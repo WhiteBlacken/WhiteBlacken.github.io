@@ -95,10 +95,10 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="小红书-实习-DBA-一面"><a href="#小红书-实习-DBA-一面" class="headerlink" title="小红书-实习-DBA-一面"></a>小红书-实习-DBA-一面</h1><blockquote>
-<p>总评：基础知识的细节没记清楚，回答错误；结巴太多；介绍项目的时候，不够吸引人；<br>[TOC]</p>
+        <blockquote>
+<p>总评：基础知识的细节没记清楚，回答错误；结巴太多；介绍项目的时候，不够吸引人；</p>
 </blockquote>
-<h2 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h2><h3 id="进程间的通信方式？"><a href="#进程间的通信方式？" class="headerlink" title="进程间的通信方式？"></a>进程间的通信方式？</h3><blockquote>
+<h2 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h2><h3 id="1-进程间的通信方式？"><a href="#1-进程间的通信方式？" class="headerlink" title="1. 进程间的通信方式？"></a>1. 进程间的通信方式？</h3><blockquote>
 <p>首先每个进程的用户地址空间是独立的，但内核空间是共享的，所有进程间通信必须通过内核，所以以下机制都是内核通过的。</p>
 </blockquote>
 <p>有以下几种：</p>
@@ -135,12 +135,17 @@
 </li>
 </ol>
 <p>如信号量也可以用于实现同步和互斥</p>
-<h3 id="进程的状态及其转换？"><a href="#进程的状态及其转换？" class="headerlink" title="进程的状态及其转换？"></a>进程的状态及其转换？</h3><h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><h3 id="从键入url到显示页面的过程？"><a href="#从键入url到显示页面的过程？" class="headerlink" title="从键入url到显示页面的过程？"></a>从键入url到显示页面的过程？</h3><ul>
+<h3 id="2-进程的状态及其转换？"><a href="#2-进程的状态及其转换？" class="headerlink" title="2. 进程的状态及其转换？"></a>2. 进程的状态及其转换？</h3><h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><h3 id="1-从键入url到显示页面的过程？"><a href="#1-从键入url到显示页面的过程？" class="headerlink" title="1. 从键入url到显示页面的过程？"></a>1. 从键入url到显示页面的过程？</h3><ul>
 <li>解析url：拿到域名和要请求的资源</li>
 <li>查询域名对应的IP地址：DNS服务，客户端向本地DNS服务器发出DNS请求-&gt;若缓存中有，直接返回IP，若没有，查询根域名服务器-&gt;根域名服务器会指出（.com)属于哪个顶级域名服务器-&gt;顶级域名服务器会指出(<a target="_blank" rel="noopener" href="http://www.server.com)属于哪个权威域名服务器,权威域名服务器负责解析,然后将结果返回本地dns,本地dns返回客户端./">www.server.com)属于哪个权威域名服务器，权威域名服务器负责解析，然后将结果返回本地DNS，本地DNS返回客户端。</a><br>不过实际上，因为缓存的存在，浏览器先查自身缓存-&gt;没有就去问操作系统缓存-&gt;没有则去查hosts文件-&gt;没有则去问本地dns</li>
 <li>获得IP地址后，依托协议栈进行传输，浏览器调用socket库来委托协议栈工作，包括传输层呢哥的tcp和udp协议，他们都会使用IP协议来进行网络包的收发，IP协议还包含ICMP和ARP，分别用于告知网络包传输过程中产生的错误以及控制信息、根据IP查询以太网MAC地址。IP下层的网卡驱动程序，控制网卡，网卡负责完成实际的收发操作。</li>
 </ul>
-<h3 id="四次挥手？如何同步？"><a href="#四次挥手？如何同步？" class="headerlink" title="四次挥手？如何同步？"></a>四次挥手？如何同步？</h3><h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><h3 id="linux的常见命令"><a href="#linux的常见命令" class="headerlink" title="linux的常见命令"></a>linux的常见命令</h3><h2 id="算法题"><a href="#算法题" class="headerlink" title="算法题"></a>算法题</h2><h3 id="逆转字符串：’hello中国nihao’"><a href="#逆转字符串：’hello中国nihao’" class="headerlink" title="逆转字符串：’hello中国nihao’"></a>逆转字符串：’hello中国nihao’</h3><h2 id="其他类"><a href="#其他类" class="headerlink" title="其他类"></a>其他类</h2><h3 id="挑一个比较出彩的项目介绍下？"><a href="#挑一个比较出彩的项目介绍下？" class="headerlink" title="挑一个比较出彩的项目介绍下？"></a>挑一个比较出彩的项目介绍下？</h3><h3 id="学过哪些专业课？"><a href="#学过哪些专业课？" class="headerlink" title="学过哪些专业课？"></a>学过哪些专业课？</h3>
+<h3 id="2-四次挥手？如何同步？"><a href="#2-四次挥手？如何同步？" class="headerlink" title="2. 四次挥手？如何同步？"></a>2. 四次挥手？如何同步？</h3><p>序号（seq）和确认号（ack）</p>
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><h3 id="1-linux的常见命令"><a href="#1-linux的常见命令" class="headerlink" title="1. linux的常见命令"></a>1. linux的常见命令</h3><p>ls,cd,pwd,cp,mv,rm,touch,cat<br>grep,wc<br>ps,top,kill,pkill<br>ping,ipconfig,ssh,wget,curl,netstart<br>df,free<br>chmod,su,sudo,chown</p>
+<h2 id="算法题"><a href="#算法题" class="headerlink" title="算法题"></a>算法题</h2><h3 id="1-逆转字符串：’hello中国nihao’"><a href="#1-逆转字符串：’hello中国nihao’" class="headerlink" title="1. 逆转字符串：’hello中国nihao’"></a>1. 逆转字符串：’hello中国nihao’</h3><p>UTF-8编码中中文占用3个字符，特殊中文字符4个字节。<br>不过这题，python和java都能直接输出。<br>不知道这个题出了有啥意义。</p>
+<h2 id="其他类"><a href="#其他类" class="headerlink" title="其他类"></a>其他类</h2><h3 id="1-挑一个比较出彩的项目介绍下？"><a href="#1-挑一个比较出彩的项目介绍下？" class="headerlink" title="1. 挑一个比较出彩的项目介绍下？"></a>1. 挑一个比较出彩的项目介绍下？</h3><p>讲的很长，但是不吸引人，言简意赅一点</p>
+<h3 id="2-学过哪些专业课？"><a href="#2-学过哪些专业课？" class="headerlink" title="2. 学过哪些专业课？"></a>2. 学过哪些专业课？</h3><p>有点忘了，记下几个。<br>高级软件开发技术，web软件开发，软件过程管理<br>机器学习，高级机器学习，强化学习</p>
+
       
     </div>
     <footer class="article-footer">
