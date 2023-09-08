@@ -14,7 +14,7 @@
 <meta property="og:description" content="数据库1. 如果数据查询突然很慢，如何排查？可能引起的原因：  数据量增大，本身sql书写不合理，或者没加索引，或者索引失效（分布发生了变化，导致执行计划认为全表扫描更快），或者索引碎片化，或者页分裂 大量的并发请求，服务器资源占用升高 受到类似DDos攻击 锁和阻塞，某些查询或任务锁定了资源 数据库在进行维护任务 网络问题 硬件设施出问题，或磁盘空间不足  2. mysql的锁有哪些？什么情况下">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-08T16:45:35.000Z">
-<meta property="article:modified_time" content="2023-09-08T17:40:37.438Z">
+<meta property="article:modified_time" content="2023-09-08T17:44:53.029Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -115,7 +115,13 @@
 <li>锁升级，行锁累积，升级为表锁来减少锁的管理开销</li>
 <li>明确的锁表请求，lock tables（默认加写锁）</li>
 </ol>
-<p>innodb加间隙锁的情况</p>
+<p>间隙锁用于锁定两个记录之间的间隙，确保在锁定期间，其他事务不能在这个间隙插入新的记录，来防止幻读。<br>innodb加间隙锁的情况：</p>
+<ol>
+<li>范围查询</li>
+<li>唯一索引检查，插入记录时</li>
+<li>外键约束检查</li>
+<li>插入操作</li>
+</ol>
 <h3 id="3-隔离级别有哪些？因为隔离级别导致问题的情况遇到过吗？"><a href="#3-隔离级别有哪些？因为隔离级别导致问题的情况遇到过吗？" class="headerlink" title="3. 隔离级别有哪些？因为隔离级别导致问题的情况遇到过吗？"></a>3. 隔离级别有哪些？因为隔离级别导致问题的情况遇到过吗？</h3><h3 id="4-怎么知道是否使用了索引？"><a href="#4-怎么知道是否使用了索引？" class="headerlink" title="4. 怎么知道是否使用了索引？"></a>4. 怎么知道是否使用了索引？</h3><p>explain</p>
 <h3 id="5-聚簇索引和非聚簇索引的区别？"><a href="#5-聚簇索引和非聚簇索引的区别？" class="headerlink" title="5. 聚簇索引和非聚簇索引的区别？"></a>5. 聚簇索引和非聚簇索引的区别？</h3><h3 id="6-为什么用B-树？"><a href="#6-为什么用B-树？" class="headerlink" title="6. 为什么用B+树？"></a>6. 为什么用B+树？</h3><h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><h3 id="1-三次握手，客户端的ack丢失会怎么用？"><a href="#1-三次握手，客户端的ack丢失会怎么用？" class="headerlink" title="1. 三次握手，客户端的ack丢失会怎么用？"></a>1. 三次握手，客户端的ack丢失会怎么用？</h3><p>server重发syn+ack报文，3次失败后断开半连接状态。</p>
 <h3 id="2-实际使用过socket吗"><a href="#2-实际使用过socket吗" class="headerlink" title="2. 实际使用过socket吗"></a>2. 实际使用过socket吗</h3><h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><h3 id="1-介绍下垃圾回收算法？"><a href="#1-介绍下垃圾回收算法？" class="headerlink" title="1. 介绍下垃圾回收算法？"></a>1. 介绍下垃圾回收算法？</h3><h3 id="2-jvm调优的经验？"><a href="#2-jvm调优的经验？" class="headerlink" title="2. jvm调优的经验？"></a>2. jvm调优的经验？</h3><h3 id="3-类加载器？双亲委派机制？什么时候要打破双亲委派机制？"><a href="#3-类加载器？双亲委派机制？什么时候要打破双亲委派机制？" class="headerlink" title="3. 类加载器？双亲委派机制？什么时候要打破双亲委派机制？"></a>3. 类加载器？双亲委派机制？什么时候要打破双亲委派机制？</h3><h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><h3 id="1-基本数据结构？讲讲跳表？"><a href="#1-基本数据结构？讲讲跳表？" class="headerlink" title="1. 基本数据结构？讲讲跳表？"></a>1. 基本数据结构？讲讲跳表？</h3><h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><h3 id="1-如何排查占用资源的内存？"><a href="#1-如何排查占用资源的内存？" class="headerlink" title="1. 如何排查占用资源的内存？"></a>1. 如何排查占用资源的内存？</h3><h3 id="2-如果jvm的xml设为4GB，通过top发现其占用不止4GB，是因为什么？"><a href="#2-如果jvm的xml设为4GB，通过top发现其占用不止4GB，是因为什么？" class="headerlink" title="2. 如果jvm的xml设为4GB，通过top发现其占用不止4GB，是因为什么？"></a>2. 如果jvm的xml设为4GB，通过top发现其占用不止4GB，是因为什么？</h3>
