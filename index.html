@@ -77,6 +77,130 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-拼多多-0910-笔试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/" class="article-date">
+  <time class="dt-published" datetime="2023-09-10T12:11:33.000Z" itemprop="datePublished">2023-09-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/">拼多多-0910-笔试</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="题目要求："><a href="#题目要求：" class="headerlink" title="题目要求："></a>题目要求：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">小明需要在m分钟内修或更换n个零件，会给出每个零件修的耗时ai、修的价格bi、更换的耗时ci、更换的价格di。</span><br><span class="line">请计算在m分钟能否修复（修或更换均可）n个零件，如何可以，输出最小的成本</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3 18        # n个零件， 时间上限为m</span><br><span class="line">9 1 2 11    # 第一个零件的 修耗时，修成本，更换耗时，更换成本</span><br><span class="line">8 4 3 10    # 第二个零件 ...</span><br><span class="line">10 6 5 12   # 第三个零件 ...</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">23          # 价格</span><br></pre></td></tr></table></figure>
+
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><blockquote>
+<p>背包问题</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 处理输入</span></span><br><span class="line">n, m = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">parts = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    a, b, c, d = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">    parts.append((a, b, c, d))</span><br><span class="line"></span><br><span class="line">min_time = <span class="built_in">sum</span>(x[<span class="number">2</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts)</span><br><span class="line"><span class="keyword">if</span> min_time &gt; m:  <span class="comment"># 如果全换不修是否能满足要求</span></span><br><span class="line">    <span class="built_in">print</span>(-<span class="number">1</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># 转换成0-1背包问题,挑选从换-&gt;修的零件,尽可能多的选取价格降低最多的方式</span></span><br><span class="line">    bag_weight = m - min_time  <span class="comment"># 最多可以更换weight的重量</span></span><br><span class="line">    weights = [x[<span class="number">0</span>] - x[<span class="number">2</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts]</span><br><span class="line">    values = [x[<span class="number">3</span>] - x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts]</span><br><span class="line">    <span class="comment"># dp[i][j] 在可选范围为前i个,背包容量为j</span></span><br><span class="line">    dp = [[<span class="number">0</span>] * (bag_weight + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>)]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(bag_weight + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> i * j == <span class="number">0</span>:</span><br><span class="line">                dp[i][j] = <span class="number">0</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> j - weights[i - <span class="number">1</span>] &lt; <span class="number">0</span>:  <span class="comment"># 没法选</span></span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dp[i][j] = <span class="built_in">max</span>(</span><br><span class="line">                    dp[i - <span class="number">1</span>][j],  <span class="comment"># 不选</span></span><br><span class="line">                    dp[i - <span class="number">1</span>][j - weights[i - <span class="number">1</span>]] + values[i - <span class="number">1</span>]  <span class="comment"># 选</span></span><br><span class="line">                )</span><br><span class="line">    res = <span class="built_in">sum</span>(x[<span class="number">3</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts) - dp[n][bag_weight]</span><br><span class="line">    <span class="built_in">print</span>(res)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/" data-id="clmdhsy3900002gum8mwg93v5" data-title="拼多多-0910-笔试" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Java基础知识" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="article-date">
+  <time class="dt-published" datetime="2023-09-09T16:43:36.000Z" itemprop="datePublished">2023-09-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Java面经</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>先依葫芦画瓢，再深入理解</p>
+</blockquote>
+<h2 id="1-JAVA创建线程的方法"><a href="#1-JAVA创建线程的方法" class="headerlink" title="1. JAVA创建线程的方法"></a>1. JAVA创建线程的方法</h2><p>底层都是基于Runnable接口</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>特点</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>继承Thread类</td>
+<td>占用了继承的名额，java中是单继承的</td>
+<td>Thread类实际上也实现了Runnable接口</td>
+</tr>
+<tr>
+<td>实现Runnable接口</td>
+<td>无返回结果</td>
+<td></td>
+</tr>
+<tr>
+<td>Callable+FutureTask</td>
+<td>可以拿到返回结果</td>
+<td></td>
+</tr>
+<tr>
+<td>利用线程池去创建线程</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="2-ThreadLocal有哪些应用场景，底层实现？"><a href="#2-ThreadLocal有哪些应用场景，底层实现？" class="headerlink" title="2. ThreadLocal有哪些应用场景，底层实现？"></a>2. ThreadLocal有哪些应用场景，底层实现？</h2><p>ThreadLocal是Java提供的线程本地存储机制，可以利用该机制将数据缓存在某个线程内部，该线程可以在任意时刻，任意方法中获取缓存数据。<br>底层是通过ThreadLocalMap实现，每个Thread对象（不是ThreadLocal）都有一个ThreadLocalMap，key为ThreadLocal对象，value为要缓存的值。<br>问题：线程池场景下可能导致内存泄露<br>解决：location.remove()</p>
+<h2 id="3-Synchronized锁升级的过程？"><a href="#3-Synchronized锁升级的过程？" class="headerlink" title="3. Synchronized锁升级的过程？"></a>3. Synchronized锁升级的过程？</h2><p>偏向锁：同一个线程，锁对象的对象头记录了当前获取该锁的线程ID，该线程下次再来获取该锁，可以直接获取，即支持锁重入。<br>轻量级锁：不同线程，不涉及操作系统级别的操作，如果有第二个线程来竞争，则会通过自旋来实现，并不阻塞线程，因为阻塞和唤醒都是需要操作系统来进行，开销大。<br>重量级锁：会导致线程阻塞。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-id="clmdhsy3e00012gum436n6vwg" data-title="Java面经" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-阿里国际-秋招-java开发-一面-简历面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/" class="article-date">
@@ -498,7 +622,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
     </div>
   </div>
 
@@ -508,7 +632,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">面经</a>
+      <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
     </div>
   </div>
 
@@ -530,6 +654,14 @@
       <ul>
         
           <li>
+            <a href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/">拼多多-0910-笔试</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Java面经</a>
+          </li>
+        
+          <li>
             <a href="/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/">阿里国际-秋招-java开发-一面/简历面</a>
           </li>
         
@@ -539,10 +671,6 @@
         
           <li>
             <a href="/2023/09/09/%E8%85%BE%E8%AE%AF-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">腾讯-秋招-后台开发-一面</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/08/%E5%B0%8F%E7%BA%A2%E4%B9%A6-%E5%AE%9E%E4%B9%A0-DBA-%E4%B8%80%E9%9D%A2/">小红书-实习-DBA-一面</a>
           </li>
         
       </ul>

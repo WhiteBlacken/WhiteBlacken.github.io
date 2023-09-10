@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>拼多多-0910-笔试 | xiangyao的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="题目要求：12小明需要在m分钟内修或更换n个零件，会给出每个零件修的耗时ai、修的价格bi、更换的耗时ci、更换的价格di。请计算在m分钟能否修复（修或更换均可）n个零件，如何可以，输出最小的成本  输入格式：12343 18        # n个零件， 时间上限为m9 1 2 11    # 第一个零件的 修耗时，修成本，更换耗时，更换成本8 4 3 10    # 第二个零件 ...10 6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拼多多-0910-笔试">
+<meta property="og:url" content="http://example.com/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/index.html">
+<meta property="og:site_name" content="xiangyao的个人博客">
+<meta property="og:description" content="题目要求：12小明需要在m分钟内修或更换n个零件，会给出每个零件修的耗时ai、修的价格bi、更换的耗时ci、更换的价格di。请计算在m分钟能否修复（修或更换均可）n个零件，如何可以，输出最小的成本  输入格式：12343 18        # n个零件， 时间上限为m9 1 2 11    # 第一个零件的 修耗时，修成本，更换耗时，更换成本8 4 3 10    # 第二个零件 ...10 6">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-10T12:11:33.000Z">
+<meta property="article:modified_time" content="2023-09-10T13:30:14.973Z">
+<meta property="article:author" content="xiangyao">
+<meta property="article:tag" content="笔试">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="xiangyao的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">xiangyao的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录下这一刻，让我们变得更强</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-拼多多-0910-笔试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/" class="article-date">
+  <time class="dt-published" datetime="2023-09-10T12:11:33.000Z" itemprop="datePublished">2023-09-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      拼多多-0910-笔试
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="题目要求："><a href="#题目要求：" class="headerlink" title="题目要求："></a>题目要求：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">小明需要在m分钟内修或更换n个零件，会给出每个零件修的耗时ai、修的价格bi、更换的耗时ci、更换的价格di。</span><br><span class="line">请计算在m分钟能否修复（修或更换均可）n个零件，如何可以，输出最小的成本</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3 18        # n个零件， 时间上限为m</span><br><span class="line">9 1 2 11    # 第一个零件的 修耗时，修成本，更换耗时，更换成本</span><br><span class="line">8 4 3 10    # 第二个零件 ...</span><br><span class="line">10 6 5 12   # 第三个零件 ...</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">23          # 价格</span><br></pre></td></tr></table></figure>
+
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><blockquote>
+<p>背包问题</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 处理输入</span></span><br><span class="line">n, m = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">parts = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    a, b, c, d = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">    parts.append((a, b, c, d))</span><br><span class="line"></span><br><span class="line">min_time = <span class="built_in">sum</span>(x[<span class="number">2</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts)</span><br><span class="line"><span class="keyword">if</span> min_time &gt; m:  <span class="comment"># 如果全换不修是否能满足要求</span></span><br><span class="line">    <span class="built_in">print</span>(-<span class="number">1</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># 转换成0-1背包问题,挑选从换-&gt;修的零件,尽可能多的选取价格降低最多的方式</span></span><br><span class="line">    bag_weight = m - min_time  <span class="comment"># 最多可以更换weight的重量</span></span><br><span class="line">    weights = [x[<span class="number">0</span>] - x[<span class="number">2</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts]</span><br><span class="line">    values = [x[<span class="number">3</span>] - x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts]</span><br><span class="line">    <span class="comment"># dp[i][j] 在可选范围为前i个,背包容量为j</span></span><br><span class="line">    dp = [[<span class="number">0</span>] * (bag_weight + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>)]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(bag_weight + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> i * j == <span class="number">0</span>:</span><br><span class="line">                dp[i][j] = <span class="number">0</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> j - weights[i - <span class="number">1</span>] &lt; <span class="number">0</span>:  <span class="comment"># 没法选</span></span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dp[i][j] = <span class="built_in">max</span>(</span><br><span class="line">                    dp[i - <span class="number">1</span>][j],  <span class="comment"># 不选</span></span><br><span class="line">                    dp[i - <span class="number">1</span>][j - weights[i - <span class="number">1</span>]] + values[i - <span class="number">1</span>]  <span class="comment"># 选</span></span><br><span class="line">                )</span><br><span class="line">    res = <span class="built_in">sum</span>(x[<span class="number">3</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts) - dp[n][bag_weight]</span><br><span class="line">    <span class="built_in">print</span>(res)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/" data-id="clmdhsy3900002gum8mwg93v5" data-title="拼多多-0910-笔试" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java面经</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/">拼多多-0910-笔试</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Java面经</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/">阿里国际-秋招-java开发-一面/简历面</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/09/%E5%BE%97%E7%89%A9-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">得物-秋招-java开发-一面</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/09/%E8%85%BE%E8%AE%AF-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">腾讯-秋招-后台开发-一面</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 xiangyao<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
