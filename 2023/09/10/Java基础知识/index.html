@@ -14,7 +14,7 @@
 <meta property="og:description" content="先依葫芦画瓢，再深入理解  1. 什么是协程？2. 什么是超线程？3. 如何设置合理的线程数？目标是：最大化利用CPU的情况下，减少线程切换的开销  高并发，低耗时，建议少线程 低并发，高耗时，建议多线程 高并发，高耗时，分析任务类型，增加排队，加大线程数  4. 什么是匿名类？什么是函数式接口？5. run()和start()run方法是同步方法，由主线程执行，并未开启新线程。run可以无限执">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-09T16:43:36.000Z">
-<meta property="article:modified_time" content="2023-09-11T09:43:54.165Z">
+<meta property="article:modified_time" content="2023-09-12T16:41:12.842Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="JAVA">
 <meta name="twitter:card" content="summary">
@@ -120,11 +120,36 @@
 </ol>
 <h1 id="7-线程池的作用"><a href="#7-线程池的作用" class="headerlink" title="7. 线程池的作用"></a>7. 线程池的作用</h1><p>容纳多个线程的容器，其中的线程可以反复使用，省去了频繁创建线程对象的操作，无需反复创建线程而消耗过多的资源。<br>主要优势：</p>
 <ul>
-<li>降低资源消耗</li>
-<li>提高响应速度</li>
-<li>提高线程的可管理性</li>
+<li>降低资源消耗：防止了反复创建销毁</li>
+<li>提高响应速度：任务不需要等待线程创建</li>
+<li>提高线程的可管理性：防止无限制创建</li>
 </ul>
-
+<h2 id="为什么要在finally里关闭线程池？"><a href="#为什么要在finally里关闭线程池？" class="headerlink" title="为什么要在finally里关闭线程池？"></a>为什么要在finally里关闭线程池？</h2><p>占用系统资源，内存泄露，主线程不会退出。</p>
+<p>threadPool.shutdown();等待正在执行的，以及阻塞队列中任务执行完。<br>threadPool.shutdownNow();等正在执行的任务后即关闭线程。<br>这两种方式使用interrupt，给是给个中断标志，并不会决定线程关闭，由线程内部自己处理。<br>两者的区别只是看是否依据阻塞队列是否为空。</p>
+<p>threadPool.isTerminated();可以用于判断线程池是否真正停止了。</p>
+<h2 id="execute-方法和submit-有什么区别？"><a href="#execute-方法和submit-有什么区别？" class="headerlink" title="execute()方法和submit()有什么区别？"></a>execute()方法和submit()有什么区别？</h2><ol>
+<li>参数<br>execute只接收runnable，submit指出runnable,callable，可以直接返回FutureTask对象。</li>
+<li>异常<br>execute会在子线程中抛出异常，主线程捕捉不到。submit不会立刻抛出异常，而是将异常暂时存起来，等调用Future.get()方法才会抛出，并且可以在主线程中捕捉到。</li>
+</ol>
+<h2 id="线程池的创建顺序"><a href="#线程池的创建顺序" class="headerlink" title="线程池的创建顺序"></a>线程池的创建顺序</h2><p>实际的执行顺序，并不一致，比如阻塞队列中的任务和最大线程数量创建线程所执行的任务。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A[判断核心线程数量是否已满]</span><br><span class="line">A --&gt;|是| B[判断阻塞队列是否已满]</span><br><span class="line">A --&gt;|否| C[创建线程执行任务]</span><br><span class="line">B --&gt;|否| D[加入阻塞队列]</span><br><span class="line">B --&gt;|是| E[判断最大线程数量是否已满]</span><br><span class="line">E --&gt;|是| F[执行拒绝策略]</span><br><span class="line">E --&gt;|否| G[创建线程]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>线程依赖阻塞队列来保活。</p>
+<p>？什么是阻塞队列，什么是非阻塞队列？</p>
+<p>拒绝策略</p>
+<ol>
+<li>抛异常-默认</li>
+<li>调用者线程自己去执行，相当于反馈机制，减缓新任务的提交速度</li>
+<li>抛弃最老的任务-阻塞队列中</li>
+<li>直接静默抛弃</li>
+</ol>
+<p>可以实现RejectedExecutionHandler接口，自定义拒绝策略。</p>
+<p>线程淘汰策略</p>
+<ol>
+<li>正常退出<br>假设m个线程，核心线程数为n，其中m&gt;n,阻塞队列无任务，需要淘汰m-n个线程。<br>淘汰通过getTask方法，当getTask为null时对应的线程消失，当上述场景不满足时，阻塞队列实际上一直调用的是take方法，进行无限阻塞，而满足时会进行poll超时阻塞。<br>m个线程需要通过CAS去竞争，竞争成功的m-n个线程会执行poll()方法，超时后，getTask返回null，剩余的n个线程则在没有新任务时无限阻塞。<br>核心线程和临时线程本质上没区别，看最后保留了哪些，哪些就是核心线程。<br>所以线程池参数的超时时间，就是用来设置poll方法超时阻塞的时间。</li>
+<li>异常退出<br>线程抛异常退出后，线程池会addWork()创建一个新的线程。<br>为什么不捕获异常，直接让线程执行下一个任务呢？<br>为了统一的异常处理器setUncaughtExceptionHandler，所以需要抛出异常，异常抛出后，线程异常退出。</li>
+</ol>
+<h2 id="tomcat中的线程池"><a href="#tomcat中的线程池" class="headerlink" title="tomcat中的线程池"></a>tomcat中的线程池</h2><p>JUC的线程池构造方法本身并不创建线程，只是创建一个线程工厂。而tomcat中线程池的构造方法有一个preStartAllCoreThread()方法，用于提前创建所有的核心线程。</p>
+<h1 id="8-线程安全问题"><a href="#8-线程安全问题" class="headerlink" title="8. 线程安全问题"></a>8. 线程安全问题</h1>
       
     </div>
     <footer class="article-footer">
