@@ -110,7 +110,6 @@
 
 <p>申请了一个二维的dp数组，空间复杂度为O(m*n),无法通过测试用例。其实不是m，不过也是一个时间，比m小，对应代码中的m-min_time。<br>dp[i][j]只依赖于dp[i-1][*],所以可以使用滚动数据，将空间复杂度降为O(2*m)。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仅展示修改部分</span></span><br><span class="line">dp = [[<span class="number">0</span>] * (bag_weight + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>)] </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(bag_weight + <span class="number">1</span>):</span><br><span class="line">        now, pre = i % <span class="number">2</span>, (i - <span class="number">1</span>) % <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> i * j == <span class="number">0</span>:</span><br><span class="line">            dp[now][j] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> j - weights[i - <span class="number">1</span>] &lt; <span class="number">0</span>:  <span class="comment"># 没法选</span></span><br><span class="line">            dp[now][j] = dp[pre][j]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dp[now][j] = <span class="built_in">max</span>(</span><br><span class="line">                dp[pre][j],  <span class="comment"># 不选</span></span><br><span class="line">                dp[pre][j - weights[i - <span class="number">1</span>]] + values[i - <span class="number">1</span>]  <span class="comment"># 选</span></span><br><span class="line">            )</span><br></pre></td></tr></table></figure>
-
       
     </div>
     <footer class="article-footer">
@@ -142,7 +141,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Java面经</a>
+      <a class="p-name article-title" href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">J.U.C</a>
     </h1>
   
 
@@ -153,43 +152,30 @@
         <blockquote>
 <p>先依葫芦画瓢，再深入理解</p>
 </blockquote>
-<h2 id="1-JAVA创建线程的方法"><a href="#1-JAVA创建线程的方法" class="headerlink" title="1. JAVA创建线程的方法"></a>1. JAVA创建线程的方法</h2><p>底层都是基于Runnable接口</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>特点</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>继承Thread类</td>
-<td>占用了继承的名额，java中是单继承的</td>
-<td>Thread类实际上也实现了Runnable接口</td>
-</tr>
-<tr>
-<td>实现Runnable接口</td>
-<td>无返回结果</td>
-<td></td>
-</tr>
-<tr>
-<td>Callable+FutureTask</td>
-<td>可以拿到返回结果</td>
-<td></td>
-</tr>
-<tr>
-<td>利用线程池去创建线程</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="2-ThreadLocal有哪些应用场景，底层实现？"><a href="#2-ThreadLocal有哪些应用场景，底层实现？" class="headerlink" title="2. ThreadLocal有哪些应用场景，底层实现？"></a>2. ThreadLocal有哪些应用场景，底层实现？</h2><p>ThreadLocal是Java提供的线程本地存储机制，可以利用该机制将数据缓存在某个线程内部，该线程可以在任意时刻，任意方法中获取缓存数据。<br>底层是通过ThreadLocalMap实现，每个Thread对象（不是ThreadLocal）都有一个ThreadLocalMap，key为ThreadLocal对象，value为要缓存的值。<br>问题：线程池场景下可能导致内存泄露<br>解决：location.remove()</p>
-<h2 id="3-Synchronized锁升级的过程？"><a href="#3-Synchronized锁升级的过程？" class="headerlink" title="3. Synchronized锁升级的过程？"></a>3. Synchronized锁升级的过程？</h2><p>偏向锁：同一个线程，锁对象的对象头记录了当前获取该锁的线程ID，该线程下次再来获取该锁，可以直接获取，即支持锁重入。<br>轻量级锁：不同线程，不涉及操作系统级别的操作，如果有第二个线程来竞争，则会通过自旋来实现，并不阻塞线程，因为阻塞和唤醒都是需要操作系统来进行，开销大。<br>重量级锁：会导致线程阻塞。</p>
+<h1 id="1-什么是协程？"><a href="#1-什么是协程？" class="headerlink" title="1. 什么是协程？"></a>1. 什么是协程？</h1><h1 id="2-什么是超线程？"><a href="#2-什么是超线程？" class="headerlink" title="2. 什么是超线程？"></a>2. 什么是超线程？</h1><h1 id="3-如何设置合理的线程数？"><a href="#3-如何设置合理的线程数？" class="headerlink" title="3. 如何设置合理的线程数？"></a>3. 如何设置合理的线程数？</h1><p>目标是：最大化利用CPU的情况下，减少线程切换的开销</p>
+<ul>
+<li>高并发，低耗时，建议少线程</li>
+<li>低并发，高耗时，建议多线程</li>
+<li>高并发，高耗时，分析任务类型，增加排队，加大线程数</li>
+</ul>
+<h1 id="4-什么是匿名类？什么是函数式接口？"><a href="#4-什么是匿名类？什么是函数式接口？" class="headerlink" title="4. 什么是匿名类？什么是函数式接口？"></a>4. 什么是匿名类？什么是函数式接口？</h1><h1 id="5-run-和start"><a href="#5-run-和start" class="headerlink" title="5. run()和start()"></a>5. run()和start()</h1><p>run方法是同步方法，由主线程执行，并未开启新线程。<br>run可以无限执行，start只能执行一次（illegalThreadStateException）。</p>
+<p>还有getName，setName，sleep，interrupt，yield，getPriority（1-10，默认是5），setPriority等方法。<br>sleep(0)先进入阻塞态（不过因为是0ms，所以直接进就绪态），yield进入就绪态。<br>yield之后，优先级更高的线程更有可能获得cpu时间片。yield根据jvm和操作系统不同，行为可能不同。<br>interrupt方法只是通知线程需要中断，做了个标记，并不会立刻中断。<br>public static boolean interrupted() 判断是否中断，并清除标记。<br>public boolean isInterrupted() 判断是否被中断，不清楚标记。<br>sleep过程如果使用interrupt，会抛出InterruptedException异常，捕获该异常会清除标记，需要在catch中再次使用interrupt来标记。<br>join：主线程等待子线程完成<br>setDaemon：设置守护进程，只要所有用户线程退出后，守护进程<strong>立马</strong>结束，不论执行到哪。<br>应用：垃圾回收器；tomcat用来接收外部请求的线程。<br>isDaemon<br>getState：new，runnable，waiting（sleep，join，wait），timed_waiting（带计时的sleep，join，wait），blocked（锁相关），terminated</p>
+<h1 id="6-线程的创建方式"><a href="#6-线程的创建方式" class="headerlink" title="6. 线程的创建方式"></a>6. 线程的创建方式</h1><ol>
+<li>实现Runnable接口的run方法<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyRunnable</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Runnable方式运行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">MyRunnable</span> <span class="variable">myRunnable</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyRunnable</span>();</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(myRunnable);</span><br><span class="line">        thread1.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>继承Thread类并重新run方法<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//受限于java的单继承，如果继承了Thread类，无法继承其他类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyThread</span> <span class="keyword">extends</span> <span class="title class_">Thread</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Thread方式运行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">MyThread</span>().start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>使用FutureTask方法（实现Callable接口）<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyCallable</span> <span class="keyword">implements</span> <span class="title class_">Callable</span>&lt;String&gt; &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Callable接口方式运行&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        FutureTask&lt;String&gt; futureTask = <span class="keyword">new</span> <span class="title class_">FutureTask</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">MyCallable</span>());</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(futureTask);</span><br><span class="line">        thread.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> futureTask.get();</span><br><span class="line">            System.out.println(result);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="7-线程池的作用"><a href="#7-线程池的作用" class="headerlink" title="7. 线程池的作用"></a>7. 线程池的作用</h1><p>容纳多个线程的容器，其中的线程可以反复使用，省去了频繁创建线程对象的操作，无需反复创建线程而消耗过多的资源。<br>主要优势：</p>
+<ul>
+<li>降低资源消耗</li>
+<li>提高响应速度</li>
+<li>提高线程的可管理性</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-id="clmdhsy3e00012gum436n6vwg" data-title="Java面经" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-id="clmdhsy3e00012gum436n6vwg" data-title="J.U.C" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -660,7 +646,7 @@
           </li>
         
           <li>
-            <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Java面经</a>
+            <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">J.U.C</a>
           </li>
         
           <li>

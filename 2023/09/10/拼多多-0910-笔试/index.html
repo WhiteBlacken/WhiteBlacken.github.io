@@ -14,7 +14,7 @@
 <meta property="og:description" content="题目要求：12小明需要在m分钟内修或更换n个零件，会给出每个零件修的耗时ai、修的价格bi、更换的耗时ci、更换的价格di。请计算在m分钟能否修复（修或更换均可）n个零件，如何可以，输出最小的成本  输入格式：12343 18        # n个零件， 时间上限为m9 1 2 11    # 第一个零件的 修耗时，修成本，更换耗时，更换成本8 4 3 10    # 第二个零件 ...10 6">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-10T12:11:33.000Z">
-<meta property="article:modified_time" content="2023-09-10T13:41:34.075Z">
+<meta property="article:modified_time" content="2023-09-10T16:00:41.245Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="笔试">
 <meta name="twitter:card" content="summary">
@@ -113,7 +113,6 @@
 
 <p>申请了一个二维的dp数组，空间复杂度为O(m*n),无法通过测试用例。其实不是m，不过也是一个时间，比m小，对应代码中的m-min_time。<br>dp[i][j]只依赖于dp[i-1][*],所以可以使用滚动数据，将空间复杂度降为O(2*m)。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仅展示修改部分</span></span><br><span class="line">dp = [[<span class="number">0</span>] * (bag_weight + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>)] </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(bag_weight + <span class="number">1</span>):</span><br><span class="line">        now, pre = i % <span class="number">2</span>, (i - <span class="number">1</span>) % <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> i * j == <span class="number">0</span>:</span><br><span class="line">            dp[now][j] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> j - weights[i - <span class="number">1</span>] &lt; <span class="number">0</span>:  <span class="comment"># 没法选</span></span><br><span class="line">            dp[now][j] = dp[pre][j]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dp[now][j] = <span class="built_in">max</span>(</span><br><span class="line">                dp[pre][j],  <span class="comment"># 不选</span></span><br><span class="line">                dp[pre][j - weights[i - <span class="number">1</span>]] + values[i - <span class="number">1</span>]  <span class="comment"># 选</span></span><br><span class="line">            )</span><br></pre></td></tr></table></figure>
-
       
     </div>
     <footer class="article-footer">
@@ -132,7 +131,7 @@
   
     <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Java面经</div>
+      <div class="article-nav-title">J.U.C</div>
     </a>
   
 </nav>
@@ -188,7 +187,7 @@
           </li>
         
           <li>
-            <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Java面经</a>
+            <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">J.U.C</a>
           </li>
         
           <li>
