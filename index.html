@@ -77,6 +77,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-阿里国际-0911-笔试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/12/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-0911-%E7%AC%94%E8%AF%95/" class="article-date">
+  <time class="dt-published" datetime="2023-09-12T05:01:11.000Z" itemprop="datePublished">2023-09-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/12/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-0911-%E7%AC%94%E8%AF%95/">阿里国际-0911-笔试</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="题目要求："><a href="#题目要求：" class="headerlink" title="题目要求："></a>题目要求：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">小红喜欢看电影，对不同的电影有不同的期待值。</span><br><span class="line">每天上映一部电影，随着上映时间的增加，小红的期待会减少。</span><br><span class="line">小红只在奇数天看电影，且不会重复看同一个电影，求n天内看电影能获得的最大期待。</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6 1</span><br><span class="line">1 2 4 9 4 5</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13   </span><br></pre></td></tr></table></figure>
+
+<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">总共6天，期待值每过1天降低1.</span><br><span class="line">小红可以在1 3 5天看电影。</span><br><span class="line">第一天：期待值最大的电影值为1.</span><br><span class="line">第三天：电影的期待分别为1,4,期待值最大为4</span><br><span class="line">第五天：电影的期待分别为-1,8,4,期待值最大为8</span><br><span class="line">故结果为 1+4+8=13</span><br></pre></td></tr></table></figure>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>堆问题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line">n, d = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">arr = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用堆：满足每次需要取出最值，并剔除</span></span><br><span class="line"><span class="comment"># 需要的是最大堆，python仅最小堆，故对元素取反</span></span><br><span class="line">res = <span class="number">0</span></span><br><span class="line">heap = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>:  <span class="comment"># 说是奇数天，其实是偶数</span></span><br><span class="line">        <span class="comment"># 只是保持相对关系，实际的期望之后再求</span></span><br><span class="line">        expect, idx = heapq.heappushpop(heap, (-arr[i] - d * i, i))  <span class="comment"># 不想回头，所以每过一天分量+d，一定是递增，不然那每一天都加个d还有啥用</span></span><br><span class="line">        res += -expect - i * d  <span class="comment"># res += - (expect + (d * idx)) - (i - idx) * d  先把多删的不上，再把期望按经过的时间衰退</span></span><br><span class="line">    <span class="keyword">else</span>:  <span class="comment"># 偶数天也要放进来，只是不输出就行</span></span><br><span class="line">        heapq.heappush(heap, (-arr[i] - d * i, i))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(res)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/12/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-0911-%E7%AC%94%E8%AF%95/" data-id="clmfuls4o0000s4um5sipc1ci" data-title="阿里国际-0911-笔试" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-拼多多-0910-笔试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/" class="article-date">
@@ -105,7 +152,7 @@
 
 <h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">23          # 价格</span><br></pre></td></tr></table></figure>
 
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>背包问题</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>背包问题</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 处理输入</span></span><br><span class="line">n, m = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">parts = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    a, b, c, d = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">    parts.append((a, b, c, d))</span><br><span class="line"></span><br><span class="line">min_time = <span class="built_in">sum</span>(x[<span class="number">2</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts)</span><br><span class="line"><span class="keyword">if</span> min_time &gt; m:  <span class="comment"># 如果全换不修是否能满足要求</span></span><br><span class="line">    <span class="built_in">print</span>(-<span class="number">1</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># 转换成0-1背包问题,挑选从换-&gt;修的零件,尽可能多的选取价格降低最多的方式</span></span><br><span class="line">    bag_weight = m - min_time  <span class="comment"># 最多可以更换weight的重量</span></span><br><span class="line">    weights = [x[<span class="number">0</span>] - x[<span class="number">2</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts]</span><br><span class="line">    values = [x[<span class="number">3</span>] - x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts]</span><br><span class="line">    <span class="comment"># dp[i][j] 在可选范围为前i个,背包容量为j</span></span><br><span class="line">    dp = [[<span class="number">0</span>] * (bag_weight + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>)]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(bag_weight + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> i * j == <span class="number">0</span>:</span><br><span class="line">                dp[i][j] = <span class="number">0</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> j - weights[i - <span class="number">1</span>] &lt; <span class="number">0</span>:  <span class="comment"># 没法选</span></span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dp[i][j] = <span class="built_in">max</span>(</span><br><span class="line">                    dp[i - <span class="number">1</span>][j],  <span class="comment"># 不选</span></span><br><span class="line">                    dp[i - <span class="number">1</span>][j - weights[i - <span class="number">1</span>]] + values[i - <span class="number">1</span>]  <span class="comment"># 选</span></span><br><span class="line">                )</span><br><span class="line">    res = <span class="built_in">sum</span>(x[<span class="number">3</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts) - dp[n][bag_weight]</span><br><span class="line">    <span class="built_in">print</span>(res)</span><br></pre></td></tr></table></figure>
 
 <p>申请了一个二维的dp数组，空间复杂度为O(m*n),无法通过测试用例。其实不是m，不过也是一个时间，比m小，对应代码中的m-min_time。<br>dp[i][j]只依赖于dp[i-1][*],所以可以使用滚动数据，将空间复杂度降为O(2*m)。</p>
@@ -642,6 +689,10 @@
       <ul>
         
           <li>
+            <a href="/2023/09/12/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-0911-%E7%AC%94%E8%AF%95/">阿里国际-0911-笔试</a>
+          </li>
+        
+          <li>
             <a href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/">拼多多-0910-笔试</a>
           </li>
         
@@ -655,10 +706,6 @@
         
           <li>
             <a href="/2023/09/09/%E5%BE%97%E7%89%A9-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">得物-秋招-java开发-一面</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/09/%E8%85%BE%E8%AE%AF-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">腾讯-秋招-后台开发-一面</a>
           </li>
         
       </ul>
