@@ -77,6 +77,101 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-美团-秋招-后端开发-一面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" class="article-date">
+  <time class="dt-published" datetime="2023-09-13T07:34:43.000Z" itemprop="datePublished">2023-09-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">美团-秋招-后端开发-一面</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><ol>
+<li>什么是幻读？写一个insert语句来说明间隙锁加在什么位置？<br>幻读：事务中多次查询，行集不同。<br>如何解决幻读？mvcc+间隙锁<ul>
+<li>当前读：使用select … for update来对所选的行上排他锁。<ul>
+<li>在事务开始使用它，当开始一个事务并打算查询某些可能更新某些行时，首先查询锁定这些行<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">START</span> TRANSACTION;</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">where</span> id <span class="keyword">BETWEEN</span> <span class="number">1</span> <span class="keyword">AND</span> <span class="number">4</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br><span class="line">  ```  </span><br><span class="line"><span class="operator">*</span> 后续查询，同一个事务中再次执行相同的<span class="keyword">select</span>查询，由于已经锁定了相关行，会看到相同的行集，不会出现幻读。</span><br><span class="line"><span class="operator">*</span> 执行更新，该事务的可以安全进行更新，记录锁会锁定<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>，间隙锁会锁定<span class="number">2</span>，故其他事务执行插入<span class="number">2</span>会失败。</span><br><span class="line">  ```<span class="keyword">sql</span></span><br><span class="line">  <span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name (id) <span class="keyword">VALUES</span>(<span class="number">2</span>);</span><br></pre></td></tr></table></figure></li>
+<li>需要注意：<ul>
+<li>确保事务不会长时间持有锁，以避免可能的死锁或长时间阻止其他事务访问被锁定的数据。</li>
+<li>不能防止其他事务插入数据到查询范围之外。</li>
+</ul>
+</li>
+<li>以上是在有索引的情况，如果没加索引，如何添加间隙锁？<ul>
+<li>通常会做全表扫描，并对整张表做意向锁。<ul>
+<li>意向锁：通知其他事务，有事务打算获取更精细级别的锁，这意味着其他事务如果想在这个表上获得排它锁，会被阻塞。</li>
+<li>记录锁：只有满足条件的行，才会被加上记录锁。</li>
+<li>间隙锁：由于count没有索引，所以无法加上明确的间隙锁。但是由于可能的全表扫描，实际上整个表都可能受到影响，导致新行插入也可能受到限制。如果查询的是具体的记录，不会锁定任何间隙。如果使用范围查询，则可能使用间隙锁。<strong>如果想想用范围查询并执行SELECT…FOR UPDATE操作，最好在涉及的列上加上索引。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>快照读：通过MVCC解决幻读，在可重复读隔离级别下，事务在执行过程中看到的数据实际上是不变的。<ul>
+<li>mvcc在事务开始后，执行第一个查询语句，会创建read view，后续的查询语句利用这个read view+undo log版本链找到事务开始时的数据，以保证在事务中每次查询的数据都一样。</li>
+<li>MVCC已经这么好了，为什么还需要间隙锁？<ul>
+<li>虽然事务B插入行，事务A不会出现幻读，但是事务A如果要在这个范围内插入数据，会和事务B的插入发生冲突。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>MVCC+间隙锁就可以解决幻读了吗？<br>结论：很大程度上可以，但是没有完全解决。<br>场景一：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- T1时刻：仅有id 1-4的记录，事务A查询id=5，查询不到</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t_stu <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">5</span>；</span><br><span class="line"><span class="comment">-- T2时刻：事务B插入id=5的记录</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_stu <span class="keyword">values</span>(<span class="number">5</span>,<span class="string">&#x27;qxy&#x27;</span>)；</span><br><span class="line"><span class="comment">-- T3时刻：事务A更新了id=5的记录，很违和</span></span><br><span class="line"><span class="keyword">update</span> t_stu <span class="keyword">set</span> name <span class="operator">=</span> <span class="string">&#x27;qxy1&#x27;</span> <span class="keyword">where</span> id<span class="operator">=</span> <span class="number">5</span>;</span><br><span class="line"><span class="comment">-- T4时刻：事务A查询id=5，可以查询到</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t_stu <span class="keyword">where</span> id<span class="operator">=</span> <span class="number">5</span>；</span><br></pre></td></tr></table></figure>
+
+<p>场景二：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- T1时刻：事务A执行快照读，读出3条记录</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t_test <span class="keyword">where</span> id <span class="operator">&gt;</span> <span class="number">100</span>;</span><br><span class="line"><span class="comment">-- T2时刻：事务B插入id=200的记录</span></span><br><span class="line"><span class="comment">-- T3时刻：事务A再执行当前读，会得到4条记录</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t_test <span class="keyword">where</span> id <span class="operator">&gt;</span> <span class="number">100</span> <span class="keyword">for</span> <span class="keyword">update</span>;</span><br></pre></td></tr></table></figure>
+<p>想要避免这类特殊场景下发生幻读，就要尽量在开启事务之后，尽快执行select…for update语句，目的就是为了避免T2时刻数据的插入。<br>2. 高并发写数据库的情况？</p>
+<p>抛出去的剑又回来了，是不是间隙锁会导致高并发读写的出现性能问题？<br>参考腾讯一面-有遇到过因为隔离级别导致的问题啊？</p>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><ol>
+<li>jvm内存结构</li>
+<li>OOM出现的情况</li>
+</ol>
+<h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><ol>
+<li>redis部署的方式</li>
+<li>redis有哪些数据结构？讲下zset的底层结构？</li>
+<li>redis和数据库不一致的情况？</li>
+</ol>
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><ol>
+<li>服务响应很慢，如何排查？如何定位到代码？</li>
+</ol>
+<h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><ol>
+<li>项目难点？</li>
+</ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
+<li>为什么选择这家公司？</li>
+<li>为什么不找暑期实习？</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" data-id="clmhp3z31000018um1wh1327w" data-title="美团-秋招-后端开发-一面" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-阿里国际-0911-笔试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/12/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-0911-%E7%AC%94%E8%AF%95/" class="article-date">
@@ -243,7 +338,8 @@
 <li>异常退出<br>线程抛异常退出后，线程池会addWork()创建一个新的线程。<br>为什么不捕获异常，直接让线程执行下一个任务呢？<br>为了统一的异常处理器setUncaughtExceptionHandler，所以需要抛出异常，异常抛出后，线程异常退出。</li>
 </ol>
 <h2 id="tomcat中的线程池"><a href="#tomcat中的线程池" class="headerlink" title="tomcat中的线程池"></a>tomcat中的线程池</h2><p>JUC的线程池构造方法本身并不创建线程，只是创建一个线程工厂。而tomcat中线程池的构造方法有一个preStartAllCoreThread()方法，用于提前创建所有的核心线程。</p>
-<h1 id="8-线程安全问题"><a href="#8-线程安全问题" class="headerlink" title="8. 线程安全问题"></a>8. 线程安全问题</h1>
+<h1 id="8-线程安全问题"><a href="#8-线程安全问题" class="headerlink" title="8. 线程安全问题"></a>8. 线程安全问题</h1><p>线程并发对共享数据进行读写，造成数据混乱。</p>
+
       
     </div>
     <footer class="article-footer">
@@ -714,6 +810,10 @@
       <ul>
         
           <li>
+            <a href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">美团-秋招-后端开发-一面</a>
+          </li>
+        
+          <li>
             <a href="/2023/09/12/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-0911-%E7%AC%94%E8%AF%95/">阿里国际-0911-笔试</a>
           </li>
         
@@ -727,10 +827,6 @@
         
           <li>
             <a href="/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/">阿里国际-秋招-java开发-一面/简历面</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/09/%E5%BE%97%E7%89%A9-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">得物-秋招-java开发-一面</a>
           </li>
         
       </ul>
