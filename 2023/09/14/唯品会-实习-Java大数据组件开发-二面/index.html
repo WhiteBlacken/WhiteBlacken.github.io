@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>唯品会-实习-Java大数据组件开发-二面 | xiangyao的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="代码题题目要求123456手写一个阻塞队列。满足以下要求：1. 有界2. 实现读写函数3. 使用模板4. 考虑多线程并发读取  代码书写先了解一下java中的阻塞队列。java的阻塞队列提供了线程安全的队列实现，其中的阻塞操作主要是为了确保在并发环境中数据安全添加和移除。’java.util.concurrent’包提供了多种阻塞队列的实现，这些阻塞队列在多线程编程，特别是生产者-消费者模型中非常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="唯品会-实习-Java大数据组件开发-二面">
+<meta property="og:url" content="http://example.com/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/index.html">
+<meta property="og:site_name" content="xiangyao的个人博客">
+<meta property="og:description" content="代码题题目要求123456手写一个阻塞队列。满足以下要求：1. 有界2. 实现读写函数3. 使用模板4. 考虑多线程并发读取  代码书写先了解一下java中的阻塞队列。java的阻塞队列提供了线程安全的队列实现，其中的阻塞操作主要是为了确保在并发环境中数据安全添加和移除。’java.util.concurrent’包提供了多种阻塞队列的实现，这些阻塞队列在多线程编程，特别是生产者-消费者模型中非常">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-14T06:57:38.000Z">
+<meta property="article:modified_time" content="2023-09-14T13:08:43.408Z">
+<meta property="article:author" content="xiangyao">
+<meta property="article:tag" content="面经">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="xiangyao的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">xiangyao的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录下这一刻，让我们变得更强</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-唯品会-实习-Java大数据组件开发-二面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" class="article-date">
+  <time class="dt-published" datetime="2023-09-14T06:57:38.000Z" itemprop="datePublished">2023-09-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      唯品会-实习-Java大数据组件开发-二面
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="代码题"><a href="#代码题" class="headerlink" title="代码题"></a>代码题</h1><h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">手写一个阻塞队列。</span><br><span class="line">满足以下要求：</span><br><span class="line">1. 有界</span><br><span class="line">2. 实现读写函数</span><br><span class="line">3. 使用模板</span><br><span class="line">4. 考虑多线程并发读取</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码书写"><a href="#代码书写" class="headerlink" title="代码书写"></a>代码书写</h2><p>先了解一下java中的阻塞队列。<br>java的阻塞队列提供了线程安全的队列实现，其中的阻塞操作主要是为了确保在并发环境中数据安全添加和移除。’java.util.concurrent’包提供了多种阻塞队列的实现，这些阻塞队列在多线程编程，特别是生产者-消费者模型中非常有用。<br>多线程环境中，阻塞队列是一个非常有用的工具，因为他自动处理了大部分线程间同步的问题。<br>以下是主要的阻塞队列：</p>
+<table>
+<thead>
+<tr>
+<th>队列</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ArrayBlockingQueue</td>
+<td>基于数据结构的有界阻塞队列</td>
+</tr>
+<tr>
+<td>LinkedBlockingQueue</td>
+<td>基于链表的可选容量（默认为Integer.MAX_VALUE)的阻塞队列。</td>
+</tr>
+<tr>
+<td>PriorityBlockingQueue</td>
+<td>支持优先级的无界阻塞队列，队列中的元素必须实现Comparable接口</td>
+</tr>
+<tr>
+<td>SynchronousQueue</td>
+<td>不存储元素的阻塞队列，每一个put操作必须等待一个take操作</td>
+</tr>
+<tr>
+<td>DelayQueue</td>
+<td>使用优先队列实现的无界阻塞函数，只有在延迟到期才能从中提取元素</td>
+</tr>
+<tr>
+<td>LinkedTransferQueue</td>
+<td>链表组成的队列，是TransferQueue接口的一个实现，并支持所有操作</td>
+</tr>
+<tr>
+<td>LinkedBlockingDeque</td>
+<td>双向阻塞队列，可以从两端插入或移除元素</td>
+</tr>
+</tbody></table>
+<p>提供的操作</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>put(e)</td>
+<td>将元素添加到队列末尾，队满则等待</td>
+</tr>
+<tr>
+<td>take()</td>
+<td>从队列前端移除并返回元素，队空则等待</td>
+</tr>
+<tr>
+<td>offer(e,timeout,timeunit)</td>
+<td>尝试将元素添加到队列中，队满则等待指定时间</td>
+</tr>
+<tr>
+<td>poll(timeout,timeunit)</td>
+<td>从队头移并返回头部的元素，如果队列为空则等待指定时间</td>
+</tr>
+</tbody></table>
+<p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyBlockingQueue</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">CAPACITY</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    LinkedList&lt;E&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="type">ReentrantLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>(<span class="literal">true</span>); <span class="comment">//创建公平锁，来保证等待时间最长的线程获得锁</span></span><br><span class="line">    <span class="type">Condition</span> <span class="variable">full</span> <span class="operator">=</span> lock.newCondition();</span><br><span class="line">    <span class="type">Condition</span> <span class="variable">empty</span> <span class="operator">=</span> lock.newCondition();</span><br><span class="line"></span><br><span class="line">    MyBlockingQueue(<span class="type">int</span> capacity) &#123;</span><br><span class="line">        <span class="built_in">this</span>.CAPACITY = capacity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(E e)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (queue.size() == CAPACITY) &#123;</span><br><span class="line">                full.await();</span><br><span class="line">            &#125;</span><br><span class="line">            queue.add(e);</span><br><span class="line">            <span class="keyword">if</span> (queue.size() == <span class="number">1</span>) &#123; <span class="comment">//说明之前是0</span></span><br><span class="line">                empty.signal();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> E <span class="title function_">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (queue.size() == <span class="number">0</span>) &#123;</span><br><span class="line">                empty.await();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">E</span> <span class="variable">e</span> <span class="operator">=</span> queue.poll();</span><br><span class="line">            System.out.println(<span class="string">&quot;get date:&quot;</span> + e + <span class="string">&quot; and queue-size:&quot;</span> + queue.size());</span><br><span class="line">            <span class="keyword">if</span> (queue.size() == CAPACITY - <span class="number">1</span>) &#123;</span><br><span class="line">                full.signal();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> e;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        MyBlockingQueue&lt;Integer&gt; blockingQueue = <span class="keyword">new</span> <span class="title class_">MyBlockingQueue</span>&lt;&gt;(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建5个生产者线程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="type">int</span> <span class="variable">producerNum</span> <span class="operator">=</span> i;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                        <span class="type">int</span> <span class="variable">item</span> <span class="operator">=</span> (<span class="type">int</span>) (Math.random() * <span class="number">100</span>);</span><br><span class="line">                        blockingQueue.put(item);</span><br><span class="line">                        System.out.println(<span class="string">&quot;Producer &quot;</span> + producerNum + <span class="string">&quot; put: &quot;</span> + item);</span><br><span class="line">                        Thread.sleep(<span class="number">500</span>);  <span class="comment">// 模拟生产需要的时间</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建5个消费者线程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                        <span class="type">int</span> <span class="variable">item</span> <span class="operator">=</span> blockingQueue.take();</span><br><span class="line">                        System.out.println(<span class="string">&quot;Consumed: &quot;</span> + item);</span><br><span class="line">                        Thread.sleep(<span class="number">1000</span>);  <span class="comment">// 模拟消费需要的时间</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果使用synchronized的关键字，有一个坑是，只有一个线程可以执行任何synchronized代码块。因此，如果一个线程正在执行put方法（它是一个synchronized方法），其他线程不能同时执行put或take方法，它们必须等待直到第一个线程退出synchronized块。即synchronized是对象级别的。当然，可以使用synchronized(someObject)来进行更细粒度的控制。</p>
+<p>前面给出的代码中，因为使用的是同一个lock，实际上也是put和take也是互斥的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" data-id="clmj6u9xn0000qcum2nc70qk1" data-title="唯品会-实习-Java大数据组件开发-二面" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">美团-秋招-后端开发-一面</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">唯品会-实习-Java大数据组件开发-二面</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">美团-秋招-后端开发-一面</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/12/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-0911-%E7%AC%94%E8%AF%95/">阿里国际-0911-笔试</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/">拼多多-0910-笔试</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">J.U.C</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 xiangyao<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

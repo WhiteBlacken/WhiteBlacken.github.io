@@ -77,6 +77,114 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-唯品会-实习-Java大数据组件开发-二面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" class="article-date">
+  <time class="dt-published" datetime="2023-09-14T06:57:38.000Z" itemprop="datePublished">2023-09-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">唯品会-实习-Java大数据组件开发-二面</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="代码题"><a href="#代码题" class="headerlink" title="代码题"></a>代码题</h1><h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">手写一个阻塞队列。</span><br><span class="line">满足以下要求：</span><br><span class="line">1. 有界</span><br><span class="line">2. 实现读写函数</span><br><span class="line">3. 使用模板</span><br><span class="line">4. 考虑多线程并发读取</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码书写"><a href="#代码书写" class="headerlink" title="代码书写"></a>代码书写</h2><p>先了解一下java中的阻塞队列。<br>java的阻塞队列提供了线程安全的队列实现，其中的阻塞操作主要是为了确保在并发环境中数据安全添加和移除。’java.util.concurrent’包提供了多种阻塞队列的实现，这些阻塞队列在多线程编程，特别是生产者-消费者模型中非常有用。<br>多线程环境中，阻塞队列是一个非常有用的工具，因为他自动处理了大部分线程间同步的问题。<br>以下是主要的阻塞队列：</p>
+<table>
+<thead>
+<tr>
+<th>队列</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ArrayBlockingQueue</td>
+<td>基于数据结构的有界阻塞队列</td>
+</tr>
+<tr>
+<td>LinkedBlockingQueue</td>
+<td>基于链表的可选容量（默认为Integer.MAX_VALUE)的阻塞队列。</td>
+</tr>
+<tr>
+<td>PriorityBlockingQueue</td>
+<td>支持优先级的无界阻塞队列，队列中的元素必须实现Comparable接口</td>
+</tr>
+<tr>
+<td>SynchronousQueue</td>
+<td>不存储元素的阻塞队列，每一个put操作必须等待一个take操作</td>
+</tr>
+<tr>
+<td>DelayQueue</td>
+<td>使用优先队列实现的无界阻塞函数，只有在延迟到期才能从中提取元素</td>
+</tr>
+<tr>
+<td>LinkedTransferQueue</td>
+<td>链表组成的队列，是TransferQueue接口的一个实现，并支持所有操作</td>
+</tr>
+<tr>
+<td>LinkedBlockingDeque</td>
+<td>双向阻塞队列，可以从两端插入或移除元素</td>
+</tr>
+</tbody></table>
+<p>提供的操作</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>put(e)</td>
+<td>将元素添加到队列末尾，队满则等待</td>
+</tr>
+<tr>
+<td>take()</td>
+<td>从队列前端移除并返回元素，队空则等待</td>
+</tr>
+<tr>
+<td>offer(e,timeout,timeunit)</td>
+<td>尝试将元素添加到队列中，队满则等待指定时间</td>
+</tr>
+<tr>
+<td>poll(timeout,timeunit)</td>
+<td>从队头移并返回头部的元素，如果队列为空则等待指定时间</td>
+</tr>
+</tbody></table>
+<p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyBlockingQueue</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">CAPACITY</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    LinkedList&lt;E&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="type">ReentrantLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>(<span class="literal">true</span>); <span class="comment">//创建公平锁，来保证等待时间最长的线程获得锁</span></span><br><span class="line">    <span class="type">Condition</span> <span class="variable">full</span> <span class="operator">=</span> lock.newCondition();</span><br><span class="line">    <span class="type">Condition</span> <span class="variable">empty</span> <span class="operator">=</span> lock.newCondition();</span><br><span class="line"></span><br><span class="line">    MyBlockingQueue(<span class="type">int</span> capacity) &#123;</span><br><span class="line">        <span class="built_in">this</span>.CAPACITY = capacity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(E e)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (queue.size() == CAPACITY) &#123;</span><br><span class="line">                full.await();</span><br><span class="line">            &#125;</span><br><span class="line">            queue.add(e);</span><br><span class="line">            <span class="keyword">if</span> (queue.size() == <span class="number">1</span>) &#123; <span class="comment">//说明之前是0</span></span><br><span class="line">                empty.signal();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> E <span class="title function_">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (queue.size() == <span class="number">0</span>) &#123;</span><br><span class="line">                empty.await();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">E</span> <span class="variable">e</span> <span class="operator">=</span> queue.poll();</span><br><span class="line">            System.out.println(<span class="string">&quot;get date:&quot;</span> + e + <span class="string">&quot; and queue-size:&quot;</span> + queue.size());</span><br><span class="line">            <span class="keyword">if</span> (queue.size() == CAPACITY - <span class="number">1</span>) &#123;</span><br><span class="line">                full.signal();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> e;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        MyBlockingQueue&lt;Integer&gt; blockingQueue = <span class="keyword">new</span> <span class="title class_">MyBlockingQueue</span>&lt;&gt;(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建5个生产者线程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="type">int</span> <span class="variable">producerNum</span> <span class="operator">=</span> i;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                        <span class="type">int</span> <span class="variable">item</span> <span class="operator">=</span> (<span class="type">int</span>) (Math.random() * <span class="number">100</span>);</span><br><span class="line">                        blockingQueue.put(item);</span><br><span class="line">                        System.out.println(<span class="string">&quot;Producer &quot;</span> + producerNum + <span class="string">&quot; put: &quot;</span> + item);</span><br><span class="line">                        Thread.sleep(<span class="number">500</span>);  <span class="comment">// 模拟生产需要的时间</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建5个消费者线程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                        <span class="type">int</span> <span class="variable">item</span> <span class="operator">=</span> blockingQueue.take();</span><br><span class="line">                        System.out.println(<span class="string">&quot;Consumed: &quot;</span> + item);</span><br><span class="line">                        Thread.sleep(<span class="number">1000</span>);  <span class="comment">// 模拟消费需要的时间</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果使用synchronized的关键字，有一个坑是，只有一个线程可以执行任何synchronized代码块。因此，如果一个线程正在执行put方法（它是一个synchronized方法），其他线程不能同时执行put或take方法，它们必须等待直到第一个线程退出synchronized块。即synchronized是对象级别的。当然，可以使用synchronized(someObject)来进行更细粒度的控制。</p>
+<p>前面给出的代码中，因为使用的是同一个lock，实际上也是put和take也是互斥的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" data-id="clmj6u9xn0000qcum2nc70qk1" data-title="唯品会-实习-Java大数据组件开发-二面" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-美团-秋招-后端开发-一面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" class="article-date">
@@ -180,7 +288,8 @@
 <p>java中什么情况下会使用直接内存？<br>使用ByteBuffer.allocateDirect()方法分配的内存，位于java堆之外，直接内存常用于IO操作，特别是NIO中，因为他可以减少java堆和本地IO操作之间复制数据的开销。<br>虽然直接内存位于Java对之外，但仍受到进程最大内存限制的约束，如果尝试分配超过限制的直接内存，则会报OOM。可以通过调整JVM的-XX：MaxDirectMemorySize来设置直接内存的最大值。</p>
 <p>JVM参数中可以指定哪些区域的大小？<br>java堆、元空间、直接内存。但是仍然受到操作系统对进程总体内存的限制。<br>所以进程不论超出jvm限制，或者是超出操作系统的限制，都会造成OOM。</p>
 <h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><ol>
-<li>redis部署的方式</li>
+<li>项目中redis部署的方式</li>
+<li>redis为什么快</li>
 <li>redis有哪些数据结构？讲下zset的底层结构？</li>
 <li>redis和数据库不一致的情况？</li>
 </ol>
@@ -868,6 +977,10 @@
       <ul>
         
           <li>
+            <a href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">唯品会-实习-Java大数据组件开发-二面</a>
+          </li>
+        
+          <li>
             <a href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">美团-秋招-后端开发-一面</a>
           </li>
         
@@ -881,10 +994,6 @@
         
           <li>
             <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">J.U.C</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/">阿里国际-秋招-java开发-一面/简历面</a>
           </li>
         
       </ul>
