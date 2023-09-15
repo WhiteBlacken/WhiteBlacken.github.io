@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>携程面经-搬运 | xiangyao的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="[TOC] Java1. jvm内存不细写了。  线程共享： 堆：存放对象实例，gc的主要区域，当内存泄露、分配大量大对象时会OOM 方法区：存放类的信息，元空间是其底层物理实现，当类加载过多，会产生OOM   线程私有： java栈：存放基础数据类型和对象引用 本地方法栈：服务于其他语言的本地方法，和java栈一样，也有小概率发生OOM，场景是创建了太多的线程，每个线程都会都会分配一定的必要的内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="携程面经-搬运">
+<meta property="og:url" content="http://example.com/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/index.html">
+<meta property="og:site_name" content="xiangyao的个人博客">
+<meta property="og:description" content="[TOC] Java1. jvm内存不细写了。  线程共享： 堆：存放对象实例，gc的主要区域，当内存泄露、分配大量大对象时会OOM 方法区：存放类的信息，元空间是其底层物理实现，当类加载过多，会产生OOM   线程私有： java栈：存放基础数据类型和对象引用 本地方法栈：服务于其他语言的本地方法，和java栈一样，也有小概率发生OOM，场景是创建了太多的线程，每个线程都会都会分配一定的必要的内">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-15T11:25:50.000Z">
+<meta property="article:modified_time" content="2023-09-15T16:18:31.807Z">
+<meta property="article:author" content="xiangyao">
+<meta property="article:tag" content="面经">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="xiangyao的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">xiangyao的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录下这一刻，让我们变得更强</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-携程面经-搬运" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/" class="article-date">
+  <time class="dt-published" datetime="2023-09-15T11:25:50.000Z" itemprop="datePublished">2023-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      携程面经-搬运
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-jvm内存"><a href="#1-jvm内存" class="headerlink" title="1. jvm内存"></a>1. jvm内存</h2><p>不细写了。</p>
+<ul>
+<li>线程共享：<ul>
+<li>堆：存放对象实例，gc的主要区域，当内存泄露、分配大量大对象时会OOM</li>
+<li>方法区：存放类的信息，元空间是其底层物理实现，当类加载过多，会产生OOM</li>
+</ul>
+</li>
+<li>线程私有：<ul>
+<li>java栈：存放基础数据类型和对象引用</li>
+<li>本地方法栈：服务于其他语言的本地方法，和java栈一样，也有小概率发生OOM，场景是创建了太多的线程，每个线程都会都会分配一定的必要的内存空间，线程过多，则OOM。</li>
+<li>程序计数器：字节码执行的行号指示器</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-强引用，软引用，弱引用，虚引用"><a href="#2-强引用，软引用，弱引用，虚引用" class="headerlink" title="2. 强引用，软引用，弱引用，虚引用"></a>2. 强引用，软引用，弱引用，虚引用</h2><p>与垃圾回收机制有关，可以帮助程序员更加灵活的控制对象的生命周期。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>强引用</td>
+<td>只要对象有强引用与之关联，GC绝不对其回收；比方说Object obj &#x3D; new Object();</td>
+</tr>
+<tr>
+<td>软引用</td>
+<td>在内存紧张时会被回收</td>
+</tr>
+<tr>
+<td>弱引用</td>
+<td>比软引用生命周期更短，一旦jvm进行垃圾回收，与弱引用关联的对象都会被回收，不考虑其他引用情况，是一种积极的的回收策略；适用于不希望对象长时间活在内存的场景，例如WeekHashMap</td>
+</tr>
+<tr>
+<td>虚引用</td>
+<td>主要是用来跟踪对象被垃圾回收的状态，与其关联的对象总是被可垃圾回收，有虚引用关联，不影响其生命周期</td>
+</tr>
+</tbody></table>
+<h2 id="3-线程池核心参数有哪些，keppalive参数有什么用？线程池的阻塞队列有哪些？"><a href="#3-线程池核心参数有哪些，keppalive参数有什么用？线程池的阻塞队列有哪些？" class="headerlink" title="3. 线程池核心参数有哪些，keppalive参数有什么用？线程池的阻塞队列有哪些？"></a>3. 线程池核心参数有哪些，keppalive参数有什么用？线程池的阻塞队列有哪些？</h2><p>线程池的核心参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>核心线程数</td>
+<td></td>
+</tr>
+<tr>
+<td>最大线程数</td>
+<td></td>
+</tr>
+<tr>
+<td>阻塞队列</td>
+<td></td>
+</tr>
+<tr>
+<td>KeepAliveTime</td>
+<td>线程池中超过核心线程数的空闲线程的最大空闲时间，实际上getTask中poll方法的参数</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>keepAliveTime的时间单位</td>
+</tr>
+<tr>
+<td>ThreadFactory</td>
+<td>创建现成的工厂</td>
+</tr>
+<tr>
+<td>handler</td>
+<td>线程池的拒绝策略</td>
+</tr>
+</tbody></table>
+<p>阻塞队列有哪些？</p>
+<table>
+<thead>
+<tr>
+<th>队列</th>
+<th>描述</th>
+<th>使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ArrayBlockingQueue</td>
+<td>数组支持的有界阻塞队列</td>
+<td></td>
+</tr>
+<tr>
+<td>LinkedBlockingQueue</td>
+<td>链表支持的阻塞队列，可指定大小，不指定默认容量为Integer.MAX_VALUE</td>
+<td></td>
+</tr>
+<tr>
+<td>PriorityBlockingQueue</td>
+<td>支持优先级的无界队列，需要定义比较器</td>
+<td></td>
+</tr>
+<tr>
+<td>SynchronousQueue</td>
+<td>不存储元素，用于线程间数据交换</td>
+<td></td>
+</tr>
+<tr>
+<td>DelayedQueue</td>
+<td>元素到期才能被取出，用于创建时间延迟的缓存场景</td>
+<td>定时任务，周期性任务</td>
+</tr>
+<tr>
+<td>LinkedBlockingQueue</td>
+<td>双端版本的LinkedBlockingQueue</td>
+<td></td>
+</tr>
+<tr>
+<td>LinkedTransferQueue</td>
+<td>链表支持的，生产者线程会等待消费者接收数据</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>拒绝策略有哪些（简写）？</p>
+<ol>
+<li>抛出异常（默认）</li>
+<li>静默处理</li>
+<li>移除阻塞队列中队头的任务，插入新任务</li>
+<li>调用者线程执行任务，算是个负反馈，来降低任务分发的频率</li>
+</ol>
+<h2 id="4-threadlocal是什么？有内存溢出风险吗？"><a href="#4-threadlocal是什么？有内存溢出风险吗？" class="headerlink" title="4. threadlocal是什么？有内存溢出风险吗？"></a>4. threadlocal是什么？有内存溢出风险吗？</h2><p>ThreadLocal是java提供的一个线程局部变量的工具，每个线程都有一个局部变量，可以通过ThreadLocal存取，不同线程之间相互独立。<br>内存泄露？<br>ThreadLocal的生命周期和线程绑定，所以在线程池这种，线程复用的场景，如果使用完不清理ThreadLocal的值，可能会导致内存泄露。</p>
+<h1 id="5-什么是线程死锁？怎么解决或防止死锁？"><a href="#5-什么是线程死锁？怎么解决或防止死锁？" class="headerlink" title="5. 什么是线程死锁？怎么解决或防止死锁？"></a>5. 什么是线程死锁？怎么解决或防止死锁？</h1><p>线程死锁是指两个及两个以上的线程在执行过程中，由于竞争资源而导致的互相等待的现象，若无外力作用，他们都无法进行下去。<br>一种简单的情况是，两个线程分别占有一部分资源并等待对方释放自己所需要的资源。</p>
+<p>死锁产生的四个条件<br>    * 互斥<br>    * 请求并保持<br>    * 不剥夺<br>    * 循环等待</p>
+<p>解决或防止死锁的方法<br>    * 资源有序分配<br>    * 线程开始前分配所有必要资源<br>    * 一个线程请求资源得不到满足，则必须释放其占有的所有资源<br>    * 死锁的检测和解除<br>    * 超时与重试</p>
+<h1 id="6-spring面向切片编程的实现原理，spring动态代理"><a href="#6-spring面向切片编程的实现原理，spring动态代理" class="headerlink" title="6. spring面向切片编程的实现原理，spring动态代理"></a>6. spring面向切片编程的实现原理，spring动态代理</h1><p>面向切片编程AOP是提取在应用程序中多个地方都有影响，且与主业务逻辑无关的功能，比如日志、事务管理等。<br>实现原理：spring容器实例化bean时，会查找定义的切面，并根据切面和通知创建响应的代理对象，这些代理对象将原始的bean包装在内，并在调用目标方法时执行相应的通知。<br>动态代理：代理对象包装目标对象，当代理对象的一个方法被调用时，他会执行相应的通知，然后再调用原始对象上的相应方法。</p>
+<h2 id="7-哪些框架用了反射？反射会有什么问题？"><a href="#7-哪些框架用了反射？反射会有什么问题？" class="headerlink" title="7. 哪些框架用了反射？反射会有什么问题？"></a>7. 哪些框架用了反射？反射会有什么问题？</h2><p>使用反射的java框架：</p>
+<ul>
+<li>spring</li>
+<li>hibernate</li>
+<li>junit</li>
+<li>javaBean</li>
+<li>structs</li>
+</ul>
+<p>问题：</p>
+<ul>
+<li>性能：反射方法通常比非反射方法调用慢</li>
+<li>安全：可能会破坏封装</li>
+<li>类型的安全问题：反射不会进行类型检查，类型问题可能在运行时出现，会导致运行时异常</li>
+</ul>
+<p>使用反射创建实例的例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类名</span></span><br><span class="line"><span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> <span class="string">&quot;java.lang.String&quot;</span>;</span><br><span class="line"><span class="comment">// 通过反射获取类</span></span><br><span class="line">Class&lt;?&gt; clazz = Class.forName(className);</span><br><span class="line"><span class="comment">// 创建实例</span></span><br><span class="line"><span class="type">Object</span> <span class="variable">instance</span> <span class="operator">=</span> clazz.getDeclaredConstructor().newInstance();</span><br><span class="line"><span class="comment">// 打印实例</span></span><br><span class="line">System.out.println(instance);</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-逃逸分析"><a href="#8-逃逸分析" class="headerlink" title="8. 逃逸分析"></a>8. 逃逸分析</h2><p>一种编译器器优化技术，主要目的是分析对象的动态作用于，确定对象是否可能逃逸出方法或者线程的作用域，进而决定如何更有效的分配和管理对象。</p>
+<p>应用：</p>
+<ol>
+<li>栈上分配：java中对象通常在堆上分配，需要进行垃圾回收，如果逃逸分析发生一个对象只在一个方法作用域内有效，不会被其他才能线程引用，那么可以分配在栈上，从而避免在堆上分配和后续的垃圾回收。</li>
+<li>锁消除：若对象不会被多线程共享，则可以消除不必要的锁操作。</li>
+<li>锁粗化：如果连续多次对同一个对象进行同步，则可以将多次锁操作合并为一次，减少锁竞争。</li>
+</ol>
+<p>Java HotSpot VM，可以通过JVM参数来启用逃逸分析，虽然可以提高程序的性能，减少不必要的内存和锁开销，但是会导致编译时间增加。</p>
+<h1 id="MySql"><a href="#MySql" class="headerlink" title="MySql"></a>MySql</h1><h2 id="1-mysql什么情况下会加行锁，什么情况加表锁"><a href="#1-mysql什么情况下会加行锁，什么情况加表锁" class="headerlink" title="1. mysql什么情况下会加行锁，什么情况加表锁"></a>1. mysql什么情况下会加行锁，什么情况加表锁</h2><p>如果使用的引擎是innodb的话，默认使用的是行锁。</p>
+<ul>
+<li>加表锁的情况<ul>
+<li>执行DDL操作</li>
+<li>sql语句导致无法预测要锁定哪些行，可能会使用表锁，比如说外键约束的场景</li>
+<li>显式的使用lock table语句</li>
+</ul>
+</li>
+<li>加行锁的情况<ul>
+<li>where子句匹配到了主键或唯一索引</li>
+<li>执行了范围查询、全表扫描、或不使用索引的查询，不过有可能会锁定大量行，接近全表的数据。</li>
+<li>insert，update，delete语句中受影响的行</li>
+<li>select … for update(排他锁)，select … lock in share mode(共享锁),会对所选行加行锁</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-mysql索引结构，b-树相对于b树的改进，带来了哪些好处？"><a href="#2-mysql索引结构，b-树相对于b树的改进，带来了哪些好处？" class="headerlink" title="2. mysql索引结构，b+树相对于b树的改进，带来了哪些好处？"></a>2. mysql索引结构，b+树相对于b树的改进，带来了哪些好处？</h2><ol>
+<li>b+树将数据全存储在叶子结点中，使得每个非叶子结点中可以存储更多的索引，树的整体高度降低，而树的高度和磁盘的IO次数相关，有效的降低了IO的开销，同时使得查询更加稳定。</li>
+<li>b+树使用双向链表将叶子结点进行串联，提高了排序、范围查询等操作的效率。</li>
+<li>b+树插入删除效率上更高，因为数据只存在于叶子节点，不必在整棵树上移动。</li>
+</ol>
+<h2 id="3-要对一个列做模糊查询，希望走索引，应该怎么做？"><a href="#3-要对一个列做模糊查询，希望走索引，应该怎么做？" class="headerlink" title="3. 要对一个列做模糊查询，希望走索引，应该怎么做？"></a>3. 要对一个列做模糊查询，希望走索引，应该怎么做？</h2><p>需要看查询的需求</p>
+<ol>
+<li>如果是模糊查询是以固定前缀开头，那直接对该列加索引或者前缀索引就可。</li>
+<li>如果不以固定前缀开头<ul>
+<li>使用全文索引  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> FULLTEXT INDEX idx_name <span class="keyword">ON</span> table_name(column_name);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> <span class="keyword">MATCH</span>(column_name) AGAINST(<span class="string">&#x27;abc&#x27;</span>);</span><br></pre></td></tr></table></figure></li>
+<li>使用搜索引擎，利用倒排索引的方式来。<ul>
+<li>主要思想是：关键词-&gt;文档id的映射，对关键词索引和文档id分别做了优化，如关键词有序，且使用前缀树降低内存开销。文档id通过增量id，integer数组和bitmap的混合使用来降低硬盘开销。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="4-SQL表有4个列，每个列加单独索引，然后查询语句里where条件4个列都有-的条件，问是否用到索引？用到的话是用了什么索引？"><a href="#4-SQL表有4个列，每个列加单独索引，然后查询语句里where条件4个列都有-的条件，问是否用到索引？用到的话是用了什么索引？" class="headerlink" title="4. SQL表有4个列，每个列加单独索引，然后查询语句里where条件4个列都有&#x3D;的条件，问是否用到索引？用到的话是用了什么索引？"></a>4. SQL表有4个列，每个列加单独索引，然后查询语句里where条件4个列都有&#x3D;的条件，问是否用到索引？用到的话是用了什么索引？</h2><p>会用到索引，优化器会使用其中他认为最优的索引来执行。</p>
+<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><ol>
+<li>缓存穿透的解决策略<br>首先要区分三个概念</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>现象</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>缓存雪崩</td>
+<td>大量的key在同一时间失效，导致请求大量打到数据库上，导致数据库宕机</td>
+<td>过期时间可以加上随机数；可以在过期前主动更新缓存；</td>
+</tr>
+<tr>
+<td>缓存击穿</td>
+<td>热点数据的key失效，导致访问该热点数据的请求，打到数据库上</td>
+<td>热点数据永不过期，利用后台线程进行数据更新；设置二级缓存，当一级缓存失效后，可以访问二级缓存；设置互斥锁，保证只有一个请求去访问数据库更新缓存，其他线程等待。</td>
+</tr>
+<tr>
+<td>缓存穿透</td>
+<td>访问一个数据库中不存在的key，会导致redis无法拦截请求，请求每次都打到数据库上</td>
+<td>reids中可以存储一个null值，设置较短的过期时间；可以通过bitmap或者布隆过滤器来拦截请求</td>
+</tr>
+</tbody></table>
+<h2 id="1-redis为什么快"><a href="#1-redis为什么快" class="headerlink" title="1. redis为什么快?"></a>1. redis为什么快?</h2><p>不细讲，不过要看看标准答案是什么</p>
+<ol>
+<li>内存操作vs磁盘操作</li>
+<li>数据结构简单，且底层实现高效</li>
+<li>处理用户请求时是单线程，避免了线程上下文切换的开销，也避免了处理数据竞争和死锁的开销。</li>
+</ol>
+<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="1-介绍快速排序、归并排序"><a href="#1-介绍快速排序、归并排序" class="headerlink" title="1. 介绍快速排序、归并排序"></a>1. 介绍快速排序、归并排序</h2><p>快排和归并都是分治的思想。<br>快排：选择基准-&gt;划分-&gt;递归处理子序列<br>归并排序（merged sort）：</p>
+<ul>
+<li>分解：将列表中每个元素放入单独的列表</li>
+<li>递归排序：递归合并这些子列表以产生新的排序子列表</li>
+<li>合并：反复合并这些子列表，直到只剩下一个已排序的列表。</li>
+</ul>
+<h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><h2 id="1-服务器内存溢出，cpu占用100-，这些怎么排查"><a href="#1-服务器内存溢出，cpu占用100-，这些怎么排查" class="headerlink" title="1. 服务器内存溢出，cpu占用100%，这些怎么排查"></a>1. 服务器内存溢出，cpu占用100%，这些怎么排查</h2><ol>
+<li>查看系统日志，找相关的错误和警告</li>
+<li>使用top和htop查看哪些进程&#x2F;线程在消耗大量cpu</li>
+<li>使用perf，linux性能分析工具，可以查找到哪些函数或系统调用导致了高CPU使用</li>
+<li>java应用的话，可以使用jstack来查看哪些线程或代码段导致了高的CPU使用</li>
+<li>检查硬件故障</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/" data-id="clmkt26wm0000f8um543rhb8d" data-title="携程面经-搬运" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">常见选型问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/MYSQL/" style="font-size: 10px;">MYSQL</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/">携程面经-搬运</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/">常见选型问题</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/15/%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%99%85%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%90%AC%E8%BF%90/">索引创建实际遇到的问题-搬运</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">唯品会-实习-Java大数据组件开发-二面</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">美团-秋招-后端开发-一面</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 xiangyao<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
