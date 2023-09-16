@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>携程-秋招-一二面 | xiangyao的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="[TOC] 综合类1. mysql如何提高并发量？线程池的常用大小？2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？3. java程序内存占用100%，如何排查？4. redis的使用方式？5. 索引优化的场景？（撕逼了很久）？6. 一亿的键值对（时间，访问量），内存中怎么存？7. 本机缓存、分布式缓存、多级缓存的优劣势？8. top命令中的几个值的含义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="携程-秋招-一二面">
+<meta property="og:url" content="http://example.com/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/index.html">
+<meta property="og:site_name" content="xiangyao的个人博客">
+<meta property="og:description" content="[TOC] 综合类1. mysql如何提高并发量？线程池的常用大小？2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？3. java程序内存占用100%，如何排查？4. redis的使用方式？5. 索引优化的场景？（撕逼了很久）？6. 一亿的键值对（时间，访问量），内存中怎么存？7. 本机缓存、分布式缓存、多级缓存的优劣势？8. top命令中的几个值的含义">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-16T08:06:00.000Z">
+<meta property="article:modified_time" content="2023-09-16T09:20:55.464Z">
+<meta property="article:author" content="xiangyao">
+<meta property="article:tag" content="面经">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="xiangyao的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">xiangyao的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录下这一刻，让我们变得更强</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-携程-秋招-一二面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/" class="article-date">
+  <time class="dt-published" datetime="2023-09-16T08:06:00.000Z" itemprop="datePublished">2023-09-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      携程-秋招-一二面
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="综合类"><a href="#综合类" class="headerlink" title="综合类"></a>综合类</h1><h2 id="1-mysql如何提高并发量？线程池的常用大小？"><a href="#1-mysql如何提高并发量？线程池的常用大小？" class="headerlink" title="1. mysql如何提高并发量？线程池的常用大小？"></a>1. mysql如何提高并发量？线程池的常用大小？</h2><h2 id="2-java程序如何提高并发量？Http1-1有无队头阻塞，并发模式？keepalive？"><a href="#2-java程序如何提高并发量？Http1-1有无队头阻塞，并发模式？keepalive？" class="headerlink" title="2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？"></a>2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？</h2><h2 id="3-java程序内存占用100-，如何排查？"><a href="#3-java程序内存占用100-，如何排查？" class="headerlink" title="3. java程序内存占用100%，如何排查？"></a>3. java程序内存占用100%，如何排查？</h2><h2 id="4-redis的使用方式？"><a href="#4-redis的使用方式？" class="headerlink" title="4. redis的使用方式？"></a>4. redis的使用方式？</h2><h2 id="5-索引优化的场景？（撕逼了很久）？"><a href="#5-索引优化的场景？（撕逼了很久）？" class="headerlink" title="5. 索引优化的场景？（撕逼了很久）？"></a>5. 索引优化的场景？（撕逼了很久）？</h2><h2 id="6-一亿的键值对（时间，访问量），内存中怎么存？"><a href="#6-一亿的键值对（时间，访问量），内存中怎么存？" class="headerlink" title="6. 一亿的键值对（时间，访问量），内存中怎么存？"></a>6. 一亿的键值对（时间，访问量），内存中怎么存？</h2><h2 id="7-本机缓存、分布式缓存、多级缓存的优劣势？"><a href="#7-本机缓存、分布式缓存、多级缓存的优劣势？" class="headerlink" title="7. 本机缓存、分布式缓存、多级缓存的优劣势？"></a>7. 本机缓存、分布式缓存、多级缓存的优劣势？</h2><h2 id="8-top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）"><a href="#8-top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）" class="headerlink" title="8. top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）"></a>8. top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）</h2><h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="1-介绍下TCP和UDP的区别？TCP如何实现可靠传输？"><a href="#1-介绍下TCP和UDP的区别？TCP如何实现可靠传输？" class="headerlink" title="1. 介绍下TCP和UDP的区别？TCP如何实现可靠传输？"></a>1. 介绍下TCP和UDP的区别？TCP如何实现可靠传输？</h2><h2 id="2-Restful-api常用的method？"><a href="#2-Restful-api常用的method？" class="headerlink" title="2. Restful api常用的method？"></a>2. Restful api常用的method？</h2><h2 id="3-http状态码？403？"><a href="#3-http状态码？403？" class="headerlink" title="3. http状态码？403？"></a>3. http状态码？403？</h2><table>
+    <tr>
+        <th>分类</th>
+        <th>状态码</th>
+    </tr>
+    <tr>
+        <td rowspan="2">1xx(信息响应)</td>
+        <td>100 continue：服务器已经接收到请求的初始部分，并且客户端应继续请求，如果请求已经完成，则忽略</td>
+    </tr>
+    <tr>
+        <td>101 Switching Protocals：服务器了解并准确切换协议，例如从Http/1.1切换到WebSocket</td>
+    </tr>
+    <tr>
+        <td rowspan="3">2xx(成功）</td>
+        <td>200 OK：请求成功</td>
+    </tr>
+    <tr>
+        <td>201 Created: 请求已被实现，结果是创建了一个新的资源</td>
+    </tr>
+    <tr>
+        <td>204 No Content: 服务器已经成功处理请求，但是没有返回任何内容</td>
+    </tr>
+    <tr>
+        <td rowspan="3">3xx(重定向）</td>
+        <td>301 Moved Permanently：被请求的资源已永久移动到新的URL</td>
+    </tr>
+    <tr>
+        <td>302 Found：被请求的资源临时从不同的URI响应</td>
+    </tr>
+    <tr>
+        <td>304 Not Modified：该资源自从上次请求后没有任何修改</td>
+    </tr>
+    <tr>
+        <td rowspan="5"><Strong>4xx(客户端错误）</Strong></td>
+        <td>400 Bad Request：服务器不能或不会处理请求，由于客户端似乎有错误</td>
+    </tr>
+    <tr>
+        <td>401 Unauthorized：请求需要用户的身份验证</td>
+    </tr>
+    <tr>
+        <td><Strong>403 Forbidden：服务器理解客户端的请求，但拒绝执行他</Strong></td>
+    </tr>
+    <tr>
+        <td>404 Not Found：请求的资源在服务器上未找到</td>
+    </tr>
+    <tr>
+        <td>429 Too Many Requests：用户在给定时间内发送了太多的请求</td>
+    </tr>
+    <tr>
+        <td rowspan="3"><Strong>5xx(服务器错误）</Strong></td>
+        <td>500 Internal Server Error：服务器遇到一个情况，不知道如何处理</td>
+    </tr>
+    <tr>
+        <td>502 Bad Gateway：服务器作为网关或代理，从上游服务器收到一个无效的响应。</td>
+    </tr>
+    <tr>
+        <td>503 Service Unavailable：服务器不准确处理请求，通常情况是服务器过载或正在维护</td>
+    </tr>
+</table>
+
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-介绍下哈希查找的过程？"><a href="#1-介绍下哈希查找的过程？" class="headerlink" title="1. 介绍下哈希查找的过程？"></a>1. 介绍下哈希查找的过程？</h2><h1 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h1><h2 id="1-IPv4转int，int转IPv4（手写）"><a href="#1-IPv4转int，int转IPv4（手写）" class="headerlink" title="1. IPv4转int，int转IPv4（手写）"></a>1. IPv4转int，int转IPv4（手写）</h2><h2 id="2-汉诺塔（手写）"><a href="#2-汉诺塔（手写）" class="headerlink" title="2. 汉诺塔（手写）"></a>2. 汉诺塔（手写）</h2><h2 id="3-排序算法？介绍下快排？"><a href="#3-排序算法？介绍下快排？" class="headerlink" title="3. 排序算法？介绍下快排？"></a>3. 排序算法？介绍下快排？</h2><h2 id="4-介绍下查找算法？"><a href="#4-介绍下查找算法？" class="headerlink" title="4. 介绍下查找算法？"></a>4. 介绍下查找算法？</h2><h2 id="5-链表和数组？"><a href="#5-链表和数组？" class="headerlink" title="5. 链表和数组？"></a>5. 链表和数组？</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/" data-id="clmltjsqe00009sum4wh63jth" data-title="携程-秋招-一二面" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">携程面经-搬运</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/MYSQL/" style="font-size: 10px;">MYSQL</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/">携程-秋招-一二面</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/">携程面经-搬运</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/">常见选型问题</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/15/%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%99%85%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%90%AC%E8%BF%90/">索引创建实际遇到的问题-搬运</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">唯品会-实习-Java大数据组件开发-二面</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 xiangyao<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

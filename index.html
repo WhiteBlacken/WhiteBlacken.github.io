@@ -77,6 +77,107 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-携程-秋招-一二面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/" class="article-date">
+  <time class="dt-published" datetime="2023-09-16T08:06:00.000Z" itemprop="datePublished">2023-09-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/">携程-秋招-一二面</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="综合类"><a href="#综合类" class="headerlink" title="综合类"></a>综合类</h1><h2 id="1-mysql如何提高并发量？线程池的常用大小？"><a href="#1-mysql如何提高并发量？线程池的常用大小？" class="headerlink" title="1. mysql如何提高并发量？线程池的常用大小？"></a>1. mysql如何提高并发量？线程池的常用大小？</h2><h2 id="2-java程序如何提高并发量？Http1-1有无队头阻塞，并发模式？keepalive？"><a href="#2-java程序如何提高并发量？Http1-1有无队头阻塞，并发模式？keepalive？" class="headerlink" title="2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？"></a>2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？</h2><h2 id="3-java程序内存占用100-，如何排查？"><a href="#3-java程序内存占用100-，如何排查？" class="headerlink" title="3. java程序内存占用100%，如何排查？"></a>3. java程序内存占用100%，如何排查？</h2><h2 id="4-redis的使用方式？"><a href="#4-redis的使用方式？" class="headerlink" title="4. redis的使用方式？"></a>4. redis的使用方式？</h2><h2 id="5-索引优化的场景？（撕逼了很久）？"><a href="#5-索引优化的场景？（撕逼了很久）？" class="headerlink" title="5. 索引优化的场景？（撕逼了很久）？"></a>5. 索引优化的场景？（撕逼了很久）？</h2><h2 id="6-一亿的键值对（时间，访问量），内存中怎么存？"><a href="#6-一亿的键值对（时间，访问量），内存中怎么存？" class="headerlink" title="6. 一亿的键值对（时间，访问量），内存中怎么存？"></a>6. 一亿的键值对（时间，访问量），内存中怎么存？</h2><h2 id="7-本机缓存、分布式缓存、多级缓存的优劣势？"><a href="#7-本机缓存、分布式缓存、多级缓存的优劣势？" class="headerlink" title="7. 本机缓存、分布式缓存、多级缓存的优劣势？"></a>7. 本机缓存、分布式缓存、多级缓存的优劣势？</h2><h2 id="8-top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）"><a href="#8-top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）" class="headerlink" title="8. top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）"></a>8. top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）</h2><h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="1-介绍下TCP和UDP的区别？TCP如何实现可靠传输？"><a href="#1-介绍下TCP和UDP的区别？TCP如何实现可靠传输？" class="headerlink" title="1. 介绍下TCP和UDP的区别？TCP如何实现可靠传输？"></a>1. 介绍下TCP和UDP的区别？TCP如何实现可靠传输？</h2><h2 id="2-Restful-api常用的method？"><a href="#2-Restful-api常用的method？" class="headerlink" title="2. Restful api常用的method？"></a>2. Restful api常用的method？</h2><h2 id="3-http状态码？403？"><a href="#3-http状态码？403？" class="headerlink" title="3. http状态码？403？"></a>3. http状态码？403？</h2><table>
+    <tr>
+        <th>分类</th>
+        <th>状态码</th>
+    </tr>
+    <tr>
+        <td rowspan="2">1xx(信息响应)</td>
+        <td>100 continue：服务器已经接收到请求的初始部分，并且客户端应继续请求，如果请求已经完成，则忽略</td>
+    </tr>
+    <tr>
+        <td>101 Switching Protocals：服务器了解并准确切换协议，例如从Http/1.1切换到WebSocket</td>
+    </tr>
+    <tr>
+        <td rowspan="3">2xx(成功）</td>
+        <td>200 OK：请求成功</td>
+    </tr>
+    <tr>
+        <td>201 Created: 请求已被实现，结果是创建了一个新的资源</td>
+    </tr>
+    <tr>
+        <td>204 No Content: 服务器已经成功处理请求，但是没有返回任何内容</td>
+    </tr>
+    <tr>
+        <td rowspan="3">3xx(重定向）</td>
+        <td>301 Moved Permanently：被请求的资源已永久移动到新的URL</td>
+    </tr>
+    <tr>
+        <td>302 Found：被请求的资源临时从不同的URI响应</td>
+    </tr>
+    <tr>
+        <td>304 Not Modified：该资源自从上次请求后没有任何修改</td>
+    </tr>
+    <tr>
+        <td rowspan="5"><Strong>4xx(客户端错误）</Strong></td>
+        <td>400 Bad Request：服务器不能或不会处理请求，由于客户端似乎有错误</td>
+    </tr>
+    <tr>
+        <td>401 Unauthorized：请求需要用户的身份验证</td>
+    </tr>
+    <tr>
+        <td><Strong>403 Forbidden：服务器理解客户端的请求，但拒绝执行他</Strong></td>
+    </tr>
+    <tr>
+        <td>404 Not Found：请求的资源在服务器上未找到</td>
+    </tr>
+    <tr>
+        <td>429 Too Many Requests：用户在给定时间内发送了太多的请求</td>
+    </tr>
+    <tr>
+        <td rowspan="3"><Strong>5xx(服务器错误）</Strong></td>
+        <td>500 Internal Server Error：服务器遇到一个情况，不知道如何处理</td>
+    </tr>
+    <tr>
+        <td>502 Bad Gateway：服务器作为网关或代理，从上游服务器收到一个无效的响应。</td>
+    </tr>
+    <tr>
+        <td>503 Service Unavailable：服务器不准确处理请求，通常情况是服务器过载或正在维护</td>
+    </tr>
+</table>
+
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-介绍下哈希查找的过程？"><a href="#1-介绍下哈希查找的过程？" class="headerlink" title="1. 介绍下哈希查找的过程？"></a>1. 介绍下哈希查找的过程？</h2><h1 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h1><h2 id="1-IPv4转int，int转IPv4（手写）"><a href="#1-IPv4转int，int转IPv4（手写）" class="headerlink" title="1. IPv4转int，int转IPv4（手写）"></a>1. IPv4转int，int转IPv4（手写）</h2><h2 id="2-汉诺塔（手写）"><a href="#2-汉诺塔（手写）" class="headerlink" title="2. 汉诺塔（手写）"></a>2. 汉诺塔（手写）</h2><h2 id="3-排序算法？介绍下快排？"><a href="#3-排序算法？介绍下快排？" class="headerlink" title="3. 排序算法？介绍下快排？"></a>3. 排序算法？介绍下快排？</h2><h2 id="4-介绍下查找算法？"><a href="#4-介绍下查找算法？" class="headerlink" title="4. 介绍下查找算法？"></a>4. 介绍下查找算法？</h2><h2 id="5-链表和数组？"><a href="#5-链表和数组？" class="headerlink" title="5. 链表和数组？"></a>5. 链表和数组？</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/" data-id="clmltjsqe00009sum4wh63jth" data-title="携程-秋招-一二面" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-携程面经-搬运" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/" class="article-date">
@@ -1064,130 +1165,6 @@
 
 
   
-    <article id="post-得物-秋招-java开发-一面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/09/%E5%BE%97%E7%89%A9-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" class="article-date">
-  <time class="dt-published" datetime="2023-09-09T03:06:09.000Z" itemprop="datePublished">2023-09-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/09/%E5%BE%97%E7%89%A9-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">得物-秋招-java开发-一面</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>题目很简单，但是关于java的知识太薄弱了</p>
-</blockquote>
-<h2 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h2><h3 id="1-面向对象的特性？多态的实现方式？"><a href="#1-面向对象的特性？多态的实现方式？" class="headerlink" title="1. 面向对象的特性？多态的实现方式？"></a>1. 面向对象的特性？多态的实现方式？</h3><ol>
-<li>继承</li>
-<li>封装</li>
-<li>多态<ul>
-<li>方法重载（同名不同参）：编译时多态</li>
-<li>方法重写（继承后override）：运行时多态</li>
-</ul>
-</li>
-</ol>
-<h3 id="2-接口和抽象类的区别？"><a href="#2-接口和抽象类的区别？" class="headerlink" title="2. 接口和抽象类的区别？"></a>2. 接口和抽象类的区别？</h3><table>
-<thead>
-<tr>
-<th>特性</th>
-<th>接口</th>
-<th>抽象</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>数量</td>
-<td>可实现多个</td>
-<td>只能继承一个</td>
-</tr>
-<tr>
-<td>含非抽象方法</td>
-<td></td>
-<td>√</td>
-</tr>
-<tr>
-<td>可以被实例化</td>
-<td></td>
-<td>√</td>
-</tr>
-<tr>
-<td>可以有构造函数</td>
-<td></td>
-<td>√</td>
-</tr>
-<tr>
-<td>可以有成员变量</td>
-<td></td>
-<td>√</td>
-</tr>
-<tr>
-<td>访问修饰符</td>
-<td>仅为public</td>
-<td>抽象方法可为public和protected</td>
-</tr>
-<tr>
-<td>使用场景</td>
-<td>仅提供公共方法协议，不考虑实现</td>
-<td>为一系列类提供公共的状态来实现</td>
-</tr>
-</tbody></table>
-<h3 id="3-String类是否可以继承？如果创建了路径完全一样的String，会有什么区别？"><a href="#3-String类是否可以继承？如果创建了路径完全一样的String，会有什么区别？" class="headerlink" title="3. String类是否可以继承？如果创建了路径完全一样的String，会有什么区别？"></a>3. String类是否可以继承？如果创建了路径完全一样的String，会有什么区别？</h3><p>String类不可以被继承，其被final修饰。<br>final修饰的特点：（以下情况编译不通过）</p>
-<ol>
-<li>final修饰的类不能被继承</li>
-<li>final修饰的方法不能被重写</li>
-<li>final修饰的变量赋值后不可修改</li>
-</ol>
-<p>创建了路径完全一样的String类会怎么样？</p>
-<ol>
-<li>编译不通过</li>
-<li>即使编译通过，类加载器也会默认加载java类库的java.lang.String。（除非自定义类加载器）</li>
-<li>即使创建了同一个包中的类，也不能访问String类的包级私有成员（不加修饰符的默认访问级别）<br>目的是为了确保核心类库不会被恶意代码覆盖和修改。</li>
-</ol>
-<h3 id="4-JAVA创建对象有几种方法？"><a href="#4-JAVA创建对象有几种方法？" class="headerlink" title="4. JAVA创建对象有几种方法？"></a>4. JAVA创建对象有几种方法？</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1. new</span><br><span class="line">ClassName obj = new ClassName();</span><br><span class="line">2. newInstance + 反射</span><br><span class="line">//只能调用无参构造函数</span><br><span class="line">ClassName obj = (ClassName)Class.forName(&quot;ClassName&quot;).newInstance();</span><br><span class="line">3. Constructor的newInstance方法</span><br><span class="line">//也是反射，可带参数</span><br><span class="line">Constructor&lt;ClassName&gt; constructor = ClassName.class.getConstructor(String.class,int.class);</span><br><span class="line">ClassName obj = constructor.newInstance(&quot;John&quot;,25);</span><br><span class="line">4. clone方法，需要类实现Cloneable方法</span><br><span class="line">ClassName obj1 = new ClassName();</span><br><span class="line">ClassName obj2 = (ClassName)obj1.clone();</span><br><span class="line">5. 反序列化</span><br><span class="line">//从流中读取对象，使用反序列化构建</span><br><span class="line">ObjectInputStream inStream = new ObjectInputStream(anInputStream);</span><br><span class="line">ClassName obj = (ClassName)inStream.readObject();</span><br><span class="line">6. 工厂模式</span><br><span class="line">//提供一个接口或方法来创建对象，不需要客户端知道具体要创建哪个类的实例。</span><br><span class="line">//一个常见的使用场景：数据库连接的创建</span><br></pre></td></tr></table></figure>
-<h3 id="5-HashMap-get一个值的过程？为什么冲突用链表，而不用数组？"><a href="#5-HashMap-get一个值的过程？为什么冲突用链表，而不用数组？" class="headerlink" title="5. HashMap get一个值的过程？为什么冲突用链表，而不用数组？"></a>5. HashMap get一个值的过程？为什么冲突用链表，而不用数组？</h3><p>get值，hashCode-&gt;equals<br>为什么用链表存储冲突结点？</p>
-<ol>
-<li>数组需提前分配空间，可能会面临扩容问题</li>
-<li>链表转红黑树更简单</li>
-</ol>
-<p><strong>扩展1：HashMap的key值可以是可变对象吗？</strong><br>可以，HashMap的key值可以是任何对象。但是可能会产生数据丢失和不一致。<br>并且自己需要定义hashCode和equals方法，一旦修改了equals，需要相应修改hashCode方法。</p>
-<p><strong>扩展2：如果我不重写hashCode和equals方法，直接将对象放入HashSet，依据什么去重？</strong><br>是否指向内存中同一个对象。</p>
-<p><strong>扩展3：python中的dict的key值可以是可变对象吗？</strong><br>不可以，需要满足可哈希，可变对象hash值会变化。（而java中的hashmap可以使用任何类型做key值）<br>其他和java中hashmap类似，自定义对象去重，使用__hash__(),<strong>eq</strong>()来判断。</p>
-<h3 id="6-介绍下threadlocal"><a href="#6-介绍下threadlocal" class="headerlink" title="6. 介绍下threadlocal"></a>6. 介绍下threadlocal</h3><p>线程局部变量的类，每个线程自己的独立的变量副本。<br>用于保存线程的相关状态。<br>有内存泄露的风险，如果线程是线程池中的持久线程，用完ThreadLocal未使用remove方法，会导致内存泄露。</p>
-<h3 id="7-介绍下synchronized和atomic"><a href="#7-介绍下synchronized和atomic" class="headerlink" title="7. 介绍下synchronized和atomic"></a>7. 介绍下synchronized和atomic</h3><p>主要围绕着上锁不上锁，阐述以下几点：</p>
-<ol>
-<li>不同并发程度下的开销</li>
-<li>适用范围</li>
-</ol>
-<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="1-深分页问题如何解决？"><a href="#1-深分页问题如何解决？" class="headerlink" title="1. 深分页问题如何解决？"></a>1. 深分页问题如何解决？</h3><h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><h3 id="1-文本如何转成结构化信息的？"><a href="#1-文本如何转成结构化信息的？" class="headerlink" title="1. 文本如何转成结构化信息的？"></a>1. 文本如何转成结构化信息的？</h3><p>正则表达式，可以用于提取邮箱，手机号。<br>newspaper，识别大段文本。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/09/%E5%BE%97%E7%89%A9-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" data-id="clmbgdpzf000034um1ifo0lzg" data-title="得物-秋招-java开发-一面" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1238,6 +1215,10 @@
       <ul>
         
           <li>
+            <a href="/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/">携程-秋招-一二面</a>
+          </li>
+        
+          <li>
             <a href="/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/">携程面经-搬运</a>
           </li>
         
@@ -1251,10 +1232,6 @@
         
           <li>
             <a href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">唯品会-实习-Java大数据组件开发-二面</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">美团-秋招-后端开发-一面</a>
           </li>
         
       </ul>
