@@ -101,6 +101,48 @@
       
         <p>[TOC]</p>
 <h1 id="综合类"><a href="#综合类" class="headerlink" title="综合类"></a>综合类</h1><h2 id="1-mysql如何提高并发量？线程池的常用大小？"><a href="#1-mysql如何提高并发量？线程池的常用大小？" class="headerlink" title="1. mysql如何提高并发量？线程池的常用大小？"></a>1. mysql如何提高并发量？线程池的常用大小？</h2><h2 id="2-java程序如何提高并发量？Http1-1有无队头阻塞，并发模式？keepalive？"><a href="#2-java程序如何提高并发量？Http1-1有无队头阻塞，并发模式？keepalive？" class="headerlink" title="2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？"></a>2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？</h2><h2 id="3-java程序内存占用100-，如何排查？"><a href="#3-java程序内存占用100-，如何排查？" class="headerlink" title="3. java程序内存占用100%，如何排查？"></a>3. java程序内存占用100%，如何排查？</h2><h2 id="4-redis的使用方式？"><a href="#4-redis的使用方式？" class="headerlink" title="4. redis的使用方式？"></a>4. redis的使用方式？</h2><h2 id="5-索引优化的场景？（撕逼了很久）？"><a href="#5-索引优化的场景？（撕逼了很久）？" class="headerlink" title="5. 索引优化的场景？（撕逼了很久）？"></a>5. 索引优化的场景？（撕逼了很久）？</h2><h2 id="6-一亿的键值对（时间，访问量），内存中怎么存？"><a href="#6-一亿的键值对（时间，访问量），内存中怎么存？" class="headerlink" title="6. 一亿的键值对（时间，访问量），内存中怎么存？"></a>6. 一亿的键值对（时间，访问量），内存中怎么存？</h2><h2 id="7-本机缓存、分布式缓存、多级缓存的优劣势？"><a href="#7-本机缓存、分布式缓存、多级缓存的优劣势？" class="headerlink" title="7. 本机缓存、分布式缓存、多级缓存的优劣势？"></a>7. 本机缓存、分布式缓存、多级缓存的优劣势？</h2><h2 id="8-top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）"><a href="#8-top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）" class="headerlink" title="8. top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）"></a>8. top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）</h2><h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="1-介绍下TCP和UDP的区别？TCP如何实现可靠传输？"><a href="#1-介绍下TCP和UDP的区别？TCP如何实现可靠传输？" class="headerlink" title="1. 介绍下TCP和UDP的区别？TCP如何实现可靠传输？"></a>1. 介绍下TCP和UDP的区别？TCP如何实现可靠传输？</h2><h2 id="2-Restful-api常用的method？"><a href="#2-Restful-api常用的method？" class="headerlink" title="2. Restful api常用的method？"></a>2. Restful api常用的method？</h2><h2 id="3-http状态码？403？"><a href="#3-http状态码？403？" class="headerlink" title="3. http状态码？403？"></a>3. http状态码？403？</h2><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>用于读取信息，幂等的</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>用于创建新资源</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>更新会创建指定资源，幂等的</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>用于删除指定的资源，幂等</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>用于更新部分资源</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>与get相同，但是只返回HTTP头部，不返回实体的主体</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>用于描述目标资源的通信选项，返回该资源支持的HTTP方法</td>
+</tr>
+</tbody></table>
+<p>PUT和PATCH方法的区别：</p>
+<ol>
+<li>意图：put幂等，主要目的是完全替换目标资源，也就是说，即使只改一个属性，也要提供完整的更新内容；patch用于部分更新目标资源，仅需提供资源中要修改的属性和新值，不一定是幂等的。</li>
+<li>资源不存在时：put可能会创建一个新资源，patch会返回一个错误。</li>
+<li>传输与安全性：put可以只传输修改部分，更搞笑，但是可能会产生安全性问题。</li>
+</ol>
+<h2 id="4-http的请求头"><a href="#4-http的请求头" class="headerlink" title="4. http的请求头"></a>4. http的请求头</h2><table>
     <tr>
         <th>分类</th>
         <th>状态码</th>
@@ -140,7 +182,7 @@
         <td>401 Unauthorized：请求需要用户的身份验证</td>
     </tr>
     <tr>
-        <td><Strong>403 Forbidden：服务器理解客户端的请求，但拒绝执行他</Strong></td>
+        <td><Strong>403 Forbidden：服务器理解客户端的请求，但拒绝执行他。</Strong>一般在权限不足或api调用超限时使用。</td>
     </tr>
     <tr>
         <td>404 Not Found：请求的资源在服务器上未找到</td>
