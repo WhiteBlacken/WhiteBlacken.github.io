@@ -6,15 +6,15 @@
   
   <title>携程-秋招-一二面 | xiangyao的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="[TOC] 综合类1. mysql如何提高并发量？线程池的常用大小？2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？3. java程序内存占用100%，如何排查？4. redis的使用方式？5. 索引优化的场景？（撕逼了很久）？6. 一亿的键值对（时间，访问量），内存中怎么存？7. 本机缓存、分布式缓存、多级缓存的优劣势？8. top命令中的几个值的含义">
+  <meta name="description" content="[TOC] 综合类1. mysql如何提高并发量？连接池的常用大小？思考的点包括哪些？  硬件方面： 使用SSD提高IO速度； 增加内存来提供更大的缓冲区，减少IO操作 多核处理器：提供更多的并行能力   MYSQL配置优化 调整innodb_buffer_pool_size（存储引擎的内存缓冲池大小），应调整为系统总内存的60%-80% 调整innodb_log_file_size，适当增大日志">
 <meta property="og:type" content="article">
 <meta property="og:title" content="携程-秋招-一二面">
 <meta property="og:url" content="http://example.com/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
-<meta property="og:description" content="[TOC] 综合类1. mysql如何提高并发量？线程池的常用大小？2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？3. java程序内存占用100%，如何排查？4. redis的使用方式？5. 索引优化的场景？（撕逼了很久）？6. 一亿的键值对（时间，访问量），内存中怎么存？7. 本机缓存、分布式缓存、多级缓存的优劣势？8. top命令中的几个值的含义">
+<meta property="og:description" content="[TOC] 综合类1. mysql如何提高并发量？连接池的常用大小？思考的点包括哪些？  硬件方面： 使用SSD提高IO速度； 增加内存来提供更大的缓冲区，减少IO操作 多核处理器：提供更多的并行能力   MYSQL配置优化 调整innodb_buffer_pool_size（存储引擎的内存缓冲池大小），应调整为系统总内存的60%-80% 调整innodb_log_file_size，适当增大日志">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-16T08:06:00.000Z">
-<meta property="article:modified_time" content="2023-09-16T10:31:15.883Z">
+<meta property="article:modified_time" content="2023-09-16T13:02:27.165Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary">
@@ -103,7 +103,61 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p>[TOC]</p>
-<h1 id="综合类"><a href="#综合类" class="headerlink" title="综合类"></a>综合类</h1><h2 id="1-mysql如何提高并发量？线程池的常用大小？"><a href="#1-mysql如何提高并发量？线程池的常用大小？" class="headerlink" title="1. mysql如何提高并发量？线程池的常用大小？"></a>1. mysql如何提高并发量？线程池的常用大小？</h2><h2 id="2-java程序如何提高并发量？Http1-1有无队头阻塞，并发模式？keepalive？"><a href="#2-java程序如何提高并发量？Http1-1有无队头阻塞，并发模式？keepalive？" class="headerlink" title="2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？"></a>2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？</h2><h2 id="3-java程序内存占用100-，如何排查？"><a href="#3-java程序内存占用100-，如何排查？" class="headerlink" title="3. java程序内存占用100%，如何排查？"></a>3. java程序内存占用100%，如何排查？</h2><h2 id="4-redis的使用方式？"><a href="#4-redis的使用方式？" class="headerlink" title="4. redis的使用方式？"></a>4. redis的使用方式？</h2><h2 id="5-索引优化的场景？（撕逼了很久）？"><a href="#5-索引优化的场景？（撕逼了很久）？" class="headerlink" title="5. 索引优化的场景？（撕逼了很久）？"></a>5. 索引优化的场景？（撕逼了很久）？</h2><h2 id="6-一亿的键值对（时间，访问量），内存中怎么存？"><a href="#6-一亿的键值对（时间，访问量），内存中怎么存？" class="headerlink" title="6. 一亿的键值对（时间，访问量），内存中怎么存？"></a>6. 一亿的键值对（时间，访问量），内存中怎么存？</h2><h2 id="7-本机缓存、分布式缓存、多级缓存的优劣势？"><a href="#7-本机缓存、分布式缓存、多级缓存的优劣势？" class="headerlink" title="7. 本机缓存、分布式缓存、多级缓存的优劣势？"></a>7. 本机缓存、分布式缓存、多级缓存的优劣势？</h2><h2 id="8-top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）"><a href="#8-top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）" class="headerlink" title="8. top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）"></a>8. top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）</h2><h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="1-介绍下TCP和UDP的区别？TCP如何实现可靠传输？"><a href="#1-介绍下TCP和UDP的区别？TCP如何实现可靠传输？" class="headerlink" title="1. 介绍下TCP和UDP的区别？TCP如何实现可靠传输？"></a>1. 介绍下TCP和UDP的区别？TCP如何实现可靠传输？</h2><h2 id="2-Restful-api常用的method？"><a href="#2-Restful-api常用的method？" class="headerlink" title="2. Restful api常用的method？"></a>2. Restful api常用的method？</h2><h2 id="3-http状态码？403？"><a href="#3-http状态码？403？" class="headerlink" title="3. http状态码？403？"></a>3. http状态码？403？</h2><table>
+<h1 id="综合类"><a href="#综合类" class="headerlink" title="综合类"></a>综合类</h1><h2 id="1-mysql如何提高并发量？连接池的常用大小？"><a href="#1-mysql如何提高并发量？连接池的常用大小？" class="headerlink" title="1. mysql如何提高并发量？连接池的常用大小？"></a>1. mysql如何提高并发量？连接池的常用大小？</h2><p>思考的点包括哪些？</p>
+<ol>
+<li><strong>硬件方面</strong>：<ul>
+<li>使用SSD提高IO速度；</li>
+<li>增加内存来提供更大的缓冲区，减少IO操作</li>
+<li>多核处理器：提供更多的并行能力</li>
+</ul>
+</li>
+<li><strong>MYSQL配置优化</strong><ul>
+<li>调整innodb_buffer_pool_size（存储引擎的内存缓冲池大小），应调整为系统总内存的60%-80%</li>
+<li>调整innodb_log_file_size，适当增大日志文件大小可以提高写入性能</li>
+<li>使用持久连接：避免频繁建立和关闭连接</li>
+</ul>
+</li>
+<li>查询优化：索引+避免复杂查询+优化数据表（optimize table）+数据库结构优化（消除数据冗余，使用更适当的数据类型）</li>
+<li><strong>读写分离</strong></li>
+<li><strong>数据库分片</strong></li>
+<li><strong>连接池</strong>：复用数据库连接，减少建立和关闭连接的开销</li>
+<li>引擎更换：不需要事务且读多写少，上MyISAM</li>
+<li>避免锁竞争：通过代码优化和数据库设计，减少长期持有锁的情况</li>
+</ol>
+<h2 id="2-java程序如何提高并发量？Http1-1有无队头阻塞，并发模式？keepalive？"><a href="#2-java程序如何提高并发量？Http1-1有无队头阻塞，并发模式？keepalive？" class="headerlink" title="2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？"></a>2. java程序如何提高并发量？Http1.1有无队头阻塞，并发模式？keepalive？</h2><p>思考的点包括哪些？（数据库方面的参考上一个问题）</p>
+<ol>
+<li>多线程编程</li>
+<li>减少线程争用和使用更适当的并发集合，比如减少全局变量和静态变量的过渡使用</li>
+<li>垂直（单台机器加性能）和水平扩展（添加更多服务器以分摊负载），以及微服务分摊负载，负载均衡器来分发请求</li>
+<li>JVM调整：调整堆大小和GC策略来减少垃圾回收暂停</li>
+<li>使用中间件和外部消息系统：消息队列异步处理请求，缓存减少对数据库访问</li>
+<li>避免阻塞，使用非阻塞IO或异步IO</li>
+</ol>
+<h2 id="3-java程序内存占用100-，如何排查？"><a href="#3-java程序内存占用100-，如何排查？" class="headerlink" title="3. java程序内存占用100%，如何排查？"></a>3. java程序内存占用100%，如何排查？</h2><h2 id="4-redis的使用方式？"><a href="#4-redis的使用方式？" class="headerlink" title="4. redis的使用方式？"></a>4. redis的使用方式？</h2><h2 id="5-索引优化的场景？（撕逼了很久）？"><a href="#5-索引优化的场景？（撕逼了很久）？" class="headerlink" title="5. 索引优化的场景？（撕逼了很久）？"></a>5. 索引优化的场景？（撕逼了很久）？</h2><h2 id="6-一亿的键值对（时间，访问量），内存中怎么存？"><a href="#6-一亿的键值对（时间，访问量），内存中怎么存？" class="headerlink" title="6. 一亿的键值对（时间，访问量），内存中怎么存？"></a>6. 一亿的键值对（时间，访问量），内存中怎么存？</h2><h2 id="7-本机缓存、分布式缓存、多级缓存的优劣势？"><a href="#7-本机缓存、分布式缓存、多级缓存的优劣势？" class="headerlink" title="7. 本机缓存、分布式缓存、多级缓存的优劣势？"></a>7. 本机缓存、分布式缓存、多级缓存的优劣势？</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>本机缓存</td>
+<td>速度快：数据存储在应用程序同一台服务器上，不存在网络开销；无需额外网络配置或外部组件</td>
+<td>受制于单个机器内存大小；不易扩展；服务器崩溃，缓存数据会丢失；多服务器环境中，每个服务器的本地缓存可能出现数据不一致的情况；</td>
+</tr>
+<tr>
+<td>分布式缓存</td>
+<td>水平扩展：可以容易地通过增加更多的服务器来扩展缓存容量；数据的持久性和可用性；</td>
+<td>复杂性；存在网络延迟；需要更多的硬件资源和管理工作</td>
+</tr>
+<tr>
+<td>多级缓存</td>
+<td>灵活性:可以根据需要和访问模式调整每级缓存的大小和策略；高效率：经常访问的数据可以存储在本地缓存，较少访问的数据可以存储在分布式缓存中；高可用性：结合了本地缓存的速度和分布式缓存的扩展性</td>
+<td>复杂性；一致性问题：在不同级别的缓存之间保持数据一致性可能比较复杂</td>
+</tr>
+</tbody></table>
+<h2 id="8-top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）"><a href="#8-top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）" class="headerlink" title="8. top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）"></a>8. top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）</h2><h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="1-介绍下TCP和UDP的区别？TCP如何实现可靠传输？"><a href="#1-介绍下TCP和UDP的区别？TCP如何实现可靠传输？" class="headerlink" title="1. 介绍下TCP和UDP的区别？TCP如何实现可靠传输？"></a>1. 介绍下TCP和UDP的区别？TCP如何实现可靠传输？</h2><h2 id="2-Restful-api常用的method？"><a href="#2-Restful-api常用的method？" class="headerlink" title="2. Restful api常用的method？"></a>2. Restful api常用的method？</h2><table>
 <thead>
 <tr>
 <th>Method</th>
@@ -145,7 +199,7 @@
 <li>资源不存在时：put可能会创建一个新资源，patch会返回一个错误。</li>
 <li>传输与安全性：put可以只传输修改部分，更搞笑，但是可能会产生安全性问题。</li>
 </ol>
-<h2 id="4-http的请求头"><a href="#4-http的请求头" class="headerlink" title="4. http的请求头"></a>4. http的请求头</h2><table>
+<h2 id="3-http状态码？403？"><a href="#3-http状态码？403？" class="headerlink" title="3. http状态码？403？"></a>3. http状态码？403？</h2><table>
     <tr>
         <th>分类</th>
         <th>状态码</th>
@@ -205,7 +259,23 @@
     </tr>
 </table>
 
-<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-介绍下哈希查找的过程？"><a href="#1-介绍下哈希查找的过程？" class="headerlink" title="1. 介绍下哈希查找的过程？"></a>1. 介绍下哈希查找的过程？</h2><h1 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h1><h2 id="1-IPv4转int，int转IPv4（手写）"><a href="#1-IPv4转int，int转IPv4（手写）" class="headerlink" title="1. IPv4转int，int转IPv4（手写）"></a>1. IPv4转int，int转IPv4（手写）</h2><h2 id="2-汉诺塔（手写）"><a href="#2-汉诺塔（手写）" class="headerlink" title="2. 汉诺塔（手写）"></a>2. 汉诺塔（手写）</h2><h2 id="3-排序算法？介绍下快排？"><a href="#3-排序算法？介绍下快排？" class="headerlink" title="3. 排序算法？介绍下快排？"></a>3. 排序算法？介绍下快排？</h2><h2 id="4-介绍下查找算法？"><a href="#4-介绍下查找算法？" class="headerlink" title="4. 介绍下查找算法？"></a>4. 介绍下查找算法？</h2><h2 id="5-链表和数组？"><a href="#5-链表和数组？" class="headerlink" title="5. 链表和数组？"></a>5. 链表和数组？</h2>
+<h2 id="4-http的请求头"><a href="#4-http的请求头" class="headerlink" title="4. http的请求头"></a>4. http的请求头</h2><h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-介绍下哈希查找的过程？"><a href="#1-介绍下哈希查找的过程？" class="headerlink" title="1. 介绍下哈希查找的过程？"></a>1. 介绍下哈希查找的过程？</h2><h2 id="2-BIO和NIO"><a href="#2-BIO和NIO" class="headerlink" title="2. BIO和NIO"></a>2. BIO和NIO</h2><p>java中两种主要的IO处理方式，主要区别在于是否允许线程在等待数据时被阻塞。</p>
+<ol>
+<li>BIO（Blocking IO）<ul>
+<li>阻塞模式：当线程调用read或write方法 ，该线程被阻塞，直到数据被读取或写入，或者发生某个异常，这意味着其他IO操作必须等待当前操作完成。</li>
+<li>模型简单：模型简单，流程清晰</li>
+<li>效率问题：每次IO都会导致线程被阻塞，如果请求并发量大，需要创建大量线程来处理IO，导致资源浪费和系统压力增加。</li>
+</ul>
+</li>
+<li>NIO（Non-blocking IO）<ul>
+<li>非阻塞模式：线程调用read，如果没有数据可读，线程可以继续执行其他任务，write同理。线程通常将非阻塞IO的空闲时间用于在其他IO通道上执行IO操作，所以单个线程可以管理多个数据输出。</li>
+<li>缓冲区：NIO引入了缓冲区的概念，数据的读写都是基于缓冲区进行的，缓冲区实质上是一个数组</li>
+<li>选择器：NIO引入了selector的概念，选择器可以监视多个IO通道，检查那个通道已经准备好了读写，使得一个线程可以管理多个通道。</li>
+<li>灵活性增加，但是编程复杂度也增加。</li>
+</ul>
+</li>
+</ol>
+<h1 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h1><h2 id="1-IPv4转int，int转IPv4（手写）"><a href="#1-IPv4转int，int转IPv4（手写）" class="headerlink" title="1. IPv4转int，int转IPv4（手写）"></a>1. IPv4转int，int转IPv4（手写）</h2><h2 id="2-汉诺塔（手写）"><a href="#2-汉诺塔（手写）" class="headerlink" title="2. 汉诺塔（手写）"></a>2. 汉诺塔（手写）</h2><h2 id="3-排序算法？介绍下快排？"><a href="#3-排序算法？介绍下快排？" class="headerlink" title="3. 排序算法？介绍下快排？"></a>3. 排序算法？介绍下快排？</h2><h2 id="4-介绍下查找算法？"><a href="#4-介绍下查找算法？" class="headerlink" title="4. 介绍下查找算法？"></a>4. 介绍下查找算法？</h2><h2 id="5-链表和数组？"><a href="#5-链表和数组？" class="headerlink" title="5. 链表和数组？"></a>5. 链表和数组？</h2>
       
     </div>
     <footer class="article-footer">
