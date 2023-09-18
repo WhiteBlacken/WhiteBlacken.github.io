@@ -77,6 +77,118 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java基础知识" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="article-date">
+  <time class="dt-published" datetime="2023-09-09T16:43:36.000Z" itemprop="datePublished">2023-09-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">J.U.C</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>先依葫芦画瓢，再深入理解</p>
+</blockquote>
+<h1 id="1-什么是协程？"><a href="#1-什么是协程？" class="headerlink" title="1. 什么是协程？"></a>1. 什么是协程？</h1><h1 id="2-什么是超线程？"><a href="#2-什么是超线程？" class="headerlink" title="2. 什么是超线程？"></a>2. 什么是超线程？</h1><h1 id="3-如何设置合理的线程数？"><a href="#3-如何设置合理的线程数？" class="headerlink" title="3. 如何设置合理的线程数？"></a>3. 如何设置合理的线程数？</h1><p>目标是：最大化利用CPU的情况下，减少线程切换的开销</p>
+<ul>
+<li>高并发，低耗时，建议少线程</li>
+<li>低并发，高耗时，建议多线程</li>
+<li>高并发，高耗时，分析任务类型，增加排队，加大线程数</li>
+</ul>
+<h1 id="4-什么是匿名类？什么是函数式接口？"><a href="#4-什么是匿名类？什么是函数式接口？" class="headerlink" title="4. 什么是匿名类？什么是函数式接口？"></a>4. 什么是匿名类？什么是函数式接口？</h1><h1 id="5-run-和start"><a href="#5-run-和start" class="headerlink" title="5. run()和start()"></a>5. run()和start()</h1><p>run方法是同步方法，由主线程执行，并未开启新线程。<br>run可以无限执行，start只能执行一次（illegalThreadStateException）。</p>
+<p>还有getName，setName，sleep，interrupt，yield，getPriority（1-10，默认是5），setPriority等方法。<br>sleep(0)先进入阻塞态（不过因为是0ms，所以直接进就绪态），yield进入就绪态。<br>yield之后，优先级更高的线程更有可能获得cpu时间片。yield根据jvm和操作系统不同，行为可能不同。<br>interrupt方法只是通知线程需要中断，做了个标记，并不会立刻中断。<br>public static boolean interrupted() 判断是否中断，并清除标记。<br>public boolean isInterrupted() 判断是否被中断，不清楚标记。<br>sleep过程如果使用interrupt，会抛出InterruptedException异常，捕获该异常会清除标记，需要在catch中再次使用interrupt来标记。<br>join：主线程等待子线程完成<br>setDaemon：设置守护进程，只要所有用户线程退出后，守护进程<strong>立马</strong>结束，不论执行到哪。<br>应用：垃圾回收器；tomcat用来接收外部请求的线程。<br>isDaemon<br>getState：new，runnable，waiting（sleep，join，wait），timed_waiting（带计时的sleep，join，wait），blocked（锁相关），terminated</p>
+<h1 id="6-线程的创建方式"><a href="#6-线程的创建方式" class="headerlink" title="6. 线程的创建方式"></a>6. 线程的创建方式</h1><ol>
+<li>实现Runnable接口的run方法<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyRunnable</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Runnable方式运行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">MyRunnable</span> <span class="variable">myRunnable</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyRunnable</span>();</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(myRunnable);</span><br><span class="line">        thread1.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>继承Thread类并重新run方法<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//受限于java的单继承，如果继承了Thread类，无法继承其他类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyThread</span> <span class="keyword">extends</span> <span class="title class_">Thread</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Thread方式运行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">MyThread</span>().start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>使用FutureTask方法（实现Callable接口）<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyCallable</span> <span class="keyword">implements</span> <span class="title class_">Callable</span>&lt;String&gt; &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Callable接口方式运行&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        FutureTask&lt;String&gt; futureTask = <span class="keyword">new</span> <span class="title class_">FutureTask</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">MyCallable</span>());</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(futureTask);</span><br><span class="line">        thread.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> futureTask.get();</span><br><span class="line">            System.out.println(result);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="7-线程池的作用"><a href="#7-线程池的作用" class="headerlink" title="7. 线程池的作用"></a>7. 线程池的作用</h1><p>容纳多个线程的容器，其中的线程可以反复使用，省去了频繁创建线程对象的操作，无需反复创建线程而消耗过多的资源。<br>主要优势：</p>
+<ul>
+<li>降低资源消耗：防止了反复创建销毁</li>
+<li>提高响应速度：任务不需要等待线程创建</li>
+<li>提高线程的可管理性：防止无限制创建</li>
+</ul>
+<h2 id="为什么要在finally里关闭线程池？"><a href="#为什么要在finally里关闭线程池？" class="headerlink" title="为什么要在finally里关闭线程池？"></a>为什么要在finally里关闭线程池？</h2><p>占用系统资源，内存泄露，主线程不会退出。</p>
+<p>threadPool.shutdown();等待正在执行的，以及阻塞队列中任务执行完。<br>threadPool.shutdownNow();等正在执行的任务后即关闭线程。<br>这两种方式使用interrupt，给是给个中断标志，并不会决定线程关闭，由线程内部自己处理。<br>两者的区别只是看是否依据阻塞队列是否为空。</p>
+<p>threadPool.isTerminated();可以用于判断线程池是否真正停止了。</p>
+<h2 id="execute-方法和submit-有什么区别？"><a href="#execute-方法和submit-有什么区别？" class="headerlink" title="execute()方法和submit()有什么区别？"></a>execute()方法和submit()有什么区别？</h2><ol>
+<li>参数<br>execute只接收runnable，submit指出runnable,callable，可以直接返回FutureTask对象。</li>
+<li>异常<br>execute会在子线程中抛出异常，主线程捕捉不到。submit不会立刻抛出异常，而是将异常暂时存起来，等调用Future.get()方法才会抛出，并且可以在主线程中捕捉到。</li>
+</ol>
+<h2 id="线程池的创建顺序"><a href="#线程池的创建顺序" class="headerlink" title="线程池的创建顺序"></a>线程池的创建顺序</h2><p>实际的执行顺序，并不一致，比如阻塞队列中的任务和最大线程数量创建线程所执行的任务。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A[判断核心线程数量是否已满]</span><br><span class="line">A --&gt;|是| B[判断阻塞队列是否已满]</span><br><span class="line">A --&gt;|否| C[创建线程执行任务]</span><br><span class="line">B --&gt;|否| D[加入阻塞队列]</span><br><span class="line">B --&gt;|是| E[判断最大线程数量是否已满]</span><br><span class="line">E --&gt;|是| F[执行拒绝策略]</span><br><span class="line">E --&gt;|否| G[创建线程]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>线程依赖阻塞队列来保活。</p>
+<p>？什么是阻塞队列，什么是非阻塞队列？</p>
+<p>拒绝策略</p>
+<ol>
+<li>抛异常-默认</li>
+<li>调用者线程自己去执行，相当于反馈机制，减缓新任务的提交速度</li>
+<li>抛弃最老的任务-阻塞队列中</li>
+<li>直接静默抛弃</li>
+</ol>
+<p>可以实现RejectedExecutionHandler接口，自定义拒绝策略。</p>
+<p>线程淘汰策略</p>
+<ol>
+<li>正常退出<br>假设m个线程，核心线程数为n，其中m&gt;n,阻塞队列无任务，需要淘汰m-n个线程。<br>淘汰通过getTask方法，当getTask为null时对应的线程消失，当上述场景不满足时，阻塞队列实际上一直调用的是take方法，进行无限阻塞，而满足时会进行poll超时阻塞。<br>m个线程需要通过CAS去竞争，竞争成功的m-n个线程会执行poll()方法，超时后，getTask返回null，剩余的n个线程则在没有新任务时无限阻塞。<br>核心线程和临时线程本质上没区别，看最后保留了哪些，哪些就是核心线程。<br>所以线程池参数的超时时间，就是用来设置poll方法超时阻塞的时间。</li>
+<li>异常退出<br>线程抛异常退出后，线程池会addWork()创建一个新的线程。<br>为什么不捕获异常，直接让线程执行下一个任务呢？<br>为了统一的异常处理器setUncaughtExceptionHandler，所以需要抛出异常，异常抛出后，线程异常退出。</li>
+</ol>
+<h2 id="tomcat中的线程池"><a href="#tomcat中的线程池" class="headerlink" title="tomcat中的线程池"></a>tomcat中的线程池</h2><p>JUC的线程池构造方法本身并不创建线程，只是创建一个线程工厂。而tomcat中线程池的构造方法有一个preStartAllCoreThread()方法，用于提前创建所有的核心线程。</p>
+<h1 id="8-线程安全问题"><a href="#8-线程安全问题" class="headerlink" title="8. 线程安全问题"></a>8. 线程安全问题</h1><p>线程并发对共享数据进行读写，造成数据混乱。<br>线程安全的三特性：</p>
+<ul>
+<li>原子性<ul>
+<li>synchronized</li>
+<li>atomic</li>
+</ul>
+</li>
+<li>可见性<ul>
+<li>synchronized</li>
+<li>voliate</li>
+</ul>
+</li>
+<li>有序性</li>
+</ul>
+<h2 id="9-JMM"><a href="#9-JMM" class="headerlink" title="9. JMM"></a>9. JMM</h2><p>JAVA多线程内存模型。<br>多线程对共享变量操作实际上是操作每个线程工作内存中的副本。</p>
+<p>缓存一致性协议（MESI）<br>多个CPU从主内存读取同一个数据到各自的高速缓存，当其中某个cpu修改了缓存里的数据，该数据会马上同步回主内存，其他cpu通过总线嗅探机制可以感知到数据的变化从而将自己的缓存里的数据失效。</p>
+<p>volatile是如何使缓存一致的？<br>volatile底层主要是通过汇编lock前缀指令，他会锁定这块内存区域的缓存（缓存行锁定），并写回到主内存。<br>而intel 64架构中lock指令会执行以下操作：<br>    1. 立即将当前缓存行中的数据写回系统内存<br>    2. 写回操作会引起其他CPU里缓存该内存地址的数据无效（MESI协议）<br>    3. 提供内存屏障，使得lock前后指令不能重排序。</p>
+<p>指令重排序：在不影响单线程程序执行结果的前提下，计算机为了最大限度发挥机器性能，会对机器指令重排序优化。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[源代码]</span><br><span class="line">B[编译器优化重排序]</span><br><span class="line">C[指令级优化重排序]</span><br><span class="line">D[内存系统重排序]</span><br><span class="line">E[最终执行指令序列]</span><br><span class="line">A --&gt;B</span><br><span class="line">B --&gt;C</span><br><span class="line">C --&gt;D</span><br><span class="line">D --&gt;E</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>bilibili在使用vpn时，视频会播放不了</p>
+<p>对象的创建流程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[开始]</span><br><span class="line">B[类加载检查]</span><br><span class="line">C[已经加载]</span><br><span class="line">D[分配内存]</span><br><span class="line">E[未加载]</span><br><span class="line">F[加载类]</span><br><span class="line">G[初始化零值]</span><br><span class="line">H[设置对象头]</span><br><span class="line">I[执行init方法]</span><br><span class="line">J[结束]</span><br><span class="line"></span><br><span class="line">A --&gt; B</span><br><span class="line">B --&gt; |已经加载| C</span><br><span class="line">B --&gt; |未加载| E</span><br><span class="line">C --&gt; D</span><br><span class="line">E --&gt; F --&gt; D</span><br><span class="line">D --&gt; G</span><br><span class="line">G --&gt; H</span><br><span class="line">H --&gt; I</span><br><span class="line">I --&gt; J</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>内存屏障<br>如果在两行代码中加上内存屏障，则底层不会对其进行重排序。</p>
+<h2 id="10-锁"><a href="#10-锁" class="headerlink" title="10. 锁"></a>10. 锁</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-id="clmdhsy3e00012gum436n6vwg" data-title="J.U.C" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-阿里国际-秋招-java开发-一面-简历面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/" class="article-date">
@@ -535,6 +647,10 @@
       <ul>
         
           <li>
+            <a href="/2023/09/18/%E4%B8%BB%E6%B5%81%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/">网络编程基础</a>
+          </li>
+        
+          <li>
             <a href="/2023/09/18/BIO-NIO/">BIO&amp;NIO</a>
           </li>
         
@@ -548,10 +664,6 @@
         
           <li>
             <a href="/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/">常见选型问题</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/15/%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%99%85%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%90%AC%E8%BF%90/">索引创建实际遇到的问题-搬运</a>
           </li>
         
       </ul>
