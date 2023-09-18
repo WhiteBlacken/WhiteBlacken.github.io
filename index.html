@@ -77,6 +77,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-BIO-NIO" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/18/BIO-NIO/" class="article-date">
+  <time class="dt-published" datetime="2023-09-18T09:34:25.000Z" itemprop="datePublished">2023-09-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/18/BIO-NIO/">BIO&amp;NIO</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h1><h2 id="BIOServer"><a href="#BIOServer" class="headerlink" title="BIOServer"></a>BIOServer</h2><p>accept时会阻塞，等待客户端连接，但是后续处理使用了新的线程，故不会阻塞。但是会对于数千数万个请求分别创建线程开销过大。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BIOServer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//创建ServerSocket，监听8080</span></span><br><span class="line">            <span class="type">ServerSocket</span> <span class="variable">serverSocket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerSocket</span>(<span class="number">8080</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;Server started,waiting for connections...&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//无限循环，等待客户端链接</span></span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="comment">//阻塞，等待客户端连接，当有新的客户端连接，返回一个新的socket对象</span></span><br><span class="line">                <span class="type">Socket</span> <span class="variable">clientSocket</span> <span class="operator">=</span> serverSocket.accept();</span><br><span class="line">                System.out.println(<span class="string">&quot;Client connected:&quot;</span> + clientSocket.getRemoteSocketAddress());</span><br><span class="line"></span><br><span class="line">                <span class="comment">//为每个新连接的客户端创建一个新线程来处理</span></span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; handleClient(clientSocket)).start();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//处理客户端请求</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">handleClient</span><span class="params">(Socket clientSocket)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//从socket中获取输入流，用于读取客户端发送的数据</span></span><br><span class="line">            <span class="type">BufferedReader</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(clientSocket.getInputStream()));</span><br><span class="line">            <span class="comment">//从socket中获取输出流，用于向客户端发送数据</span></span><br><span class="line">            <span class="type">PrintWriter</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PrintWriter</span>(clientSocket.getOutputStream(), <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">            String request, response;</span><br><span class="line">            <span class="comment">//循环读取客户端发送的每一行数据</span></span><br><span class="line">            <span class="keyword">while</span> ((request = in.readLine()) != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="string">&quot;exit&quot;</span>.equals(request)) <span class="keyword">break</span>;</span><br><span class="line">                response = <span class="string">&quot;Received:&quot;</span> + request;</span><br><span class="line">                out.println(response);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>使用线程池优化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">MAX_THREADS</span> <span class="operator">=</span> <span class="number">50</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">ExecutorService</span> <span class="variable">threadPool</span> <span class="operator">=</span> Executors.newFixedThreadPool(MAX_THREADS);</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//使用线程池</span></span><br><span class="line">            threadPool.execute(()-&gt;handleClient(clientSocket));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="BIOClient"><a href="#BIOClient" class="headerlink" title="BIOClient"></a>BIOClient</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BIOClient</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">serverAddress</span> <span class="operator">=</span> <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">serverPort</span> <span class="operator">=</span> <span class="number">8080</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Socket</span> <span class="variable">socket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Socket</span>(serverAddress, serverPort);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//从socket中获取输入输出流</span></span><br><span class="line">            <span class="type">BufferedReader</span> <span class="variable">stdIn</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(System.in));</span><br><span class="line">            <span class="type">PrintWriter</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PrintWriter</span>(socket.getOutputStream(), <span class="literal">true</span>);</span><br><span class="line">            <span class="type">BufferedReader</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(socket.getInputStream()));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            String userInput, serverResponse;</span><br><span class="line">            <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Enter Message (type &#x27;exit&#x27; to quit):&quot;</span>);</span><br><span class="line">                userInput = stdIn.readLine();</span><br><span class="line">                <span class="keyword">if</span>(userInput==<span class="literal">null</span>||<span class="string">&quot;exit&quot;</span>.equalsIgnoreCase(userInput))<span class="keyword">break</span>;</span><br><span class="line">                out.println(userInput);</span><br><span class="line">                serverResponse = in.readLine();</span><br><span class="line">                System.out.println(<span class="string">&quot;Server Response:&quot;</span> + serverResponse);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            socket.close();</span><br><span class="line">            in.close();</span><br><span class="line">            out.close();</span><br><span class="line">            stdIn.close();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h1><h2 id="NIOServer"><a href="#NIOServer" class="headerlink" title="NIOServer"></a>NIOServer</h2><p>系统的线程数量有着上限，如果想要处理更高的并发，需要使用更少的线程来处理更多的连接。</p>
+<h2 id="NIOClient"><a href="#NIOClient" class="headerlink" title="NIOClient"></a>NIOClient</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/18/BIO-NIO/" data-id="clmp04pbc00002oumgvxn7962" data-title="BIO&amp;NIO" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97/" rel="tag">手写系列</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-携程-秋招-一二面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/" class="article-date">
@@ -1283,132 +1331,6 @@
 
 
   
-    <article id="post-阿里国际-秋招-java开发-一面-简历面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/" class="article-date">
-  <time class="dt-published" datetime="2023-09-09T03:06:54.000Z" itemprop="datePublished">2023-09-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/">阿里国际-秋招-java开发-一面/简历面</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>总评：java基础知识回答不好；介绍平时在读的书，最喜欢的课程这类题目，可以提前准备下。</p>
-</blockquote>
-<h2 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h2><h3 id="1-介绍下切面编程？"><a href="#1-介绍下切面编程？" class="headerlink" title="1. 介绍下切面编程？"></a>1. 介绍下切面编程？</h3><ul>
-<li>将程序中的横切关注点（比如日志、事务管理、安全）与主业务分离开，开发者可以独立开发主业务逻辑，而不必关系与主业务逻辑不直接相关的代码。</li>
-<li>代码重用</li>
-<li>提高可维护性</li>
-<li>灵活性：轻松的添加或删除切面，不影响主业务逻辑</li>
-</ul>
-<p>总结：更关注主业务逻辑，将业务不相关代码模块化，并与主业务分离，提高了代码的可重用性和可维护性。<br>场景:日志、事务、权限检查、性能监控、异常处理</p>
-<h3 id="2-介绍下JAVA的内存管理？"><a href="#2-介绍下JAVA的内存管理？" class="headerlink" title="2. 介绍下JAVA的内存管理？"></a>2. 介绍下JAVA的内存管理？</h3><ol>
-<li>内存分区</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>作用</th>
-<th>特性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>堆</td>
-<td>存放对象实例</td>
-<td>线程共享；需要GC</td>
-</tr>
-<tr>
-<td>方法区</td>
-<td>存放类信息，静态代码段，静态变量，jit即时编译产生的代码段</td>
-<td>线程共享</td>
-</tr>
-<tr>
-<td>线程栈</td>
-<td>存放局部变量和引用变量</td>
-<td>线程私有</td>
-</tr>
-<tr>
-<td>本地方法栈</td>
-<td>服务于本地方法调用</td>
-<td>线程私有</td>
-</tr>
-<tr>
-<td>程序计数器</td>
-<td>记录字节码运行的位置</td>
-<td>线程私有</td>
-</tr>
-</tbody></table>
-<ol start="2">
-<li>垃圾回收<br>依赖GC来回收不再引用的对象。<br>如何区分对象是否被应用：引用计数和可达性分析<br>常见垃圾回收算法<ul>
-<li>标记-清除：会导致碎片化</li>
-<li>复制：空间折半</li>
-<li>标记-整理：移动开销大<br>常见的垃圾回收器</li>
-<li>serial collector:特点是Stop the word，且单线程</li>
-<li>parallel Collector：stop the world，但是多线程</li>
-<li>CMS：为解决stw问题，但是未完全解决</li>
-<li>G1：改进CMS</li>
-</ul>
-</li>
-<li>对象分配<br>对象首先在新生代，特别是eden，eden满了进行young gc。<br>存活时间长的对象，进入老年代，老年代满了进行full gc。<br>防止了频繁移动长生命周期的对象带来的开销。</li>
-<li>内存泄露<br>现象：不再使用的对象却不被回收。<br>原因：长生命周期对象持有短生命周期对象的引用。<br>例子：<ul>
-<li>static修饰的集合类</li>
-<li>未显式close的数据库连接、网络和io操作</li>
-<li>集合中的对象属性修改后无法被remove</li>
-<li>释放对象时未删除监听器</li>
-<li>内部类</li>
-<li>单例对象持有外部引用（单例对象以静态变量形式存在）</li>
-</ul>
-</li>
-</ol>
-<h3 id="3-JAVA类加载的过程？双亲委派机制？"><a href="#3-JAVA类加载的过程？双亲委派机制？" class="headerlink" title="3. JAVA类加载的过程？双亲委派机制？"></a>3. JAVA类加载的过程？双亲委派机制？</h3><p>当一个类加载器收到类加载请求，不会自己去加载，而是委派给父类加载器。<br>如果父类加载器无法完成加载（所请求的类不在其搜索路径下），子加载器尝试自己去加载。<br>是一个递归的过程。</p>
-<p>加载器自顶向下分别为：</p>
-<ol>
-<li>Bootstrap classloader：加载jre核心库，如java.lang</li>
-<li>Extention ClassLoader：加载jre&#x2F;lib&#x2F;ext或系统变量java.ext.dirs执行位置的类库</li>
-<li>Application ClassLoader：加载用户路径（classpath）上指定的类库。</li>
-<li>自定义类加载器：开发者通过集成java.lang.ClassLoader来创建自己的类加载器</li>
-</ol>
-<p><strong>扩展1：需要打破双亲委派机制的场景?</strong><br><strong>扩展2：如何打破双亲委派机制？</strong></p>
-<h3 id="4-介绍下红黑树"><a href="#4-介绍下红黑树" class="headerlink" title="4. 介绍下红黑树"></a>4. 介绍下红黑树</h3><h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><h3 id="1-键入url到页面渲染的过程？-高频题"><a href="#1-键入url到页面渲染的过程？-高频题" class="headerlink" title="1. 键入url到页面渲染的过程？(高频题)"></a>1. 键入url到页面渲染的过程？(高频题)</h3><ol>
-<li>从url中提取域名和静态资源</li>
-<li>通过DNS服务器，将域名转换为IP地址，过程是：浏览器缓存-&gt;查hosts-&gt;本地DNS服务器缓存-&gt;询问根域名服务器，获得顶级域名服务器-&gt;询问顶级域名服务器，获得权威域名服务器-&gt;询问权威域名服务器，获得IP.</li>
-<li>得到IP以后，调用socket方法，通过tcp或udp进行传递，tcp使用IP协议栈进行传递，其中IP负责在不同网络中路由，ARP将IP翻译为MAC地址，在目标局域网中找到目标主机。</li>
-<li>找到目标主机原路返还。</li>
-</ol>
-<h3 id="2-介绍下TCP滑动窗口"><a href="#2-介绍下TCP滑动窗口" class="headerlink" title="2. 介绍下TCP滑动窗口"></a>2. 介绍下TCP滑动窗口</h3><p>流量控制的核心机制。<br>发送方的窗口由接收方窗口和网络拥塞情况动态调整。<br>发送方发送一些数据并得到确认，会向前滑动，从而可以发送更多的数据。相应的，接收方接收了数据并发送相应的确认后，接收窗口也向前滑动。<br>如果接收方缓冲区被填满，会设置窗口发小为0来告知发送方停止发数据。<br>当网络拥塞时，发送方也会减少其窗口，来减少发送数据量，在网络条件改善后，在逐步增加。如快恢复和快重传。</p>
-<p>重传机制：超时重传-&gt;快重传-&gt;SACK<br><strong>扩展1：假设接收方窗口为10，接收到的序列是1,3,4,5,2,6，会怎么样？</strong><br>接收到seq&#x3D;1，会发送ack&#x3D;2<br>接收到3,4,5，会继续发送ack&#x3D;2，且将3,4,5放入缓冲区<br>接收到2，从缓存区中取出3,4,5，并按照正确的顺序传递给上层应用，发送ack&#x3D;6，<br>接收6，发送ack&#x3D;7<br>保证了即使在数据包乱序的情况，也能确保数据按正确的顺序被上层应用接收。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="1-介绍下最近在读的书，以及给你的启发？"><a href="#1-介绍下最近在读的书，以及给你的启发？" class="headerlink" title="1. 介绍下最近在读的书，以及给你的启发？"></a>1. 介绍下最近在读的书，以及给你的启发？</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/" data-id="clmbgdpzj000134um22r2hdlc" data-title="阿里国际-秋招-java开发-一面/简历面" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1427,7 +1349,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97/" rel="tag">手写系列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
     </div>
   </div>
 
@@ -1437,7 +1359,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/MYSQL/" style="font-size: 10px;">MYSQL</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
+      <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/MYSQL/" style="font-size: 10px;">MYSQL</a> <a href="/tags/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97/" style="font-size: 10px;">手写系列</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
     </div>
   </div>
 
@@ -1459,6 +1381,10 @@
       <ul>
         
           <li>
+            <a href="/2023/09/18/BIO-NIO/">BIO&amp;NIO</a>
+          </li>
+        
+          <li>
             <a href="/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/">携程-秋招-一二面</a>
           </li>
         
@@ -1472,10 +1398,6 @@
         
           <li>
             <a href="/2023/09/15/%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%99%85%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%90%AC%E8%BF%90/">索引创建实际遇到的问题-搬运</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">唯品会-实习-Java大数据组件开发-二面</a>
           </li>
         
       </ul>
