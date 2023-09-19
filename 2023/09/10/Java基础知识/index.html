@@ -14,7 +14,7 @@
 <meta property="og:description" content="先依葫芦画瓢，再深入理解  1. 什么是协程？2. 什么是超线程？3. 如何设置合理的线程数？目标是：最大化利用CPU的情况下，减少线程切换的开销  高并发，低耗时，建议少线程 低并发，高耗时，建议多线程 高并发，高耗时，分析任务类型，增加排队，加大线程数  4. 什么是匿名类？什么是函数式接口？5. run()和start()run方法是同步方法，由主线程执行，并未开启新线程。run可以无限执">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-09T16:43:36.000Z">
-<meta property="article:modified_time" content="2023-09-14T16:06:01.695Z">
+<meta property="article:modified_time" content="2023-09-19T03:37:57.439Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="JAVA">
 <meta name="twitter:card" content="summary">
@@ -174,7 +174,42 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[开始]</span><br><span class="line">B[类加载检查]</span><br><span class="line">C[已经加载]</span><br><span class="line">D[分配内存]</span><br><span class="line">E[未加载]</span><br><span class="line">F[加载类]</span><br><span class="line">G[初始化零值]</span><br><span class="line">H[设置对象头]</span><br><span class="line">I[执行init方法]</span><br><span class="line">J[结束]</span><br><span class="line"></span><br><span class="line">A --&gt; B</span><br><span class="line">B --&gt; |已经加载| C</span><br><span class="line">B --&gt; |未加载| E</span><br><span class="line">C --&gt; D</span><br><span class="line">E --&gt; F --&gt; D</span><br><span class="line">D --&gt; G</span><br><span class="line">G --&gt; H</span><br><span class="line">H --&gt; I</span><br><span class="line">I --&gt; J</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>内存屏障<br>如果在两行代码中加上内存屏障，则底层不会对其进行重排序。</p>
-<h2 id="10-锁"><a href="#10-锁" class="headerlink" title="10. 锁"></a>10. 锁</h2>
+<h2 id="10-锁"><a href="#10-锁" class="headerlink" title="10. 锁"></a>10. 锁</h2><h3 id="1-乐观锁-悲观锁"><a href="#1-乐观锁-悲观锁" class="headerlink" title="1. 乐观锁&amp;&amp;悲观锁"></a>1. 乐观锁&amp;&amp;悲观锁</h3><p>锁的类型，并非具体的实现。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+<th>缺点</th>
+<th>实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>悲观锁</td>
+<td>一种同步机制，假设多个事务在并发执行会发生冲突，因此事务开始时就预先获取所需的锁，确保在事务执行期间，其他事务不能访问被锁定的数据，适合于并发量大，写操作多的情况</td>
+<td>降低并发度</td>
+<td>synchronized，lock</td>
+</tr>
+<tr>
+<td>乐观锁</td>
+<td>认为在使用数据时不会有别的线程修改数据，所以不加锁，只是在更新数据的时候去判断之前是否有线程更新了数据。</td>
+<td>循环时间长时开销很大；ABA问题(加标记，加版本号)</td>
+<td>CAS</td>
+</tr>
+</tbody></table>
+<p>自旋锁&amp;&amp;互斥锁</p>
+<ul>
+<li>自旋锁：<ul>
+<li>借鉴CAS思想，指当一个线程在获取锁时，如果锁已经被其他线程获取，那么线程将循环等待，不断判断锁是否能被成功获取，直到获取锁才会退出循环。</li>
+<li>与互斥锁相似，都是为了解决对某项资源的互斥使用。</li>
+<li>但是互斥锁会让没得到锁资源的线程进入blocked状态，而后在争夺到锁资源后恢复runnable状态，这期中涉及到用户态和内核态的转换，代价较高。</li>
+<li>自旋锁不会引起调用者阻塞，如果自旋锁已经被别的执行单元保持，调用者就一直循环在那里看该自旋锁的保持者是否已经释放了锁。</li>
+<li>不适合锁占用时间比较久的情况。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-synchronized锁升级"><a href="#2-synchronized锁升级" class="headerlink" title="2. synchronized锁升级"></a>2. synchronized锁升级</h2><p>JDK 1.6之前，java内置锁是重量级锁</p>
+
       
     </div>
     <footer class="article-footer">
@@ -222,7 +257,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97/" rel="tag">手写系列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" rel="tag">代码练习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
     </div>
   </div>
 
@@ -232,7 +267,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/MYSQL/" style="font-size: 10px;">MYSQL</a> <a href="/tags/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97/" style="font-size: 10px;">手写系列</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
+      <a href="/tags/JAVA/" style="font-size: 16.67px;">JAVA</a> <a href="/tags/MYSQL/" style="font-size: 10px;">MYSQL</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" style="font-size: 13.33px;">代码练习</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
     </div>
   </div>
 
@@ -254,6 +289,10 @@
       <ul>
         
           <li>
+            <a href="/2023/09/19/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85/">生产者&amp;&amp;消费者</a>
+          </li>
+        
+          <li>
             <a href="/2023/09/18/%E4%B8%BB%E6%B5%81%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/">网络编程基础</a>
           </li>
         
@@ -267,10 +306,6 @@
         
           <li>
             <a href="/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/">携程面经-搬运</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/">常见选型问题</a>
           </li>
         
       </ul>

@@ -77,6 +77,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-拼多多-0910-笔试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/" class="article-date">
+  <time class="dt-published" datetime="2023-09-10T12:11:33.000Z" itemprop="datePublished">2023-09-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/">拼多多-0910-笔试</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="题目要求："><a href="#题目要求：" class="headerlink" title="题目要求："></a>题目要求：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">小明需要在m分钟内修或更换n个零件，会给出每个零件修的耗时ai、修的价格bi、更换的耗时ci、更换的价格di。</span><br><span class="line">请计算在m分钟能否修复（修或更换均可）n个零件，如何可以，输出最小的成本</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3 18        # n个零件， 时间上限为m</span><br><span class="line">9 1 2 11    # 第一个零件的 修耗时，修成本，更换耗时，更换成本</span><br><span class="line">8 4 3 10    # 第二个零件 ...</span><br><span class="line">10 6 5 12   # 第三个零件 ...</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">23          # 价格</span><br></pre></td></tr></table></figure>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>背包问题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 处理输入</span></span><br><span class="line">n, m = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">parts = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    a, b, c, d = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">    parts.append((a, b, c, d))</span><br><span class="line"></span><br><span class="line">min_time = <span class="built_in">sum</span>(x[<span class="number">2</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts)</span><br><span class="line"><span class="keyword">if</span> min_time &gt; m:  <span class="comment"># 如果全换不修是否能满足要求</span></span><br><span class="line">    <span class="built_in">print</span>(-<span class="number">1</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># 转换成0-1背包问题,挑选从换-&gt;修的零件,尽可能多的选取价格降低最多的方式</span></span><br><span class="line">    bag_weight = m - min_time  <span class="comment"># 最多可以更换weight的重量</span></span><br><span class="line">    weights = [x[<span class="number">0</span>] - x[<span class="number">2</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts]</span><br><span class="line">    values = [x[<span class="number">3</span>] - x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts]</span><br><span class="line">    <span class="comment"># dp[i][j] 在可选范围为前i个,背包容量为j</span></span><br><span class="line">    dp = [[<span class="number">0</span>] * (bag_weight + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>)]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(bag_weight + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> i * j == <span class="number">0</span>:</span><br><span class="line">                dp[i][j] = <span class="number">0</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> j - weights[i - <span class="number">1</span>] &lt; <span class="number">0</span>:  <span class="comment"># 没法选</span></span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dp[i][j] = <span class="built_in">max</span>(</span><br><span class="line">                    dp[i - <span class="number">1</span>][j],  <span class="comment"># 不选</span></span><br><span class="line">                    dp[i - <span class="number">1</span>][j - weights[i - <span class="number">1</span>]] + values[i - <span class="number">1</span>]  <span class="comment"># 选</span></span><br><span class="line">                )</span><br><span class="line">    res = <span class="built_in">sum</span>(x[<span class="number">3</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts) - dp[n][bag_weight]</span><br><span class="line">    <span class="built_in">print</span>(res)</span><br></pre></td></tr></table></figure>
+
+<p>申请了一个二维的dp数组，空间复杂度为O(m*n),无法通过测试用例。其实不是m，不过也是一个时间，比m小，对应代码中的m-min_time。<br>dp[i][j]只依赖于dp[i-1][*],所以可以使用滚动数据，将空间复杂度降为O(2*m)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仅展示修改部分</span></span><br><span class="line">dp = [[<span class="number">0</span>] * (bag_weight + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>)] </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(bag_weight + <span class="number">1</span>):</span><br><span class="line">        now, pre = i % <span class="number">2</span>, (i - <span class="number">1</span>) % <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> i * j == <span class="number">0</span>:</span><br><span class="line">            dp[now][j] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> j - weights[i - <span class="number">1</span>] &lt; <span class="number">0</span>:  <span class="comment"># 没法选</span></span><br><span class="line">            dp[now][j] = dp[pre][j]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dp[now][j] = <span class="built_in">max</span>(</span><br><span class="line">                dp[pre][j],  <span class="comment"># 不选</span></span><br><span class="line">                dp[pre][j - weights[i - <span class="number">1</span>]] + values[i - <span class="number">1</span>]  <span class="comment"># 选</span></span><br><span class="line">            )</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/" data-id="clmdhsy3900002gum8mwg93v5" data-title="拼多多-0910-笔试" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Java基础知识" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="article-date">
@@ -171,7 +221,42 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[开始]</span><br><span class="line">B[类加载检查]</span><br><span class="line">C[已经加载]</span><br><span class="line">D[分配内存]</span><br><span class="line">E[未加载]</span><br><span class="line">F[加载类]</span><br><span class="line">G[初始化零值]</span><br><span class="line">H[设置对象头]</span><br><span class="line">I[执行init方法]</span><br><span class="line">J[结束]</span><br><span class="line"></span><br><span class="line">A --&gt; B</span><br><span class="line">B --&gt; |已经加载| C</span><br><span class="line">B --&gt; |未加载| E</span><br><span class="line">C --&gt; D</span><br><span class="line">E --&gt; F --&gt; D</span><br><span class="line">D --&gt; G</span><br><span class="line">G --&gt; H</span><br><span class="line">H --&gt; I</span><br><span class="line">I --&gt; J</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>内存屏障<br>如果在两行代码中加上内存屏障，则底层不会对其进行重排序。</p>
-<h2 id="10-锁"><a href="#10-锁" class="headerlink" title="10. 锁"></a>10. 锁</h2>
+<h2 id="10-锁"><a href="#10-锁" class="headerlink" title="10. 锁"></a>10. 锁</h2><h3 id="1-乐观锁-悲观锁"><a href="#1-乐观锁-悲观锁" class="headerlink" title="1. 乐观锁&amp;&amp;悲观锁"></a>1. 乐观锁&amp;&amp;悲观锁</h3><p>锁的类型，并非具体的实现。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+<th>缺点</th>
+<th>实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>悲观锁</td>
+<td>一种同步机制，假设多个事务在并发执行会发生冲突，因此事务开始时就预先获取所需的锁，确保在事务执行期间，其他事务不能访问被锁定的数据，适合于并发量大，写操作多的情况</td>
+<td>降低并发度</td>
+<td>synchronized，lock</td>
+</tr>
+<tr>
+<td>乐观锁</td>
+<td>认为在使用数据时不会有别的线程修改数据，所以不加锁，只是在更新数据的时候去判断之前是否有线程更新了数据。</td>
+<td>循环时间长时开销很大；ABA问题(加标记，加版本号)</td>
+<td>CAS</td>
+</tr>
+</tbody></table>
+<p>自旋锁&amp;&amp;互斥锁</p>
+<ul>
+<li>自旋锁：<ul>
+<li>借鉴CAS思想，指当一个线程在获取锁时，如果锁已经被其他线程获取，那么线程将循环等待，不断判断锁是否能被成功获取，直到获取锁才会退出循环。</li>
+<li>与互斥锁相似，都是为了解决对某项资源的互斥使用。</li>
+<li>但是互斥锁会让没得到锁资源的线程进入blocked状态，而后在争夺到锁资源后恢复runnable状态，这期中涉及到用户态和内核态的转换，代价较高。</li>
+<li>自旋锁不会引起调用者阻塞，如果自旋锁已经被别的执行单元保持，调用者就一直循环在那里看该自旋锁的保持者是否已经释放了锁。</li>
+<li>不适合锁占用时间比较久的情况。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-synchronized锁升级"><a href="#2-synchronized锁升级" class="headerlink" title="2. synchronized锁升级"></a>2. synchronized锁升级</h2><p>JDK 1.6之前，java内置锁是重量级锁</p>
+
       
     </div>
     <footer class="article-footer">
@@ -615,7 +700,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97/" rel="tag">手写系列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" rel="tag">代码练习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
     </div>
   </div>
 
@@ -625,7 +710,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/MYSQL/" style="font-size: 10px;">MYSQL</a> <a href="/tags/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97/" style="font-size: 10px;">手写系列</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
+      <a href="/tags/JAVA/" style="font-size: 16.67px;">JAVA</a> <a href="/tags/MYSQL/" style="font-size: 10px;">MYSQL</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" style="font-size: 13.33px;">代码练习</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
     </div>
   </div>
 
@@ -647,6 +732,10 @@
       <ul>
         
           <li>
+            <a href="/2023/09/19/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85/">生产者&amp;&amp;消费者</a>
+          </li>
+        
+          <li>
             <a href="/2023/09/18/%E4%B8%BB%E6%B5%81%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/">网络编程基础</a>
           </li>
         
@@ -660,10 +749,6 @@
         
           <li>
             <a href="/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/">携程面经-搬运</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/">常见选型问题</a>
           </li>
         
       </ul>
