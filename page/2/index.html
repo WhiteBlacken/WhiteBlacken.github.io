@@ -255,7 +255,9 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-synchronized锁升级"><a href="#2-synchronized锁升级" class="headerlink" title="2. synchronized锁升级"></a>2. synchronized锁升级</h2><p>JDK 1.6之前，java内置锁是重量级锁</p>
+<h2 id="2-synchronized锁升级"><a href="#2-synchronized锁升级" class="headerlink" title="2. synchronized锁升级"></a>2. synchronized锁升级</h2><p>JDK 1.6之前，java内置锁是重量级锁,效率低下，需要由jvm用户态切换到操作系统管程来实现互斥。<br>自旋锁一直在用户态，无需切换。</p>
+<p>管程（Monitor）<br>监视器，用于管理共享变量以及对共享变量操作的过程，让他们支持并发，操作系统中称为管程，java中称为对象锁。</p>
+<p>锁升级的目的：为了提高锁的获取与释放效率，对synchronized实现进行了优化，锁的级别随着竞争情况逐渐升级，而且不可降级，级别从低到高一次为无锁-&gt;偏向锁-&gt;轻量级锁-&gt;重量级锁</p>
 
       
     </div>

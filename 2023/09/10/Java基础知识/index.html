@@ -14,7 +14,7 @@
 <meta property="og:description" content="先依葫芦画瓢，再深入理解  1. 什么是协程？2. 什么是超线程？3. 如何设置合理的线程数？目标是：最大化利用CPU的情况下，减少线程切换的开销  高并发，低耗时，建议少线程 低并发，高耗时，建议多线程 高并发，高耗时，分析任务类型，增加排队，加大线程数  4. 什么是匿名类？什么是函数式接口？5. run()和start()run方法是同步方法，由主线程执行，并未开启新线程。run可以无限执">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-09T16:43:36.000Z">
-<meta property="article:modified_time" content="2023-09-19T03:37:57.439Z">
+<meta property="article:modified_time" content="2023-09-19T05:25:42.275Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="JAVA">
 <meta name="twitter:card" content="summary">
@@ -208,7 +208,9 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-synchronized锁升级"><a href="#2-synchronized锁升级" class="headerlink" title="2. synchronized锁升级"></a>2. synchronized锁升级</h2><p>JDK 1.6之前，java内置锁是重量级锁</p>
+<h2 id="2-synchronized锁升级"><a href="#2-synchronized锁升级" class="headerlink" title="2. synchronized锁升级"></a>2. synchronized锁升级</h2><p>JDK 1.6之前，java内置锁是重量级锁,效率低下，需要由jvm用户态切换到操作系统管程来实现互斥。<br>自旋锁一直在用户态，无需切换。</p>
+<p>管程（Monitor）<br>监视器，用于管理共享变量以及对共享变量操作的过程，让他们支持并发，操作系统中称为管程，java中称为对象锁。</p>
+<p>锁升级的目的：为了提高锁的获取与释放效率，对synchronized实现进行了优化，锁的级别随着竞争情况逐渐升级，而且不可降级，级别从低到高一次为无锁-&gt;偏向锁-&gt;轻量级锁-&gt;重量级锁</p>
 
       
     </div>
