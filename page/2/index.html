@@ -77,6 +77,327 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-索引创建实际遇到的问题-搬运" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/15/%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%99%85%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%90%AC%E8%BF%90/" class="article-date">
+  <time class="dt-published" datetime="2023-09-15T02:47:55.000Z" itemprop="datePublished">2023-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/15/%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%99%85%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%90%AC%E8%BF%90/">索引创建实际遇到的问题-搬运</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>一张邀请绑定表，一个用户绑定了几十万个记录。<br>索引列为uid-用户的id，create_time-关系的创建时间。<br>查询需求比较简单：<br>根据创建时间倒序，取一页的记录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from bind where uid = xxx order by create_time desc limit 10;</span><br></pre></td></tr></table></figure>
+
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ol>
+<li><p>第一次查询比较慢，后续查询会变快，原因可能是第一次需要将几十万的数据页加载到Buffer pool，后续可以直接从内存中读取。</p>
+</li>
+<li><p>通过explain发现索引命中了创建时间，而非预期的uid，如果该用户上次绑定是在上个月，那他需要扫描这个所有的新增绑定，才能找到他的那10条数据。这样非常不稳定。</p>
+</li>
+<li><p>如果设置强制走uid索引（force index（id_uid）），explain中extra会显示出现了using file sort，这里是优化器不选择走uid索引的原因。因为即使只查询10条数据，但是需要把几十万条数据查出来以后进行排序。<br>如何影响优化优化器选择哪条索引呢？<br>主要有三种方式：</p>
+<ul>
+<li>force index(index_name)，强制优化器只使用指定的索引，如果该索引无法用于检索数据，MySQL将返回错误。 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> table_name force index(index_name) <span class="keyword">where</span> <span class="keyword">condition</span>;</span><br></pre></td></tr></table></figure></li>
+<li>use index(index_name)，告诉查询优化器仅使用列出的索引来查找数据，如果没有列出索引，查询优化器将根据表中的数据选择一个。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table_name using index(index_name) where condition;</span><br></pre></td></tr></table></figure></li>
+<li>ignore index(index_name),告诉优化器忽略列出的索引。查询优化器会考虑表中的其他索引，但不会考虑被忽略的那些。 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> table_name ignore index(index_name) <span class="keyword">where</span> <span class="keyword">condition</span>;</span><br></pre></td></tr></table></figure>
+其中force index和using index有什么区别吗？<br>force index列出的索引无法用来查询数据，则报错。<br>using index列出的索引无法用来查询数据时，则忽略这个提示。</li>
+</ul>
+</li>
+<li><p>可以通过将create_time和uid建立联合索引的方式来做，但是生产环境数据比较大，增加这样的索引会增加不少的负担，并且如果想要最新的数据，除了时间，使用id倒序也可以，最后uid，id天然的形成了倒序的效果。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/15/%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%99%85%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%90%AC%E8%BF%90/" data-id="clmk20u1700008kumgsle4k4d" data-title="索引创建实际遇到的问题-搬运" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-唯品会-实习-Java大数据组件开发-二面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" class="article-date">
+  <time class="dt-published" datetime="2023-09-14T06:57:38.000Z" itemprop="datePublished">2023-09-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">唯品会-实习-Java大数据组件开发-二面</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="代码题"><a href="#代码题" class="headerlink" title="代码题"></a>代码题</h1><h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">手写一个阻塞队列。</span><br><span class="line">满足以下要求：</span><br><span class="line">1. 有界</span><br><span class="line">2. 实现读写函数</span><br><span class="line">3. 使用模板</span><br><span class="line">4. 考虑多线程并发读取</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码书写"><a href="#代码书写" class="headerlink" title="代码书写"></a>代码书写</h2><p>先了解一下java中的阻塞队列。<br>java的阻塞队列提供了线程安全的队列实现，其中的阻塞操作主要是为了确保在并发环境中数据安全添加和移除。’java.util.concurrent’包提供了多种阻塞队列的实现，这些阻塞队列在多线程编程，特别是生产者-消费者模型中非常有用。<br>多线程环境中，阻塞队列是一个非常有用的工具，因为他自动处理了大部分线程间同步的问题。<br>以下是主要的阻塞队列：</p>
+<table>
+<thead>
+<tr>
+<th>队列</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ArrayBlockingQueue</td>
+<td>基于数据结构的有界阻塞队列</td>
+</tr>
+<tr>
+<td>LinkedBlockingQueue</td>
+<td>基于链表的可选容量（默认为Integer.MAX_VALUE)的阻塞队列。</td>
+</tr>
+<tr>
+<td>PriorityBlockingQueue</td>
+<td>支持优先级的无界阻塞队列，队列中的元素必须实现Comparable接口</td>
+</tr>
+<tr>
+<td>SynchronousQueue</td>
+<td>不存储元素的阻塞队列，每一个put操作必须等待一个take操作</td>
+</tr>
+<tr>
+<td>DelayQueue</td>
+<td>使用优先队列实现的无界阻塞函数，只有在延迟到期才能从中提取元素</td>
+</tr>
+<tr>
+<td>LinkedTransferQueue</td>
+<td>链表组成的队列，是TransferQueue接口的一个实现，并支持所有操作</td>
+</tr>
+<tr>
+<td>LinkedBlockingDeque</td>
+<td>双向阻塞队列，可以从两端插入或移除元素</td>
+</tr>
+</tbody></table>
+<p>提供的操作</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>put(e)</td>
+<td>将元素添加到队列末尾，队满则等待</td>
+</tr>
+<tr>
+<td>take()</td>
+<td>从队列前端移除并返回元素，队空则等待</td>
+</tr>
+<tr>
+<td>offer(e,timeout,timeunit)</td>
+<td>尝试将元素添加到队列中，队满则等待指定时间</td>
+</tr>
+<tr>
+<td>poll(timeout,timeunit)</td>
+<td>从队头移并返回头部的元素，如果队列为空则等待指定时间</td>
+</tr>
+</tbody></table>
+<p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyBlockingQueue</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">CAPACITY</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    LinkedList&lt;E&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="type">ReentrantLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>(<span class="literal">true</span>); <span class="comment">//创建公平锁，来保证等待时间最长的线程获得锁</span></span><br><span class="line">    <span class="type">Condition</span> <span class="variable">full</span> <span class="operator">=</span> lock.newCondition();</span><br><span class="line">    <span class="type">Condition</span> <span class="variable">empty</span> <span class="operator">=</span> lock.newCondition();</span><br><span class="line"></span><br><span class="line">    MyBlockingQueue(<span class="type">int</span> capacity) &#123;</span><br><span class="line">        <span class="built_in">this</span>.CAPACITY = capacity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(E e)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (queue.size() == CAPACITY) &#123;</span><br><span class="line">                full.await();</span><br><span class="line">            &#125;</span><br><span class="line">            queue.add(e);</span><br><span class="line">            <span class="keyword">if</span> (queue.size() == <span class="number">1</span>) &#123; <span class="comment">//说明之前是0</span></span><br><span class="line">                empty.signal();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> E <span class="title function_">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (queue.size() == <span class="number">0</span>) &#123;</span><br><span class="line">                empty.await();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">E</span> <span class="variable">e</span> <span class="operator">=</span> queue.poll();</span><br><span class="line">            System.out.println(<span class="string">&quot;get date:&quot;</span> + e + <span class="string">&quot; and queue-size:&quot;</span> + queue.size());</span><br><span class="line">            <span class="keyword">if</span> (queue.size() == CAPACITY - <span class="number">1</span>) &#123;</span><br><span class="line">                full.signal();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> e;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        MyBlockingQueue&lt;Integer&gt; blockingQueue = <span class="keyword">new</span> <span class="title class_">MyBlockingQueue</span>&lt;&gt;(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建5个生产者线程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="type">int</span> <span class="variable">producerNum</span> <span class="operator">=</span> i;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                        <span class="type">int</span> <span class="variable">item</span> <span class="operator">=</span> (<span class="type">int</span>) (Math.random() * <span class="number">100</span>);</span><br><span class="line">                        blockingQueue.put(item);</span><br><span class="line">                        System.out.println(<span class="string">&quot;Producer &quot;</span> + producerNum + <span class="string">&quot; put: &quot;</span> + item);</span><br><span class="line">                        Thread.sleep(<span class="number">500</span>);  <span class="comment">// 模拟生产需要的时间</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建5个消费者线程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                        <span class="type">int</span> <span class="variable">item</span> <span class="operator">=</span> blockingQueue.take();</span><br><span class="line">                        System.out.println(<span class="string">&quot;Consumed: &quot;</span> + item);</span><br><span class="line">                        Thread.sleep(<span class="number">1000</span>);  <span class="comment">// 模拟消费需要的时间</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果使用synchronized的关键字，有一个坑是，只有一个线程可以执行任何synchronized代码块。因此，如果一个线程正在执行put方法（它是一个synchronized方法），其他线程不能同时执行put或take方法，它们必须等待直到第一个线程退出synchronized块。即synchronized是对象级别的。当然，可以使用synchronized(someObject)来进行更细粒度的控制。</p>
+<p>前面给出的代码中，因为使用的是同一个lock，实际上也是put和take也是互斥的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" data-id="clmj6u9xn0000qcum2nc70qk1" data-title="唯品会-实习-Java大数据组件开发-二面" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-美团-秋招-后端开发-一面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" class="article-date">
+  <time class="dt-published" datetime="2023-09-13T07:34:43.000Z" itemprop="datePublished">2023-09-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">美团-秋招-后端开发-一面</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><ol>
+<li>什么是幻读？写一个insert语句来说明间隙锁加在什么位置？<br>幻读：事务中多次查询，行集不同。<br>如何解决幻读？mvcc+间隙锁<ul>
+<li>当前读：使用select … for update来对所选的行上排他锁。<ul>
+<li>在事务开始使用它，当开始一个事务并打算查询某些可能更新某些行时，首先查询锁定这些行<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">START</span> TRANSACTION;</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">where</span> id <span class="keyword">BETWEEN</span> <span class="number">1</span> <span class="keyword">AND</span> <span class="number">4</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br><span class="line">  ```  </span><br><span class="line"><span class="operator">*</span> 后续查询，同一个事务中再次执行相同的<span class="keyword">select</span>查询，由于已经锁定了相关行，会看到相同的行集，不会出现幻读。</span><br><span class="line"><span class="operator">*</span> 执行更新，该事务的可以安全进行更新，记录锁会锁定<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>，间隙锁会锁定<span class="number">2</span>，故其他事务执行插入<span class="number">2</span>会失败。</span><br><span class="line">  ```<span class="keyword">sql</span></span><br><span class="line">  <span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name (id) <span class="keyword">VALUES</span>(<span class="number">2</span>);</span><br></pre></td></tr></table></figure></li>
+<li>需要注意：<ul>
+<li>确保事务不会长时间持有锁，以避免可能的死锁或长时间阻止其他事务访问被锁定的数据。</li>
+<li>不能防止其他事务插入数据到查询范围之外。</li>
+</ul>
+</li>
+<li>以上是在有索引的情况，如果没加索引，如何添加间隙锁？<ul>
+<li>通常会做全表扫描，并对整张表做意向锁。<ul>
+<li>意向锁：通知其他事务，有事务打算获取更精细级别的锁，这意味着其他事务如果想在这个表上获得排它锁，会被阻塞。</li>
+<li>记录锁：只有满足条件的行，才会被加上记录锁。</li>
+<li>间隙锁：由于count没有索引，所以无法加上明确的间隙锁。但是由于可能的全表扫描，实际上整个表都可能受到影响，导致新行插入也可能受到限制。如果查询的是具体的记录，不会锁定任何间隙。如果使用范围查询，则可能使用间隙锁。<strong>如果想想用范围查询并执行SELECT…FOR UPDATE操作，最好在涉及的列上加上索引。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>快照读：通过MVCC解决幻读，在可重复读隔离级别下，事务在执行过程中看到的数据实际上是不变的。<ul>
+<li>mvcc在事务开始后，执行第一个查询语句，会创建read view，后续的查询语句利用这个read view+undo log版本链找到事务开始时的数据，以保证在事务中每次查询的数据都一样。</li>
+<li>MVCC已经这么好了，为什么还需要间隙锁？<ul>
+<li>虽然事务B插入行，事务A不会出现幻读，但是事务A如果要在这个范围内插入数据，会和事务B的插入发生冲突。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>MVCC+间隙锁就可以解决幻读了吗？<br>结论：很大程度上可以，但是没有完全解决。<br>场景一：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- T1时刻：仅有id 1-4的记录，事务A查询id=5，查询不到</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t_stu <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">5</span>；</span><br><span class="line"><span class="comment">-- T2时刻：事务B插入id=5的记录</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_stu <span class="keyword">values</span>(<span class="number">5</span>,<span class="string">&#x27;qxy&#x27;</span>)；</span><br><span class="line"><span class="comment">-- T3时刻：事务A更新了id=5的记录，很违和</span></span><br><span class="line"><span class="keyword">update</span> t_stu <span class="keyword">set</span> name <span class="operator">=</span> <span class="string">&#x27;qxy1&#x27;</span> <span class="keyword">where</span> id<span class="operator">=</span> <span class="number">5</span>;</span><br><span class="line"><span class="comment">-- T4时刻：事务A查询id=5，可以查询到</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t_stu <span class="keyword">where</span> id<span class="operator">=</span> <span class="number">5</span>；</span><br></pre></td></tr></table></figure>
+
+<p>场景二：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- T1时刻：事务A执行快照读，读出3条记录</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t_test <span class="keyword">where</span> id <span class="operator">&gt;</span> <span class="number">100</span>;</span><br><span class="line"><span class="comment">-- T2时刻：事务B插入id=200的记录</span></span><br><span class="line"><span class="comment">-- T3时刻：事务A再执行当前读，会得到4条记录</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t_test <span class="keyword">where</span> id <span class="operator">&gt;</span> <span class="number">100</span> <span class="keyword">for</span> <span class="keyword">update</span>;</span><br></pre></td></tr></table></figure>
+<p>想要避免这类特殊场景下发生幻读，就要尽量在开启事务之后，尽快执行select…for update语句，目的就是为了避免T2时刻数据的插入。<br>2. 高并发写数据库的情况？</p>
+<p>抛出去的剑又回来了，是不是间隙锁会导致高并发读写的出现性能问题？<br>参考腾讯一面-有遇到过因为隔离级别导致的问题啊？</p>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><ol>
+<li><p>jvm内存结构</p>
+</li>
+<li><p>OOM出现的情况<br>分不同的区域来讨论：</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>描述</th>
+<th>常见原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>堆</td>
+<td>应用程序创建太多对象，其长时间不被GC回收。</td>
+<td>内存泄露、创建了大量的大对象、长久时间持有大量对象的引用</td>
+</tr>
+<tr>
+<td>永久代-&gt;元空间（java 8）</td>
+<td>为方法区提供物理内存，主要存放类的数据。直接在主机内存分配，不在java堆，但是受到本机可用内存的限制</td>
+<td>大量类加载；元空间大小设置过小，通过指定-XX：MaxMetaspaceSize来调整；类加载泄露：频繁重新加载类或大量的动态代理生成；优化应用程序和库，减少应用程序加载的类和资源数量；升级或更改JVM</td>
+</tr>
+<tr>
+<td>本地方法栈，java线程栈</td>
+<td>过多的方法调用，超出栈的大小限制，可能会stackoverflow，也可能会oom。</td>
+<td>创建太多线程，jvm无法为新的线程分配必要的内存</td>
+</tr>
+<tr>
+<td>直接内存溢出</td>
+<td>ByteBuffer.allocateDirect()分配内存是在java堆外，但是JVM进程的最大内存限制的约束</td>
+<td></td>
+</tr>
+<tr>
+<td>GC Overhead Limit Exceeded</td>
+<td>特定的OOM错误，表示GC频繁运行但回收内存很少</td>
+<td>长时间大量的小对象对创建和丢弃，导致GC频繁</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<p>java中什么情况下会使用直接内存？<br>使用ByteBuffer.allocateDirect()方法分配的内存，位于java堆之外，直接内存常用于IO操作，特别是NIO中，因为他可以减少java堆和本地IO操作之间复制数据的开销。<br>虽然直接内存位于Java对之外，但仍受到进程最大内存限制的约束，如果尝试分配超过限制的直接内存，则会报OOM。可以通过调整JVM的-XX：MaxDirectMemorySize来设置直接内存的最大值。</p>
+<p>JVM参数中可以指定哪些区域的大小？<br>java堆、元空间、直接内存。但是仍然受到操作系统对进程总体内存的限制。<br>所以进程不论超出jvm限制，或者是超出操作系统的限制，都会造成OOM。</p>
+<h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><ol>
+<li>项目中redis部署的方式</li>
+<li>redis为什么快</li>
+<li>redis有哪些数据结构？讲下zset的底层结构？</li>
+<li>redis和数据库不一致的情况？</li>
+</ol>
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><ol>
+<li>服务响应很慢，如何排查？如何定位到代码？<br>这个问题属实高频题，主要要理清思路。可以和排查数据库查询慢对比。<br>可以导致响应慢的原因：</li>
+</ol>
+<ul>
+<li>数据库或外部依赖（远程服务，api调用，缓存服务器）</li>
+<li>网络问题</li>
+<li>系统资源</li>
+<li>并发和线程管理</li>
+<li>第三方框架导致的问题</li>
+</ul>
+<p>主要的排除步骤 –如果是django程序怎么检查，为什么我们的django程序没有遇到GC问题</p>
+<ul>
+<li>事件定性：确认报告的慢响应问题。验证是否所有用户和请求都受到了影响，还是只是某些特定场景。对比历史数据，确定是持续存在的问题还是突发事件。</li>
+<li>监控和日志审查：看监控面板或使用top命令，查看是否有高的CPU使用、内存耗尽或异常垃圾收集行为。查阅应用日志，找出异常、错误或者其他可以信息。如果有，查看垃圾收集日志，检查频繁或长时间的GC事件。</li>
+<li>检查网络和外部服务：ping、traceroute看网络延迟；检查与外部服务和数据库的交互，确保响应正常</li>
+<li>应用性能分析：使用jvisualVM，jConsole去看jvm的性能指标，分析线程转储，看是否有阻塞、死锁或其他线程相关问题。</li>
+<li>数据库查询：如果应用依赖于数据库，看数据库的慢查询日志。</li>
+<li>代码：回顾最近的代码更改 以及 查看配置文件或环境设置，有无不合理的限制或配置。</li>
+<li>重现问题：在测试环境中尝试重现。</li>
+<li>使用APM工具找出瓶颈和性能下降的具体位置</li>
+<li>检查硬件和资源：看是否有硬盘故障或RAM故障，查看其他与应用相关的系统资源，如磁盘IO、网络带宽。</li>
+<li>系统级检查：查看操作系统日志</li>
+</ul>
+<h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><ol>
+<li>项目难点？</li>
+</ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
+<li>为什么选择这家公司？</li>
+<li>为什么不找暑期实习？</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" data-id="clmhp3z31000018um1wh1327w" data-title="美团-秋招-后端开发-一面" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-阿里国际-0911-笔试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/12/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-0911-%E7%AC%94%E8%AF%95/" class="article-date">
@@ -197,7 +518,7 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>先依葫芦画瓢，再深入理解</p>
+<p>先依葫芦画瓢，再深入理解<br>[TOC]</p>
 </blockquote>
 <h1 id="1-什么是协程？"><a href="#1-什么是协程？" class="headerlink" title="1. 什么是协程？"></a>1. 什么是协程？</h1><h1 id="2-什么是超线程？"><a href="#2-什么是超线程？" class="headerlink" title="2. 什么是超线程？"></a>2. 什么是超线程？</h1><h1 id="3-如何设置合理的线程数？"><a href="#3-如何设置合理的线程数？" class="headerlink" title="3. 如何设置合理的线程数？"></a>3. 如何设置合理的线程数？</h1><p>目标是：最大化利用CPU的情况下，减少线程切换的开销</p>
 <ul>
@@ -303,8 +624,23 @@
 </li>
 </ul>
 <h2 id="2-synchronized锁升级"><a href="#2-synchronized锁升级" class="headerlink" title="2. synchronized锁升级"></a>2. synchronized锁升级</h2><p>JDK 1.6之前，java内置锁是重量级锁,效率低下，需要由jvm用户态切换到操作系统管程来实现互斥。<br>自旋锁一直在用户态，无需切换。</p>
-<p>管程（Monitor）<br>监视器，用于管理共享变量以及对共享变量操作的过程，让他们支持并发，操作系统中称为管程，java中称为对象锁。</p>
-<p>锁升级的目的：为了提高锁的获取与释放效率，对synchronized实现进行了优化，锁的级别随着竞争情况逐渐升级，而且不可降级，级别从低到高一次为无锁-&gt;偏向锁-&gt;轻量级锁-&gt;重量级锁</p>
+<p><strong>管程（Monitor）</strong><br>监视器，用于管理共享变量以及对共享变量操作的过程，让他们支持并发，操作系统中称为管程，java中称为对象锁。</p>
+<p><strong>锁升级的目的</strong><br>为了提高锁的获取与释放效率，对synchronized实现进行了优化，锁的级别随着<br>竞争情况逐渐升级，而且不可降级。</p>
+<p><strong>级别（从低到高）</strong><br>无锁-&gt;偏向锁（线程本身再次请求锁）-&gt;轻量级锁（不同线程交替请求锁，自旋）-&gt;重量级锁。</p>
+<h2 id="3-synchronized-ReentrantLock"><a href="#3-synchronized-ReentrantLock" class="headerlink" title="3. synchronized&amp;&amp;ReentrantLock"></a>3. synchronized&amp;&amp;ReentrantLock</h2><ul>
+<li>ReentrantLock需手工加锁和解锁，但是粒度和使用更灵活。</li>
+<li>synchronized是java内置关键字，由c++实现，lock是java类。</li>
+<li>ReentrantLock可以判断是否获取到了锁。 </li>
+<li>ReentrantLock提供锁申请等待限时。<ul>
+<li>lock1.tryLock();</li>
+<li>lock1.tryLock(2, TimeUnit.SECONDS);</li>
+</ul>
+</li>
+<li>ReetrantLock获取锁的过程是可以被打断的。</li>
+</ul>
+<p>总结：<br>synchronized：可重入、不可中断、非公平<br>lock：可重入、可中断、可公平</p>
+<h2 id="4-公平锁和非公平锁"><a href="#4-公平锁和非公平锁" class="headerlink" title="4. 公平锁和非公平锁"></a>4. 公平锁和非公平锁</h2><p>大部分情况下，锁的申请都是非公平的。<br>synchronized是非公平锁，ReentrantLock有公平和非公平模式。<br>非公平锁更能充分的利用CPU时间片，减少CPU空闲状态时间；减少线程切换的开销（刚释放锁的线程再次获取同步状态的概率非常大）。但可能导致锁饥饿。<br>非公平锁能够带来更高额吞吐量。</p>
+<h2 id="5-共享锁和排它锁"><a href="#5-共享锁和排它锁" class="headerlink" title="5. 共享锁和排它锁"></a>5. 共享锁和排它锁</h2><p>多个读进程并没有线程并没有线程安全问题。<br>所以引入了共享锁（读锁）和排它锁（写锁）。<br>读锁：多个读线程共享，阻塞写线程。<br>写锁：写线程独享。</p>
 
       
     </div>
@@ -313,7 +649,7 @@
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag">并发</a></li></ul>
 
     </footer>
   </div>
@@ -749,7 +1085,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" rel="tag">代码练习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" rel="tag">代码练习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">手写代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
     </div>
   </div>
 
@@ -759,7 +1095,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JAVA/" style="font-size: 16.67px;">JAVA</a> <a href="/tags/MYSQL/" style="font-size: 10px;">MYSQL</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" style="font-size: 13.33px;">代码练习</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
+      <a href="/tags/JAVA/" style="font-size: 16.67px;">JAVA</a> <a href="/tags/MYSQL/" style="font-size: 10px;">MYSQL</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" style="font-size: 13.33px;">代码练习</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">并发</a> <a href="/tags/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">手写代码</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
     </div>
   </div>
 
@@ -781,23 +1117,23 @@
       <ul>
         
           <li>
-            <a href="/2023/09/19/%E7%99%BE%E5%BA%A6-%E5%AE%9E%E4%B9%A0-java%E5%BC%80%E5%8F%91-%E7%BA%AF%E5%87%89%E9%9D%A2/">百度-实习-java开发-纯凉面</a>
+            <a href="/2023/09/20/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">b站-实习-微服务开发-一面</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/20/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/">网络相关面试题</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/19/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E4%BB%A3%E7%A0%81%E9%A2%98/">Java并发编程-常见面试代码题</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/19/%E7%99%BE%E5%BA%A6-%E5%AE%9E%E4%B9%A0-java%E5%BC%80%E5%8F%91-%E7%BA%AF%E5%87%89%E9%9D%A2/">百度-实习-java开发-一面（纯凉面）</a>
           </li>
         
           <li>
             <a href="/2023/09/19/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85/">生产者&amp;&amp;消费者</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/18/%E4%B8%BB%E6%B5%81%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/">网络编程基础</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/18/BIO-NIO/">BIO&amp;NIO</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/">携程-秋招-一二面</a>
           </li>
         
       </ul>
