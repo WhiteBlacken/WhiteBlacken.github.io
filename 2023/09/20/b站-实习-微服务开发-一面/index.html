@@ -14,7 +14,7 @@
 <meta property="og:description" content="项目1. celery的使用场景？daphne的使用场景？celery是分布式任务队列系统，允许执行并发的任务，执行后台任务或处理大量的任务 主要组件：  client：向消息队列发送任务 broker：消息队列，如rabbitmq，redis worker：负责执行任务的进程 result backend：用于存储任务的结果，可以是数据库、缓存系统或其他存储  使用场景：  后台任务 定时任务">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-20T06:57:17.000Z">
-<meta property="article:modified_time" content="2023-09-20T10:18:46.666Z">
+<meta property="article:modified_time" content="2023-09-21T05:50:44.694Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary">
@@ -125,7 +125,19 @@
 <li>celery无需自己去写任务调度、优先级、结果存储和任务重试等功能。</li>
 </ul>
 <p><strong>daphne</strong><br>django本身的开发服务器是使用传统的wsgi服务器，用于处理同步http请求，是python web应用和服务器之间的标准接口；而daphne是支持异步操作的asgi的服务器，其可以支持http2，以及websocket，且因为其异步性质，可以在单个进程中处理大量并发连接。<br>感觉像是BIO和NIO的区别。</p>
-<h2 id="2-邮箱拦截器如何用redis做的？"><a href="#2-邮箱拦截器如何用redis做的？" class="headerlink" title="2. 邮箱拦截器如何用redis做的？"></a>2. 邮箱拦截器如何用redis做的？</h2><h2 id="3-聊天用了redis的哪些操作？"><a href="#3-聊天用了redis的哪些操作？" class="headerlink" title="3. 聊天用了redis的哪些操作？"></a>3. 聊天用了redis的哪些操作？</h2><h1 id="场景题"><a href="#场景题" class="headerlink" title="场景题"></a>场景题</h1><h2 id="1-用户请求1G文件的转码，如何设计上传和下载？浏览器分片了解过吗？"><a href="#1-用户请求1G文件的转码，如何设计上传和下载？浏览器分片了解过吗？" class="headerlink" title="1. 用户请求1G文件的转码，如何设计上传和下载？浏览器分片了解过吗？"></a>1. 用户请求1G文件的转码，如何设计上传和下载？浏览器分片了解过吗？</h2><p>需要考虑效率、可靠性、用户体验、可扩展性。<br>基本的设计方案：</p>
+<h2 id="2-邮箱拦截器如何用redis做的？"><a href="#2-邮箱拦截器如何用redis做的？" class="headerlink" title="2. 邮箱拦截器如何用redis做的？"></a>2. 邮箱拦截器如何用redis做的？</h2><h2 id="3-聊天用了redis的哪些操作？"><a href="#3-聊天用了redis的哪些操作？" class="headerlink" title="3. 聊天用了redis的哪些操作？"></a>3. 聊天用了redis的哪些操作？</h2><h1 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h1><h2 id="1-redis和mysql的区别"><a href="#1-redis和mysql的区别" class="headerlink" title="1. redis和mysql的区别"></a>1. redis和mysql的区别</h2><ol>
+<li>数据模型：redis是key-value数据库，mysql关系型数据库</li>
+<li>持久性：redis主要是内存存储，也可以通过rdb和aof进行持久化，mysql通过事务来确保数据的完整性和一致性。</li>
+<li>redis的事务保证了一个客户端的命令不会被其他客户端命令打断，隔离级别是串行化，但不提供持久化保证，mysql的事务一般默认为可重复读，并且在系统崩溃后，已提交的更改仍存在。两者的原子性概念不同。</li>
+<li>性能和速度：基于内存的redis读写速度相较mysql高很多。</li>
+<li>并发：redis是单线程，mysql支持多线程和处理多个并发查询。</li>
+</ol>
+<h2 id="2-redis和mysql的一致性怎么保证？"><a href="#2-redis和mysql的一致性怎么保证？" class="headerlink" title="2. redis和mysql的一致性怎么保证？"></a>2. redis和mysql的一致性怎么保证？</h2><p>两种情况：<br>因为二者的操作不是原子性，所以只能保证最终一致性，而非强一致性，一定要原子性，需要上锁，影响系统的吞吐量。</p>
+<ol>
+<li>先操作缓存<br>先删除缓存，再更新数据库。<br>存在问题：如果在删除缓存和更新数据库之间发送一个线程读取操作，会把未更新的数据读入redis中，造成数据不一致。<br>策略：延迟双删，经过一定的时间（几百ms），再删一次redis缓存。</li>
+<li>先操作数据库<br>先更新数据库，数据库更新成功后，删除缓存。<br>存在问题：若是数据库更新成功，但是redis删除失败了，数据会不一致。<br>策略：引入重试机制。如果不想把操作嵌入到业务代码，可以通过阿里开源的cannal组件，去监听binlog，更新redis。（可以通过springboot应用来做）</li>
+</ol>
+<h1 id="场景题"><a href="#场景题" class="headerlink" title="场景题"></a>场景题</h1><h2 id="1-用户请求1G文件的转码，如何设计上传和下载？浏览器分片了解过吗？"><a href="#1-用户请求1G文件的转码，如何设计上传和下载？浏览器分片了解过吗？" class="headerlink" title="1. 用户请求1G文件的转码，如何设计上传和下载？浏览器分片了解过吗？"></a>1. 用户请求1G文件的转码，如何设计上传和下载？浏览器分片了解过吗？</h2><p>需要考虑效率、可靠性、用户体验、可扩展性。<br>基本的设计方案：</p>
 <ol>
 <li>文件上传</li>
 </ol>
