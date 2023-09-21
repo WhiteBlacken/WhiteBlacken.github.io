@@ -77,6 +77,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-常见选型问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2023-09-15T10:57:13.000Z" itemprop="datePublished">2023-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/">常见选型问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-为什么选择Meilisearch？"><a href="#1-为什么选择Meilisearch？" class="headerlink" title="1. 为什么选择Meilisearch？"></a>1. 为什么选择Meilisearch？</h1><p>这和我们项目的性质有关，我们是希望做出一个有少量用户的原型，以向投资者展示潜力。<br>在这个背景下，我们主要对比了Meilisearch和ES，<br>学习难度上：MeiliSearch的配置更简单，维护更简单，api也比较直观和简单<br>资源消耗上：meilisearch更轻量，消耗的内存和cpu资源更少<br>功能上：meilisearch仅是一个比较纯粹的搜索引擎，不具备es中机器学习插件、日志处理等功能，但对于我们来说够用。<br>与django的适配上：django集成Meilisearch的第三方库更完备<br>不过随着未来的项目增长，确实需要考虑迁移到es上。</p>
+<h1 id="2-为什么选择websocket而不是http来实现聊天？"><a href="#2-为什么选择websocket而不是http来实现聊天？" class="headerlink" title="2. 为什么选择websocket而不是http来实现聊天？"></a>2. 为什么选择websocket而不是http来实现聊天？</h1><ol>
+<li>tcp本身是全双工，但是常用的Http1.1,虽然基于tcp协议，但是本身是半双工的，对于聊天这种需要服务器主动推送数据到客户端的场景，不友好，所以需要使用支持全双工的websocket协议。</li>
+<li>http1.1里，是请求-响应模型，虽然可以使用定时轮询，长轮询等方式实现服务推送，但是如果需要频繁交互的话，websocket消耗资源更少。</li>
+<li>相对http，websocket头部信息更少，相同数量的消息在websocket上会产生更少的网络流量。</li>
+<li>适合广播，能够很好的扩展到聊天室或群聊场景。</li>
+</ol>
+<p>扩展：http2.0引入了服务器的推送的特性，为什么不选择http2.0？</p>
+<ol>
+<li>推送的不同：http2.0的目的是解决服务器知道客户端需要的资源，进行提前发送，来减少往返时间和延迟的场景。例如，客户端请求一个html页面，服务端可能知道客户端会需要与之相关的css和js文件，可提前推送。相对比，websocket是真正的双向和实时通信，允许客户端和服务器之间任意时刻发送数据，不需要预测或以前知道对方需要什么。</li>
+<li>兼容性：http2.0有些浏览器和服务器并不支持，特别是服务器推送功能，websocket的兼容性更好。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/" data-id="clmkigetf0000osumg0dg006n" data-title="常见选型问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-索引创建实际遇到的问题-搬运" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/15/%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%99%85%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%90%AC%E8%BF%90/" class="article-date">
@@ -977,101 +1029,11 @@
 
 
   
-    <article id="post-小红书-实习-DBA-一面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/08/%E5%B0%8F%E7%BA%A2%E4%B9%A6-%E5%AE%9E%E4%B9%A0-DBA-%E4%B8%80%E9%9D%A2/" class="article-date">
-  <time class="dt-published" datetime="2023-09-08T14:42:58.000Z" itemprop="datePublished">2023-09-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/08/%E5%B0%8F%E7%BA%A2%E4%B9%A6-%E5%AE%9E%E4%B9%A0-DBA-%E4%B8%80%E9%9D%A2/">小红书-实习-DBA-一面</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>总评：基础知识的细节没记清楚，回答错误；结巴太多；介绍项目的时候，不够吸引人；</p>
-</blockquote>
-<h2 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h2><h3 id="1-进程间的通信方式？"><a href="#1-进程间的通信方式？" class="headerlink" title="1. 进程间的通信方式？"></a>1. 进程间的通信方式？</h3><blockquote>
-<p>首先每个进程的用户地址空间是独立的，但内核空间是共享的，所有进程间通信必须通过内核，所以以下机制都是内核通过的。</p>
-</blockquote>
-<p>有以下几种：</p>
-<ol>
-<li><p>管道<br>单向传输，若是相关通信，需要创建两个管道<br>管道的通信效率低，不适合进程间频繁的交换数据，大小受限。<br>好处是简单，而且很容易知道管道中的数据被另一个进程读取了。<br>匿名管道仅支持父子进程之间通信（因为原理是fork创建子进程时，复制父进程的文件描述符。）；命名管道，支持不相关进程间的通信。<br>特殊文件，只存在与内存中。<br>写入和读取数据均从内核中获取，遵循先入先出。<br>总结下管道的特点：</p>
-<ul>
-<li>单向</li>
-<li>有限缓冲区</li>
-<li>数据无结构性</li>
-<li>不支持广播和多播</li>
-<li>生命周期和创建他的进程绑定</li>
-<li>通常用于有亲缘关系的进程间通信</li>
-</ul>
-</li>
-<li><p>消息队列<br>消息队列相对管道效率高，是保存在内核中的消息链表，使用一个个独立的消息体发送（用户自定义的数据类型）。<br>生命周期随内核，没有释放或没有关闭OS，则会一直存在。<br>存在问题：</p>
-<ul>
-<li>消息不及时</li>
-<li>附件大小有限制，不适合大数据传输（一条消息的最大长度和一个队列的最大长度）</li>
-<li>存在用户态与内核态之间的数据拷贝开销，读写时都存在。（管道也是）</li>
-</ul>
-</li>
-<li><p>共享内存<br>如果不想在用户态和内核态之间进行消息拷贝，则直接使用共享内存。<br>正常情况下的内存管理，采用的虚拟内存技术，每个进程都有自己独立的虚拟内存空间，即使虚拟地址一致，也映射到不同的物理内存地址。<br>共享内存：拿出一块虚拟地址空间，映射到相同的物理内存。<br>速度快，无需拷贝。<br>竞争造成数据错乱</p>
-</li>
-<li><p>信号<br>异常情况下的工作模式，需要信号来通知进程。<br>是进程间通信机制中唯一的<strong>异步</strong>通信机制。<br>来源：</p>
-<ul>
-<li>硬件来源（键盘ctrl+c）</li>
-<li>软件来源（kill命令）<br>一旦信号产生，用户进程可以有以下几种处理方式：</li>
-<li>执行默认操作，由linux规定</li>
-<li>捕捉信号，自定义处理</li>
-<li>忽略信号，但是sigkill，segstop无法捕捉和胡月，用于中断或结束进程</li>
-</ul>
-</li>
-<li><p>socket<br>用于不同主机间的通信。（同主机也行）</p>
-</li>
-</ol>
-<p>如信号量也可以用于实现同步和互斥</p>
-<h3 id="2-进程的状态及其转换？"><a href="#2-进程的状态及其转换？" class="headerlink" title="2. 进程的状态及其转换？"></a>2. 进程的状态及其转换？</h3><h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><h3 id="1-从键入url到显示页面的过程？"><a href="#1-从键入url到显示页面的过程？" class="headerlink" title="1. 从键入url到显示页面的过程？"></a>1. 从键入url到显示页面的过程？</h3><ul>
-<li>解析url：拿到域名和要请求的资源</li>
-<li>查询域名对应的IP地址：DNS服务，客户端向本地DNS服务器发出DNS请求-&gt;若缓存中有，直接返回IP，若没有，查询根域名服务器-&gt;根域名服务器会指出（.com)属于哪个顶级域名服务器-&gt;顶级域名服务器会指出(<a target="_blank" rel="noopener" href="http://www.server.com)属于哪个权威域名服务器,权威域名服务器负责解析,然后将结果返回本地dns,本地dns返回客户端./">www.server.com)属于哪个权威域名服务器，权威域名服务器负责解析，然后将结果返回本地DNS，本地DNS返回客户端。</a><br>不过实际上，因为缓存的存在，浏览器先查自身缓存-&gt;没有就去问操作系统缓存-&gt;没有则去查hosts文件-&gt;没有则去问本地dns</li>
-<li>获得IP地址后，依托协议栈进行传输，浏览器调用socket库来委托协议栈工作，包括传输层呢哥的tcp和udp协议，他们都会使用IP协议来进行网络包的收发，IP协议还包含ICMP和ARP，分别用于告知网络包传输过程中产生的错误以及控制信息、根据IP查询以太网MAC地址。IP下层的网卡驱动程序，控制网卡，网卡负责完成实际的收发操作。</li>
-</ul>
-<h3 id="2-四次挥手？如何同步？"><a href="#2-四次挥手？如何同步？" class="headerlink" title="2. 四次挥手？如何同步？"></a>2. 四次挥手？如何同步？</h3><p>序号（seq）和确认号（ack）</p>
-<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><h3 id="1-linux的常见命令"><a href="#1-linux的常见命令" class="headerlink" title="1. linux的常见命令"></a>1. linux的常见命令</h3><p>ls,cd,pwd,cp,mv,rm,touch,cat<br>grep,wc<br>ps,top,kill,pkill<br>ping,ipconfig,ssh,wget,curl,netstart<br>df,free<br>chmod,su,sudo,chown</p>
-<h2 id="算法题"><a href="#算法题" class="headerlink" title="算法题"></a>算法题</h2><h3 id="1-逆转字符串：’hello中国nihao’"><a href="#1-逆转字符串：’hello中国nihao’" class="headerlink" title="1. 逆转字符串：’hello中国nihao’"></a>1. 逆转字符串：’hello中国nihao’</h3><p>UTF-8编码中中文占用3个字符，特殊中文字符4个字节。<br>不过这题，python和java都能直接输出。<br>不知道这个题出了有啥意义。</p>
-<h2 id="其他类"><a href="#其他类" class="headerlink" title="其他类"></a>其他类</h2><h3 id="1-挑一个比较出彩的项目介绍下？"><a href="#1-挑一个比较出彩的项目介绍下？" class="headerlink" title="1. 挑一个比较出彩的项目介绍下？"></a>1. 挑一个比较出彩的项目介绍下？</h3><p>讲的很长，但是不吸引人，言简意赅一点</p>
-<h3 id="2-学过哪些专业课？"><a href="#2-学过哪些专业课？" class="headerlink" title="2. 学过哪些专业课？"></a>2. 学过哪些专业课？</h3><p>有点忘了，记下几个。<br>高级软件开发技术，web软件开发，软件过程管理<br>机器学习，高级机器学习，强化学习</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/08/%E5%B0%8F%E7%BA%A2%E4%B9%A6-%E5%AE%9E%E4%B9%A0-DBA-%E4%B8%80%E9%9D%A2/" data-id="clmaswfkx00003wumdup23sei" data-title="小红书-实习-DBA-一面" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -1117,6 +1079,10 @@
       <ul>
         
           <li>
+            <a href="/2023/09/21/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">b站-实习-微服务开发-二面</a>
+          </li>
+        
+          <li>
             <a href="/2023/09/20/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">b站-实习-微服务开发-一面</a>
           </li>
         
@@ -1130,10 +1096,6 @@
         
           <li>
             <a href="/2023/09/19/%E7%99%BE%E5%BA%A6-%E5%AE%9E%E4%B9%A0-java%E5%BC%80%E5%8F%91-%E7%BA%AF%E5%87%89%E9%9D%A2/">百度-实习-java开发-一面（纯凉面）</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/19/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85/">生产者&amp;&amp;消费者</a>
           </li>
         
       </ul>
