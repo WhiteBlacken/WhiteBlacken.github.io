@@ -1,0 +1,667 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xiangyao">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="算法题目描述12String转Long，需要考虑各种异常情况。设计测试用例。 代码数据库1. 写一段会让数据库死锁的代码？在互相持有对方需要的资源，且资源独占时会死锁。 1234567891011121314-- 会话1start transaction;update tableA set id &#x3D; 2 where id &#x3D; 1;--会话2start transaction;update tabl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="b站-实习-微服务开发-三面">
+<meta property="og:url" content="http://example.com/2023/09/22/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%B8%89%E9%9D%A2/index.html">
+<meta property="og:site_name" content="xiangyao的个人博客">
+<meta property="og:description" content="算法题目描述12String转Long，需要考虑各种异常情况。设计测试用例。 代码数据库1. 写一段会让数据库死锁的代码？在互相持有对方需要的资源，且资源独占时会死锁。 1234567891011121314-- 会话1start transaction;update tableA set id &#x3D; 2 where id &#x3D; 1;--会话2start transaction;update tabl">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-22T14:24:35.000Z">
+<meta property="article:modified_time" content="2023-09-22T16:00:46.210Z">
+<meta property="article:author" content="xiangyao">
+<meta property="article:tag" content="面经">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>b站-实习-微服务开发-三面 - xiangyao的个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xiangyao的小站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="b站-实习-微服务开发-三面"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-22 22:24" pubdate>
+          September 22, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">b站-实习-微服务开发-三面</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-type">String</span>转<span class="hljs-type">Long</span>，需要考虑各种异常情况。<br>设计测试用例。<br></code></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="1-写一段会让数据库死锁的代码？"><a href="#1-写一段会让数据库死锁的代码？" class="headerlink" title="1. 写一段会让数据库死锁的代码？"></a>1. 写一段会让数据库死锁的代码？</h2><p>在互相持有对方需要的资源，且资源独占时会死锁。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 会话1</span><br><span class="hljs-keyword">start</span> transaction;<br><span class="hljs-keyword">update</span> tableA <span class="hljs-keyword">set</span> id <span class="hljs-operator">=</span> <span class="hljs-number">2</span> <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><br><span class="hljs-comment">--会话2</span><br><span class="hljs-keyword">start</span> transaction;<br><span class="hljs-keyword">update</span> tableB <span class="hljs-keyword">set</span> id <span class="hljs-operator">=</span> <span class="hljs-number">2</span> <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><span class="hljs-keyword">update</span> tableA <span class="hljs-keyword">set</span> id <span class="hljs-operator">=</span> <span class="hljs-number">3</span> <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; <span class="hljs-comment">-- 这里会等待，因为会话1已经将这行锁定</span><br><br><span class="hljs-comment">--回到会话1</span><br><span class="hljs-keyword">update</span> tableB <span class="hljs-keyword">set</span> id <span class="hljs-operator">=</span> <span class="hljs-number">3</span> <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; <span class="hljs-comment">--这里会产生死锁，因为会话2已经将这行锁定</span><br><span class="hljs-comment">-- </span><br>innodb有一个死锁检测机制，他在检测到死锁时，会中断其中一个事务，从而解决死锁。上述两个事务中，其中一个会收到死锁的错误消息。<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><h2 id="1-什么是哲学家就餐问题？如何解决？–mark，看视频学习下"><a href="#1-什么是哲学家就餐问题？如何解决？–mark，看视频学习下" class="headerlink" title="1. 什么是哲学家就餐问题？如何解决？–mark，看视频学习下"></a>1. 什么是哲学家就餐问题？如何解决？–mark，看视频学习下</h2><p>并发和死锁问题。<br>解决方式：</p>
+<ol>
+<li>仲裁串行化：任何时候只有一个哲学家在尝试拿叉子</li>
+<li>限制同时尝试的哲学家数量：每次最多4位哲学家就餐（总共5个），这样至少有一个哲学家会成功。</li>
+<li>随机等待：如果不能拿到全部的叉子，则随机等待一段时间再尝试</li>
+<li>资源分级</li>
+</ol>
+<h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="1-如何设计一个哈希表？"><a href="#1-如何设计一个哈希表？" class="headerlink" title="1. 如何设计一个哈希表？"></a>1. 如何设计一个哈希表？</h2><ol>
+<li>选择哈希函数</li>
+</ol>
+<ul>
+<li>好的哈希函数是关键，将输入均匀地映射到哈希表的索引。</li>
+<li>快速计算，保持哈希表操作的高效性</li>
+</ul>
+<ol start="2">
+<li>数组或桶来存储数据</li>
+<li>处理哈希冲突</li>
+</ol>
+<ul>
+<li>链地址法</li>
+<li>开放寻址法（顺序，跳跃，双重哈希）</li>
+</ul>
+<ol start="4">
+<li>动态调整大小</li>
+</ol>
+<ul>
+<li>在加载因子超过一定的阈值，需要进行扩容。</li>
+</ul>
+<ol start="5">
+<li>删除操作</li>
+</ol>
+<ul>
+<li>如果在开放定址法中，会标记已删除，如果直接删除，会中断其他键的探测序列。</li>
+</ul>
+<ol start="6">
+<li>其他：</li>
+</ol>
+<ul>
+<li>设计合理的加载因子阈值</li>
+<li>安全性：使用加密哈希函数或其他安全措施来避免恶意攻击（例如故意制造哈希冲突）</li>
+</ul>
+<h2 id="2-如何解决哈希冲突？"><a href="#2-如何解决哈希冲突？" class="headerlink" title="2. 如何解决哈希冲突？"></a>2. 如何解决哈希冲突？</h2><ul>
+<li>开放寻址</li>
+<li>链地址法</li>
+</ul>
+<h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="1-服务器发送rst的情况？"><a href="#1-服务器发送rst的情况？" class="headerlink" title="1. 服务器发送rst的情况？"></a>1. 服务器发送rst的情况？</h2><p>rst(reset)包是一种特殊的包，用于快速、无条件的终止连接，而无需tcp正常的终止序列（fin握手），在以下情况中使用。</p>
+<ol>
+<li>异常关闭：当一个端点检测到连接中的错误或异常，可能会发送一个rst包来立即终止连接。</li>
+<li>非预期的数据：如果一个端点接收到它不期望的数据（比如，认为连接已经关闭，但突然收到了数据，半开问题），他会回应一个rst包。</li>
+</ol>
+<h2 id="2-tcp如何只允许单方面发送消息？"><a href="#2-tcp如何只允许单方面发送消息？" class="headerlink" title="2. tcp如何只允许单方面发送消息？"></a>2. tcp如何只允许单方面发送消息？</h2><p>通过tcp的半关闭或半开来实现，允许一个方向上的数据传输被关闭，另一个方向的数据传输保持打开。</p>
+<ol>
+<li>半关闭 - tcp的正常特性<br>四次挥手中，客户端发送了fin报文，但是接收端仍有数据要发送，不发送fin报文，来保持办关闭状态。</li>
+<li>半开 - 异常状态<br>由网络问题或其他中断导致。<br>半开状态中，一方认为连接仍然是打开并尝试发送数据，而另一方认为连接已经关闭。<br>这种状态是由FIN或RST包在网络中丢失导致的。<br>半开连接会导致资源泄露或其他问题，因为其中一方会为它认为仍然打开的链接保持资源。<br>半开状态下，若客户端已经断开，服务器不知道连接关闭，服务器尝试向客户端发送数据时，客户端会响应一个RST包。<br>解决：许多服务器有超时机制，如果一段时间内没有从连接中接收到任何数据，会自动关闭连接。</li>
+</ol>
+<h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><h2 id="1-python多线程有什么问题？"><a href="#1-python多线程有什么问题？" class="headerlink" title="1. python多线程有什么问题？"></a>1. python多线程有什么问题？</h2><p>python的实现中，使用了GIL互斥锁，来防止多个线程同时执行python字节码，也就说在任何给定的时间点，只有一个线程可以在解释器中执行。<br>由于gil的存在，多线程在cpu密集型任务上不会提供的预期的性能提升，因为线程不能并行的在多个cpu核心上运行。</p>
+<p><strong>python为什么要引入GIL呢？</strong></p>
+<ul>
+<li>取消复杂的锁机制，并提升了单线程程序的性能。</li>
+<li>cpython的内存管理使用的是引用计数，对引用计数的增减需要同步，GIL可以确保在任何时候只有一个线程能够修改引用计数。</li>
+<li>历史原因：GIL最初被引入时，多核cpu并不那么普及。（GIL在90年代引入，盛业多核cpu在2001发布。）</li>
+<li>早期的c扩展和库并不是线程安全，GIL提供一种方式来确保这些库在多线程环境中安全使用，而无需大量修改。</li>
+</ul>
+<p><strong>如何解决了GIL存在的问题？</strong></p>
+<ol>
+<li>使用其他Python实现，jpython，ironpython</li>
+<li>使用多进程</li>
+<li>子解释器，创建多个解释器，每个解释器有自己的GIL</li>
+</ol>
+<h1 id="django"><a href="#django" class="headerlink" title="django"></a>django</h1><h2 id="1-django的设计思路是什么？"><a href="#1-django的设计思路是什么？" class="headerlink" title="1. django的设计思路是什么？"></a>1. django的设计思路是什么？</h2><h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="1-最近在看的一本书？讲下印象最深刻的地方？"><a href="#1-最近在看的一本书？讲下印象最深刻的地方？" class="headerlink" title="1. 最近在看的一本书？讲下印象最深刻的地方？"></a>1. 最近在看的一本书？讲下印象最深刻的地方？</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%9D%A2%E7%BB%8F/" class="print-no-link">#面经</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>b站-实习-微服务开发-三面</div>
+      <div>http://example.com/2023/09/22/b站-实习-微服务开发-三面/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>xiangyao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 22, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/21/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" title="b站-实习-微服务开发-二面">
+                        <span class="hidden-mobile">b站-实习-微服务开发-二面</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
