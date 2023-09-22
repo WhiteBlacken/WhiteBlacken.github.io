@@ -1,1350 +1,724 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xiangyao">
+  <meta name="keywords" content="">
   
-  <title>xiangyao的个人博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="xiangyao的个人博客">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="xiangyao">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="xiangyao的个人博客" type="application/atom+xml">
+<meta name="twitter:card" content="summary_large_image">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
   
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+  <title>xiangyao的个人博客</title>
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
   
 <meta name="generator" content="Hexo 6.3.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">xiangyao的个人博客</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">记录下这一刻，让我们变得更强</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
         
-      </nav>
-      <nav id="sub-nav">
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-b站-实习-微服务开发-二面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/21/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" class="article-date">
-  <time class="dt-published" datetime="2023-09-21T06:55:23.000Z" itemprop="datePublished">2023-09-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/21/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">b站-实习-微服务开发-二面</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="1-http1-3分别解决了什么问题？如果在http3的场景下，从5G切换为无线网，会需要重新建立连接吗？"><a href="#1-http1-3分别解决了什么问题？如果在http3的场景下，从5G切换为无线网，会需要重新建立连接吗？" class="headerlink" title="1. http1-3分别解决了什么问题？如果在http3的场景下，从5G切换为无线网，会需要重新建立连接吗？"></a>1. http1-3分别解决了什么问题？如果在http3的场景下，从5G切换为无线网，会需要重新建立连接吗？</h2><p><strong>http1.1,http2,http3的演变</strong></p>
-<ul>
-<li>htt1.1相对http1：<ul>
-<li>使用长连接改善了短连接的性能开销</li>
-<li>支持管道通信，来解决队头阻塞</li>
-</ul>
-</li>
-<li>http2相对http1.1：<ul>
-<li>头部压缩</li>
-<li>二进制格式，增加解析效率</li>
-<li>并发传输：使用多个stream复用一条tcp连接的方式解决队头阻塞，一个tcp连接可以包含多个stream，每个stream里包含一个或多个message，message对应的是http1中的请求或响应，针对不同的http请求，使用stream id来区分，接收端通过stream id来有序的组装http消息，stream的帧可以是乱序的，故可以并发不同的stream – 这一块理解不深，mark一下，而且解决的是哪一端的队头阻塞？</li>
-<li>服务器推送，服务器使用偶数的stream id，客户端使用奇数的stream id，主要用于服务器提前向客户端提供资源，以降低时延的场景。</li>
-</ul>
-</li>
-<li>http3相对http2：<ul>
-<li>tcp一旦丢包，就会阻塞所有的ttp请求，http3将tcp改为udp来解决队头阻塞，用quic协议来实现类似tcp的可靠传输。三个特点：<ul>
-<li>无队头阻塞</li>
-<li>更快的连接建立（tcp和ssl分层，但是quic和ssl不分层，3次握手取代6次握手）</li>
-<li>连接迁移（http通过四元组确定tcp连接，所以ip地址变换需要重新连接，quic用连接id来标记断点，即使ip地址变化，只要保佑上下文，仍可以复用原连接）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-websocket协议了解多少？头部的内容了解吗？"><a href="#2-websocket协议了解多少？头部的内容了解吗？" class="headerlink" title="2. websocket协议了解多少？头部的内容了解吗？"></a>2. websocket协议了解多少？头部的内容了解吗？</h2><p>websocket提供了在单个tcp连接上进行全双工通信的能力，与传统的http请求&#x2F;响应模型不同，websocket允许服务器端和客户端之间进行双向通信。</p>
-<p><strong>websocket如何建立连接？</strong><br>先是tcp三次握手建立连接，然后统一使用http协议进行交互，如果想建立websocket连接，则要在http请求里带上一些特殊的header头：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//想升级协议</span><br><span class="line">Connection: Upgrade</span><br><span class="line">// 升级为WebSocket协议</span><br><span class="line">Upgrade: WebSocket</span><br><span class="line">// 随机生成的base64码</span><br><span class="line">Sec-webSocket-Key: T2a6wZlAwhgQNqruZ2YUyg==\r\n</span><br></pre></td></tr></table></figure>
-<p>如果服务器支持WebSocket协议，就走WebSocket握手流程，根据客户端生成的base64，用公开算法变成另一段字符串，放在Sec-WebSocket-Accept头中，并带上101 Switch Protocals状态码，整体响应如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 101 Switching Protocols</span><br><span class="line">Sec-WebSocket-Accept:iBJKv/ALIW2DobfoA4dmr3JHBCY=\r\n</span><br><span class="line">Upgrade: WebSocket</span><br><span class="line">Connection: Upgrade</span><br></pre></td></tr></table></figure>
-<p>浏览器也用过同样的公开算法将base64,转成另一段字符串，如果和服务器穿回来的字符串一致，则验证通过。<br>后续可以使用websocket数据格式通信。</p>
-<p><strong>WebSocket的消息格式</strong><br>WebSocket的数据包叫做帧，头部字段中有几个比较重要</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">opcode: 标志是什么类型的数据帧</span><br><span class="line">    1：string</span><br><span class="line">    2：byte</span><br><span class="line">    8: 关闭连接</span><br><span class="line">payload：存放真正想要传输的数据的长度，单位是字节。有几个不同的payload，根据前一个payload的取值，决定要不要读下面的。</span><br><span class="line">payload data：存放真正要传输额数据，根据payload字段去截取对应的数据。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h1><h2 id="1-如何部署redis？是否使用了集群？谈谈对集群的理解？"><a href="#1-如何部署redis？是否使用了集群？谈谈对集群的理解？" class="headerlink" title="1. 如何部署redis？是否使用了集群？谈谈对集群的理解？"></a>1. 如何部署redis？是否使用了集群？谈谈对集群的理解？</h2><h2 id="2-redis如何处理哈希冲突？–mark，写的不对"><a href="#2-redis如何处理哈希冲突？–mark，写的不对" class="headerlink" title="2. redis如何处理哈希冲突？–mark，写的不对"></a>2. redis如何处理哈希冲突？–mark，写的不对</h2><p>使用的是开放寻址法。HashMap使用的链地址法。<br>开放寻址法：如果所需的位置已被占用，那么探测哈希表中其他位置，直到找到一个空的位置为止。<br>常见策略：</p>
-<ol>
-<li>线性探测：找下一个</li>
-<li>二次探测：与线性探测类似，查找间隔是二次的，h(k) + 1^2, h(k) - 1^2, h(k) + 2^2, h(k) - 2^2</li>
-<li>双重哈希<br>开放寻址法的好处是，不需要额外的数据结构（如链表）来存储冲突的键，坏处是，随之填充因子增加，冲突的可能性增加。所以通常需要在填充因子达到某个阈值时，对哈希表进行再哈希，创建一个更大的哈希表，并将所有的键移动到新表中。</li>
-</ol>
-<p><strong>redis是如何进行在hash的呢？</strong><br>为了避免rehash在数据迁移过程因拷贝数据造成耗时，影响redis性能，redis采用了渐进式再哈希，分多次进行迁移。<br>步骤如下：</p>
-<ol>
-<li>给哈希表2分配空间</li>
-<li>rehash期间，哈希表新增、删除、查找或更新操作时，redis除了执行对应的操作，还会顺序将哈希表1中所有key-value迁移到哈希表2上。</li>
-<li>随着客户端发起的哈希表操作请求数据增多，最终会在某个时间点把哈希表1的所有key-value迁移到哈希表2，完成rehash。<br>rehash期间，删除、查找和更新都会在这两个哈希表中进行操作。新增请求只会被保存到哈希表2上。</li>
-</ol>
-<p><strong>rehash的触发条件？</strong></p>
-<ul>
-<li>负载因子大于等于1，并且redis没有执行bgsave或bgrewiteaof命令，也就是没有执行rdb快照和aof重写时，就会rehash。</li>
-<li>负载因子大于等于5时，哈希冲突严重，不论有没有执行rdb快照或aof重写，都会强制进行rehash。</li>
-</ul>
-<h2 id="3-zset的底层结构？"><a href="#3-zset的底层结构？" class="headerlink" title="3. zset的底层结构？"></a>3. zset的底层结构？</h2><h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><h2 id="1-nginx怎么转发？配置文件你是怎么写的？"><a href="#1-nginx怎么转发？配置文件你是怎么写的？" class="headerlink" title="1. nginx怎么转发？配置文件你是怎么写的？"></a>1. nginx怎么转发？配置文件你是怎么写的？</h2><h2 id="2-如何查看进程运行在哪些端口上？"><a href="#2-如何查看进程运行在哪些端口上？" class="headerlink" title="2. 如何查看进程运行在哪些端口上？"></a>2. 如何查看进程运行在哪些端口上？</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//查看所有进程</span><br><span class="line">lsof - i</span><br><span class="line">netstat -tulnp</span><br><span class="line">ss -tulnp</span><br><span class="line"></span><br><span class="line">//查看指定端口上运行的进程</span><br><span class="line">lsof -i :8080</span><br><span class="line">netstat -tulnp | grep :8080</span><br><span class="line">ss -tunlp | grep :8080</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="1-4000w的数据b-树有几层？"><a href="#1-4000w的数据b-树有几层？" class="headerlink" title="1. 4000w的数据b+树有几层？"></a>1. 4000w的数据b+树有几层？</h2><h2 id="2-对于唯一索引，innodb使用的索引是哈希，还是b-树？"><a href="#2-对于唯一索引，innodb使用的索引是哈希，还是b-树？" class="headerlink" title="2. 对于唯一索引，innodb使用的索引是哈希，还是b+树？"></a>2. 对于唯一索引，innodb使用的索引是哈希，还是b+树？</h2><h2 id="3-b-树的好处是什么？"><a href="#3-b-树的好处是什么？" class="headerlink" title="3. b+树的好处是什么？"></a>3. b+树的好处是什么？</h2><h1 id="代码考察"><a href="#代码考察" class="headerlink" title="代码考察"></a>代码考察</h1><h2 id="1-写一个生产者、消费者模式？"><a href="#1-写一个生产者、消费者模式？" class="headerlink" title="1. 写一个生产者、消费者模式？"></a>1. 写一个生产者、消费者模式？</h2><p>借助java的容器阻塞队列，很容易就可以写出。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestOne</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        BlockingQueue&lt;Integer&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedBlockingQueue</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//消费者</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">                    <span class="type">Integer</span> <span class="variable">val</span> <span class="operator">=</span> queue.take();</span><br><span class="line">                    System.out.println(<span class="string">&quot;消费者消费了:&quot;</span>+ val);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;) .start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//生产者</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i&lt;<span class="number">30</span>;i++)&#123;</span><br><span class="line">                    queue.put(i);</span><br><span class="line">                    System.out.println(<span class="string">&quot;生产者生产了：&quot;</span>+ i);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果想体验是如何阻塞或唤醒的，自己写一个简易的阻塞队列即可。<br>关键点在于重写take和put方法，在队满、队空时的阻塞处理，详情见<a target="_blank" rel="noopener" href="https://whiteblacken.github.io/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">唯品会-实习-Java大数据组件开发-二面</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/21/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" data-id="clmt7ueo300001gumfx8o7gme" data-title="b站-实习-微服务开发-二面" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-b站-实习-微服务开发-一面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/20/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" class="article-date">
-  <time class="dt-published" datetime="2023-09-20T06:57:17.000Z" itemprop="datePublished">2023-09-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/20/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">b站-实习-微服务开发-一面</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h1><h2 id="1-celery的使用场景？daphne的使用场景？"><a href="#1-celery的使用场景？daphne的使用场景？" class="headerlink" title="1. celery的使用场景？daphne的使用场景？"></a>1. celery的使用场景？daphne的使用场景？</h2><p><strong>celery</strong><br>是分布式任务队列系统，允许执行并发的任务，执行后台任务或处理大量的任务</p>
-<p>主要组件：</p>
-<ul>
-<li>client：向消息队列发送任务</li>
-<li>broker：消息队列，如rabbitmq，redis</li>
-<li>worker：负责执行任务的进程</li>
-<li>result backend：用于存储任务的结果，可以是数据库、缓存系统或其他存储</li>
-</ul>
-<p>使用场景：</p>
-<ol>
-<li>后台任务</li>
-<li>定时任务</li>
-<li>大数据处理</li>
-<li>并发执行</li>
-</ol>
-<p>与MQ的区别：<br>依赖于MQ来传递任务，但是提供了任务调度、结果存储、任务优先级、任务重试等高级功能。</p>
-<p>自己用多线程来实现不可以吗？</p>
-<ul>
-<li>celery可以实现分布式并发，可以通过添加更多的worker结点来在不同的机器上处理更多任务</li>
-<li>提供了更好的容错性，当一个worker失败时，任务可以重新排队并由其他worker处理，为失败处理和重试提供了机制。</li>
-<li>celery无需自己去写任务调度、优先级、结果存储和任务重试等功能。</li>
-</ul>
-<p><strong>daphne</strong><br>django本身的开发服务器是使用传统的wsgi服务器，用于处理同步http请求，是python web应用和服务器之间的标准接口；而daphne是支持异步操作的asgi的服务器，其可以支持http2，以及websocket，且因为其异步性质，可以在单个进程中处理大量并发连接。<br>感觉像是BIO和NIO的区别。</p>
-<h2 id="2-邮箱拦截器如何用redis做的？"><a href="#2-邮箱拦截器如何用redis做的？" class="headerlink" title="2. 邮箱拦截器如何用redis做的？"></a>2. 邮箱拦截器如何用redis做的？</h2><h2 id="3-聊天用了redis的哪些操作？"><a href="#3-聊天用了redis的哪些操作？" class="headerlink" title="3. 聊天用了redis的哪些操作？"></a>3. 聊天用了redis的哪些操作？</h2><h1 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h1><h2 id="1-redis和mysql的区别"><a href="#1-redis和mysql的区别" class="headerlink" title="1. redis和mysql的区别"></a>1. redis和mysql的区别</h2><ol>
-<li>数据模型：redis是key-value数据库，mysql关系型数据库</li>
-<li>持久性：redis主要是内存存储，也可以通过rdb和aof进行持久化，mysql通过事务来确保数据的完整性和一致性。</li>
-<li>redis的事务保证了一个客户端的命令不会被其他客户端命令打断，隔离级别是串行化，但不提供持久化保证，mysql的事务一般默认为可重复读，并且在系统崩溃后，已提交的更改仍存在。两者的原子性概念不同。</li>
-<li>性能和速度：基于内存的redis读写速度相较mysql高很多。</li>
-<li>并发：redis是单线程，mysql支持多线程和处理多个并发查询。</li>
-</ol>
-<h2 id="2-redis和mysql的一致性怎么保证？"><a href="#2-redis和mysql的一致性怎么保证？" class="headerlink" title="2. redis和mysql的一致性怎么保证？"></a>2. redis和mysql的一致性怎么保证？</h2><p>两种情况：<br>因为二者的操作不是原子性，所以只能保证最终一致性，而非强一致性，一定要原子性，需要上锁，影响系统的吞吐量。</p>
-<ol>
-<li>先操作缓存<br>先删除缓存，再更新数据库。<br>存在问题：如果在删除缓存和更新数据库之间发送一个线程读取操作，会把未更新的数据读入redis中，造成数据不一致。<br>策略：延迟双删，经过一定的时间（几百ms），再删一次redis缓存。</li>
-<li>先操作数据库<br>先更新数据库，数据库更新成功后，删除缓存。<br>存在问题：若是数据库更新成功，但是redis删除失败了，数据会不一致。<br>策略：引入重试机制。如果不想把操作嵌入到业务代码，可以通过阿里开源的cannal组件，去监听binlog，更新redis。（可以通过springboot应用来做）</li>
-</ol>
-<h1 id="场景题"><a href="#场景题" class="headerlink" title="场景题"></a>场景题</h1><h2 id="1-用户请求1G文件的转码，如何设计上传和下载？浏览器分片了解过吗？"><a href="#1-用户请求1G文件的转码，如何设计上传和下载？浏览器分片了解过吗？" class="headerlink" title="1. 用户请求1G文件的转码，如何设计上传和下载？浏览器分片了解过吗？"></a>1. 用户请求1G文件的转码，如何设计上传和下载？浏览器分片了解过吗？</h2><p>需要考虑效率、可靠性、用户体验、可扩展性。<br>基本的设计方案：</p>
-<ol>
-<li>文件上传</li>
-</ol>
-<ul>
-<li>分块上传：将文件切成小块（如5MB或10MB），分别上传，若某块失败，则重传该块，而非整个文件。</li>
-<li>并行上传：同时上传多个文件以提高上传速度</li>
-<li>完整性校验：每上传一个块，可以使用MD5或其他哈希算法来验证其完整性。</li>
-<li>合并文件：所有块上传完成后，服务器端将这些块合并成一个完整的文件。</li>
-</ul>
-<ol start="2">
-<li>文件转码</li>
-</ol>
-<ul>
-<li>异步处理：转码是一个耗时的过程，应该异步进行，不让用户等待</li>
-<li>任务队列：使用任务队列（RabbitMQ，Kafka，redis）来管理解码任务。</li>
-<li>分布式转码</li>
-<li>通知用户：转码完成后可以通过电子邮件、短信或站内通知来提醒用户。</li>
-</ul>
-<ol start="3">
-<li>文件下载</li>
-</ol>
-<ul>
-<li>分块下载</li>
-<li>并行下载</li>
-<li>断点续传：下载中断时，用户可以从中断点继续下载。<ul>
-<li>需要跟踪已传输的字节数，传输中断时，客户端应保存已传输的字节数。</li>
-<li>恢复传输时，客户端需要向服务器发送给一个特殊的请求，从上次中断的位置开始传输。</li>
-<li>服务器需要能支持这种特殊的请求，通过http的Range投实现，若一个文件前1000字节已经被下载，客户端可以发送给一个请求，其Range头的值为bytes&#x3D;1001-，告诉服务器端从第1001字节开始传输。（上传下载都可采用）</li>
-<li>UI上要给用户提示，是恢复上传不是重新上传。</li>
-</ul>
-</li>
-<li>完整性校验：下载完成后，验证文件的完整性，确保用户获得的是完整且未损坏的文件。</li>
-</ul>
-<ol start="4">
-<li>其他考虑</li>
-</ol>
-<ul>
-<li>安全性：使用SSL加密上传和下载数据</li>
-<li>存储策略：使用对象存储来存储大文件，因为他们为大文件提供了优化的存储和检索。</li>
-<li>用户体验：提示，查看转码进度</li>
-<li>日志和监控</li>
-</ul>
-<p><strong>浏览器分片？</strong><br>浏览器提供了一些File api和Blob api来帮助文件的分片。</p>
-<p>大文件分片上传：</p>
-<ol>
-<li>读取文件从File对象读取，(&lt;input type&#x3D;”file”&gt;)来访问用户选择的文件。</li>
-<li><strong>使用Blob.slice()方法将文件分割成多个小的数据块或分片。</strong></li>
-<li>上传分片，使用XMLHttpRequest或Fetch api将其上传到服务器，可以为每个分片添加一个唯一的序号或id，以帮助服务器识别和重新组合文件。</li>
-<li>后续中断处理和服务器组合和之前一样。</li>
-</ol>
-<p>大文件分片下载：</p>
-<ol>
-<li>根据需要，将请求文件分片</li>
-<li><strong>浏览器收到文件的一个分片，使用Blob api将其存储起来，当所有的分片都下载完毕后，可以使用’Blob’构造函数将其组合成一个完整的文件Blob。</strong></li>
-<li>使用URL.createObjectURL()方法为组合后的Blob创建一个url，并为该url提供一个下载链接，事用户可以下载完整文件。</li>
-</ol>
-<p>其他问题：</p>
-<ol>
-<li>需要服务器也支持</li>
-<li>太小的分片会导致过多的网络请求，而太大的分片可能会导致某些网络问题。通常，分片大小可以设置为几MB.</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/20/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" data-id="clmrkv5hh00002wumck5adoku" data-title="b站-实习-微服务开发-一面" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-网络相关面试题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/20/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/" class="article-date">
-  <time class="dt-published" datetime="2023-09-20T02:11:59.000Z" itemprop="datePublished">2023-09-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/20/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/">网络相关面试题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="1-Http协议的请求和响应格式"><a href="#1-Http协议的请求和响应格式" class="headerlink" title="1. Http协议的请求和响应格式"></a>1. Http协议的请求和响应格式</h1><h2 id="请求格式"><a href="#请求格式" class="headerlink" title="请求格式"></a>请求格式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 请求首行</span></span><br><span class="line"><span class="comment"> * 请求方法 + 请求目标 + HTTP版本</span></span><br><span class="line"><span class="comment"> * 常见的请求方法：get，post，put, patch, delete, head, options</span></span><br><span class="line"><span class="comment"> * /</span></span><br><span class="line"><span class="comment">POST / HTTP/1.1</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 请求体</span></span><br><span class="line"><span class="comment"> * key-value键值对组成，具体多少行，无要求</span></span><br><span class="line"><span class="comment"> * /</span></span><br><span class="line"><span class="comment">Host: localhost:8080</span></span><br><span class="line"><span class="comment">User-Agent: ...</span></span><br><span class="line"><span class="comment">Accept: ...</span></span><br><span class="line"><span class="comment">Accept-language: ...</span></span><br><span class="line"><span class="comment">Accept-Encoding: ...</span></span><br><span class="line"><span class="comment">Connection: keep-alive</span></span><br><span class="line"><span class="comment">Upgrade-Insecure-Requests: 1</span></span><br><span class="line"><span class="comment">Content-Type: ...</span></span><br><span class="line"><span class="comment">Content-length: 345</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 空行</span></span><br><span class="line"><span class="comment"> * 用于分隔请求头和请求正文</span></span><br><span class="line"><span class="comment"> * /</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 请求正文</span></span><br><span class="line"><span class="comment"> * 可以是字符串，可以是json格式</span></span><br><span class="line"><span class="comment"> * 浏览器提交给服务器的数据</span></span><br><span class="line"><span class="comment"> * /</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="响应格式"><a href="#响应格式" class="headerlink" title="响应格式"></a>响应格式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 响应首行</span></span><br><span class="line"><span class="comment"> * HTTP版本 + 响应状态 + 状态码解释</span></span><br><span class="line"><span class="comment"> * 常见的状态码：200,404,403，500，400,401,502，503</span></span><br><span class="line"><span class="comment"> * /</span></span><br><span class="line"><span class="comment">HTTP/1.1 403 Forbidden</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 响应体</span></span><br><span class="line"><span class="comment"> * key-value键值对组成，具体多少行，无要求</span></span><br><span class="line"><span class="comment"> * /</span></span><br><span class="line"><span class="comment">Server: Apache</span></span><br><span class="line"><span class="comment">Content-Type: ...</span></span><br><span class="line"><span class="comment">Date: ...</span></span><br><span class="line"><span class="comment">Keep-Alive: timeout=5.max=1000</span></span><br><span class="line"><span class="comment">Connection: Keep-Alive</span></span><br><span class="line"><span class="comment">Age: ..</span></span><br><span class="line"><span class="comment">X-Cache-Info: caching</span></span><br><span class="line"><span class="comment">Content-length: 345</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 空行</span></span><br><span class="line"><span class="comment"> * 用于分隔响应头和响应正文</span></span><br><span class="line"><span class="comment"> * /</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 响应正文</span></span><br><span class="line"><span class="comment"> * 服务器返回给浏览器的资源</span></span><br><span class="line"><span class="comment"> * 可能是html页面，图片资源，音频资源</span></span><br><span class="line"><span class="comment"> * /</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="2-ACK数据包，消耗TCP序号？"><a href="#2-ACK数据包，消耗TCP序号？" class="headerlink" title="2. ACK数据包，消耗TCP序号？"></a>2. ACK数据包，消耗TCP序号？</h1><p>短回答，三次握手中纯ack数据包，不消耗tcp序号</p>
-<h1 id="3-TCP三次握手中可以携带应用层数据吗？"><a href="#3-TCP三次握手中可以携带应用层数据吗？" class="headerlink" title="3. TCP三次握手中可以携带应用层数据吗？"></a>3. TCP三次握手中可以携带应用层数据吗？</h1><p>第三次握手可以，psh+ack，捎带应答。</p>
-<h1 id="4-TCP三次握手建立连接，如果服务器不进行accept接收新连接，最多可以三次握手完成多少个连接？"><a href="#4-TCP三次握手建立连接，如果服务器不进行accept接收新连接，最多可以三次握手完成多少个连接？" class="headerlink" title="4. TCP三次握手建立连接，如果服务器不进行accept接收新连接，最多可以三次握手完成多少个连接？"></a>4. TCP三次握手建立连接，如果服务器不进行accept接收新连接，最多可以三次握手完成多少个连接？</h1><p>这是由”已完成连接队列”的大小的决定的。<br>TCP三次握手建立连接时，在内核中进行，并根据握手状态区分为两个队列，一个是“未完成连接队列”，一个是“已完成连接队列”，而应用程序的accept方法就是从已完成连接队列中获取三次握手完成的链接。<br>如果不通过accept取出连接（状态由等待被接受-&gt;已经被接受并正在通信），那上限就是“已完成连接队列”的大小。</p>
-<h1 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h1><h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Jr4y1R7Ug/?spm_id_from=333.999.0.0&vd_source=0de7a910c6389bd641e5d95811407d7d">https://www.bilibili.com/video/BV1Jr4y1R7Ug/?spm_id_from=333.999.0.0&amp;vd_source=0de7a910c6389bd641e5d95811407d7d</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.xiaolincoding.com/network/3_tcp/tcp_interview.html">https://www.xiaolincoding.com/network/3_tcp/tcp_interview.html</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/20/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="clmrkv5hq00042wumb8wyfsqx" data-title="网络相关面试题" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Java并发编程-常见面试代码题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/19/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E4%BB%A3%E7%A0%81%E9%A2%98/" class="article-date">
-  <time class="dt-published" datetime="2023-09-19T12:10:49.000Z" itemprop="datePublished">2023-09-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/19/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E4%BB%A3%E7%A0%81%E9%A2%98/">Java并发编程-常见面试代码题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="题目1"><a href="#题目1" class="headerlink" title="题目1"></a>题目1</h1><ul>
-<li>题目描述<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">两个线程循环打印1-100。</span><br></pre></td></tr></table></figure></li>
-<li>Code<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Exam1</span> &#123;</span><br><span class="line">    <span class="comment">//保证线程共享且可见</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//锁，任意一个对象即可</span></span><br><span class="line">    <span class="keyword">static</span> <span class="type">Object</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="comment">// 线程1的逻辑</span></span><br><span class="line">            <span class="keyword">while</span> (num &lt; <span class="number">100</span>) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (lock) &#123;</span><br><span class="line">                    <span class="keyword">while</span> (num % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            lock.wait();</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">&quot;打印了&quot;</span> + num++);</span><br><span class="line">                    lock.notifyAll();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="comment">// 线程2的逻辑</span></span><br><span class="line">            <span class="keyword">while</span> (num &lt; <span class="number">100</span>) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (lock) &#123;</span><br><span class="line">                    <span class="keyword">while</span> (num % <span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            lock.wait();</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">&quot;打印了&quot;</span> + num++);</span><br><span class="line">                    lock.notifyAll();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-如果是三个线程循环打印0-100呢？修改下while的条件即可，实际上还是唤醒了所有阻塞进程，不过每个阻塞进程会去判断当前其是否可以继续运行。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Exam1</span> &#123;</span><br><span class="line">    <span class="comment">//保证线程共享且可见</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//锁，任意一个对象即可</span></span><br><span class="line">    <span class="keyword">static</span> <span class="type">Object</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="comment">// 线程1的逻辑</span></span><br><span class="line">            <span class="keyword">while</span> (num &lt; <span class="number">100</span>) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (lock) &#123;</span><br><span class="line">                    <span class="keyword">while</span> (num % <span class="number">3</span> != <span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            lock.wait();</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">&quot;打印了&quot;</span> + num++);</span><br><span class="line">                    lock.notifyAll();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-循环打印abc，写法一样，修改下判断条件即可。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Exam1</span> &#123;</span><br><span class="line">    <span class="comment">//保证线程共享且可见</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="type">char</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&#x27;c&#x27;</span>;</span><br><span class="line">    <span class="comment">//锁，任意一个对象即可</span></span><br><span class="line">    <span class="keyword">static</span> <span class="type">Object</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">char</span>[] list = <span class="keyword">new</span> <span class="title class_">char</span>[]&#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="comment">// 线程1的逻辑</span></span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (lock) &#123;</span><br><span class="line">                    <span class="keyword">while</span> (str != <span class="string">&#x27;c&#x27;</span>) &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            lock.wait();</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    str = list[(num++) % <span class="number">3</span>];</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">&quot;打印了&quot;</span> + str);</span><br><span class="line">                    lock.notifyAll();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">       <span class="comment">//....</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-这样的写法是唤醒所有的线程，然后线程去根据当前共享变量的状态决定是否阻塞，能否修改唤醒指定的线程？<br>需要为每个线程提供单独的锁对象。<br><strong>这种方式会出现死锁，目前还不知道原因。</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> JUCExam;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Exam2</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="type">Object</span> <span class="variable">lock1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">    <span class="keyword">static</span> <span class="type">Object</span> <span class="variable">lock2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">    <span class="keyword">static</span> <span class="type">Object</span> <span class="variable">lock3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (lock1) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        lock1.wait();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                    System.out.println(<span class="string">&quot;线程1正在打印：A &quot;</span>);</span><br><span class="line">                    <span class="keyword">synchronized</span> (lock2) &#123;</span><br><span class="line">                        lock2.notify();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (lock2) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        lock2.wait();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                    System.out.println(<span class="string">&quot;线程2正在打印：B&quot;</span>);</span><br><span class="line">                    <span class="keyword">synchronized</span> (lock3) &#123;</span><br><span class="line">                        lock3.notify();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (lock3) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        lock3.wait();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                    System.out.println(<span class="string">&quot;线程3正在打印：C&quot;</span>);</span><br><span class="line">                    <span class="keyword">synchronized</span> (lock1) &#123;</span><br><span class="line">                        lock1.notify();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">100</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">synchronized</span> (lock1) &#123; <span class="comment">//唤醒线程1</span></span><br><span class="line">            lock1.notify();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/19/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E4%BB%A3%E7%A0%81%E9%A2%98/" data-id="clmrkv5ho00022wum6e1rhmmr" data-title="Java并发编程-常见面试代码题" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">手写代码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-百度-实习-java开发-纯凉面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/19/%E7%99%BE%E5%BA%A6-%E5%AE%9E%E4%B9%A0-java%E5%BC%80%E5%8F%91-%E7%BA%AF%E5%87%89%E9%9D%A2/" class="article-date">
-  <time class="dt-published" datetime="2023-09-19T08:06:14.000Z" itemprop="datePublished">2023-09-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/19/%E7%99%BE%E5%BA%A6-%E5%AE%9E%E4%B9%A0-java%E5%BC%80%E5%8F%91-%E7%BA%AF%E5%87%89%E9%9D%A2/">百度-实习-java开发-一面（纯凉面）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>题目没做出来，最近懈怠了，docker、k8s了解过少。<br>[TOC]</p>
-<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="1-字符串运算"><a href="#1-字符串运算" class="headerlink" title="1. 字符串运算"></a>1. 字符串运算</h2><p>题目描述：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">一个由数字和运算符组成的字符串的表达式，按不同优先级组合数字和运算符，计算并返回所有可能组合的结果。可以按任意顺序返回答案。</span><br><span class="line"></span><br><span class="line">输入：2-1-1</span><br><span class="line">输出：[0, 2]</span><br><span class="line">解释：((2-1)-1) = 0</span><br><span class="line">      (2-(1-1)) = 2</span><br><span class="line"></span><br><span class="line">注： 运算符仅包含+, -, *, 输入整数范围[0,99]</span><br></pre></td></tr></table></figure>
-<p>Code:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Exam1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Exam1</span> <span class="variable">exam1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Exam1</span>();</span><br><span class="line">        HashSet&lt;Integer&gt; res = exam1.diffWaysToCompute(<span class="string">&quot;2-1*1&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (Integer i : res) System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> HashSet&lt;Integer&gt; <span class="title function_">diffWaysToCompute</span><span class="params">(String input)</span> &#123;</span><br><span class="line">        HashSet&lt;Integer&gt; res = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; input.length(); i++) &#123;</span><br><span class="line">            <span class="type">char</span> <span class="variable">c</span> <span class="operator">=</span> input.charAt(i);</span><br><span class="line">            <span class="keyword">if</span> (c == <span class="string">&#x27;+&#x27;</span> || c == <span class="string">&#x27;-&#x27;</span> || c == <span class="string">&#x27;*&#x27;</span>) &#123;</span><br><span class="line">                HashSet&lt;Integer&gt; left = diffWaysToCompute(input.substring(<span class="number">0</span>, i));</span><br><span class="line">                HashSet&lt;Integer&gt; right = diffWaysToCompute(input.substring(i + <span class="number">1</span>));</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> l : left) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">int</span> r : right) &#123;</span><br><span class="line">                        <span class="keyword">switch</span> (c) &#123;</span><br><span class="line">                            <span class="keyword">case</span> <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                                res.add(l + r);</span><br><span class="line">                                <span class="keyword">break</span>;</span><br><span class="line">                            <span class="keyword">case</span> <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                                res.add(l - r);</span><br><span class="line">                                <span class="keyword">break</span>;</span><br><span class="line">                            <span class="keyword">case</span> <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                                res.add(l * r);</span><br><span class="line">                                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (res.isEmpty() &amp;&amp; isNumeric(input)) &#123;</span><br><span class="line">                res.add(Integer.parseInt(input));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">isNumeric</span><span class="params">(String str)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Integer.parseInt(str);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="2-用两个栈来实现一个队列，完成队列的-Push-和-Pop-操作。"><a href="#2-用两个栈来实现一个队列，完成队列的-Push-和-Pop-操作。" class="headerlink" title="2. 用两个栈来实现一个队列，完成队列的 Push 和 Pop 操作。"></a>2. 用两个栈来实现一个队列，完成队列的 Push 和 Pop 操作。</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyQueue</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> LinkedList&lt;E&gt; stack1 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> LinkedList&lt;E&gt; stack2 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        MyQueue&lt;Integer&gt; queue = <span class="keyword">new</span> <span class="title class_">MyQueue</span>&lt;&gt;();</span><br><span class="line">        queue.push(<span class="number">1</span>);</span><br><span class="line">        queue.push(<span class="number">2</span>);</span><br><span class="line">        queue.push(<span class="number">3</span>);</span><br><span class="line">        System.out.println(queue.pop());</span><br><span class="line">        queue.push(<span class="number">4</span>);</span><br><span class="line">        System.out.println(queue.pop());</span><br><span class="line">        System.out.println(queue.pop());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">push</span><span class="params">(E e)</span>&#123;</span><br><span class="line">        stack1.add(e);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> E <span class="title function_">pop</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(stack2.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">while</span>(!stack1.isEmpty())stack2.add(stack1.poll());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> stack2.poll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-常用的数据结构？HashMap如何处理并发？"><a href="#1-常用的数据结构？HashMap如何处理并发？" class="headerlink" title="1. 常用的数据结构？HashMap如何处理并发？"></a>1. 常用的数据结构？HashMap如何处理并发？</h2><h2 id="2-String是线程安全吗？String不可修改的好处是什么？StringBuffer和StringBuilder？"><a href="#2-String是线程安全吗？String不可修改的好处是什么？StringBuffer和StringBuilder？" class="headerlink" title="2. String是线程安全吗？String不可修改的好处是什么？StringBuffer和StringBuilder？"></a>2. String是线程安全吗？String不可修改的好处是什么？StringBuffer和StringBuilder？</h2><p>String是线程安全，因为String对象不可变，任何对String对象的修改操作，都会返回新的String对象。</p>
-<p>字符串字面量在编译时会放入字符串常量池(String Pool),是java堆的一部分，用于存储所有的字符串字面量，这样做的目的是为了避免创建多个相同内容的字符串独享，从而节省内存，提高性能（仅查找，无需在堆上分配新的内存和字符串对象），安全（不可变，所以没有并发访问的问题）。<br>在字面量大量使用的场景（配置文件、xml解析、json处理），特定字符串频繁使用和比较的场景比较有效。<br>以下是对字符串字面量复用的验证：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 执行String a=&quot;aaa&quot;步骤如下：</span></span><br><span class="line"><span class="comment"> * 1. 检查字符串常量池中是否已经存在值为“aaa”的字符串</span></span><br><span class="line"><span class="comment"> * 2. 如果存在，则a指向那个字符串；</span></span><br><span class="line"><span class="comment"> * 3. 如果不存在，在字符串常量池中创建一个新的字符串，并让a指向他。</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="comment">//验证创建两个值相同的String字面量，其引用地址是否相同 </span></span><br><span class="line"><span class="type">String</span> <span class="variable">a</span> <span class="operator">=</span> <span class="string">&quot;aaa&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">b</span> <span class="operator">=</span> <span class="string">&quot;aaa&quot;</span>;</span><br><span class="line">System.out.println(a == b); <span class="comment">//返回true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//但是只有形如String a=&quot;aaa&quot;的字面量才可以，如果使用new String来创建，不可以</span></span><br><span class="line"><span class="type">String</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;aaa&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">d</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;bbb&quot;</span>);</span><br><span class="line">System.out.println(c == d); <span class="comment">//返回false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以通过intern()方式将string显示的放入字符串常量池，或者说获取字符串常量池中的引用</span></span><br><span class="line">c = c.intern();</span><br><span class="line">d = d.intern();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现在，s1和s2都指向字符串常量池中的同一个字符串</span></span><br><span class="line">System.out.println(c == d); <span class="comment">// 输出：true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<p>StringBuffer和StringBuilder并非基于String，而是基于Char[],他们是可变的，所以存在线程安全问题，但是StringBuffer使用synchronized关键字来保证其线程安全，StringBuilder是线程不安全的。</p>
-<p>实际上String也是基于Char[]，只不过其Char[]使用了final修饰。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">String</span></span><br><span class="line">    <span class="keyword">implements</span> <span class="title class_">java</span>.io.Serializable, Comparable&lt;String&gt;, CharSequence &#123;</span><br><span class="line">    <span class="comment">/** The value is used for character storage. */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">char</span> value[];</span><br><span class="line">    <span class="comment">//....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="部署相关"><a href="#部署相关" class="headerlink" title="部署相关"></a>部署相关</h1><h2 id="1-项目的部署策略？"><a href="#1-项目的部署策略？" class="headerlink" title="1. 项目的部署策略？"></a>1. 项目的部署策略？</h2><h2 id="2-搜索具体做了什么？只是调api吗？"><a href="#2-搜索具体做了什么？只是调api吗？" class="headerlink" title="2. 搜索具体做了什么？只是调api吗？"></a>2. 搜索具体做了什么？只是调api吗？</h2><h2 id="3-AI搜索的机器哪里来的？规模怎么样？"><a href="#3-AI搜索的机器哪里来的？规模怎么样？" class="headerlink" title="3. AI搜索的机器哪里来的？规模怎么样？"></a>3. AI搜索的机器哪里来的？规模怎么样？</h2><h2 id="4-论文做了什么？"><a href="#4-论文做了什么？" class="headerlink" title="4. 论文做了什么？"></a>4. 论文做了什么？</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/19/%E7%99%BE%E5%BA%A6-%E5%AE%9E%E4%B9%A0-java%E5%BC%80%E5%8F%91-%E7%BA%AF%E5%87%89%E9%9D%A2/" data-id="clmq4ton100007kumhmjp0lq4" data-title="百度-实习-java开发-一面（纯凉面）" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-生产者-消费者" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/19/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85/" class="article-date">
-  <time class="dt-published" datetime="2023-09-19T03:13:20.000Z" itemprop="datePublished">2023-09-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/19/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85/">生产者&amp;&amp;消费者</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>用LinkedList实现。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SharedQueue</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">capacity</span> <span class="operator">=</span> <span class="number">10</span>; <span class="comment">//队列最大长度</span></span><br><span class="line">    <span class="keyword">private</span> LinkedList&lt;Integer&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">SharedQueue</span> <span class="variable">sharedQueue</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SharedQueue</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//一个消费者，持续消费</span></span><br><span class="line">        <span class="type">Consumer</span> <span class="variable">consumer</span> <span class="operator">=</span> sharedQueue.<span class="keyword">new</span> <span class="title class_">Consumer</span>();</span><br><span class="line">        consumer.start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//10个生产者,生产者生产完一条消息就结束</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">            <span class="type">Producer</span> <span class="variable">producer</span> <span class="operator">=</span> sharedQueue.<span class="keyword">new</span> <span class="title class_">Producer</span>();</span><br><span class="line">            producer.start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//消费者</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Consumer</span> <span class="keyword">extends</span> <span class="title class_">Thread</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (queue) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (queue.isEmpty()) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;当前队列为空&quot;</span>);</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            queue.wait();</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                            <span class="comment">//出现异常，手动唤醒</span></span><br><span class="line">                            queue.notify();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        <span class="type">Integer</span> <span class="variable">val</span> <span class="operator">=</span> queue.poll();</span><br><span class="line">                        System.out.println(<span class="string">&quot;消费者从队列中取出了消息，取出了&quot;</span>+val);</span><br><span class="line">                        queue.notify(); <span class="comment">//唤醒生产者</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//生产者</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Producer</span> <span class="keyword">extends</span> <span class="title class_">Thread</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (queue) &#123;</span><br><span class="line">                <span class="keyword">if</span> (queue.size() &lt; capacity) &#123;</span><br><span class="line">                    queue.add(queue.size() + <span class="number">1</span>);</span><br><span class="line">                    System.out.println(<span class="string">&quot;生产者往队列中添加了消息，队列当前长度为&quot;</span>+queue.size());</span><br><span class="line">                    queue.notify();</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        queue.wait();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                        queue.notify();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上的阻塞唤醒、上锁行为，实际上阻塞队列中已经实现了，下面直接使用阻塞队列api来实现。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SharedQueue</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">capacity</span> <span class="operator">=</span> <span class="number">10</span>; <span class="comment">//队列最大长度</span></span><br><span class="line">    <span class="keyword">private</span> BlockingQueue&lt;Integer&gt; queue = <span class="keyword">new</span> <span class="title class_">ArrayBlockingQueue</span>&lt;&gt;(capacity);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//....</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//消费者</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Consumer</span> <span class="keyword">extends</span> <span class="title class_">Thread</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="type">Integer</span> <span class="variable">val</span> <span class="operator">=</span> queue.take();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//生产者</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Producer</span> <span class="keyword">extends</span> <span class="title class_">Thread</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                queue.put(queue.size()+<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/19/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85/" data-id="clmpusui70001tcumbroj5xnq" data-title="生产者&amp;&amp;消费者" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" rel="tag">代码练习</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-主流的网络模型" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/18/%E4%B8%BB%E6%B5%81%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/" class="article-date">
-  <time class="dt-published" datetime="2023-09-18T14:51:21.000Z" itemprop="datePublished">2023-09-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/18/%E4%B8%BB%E6%B5%81%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/">网络编程基础</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h1 id="网络的演变过程"><a href="#网络的演变过程" class="headerlink" title="网络的演变过程"></a>网络的演变过程</h1><ul>
-<li>BIO</li>
-<li>NIO</li>
-<li>IO多路复用I(select&#x2F;poll)</li>
-<li>IO多路复用II(epoll)</li>
-<li>信号驱动IO</li>
-<li>AIO(异步IO)</li>
-</ul>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
-<li><a target="_blank" rel="noopener" href="https://papergames.jobs.feishu.cn/referral/campus/m/position?token=MzsxNjk0MTQwNzQ2OTI3OzcyMzU5Mzk2MDMyOTQ4MTQyMTA7MA">https://papergames.jobs.feishu.cn/referral/campus/m/position?token=MzsxNjk0MTQwNzQ2OTI3OzcyMzU5Mzk2MDMyOTQ4MTQyMTA7MA</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/18/%E4%B8%BB%E6%B5%81%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/" data-id="clmp2f67f0000tcumfew27jn1" data-title="网络编程基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-BIO-NIO" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/18/BIO-NIO/" class="article-date">
-  <time class="dt-published" datetime="2023-09-18T09:34:25.000Z" itemprop="datePublished">2023-09-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/18/BIO-NIO/">BIO&amp;NIO</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h1 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h1><h2 id="BIOServer"><a href="#BIOServer" class="headerlink" title="BIOServer"></a>BIOServer</h2><p>accept时会阻塞，等待客户端连接，但是后续处理使用了新的线程，故不会阻塞。但是会对于数千数万个请求分别创建线程开销过大。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BIOServer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//创建ServerSocket，监听8080</span></span><br><span class="line">            <span class="type">ServerSocket</span> <span class="variable">serverSocket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerSocket</span>(<span class="number">8080</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;Server started,waiting for connections...&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//无限循环，等待客户端链接</span></span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="comment">//阻塞，等待客户端连接，当有新的客户端连接，返回一个新的socket对象</span></span><br><span class="line">                <span class="type">Socket</span> <span class="variable">clientSocket</span> <span class="operator">=</span> serverSocket.accept();</span><br><span class="line">                System.out.println(<span class="string">&quot;Client connected:&quot;</span> + clientSocket.getRemoteSocketAddress());</span><br><span class="line"></span><br><span class="line">                <span class="comment">//为每个新连接的客户端创建一个新线程来处理</span></span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; handleClient(clientSocket)).start();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//处理客户端请求</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">handleClient</span><span class="params">(Socket clientSocket)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//从socket中获取输入流，用于读取客户端发送的数据</span></span><br><span class="line">            <span class="type">BufferedReader</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(clientSocket.getInputStream()));</span><br><span class="line">            <span class="comment">//从socket中获取输出流，用于向客户端发送数据</span></span><br><span class="line">            <span class="type">PrintWriter</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PrintWriter</span>(clientSocket.getOutputStream(), <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">            String request, response;</span><br><span class="line">            <span class="comment">//循环读取客户端发送的每一行数据</span></span><br><span class="line">            <span class="keyword">while</span> ((request = in.readLine()) != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="string">&quot;exit&quot;</span>.equals(request)) <span class="keyword">break</span>;</span><br><span class="line">                response = <span class="string">&quot;Received:&quot;</span> + request;</span><br><span class="line">                out.println(response);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>使用线程池优化</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">MAX_THREADS</span> <span class="operator">=</span> <span class="number">50</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">ExecutorService</span> <span class="variable">threadPool</span> <span class="operator">=</span> Executors.newFixedThreadPool(MAX_THREADS);</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//使用线程池</span></span><br><span class="line">            threadPool.execute(()-&gt;handleClient(clientSocket));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="BIOClient"><a href="#BIOClient" class="headerlink" title="BIOClient"></a>BIOClient</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BIOClient</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">serverAddress</span> <span class="operator">=</span> <span class="string">&quot;localhost&quot;</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">serverPort</span> <span class="operator">=</span> <span class="number">8080</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Socket</span> <span class="variable">socket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Socket</span>(serverAddress, serverPort);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//从socket中获取输入输出流</span></span><br><span class="line">            <span class="type">BufferedReader</span> <span class="variable">stdIn</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(System.in));</span><br><span class="line">            <span class="type">PrintWriter</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PrintWriter</span>(socket.getOutputStream(), <span class="literal">true</span>);</span><br><span class="line">            <span class="type">BufferedReader</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(socket.getInputStream()));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            String userInput, serverResponse;</span><br><span class="line">            <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Enter Message (type &#x27;exit&#x27; to quit):&quot;</span>);</span><br><span class="line">                userInput = stdIn.readLine();</span><br><span class="line">                <span class="keyword">if</span>(userInput==<span class="literal">null</span>||<span class="string">&quot;exit&quot;</span>.equalsIgnoreCase(userInput))<span class="keyword">break</span>;</span><br><span class="line">                out.println(userInput);</span><br><span class="line">                serverResponse = in.readLine();</span><br><span class="line">                System.out.println(<span class="string">&quot;Server Response:&quot;</span> + serverResponse);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            socket.close();</span><br><span class="line">            in.close();</span><br><span class="line">            out.close();</span><br><span class="line">            stdIn.close();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h1><h2 id="NIOServer"><a href="#NIOServer" class="headerlink" title="NIOServer"></a>NIOServer</h2><p>系统的线程数量有着上限，如果想要处理更高的并发，需要使用更少的线程来处理更多的连接。</p>
-<h2 id="NIOClient"><a href="#NIOClient" class="headerlink" title="NIOClient"></a>NIOClient</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/18/BIO-NIO/" data-id="clmp04pbc00002oumgvxn7962" data-title="BIO&amp;NIO" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" rel="tag">代码练习</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-携程-秋招-一二面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/" class="article-date">
-  <time class="dt-published" datetime="2023-09-16T08:06:00.000Z" itemprop="datePublished">2023-09-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/">携程-秋招-一二面</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h1 id="综合类"><a href="#综合类" class="headerlink" title="综合类"></a>综合类</h1><h2 id="1-mysql如何提高并发量？连接池的常用大小？"><a href="#1-mysql如何提高并发量？连接池的常用大小？" class="headerlink" title="1. mysql如何提高并发量？连接池的常用大小？"></a>1. mysql如何提高并发量？连接池的常用大小？</h2><p>思考的点包括哪些？</p>
-<ol>
-<li><strong>硬件方面</strong>：<ul>
-<li>使用SSD提高IO速度；</li>
-<li>增加内存来提供更大的缓冲区，减少IO操作</li>
-<li>多核处理器：提供更多的并行能力</li>
-</ul>
-</li>
-<li><strong>MYSQL配置优化</strong><ul>
-<li>调整innodb_buffer_pool_size（存储引擎的内存缓冲池大小），应调整为系统总内存的60%-80%</li>
-<li>调整innodb_log_file_size，适当增大日志文件大小可以提高写入性能</li>
-<li>使用持久连接：避免频繁建立和关闭连接</li>
-</ul>
-</li>
-<li>查询优化：索引+避免复杂查询+优化数据表（optimize table）+数据库结构优化（消除数据冗余，使用更适当的数据类型）</li>
-<li><strong>读写分离</strong></li>
-<li><strong>数据库分片</strong></li>
-<li><strong>连接池</strong>：复用数据库连接，减少建立和关闭连接的开销</li>
-<li>引擎更换：不需要事务且读多写少，上MyISAM</li>
-<li>避免锁竞争：通过代码优化和数据库设计，减少长期持有锁的情况</li>
-</ol>
-<h2 id="2-java程序如何提高并发量？"><a href="#2-java程序如何提高并发量？" class="headerlink" title="2. java程序如何提高并发量？"></a>2. java程序如何提高并发量？</h2><p>思考的点包括哪些？（数据库方面的参考上一个问题）</p>
-<ol>
-<li>多线程编程</li>
-<li>减少线程争用和使用更适当的并发集合，比如减少全局变量和静态变量的过渡使用</li>
-<li>垂直（单台机器加性能）和水平扩展（添加更多服务器以分摊负载），以及微服务分摊负载，负载均衡器来分发请求</li>
-<li>JVM调整：调整堆大小和GC策略来减少垃圾回收暂停</li>
-<li>使用中间件和外部消息系统：消息队列异步处理请求，缓存减少对数据库访问</li>
-<li>避免阻塞，使用非阻塞IO或异步IO</li>
-</ol>
-<h2 id="3-java程序CPU占用100-，如何排查？"><a href="#3-java程序CPU占用100-，如何排查？" class="headerlink" title="3. java程序CPU占用100%，如何排查？"></a>3. java程序CPU占用100%，如何排查？</h2><p>大概思路：</p>
-<ol>
-<li>top确定CPU使用率，以及java进程的ID</li>
-<li>使用jstack <pid> &gt; threadDump.txt 获得线程堆栈转储</li>
-<li>分析threadDump.txt文件，查找runnable状态的线程</li>
-<li>通过堆栈转储定位到具体的代码段，进行代码审查</li>
-<li>排除外部因素：数据库响应缓慢，网络延迟，外部服务延迟</li>
-</ol>
-<p>VisualVM可以连接到运行中的jvm，其提供了采样器和探查器，可以定位导致高cpu使用率的代码段</p>
-<h2 id="4-redis的使用方式？"><a href="#4-redis的使用方式？" class="headerlink" title="4. redis的使用方式？"></a>4. redis的使用方式？</h2><h2 id="5-索引优化的场景？（撕逼了很久）？"><a href="#5-索引优化的场景？（撕逼了很久）？" class="headerlink" title="5. 索引优化的场景？（撕逼了很久）？"></a>5. 索引优化的场景？（撕逼了很久）？</h2><h2 id="6-一亿的键值对（时间，访问量），内存中怎么存？"><a href="#6-一亿的键值对（时间，访问量），内存中怎么存？" class="headerlink" title="6. 一亿的键值对（时间，访问量），内存中怎么存？"></a>6. 一亿的键值对（时间，访问量），内存中怎么存？</h2><h2 id="7-本机缓存、分布式缓存、多级缓存的优劣势？"><a href="#7-本机缓存、分布式缓存、多级缓存的优劣势？" class="headerlink" title="7. 本机缓存、分布式缓存、多级缓存的优劣势？"></a>7. 本机缓存、分布式缓存、多级缓存的优劣势？</h2><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>本机缓存</td>
-<td>速度快：数据存储在应用程序同一台服务器上，不存在网络开销；无需额外网络配置或外部组件</td>
-<td>受制于单个机器内存大小；不易扩展；服务器崩溃，缓存数据会丢失；多服务器环境中，每个服务器的本地缓存可能出现数据不一致的情况；</td>
-</tr>
-<tr>
-<td>分布式缓存</td>
-<td>水平扩展：可以容易地通过增加更多的服务器来扩展缓存容量；数据的持久性和可用性；</td>
-<td>复杂性；存在网络延迟；需要更多的硬件资源和管理工作</td>
-</tr>
-<tr>
-<td>多级缓存</td>
-<td>灵活性:可以根据需要和访问模式调整每级缓存的大小和策略；高效率：经常访问的数据可以存储在本地缓存，较少访问的数据可以存储在分布式缓存中；高可用性：结合了本地缓存的速度和分布式缓存的扩展性</td>
-<td>复杂性；一致性问题：在不同级别的缓存之间保持数据一致性可能比较复杂</td>
-</tr>
-</tbody></table>
-<h2 id="8-top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）"><a href="#8-top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）" class="headerlink" title="8. top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）"></a>8. top命令中的几个值的含义？（不知道他说的啥，就说了用户态、内核态、空闲态的cpu占用）</h2><h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="1-介绍下TCP和UDP的区别？TCP如何实现可靠传输？"><a href="#1-介绍下TCP和UDP的区别？TCP如何实现可靠传输？" class="headerlink" title="1. 介绍下TCP和UDP的区别？TCP如何实现可靠传输？"></a>1. 介绍下TCP和UDP的区别？TCP如何实现可靠传输？</h2><h2 id="2-Restful-api常用的method？"><a href="#2-Restful-api常用的method？" class="headerlink" title="2. Restful api常用的method？"></a>2. Restful api常用的method？</h2><table>
-<thead>
-<tr>
-<th>Method</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>GET</td>
-<td>用于读取信息，幂等的</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>用于创建新资源</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>更新会创建指定资源，幂等的</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td>用于删除指定的资源，幂等</td>
-</tr>
-<tr>
-<td>PATCH</td>
-<td>用于更新部分资源</td>
-</tr>
-<tr>
-<td>HEAD</td>
-<td>与get相同，但是只返回HTTP头部，不返回实体的主体</td>
-</tr>
-<tr>
-<td>OPTIONS</td>
-<td>用于描述目标资源的通信选项，返回该资源支持的HTTP方法</td>
-</tr>
-</tbody></table>
-<p>PUT和PATCH方法的区别：</p>
-<ol>
-<li>意图：put幂等，主要目的是完全替换目标资源，也就是说，即使只改一个属性，也要提供完整的更新内容；patch用于部分更新目标资源，仅需提供资源中要修改的属性和新值，不一定是幂等的。</li>
-<li>资源不存在时：put可能会创建一个新资源，patch会返回一个错误。</li>
-<li>传输与安全性：put可以只传输修改部分，更搞笑，但是可能会产生安全性问题。</li>
-</ol>
-<h2 id="3-http状态码？403？"><a href="#3-http状态码？403？" class="headerlink" title="3. http状态码？403？"></a>3. http状态码？403？</h2><table>
-    <tr>
-        <th>分类</th>
-        <th>状态码</th>
-    </tr>
-    <tr>
-        <td rowspan="2">1xx(信息响应)</td>
-        <td>100 continue：服务器已经接收到请求的初始部分，并且客户端应继续请求，如果请求已经完成，则忽略</td>
-    </tr>
-    <tr>
-        <td>101 Switching Protocals：服务器了解并准确切换协议，例如从Http/1.1切换到WebSocket</td>
-    </tr>
-    <tr>
-        <td rowspan="3">2xx(成功）</td>
-        <td>200 OK：请求成功</td>
-    </tr>
-    <tr>
-        <td>201 Created: 请求已被实现，结果是创建了一个新的资源</td>
-    </tr>
-    <tr>
-        <td>204 No Content: 服务器已经成功处理请求，但是没有返回任何内容</td>
-    </tr>
-    <tr>
-        <td rowspan="3">3xx(重定向）</td>
-        <td>301 Moved Permanently：被请求的资源已永久移动到新的URL</td>
-    </tr>
-    <tr>
-        <td>302 Found：被请求的资源临时从不同的URI响应</td>
-    </tr>
-    <tr>
-        <td>304 Not Modified：该资源自从上次请求后没有任何修改</td>
-    </tr>
-    <tr>
-        <td rowspan="5"><Strong>4xx(客户端错误）</Strong></td>
-        <td>400 Bad Request：服务器不能或不会处理请求，由于客户端似乎有错误</td>
-    </tr>
-    <tr>
-        <td>401 Unauthorized：请求需要用户的身份验证</td>
-    </tr>
-    <tr>
-        <td><Strong>403 Forbidden：服务器理解客户端的请求，但拒绝执行他。</Strong>一般在权限不足或api调用超限时使用。</td>
-    </tr>
-    <tr>
-        <td>404 Not Found：请求的资源在服务器上未找到</td>
-    </tr>
-    <tr>
-        <td>429 Too Many Requests：用户在给定时间内发送了太多的请求</td>
-    </tr>
-    <tr>
-        <td rowspan="3"><Strong>5xx(服务器错误）</Strong></td>
-        <td>500 Internal Server Error：服务器遇到一个情况，不知道如何处理</td>
-    </tr>
-    <tr>
-        <td>502 Bad Gateway：服务器作为网关或代理，从上游服务器收到一个无效的响应。</td>
-    </tr>
-    <tr>
-        <td>503 Service Unavailable：服务器不准确处理请求，通常情况是服务器过载或正在维护</td>
-    </tr>
-</table>
-
-<h2 id="4-http的请求头"><a href="#4-http的请求头" class="headerlink" title="4. http的请求头"></a>4. http的请求头</h2><table>
-<thead>
-<tr>
-<th>字段</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>accept</td>
-<td>告知服务器客户端可以处理的媒体类型</td>
-</tr>
-<tr>
-<td>accept-chatset</td>
-<td>客户端可以理解的字符集，与文本的编码方式有关</td>
-</tr>
-<tr>
-<td>accept-encoding</td>
-<td>客户端可以处理的内容编码，与压缩方式有挂</td>
-</tr>
-<tr>
-<td>accept-language</td>
-<td>首选语言</td>
-</tr>
-<tr>
-<td>Authorization</td>
-<td>用于身份验证的凭证</td>
-</tr>
-<tr>
-<td>Host</td>
-<td>指定请求资源的internet主机和端口号</td>
-</tr>
-<tr>
-<td>User-agent</td>
-<td>描述发出请求的用户代理，描述请求来自哪种浏览器、操作系统或设备，版本，或其他信息，主要作用是允许内容提供者提供与特定浏览器或设备更兼容的内容。可能会被伪造。</td>
-</tr>
-</tbody></table>
-<h2 id="5-你们为什么使用http来处理请求？"><a href="#5-你们为什么使用http来处理请求？" class="headerlink" title="5. 你们为什么使用http来处理请求？"></a>5. 你们为什么使用http来处理请求？</h2><ol>
-<li>简单：文本协议，人类可读，开发者能快读理解。</li>
-<li>无状态：请求独立，简化了服务器设计，并允许请求负载均衡。</li>
-<li>广泛支持：几乎所有的编程语言和平台都有库和框架来处理http交互，并且web浏览器的普及，且主流web浏览器都使用http作为主要通信协议、</li>
-<li>无需建立长连接：虽然http1.0和http1.1支持持久连接，但是大部分情况并不需要保持长时间连接，这对于节省服务器资源和处理并发请求非常有用。</li>
-<li>安全性：https为网站和用户提供了加密和身份验证，保护数据在传输过程中的安全性。</li>
-</ol>
-<p>总结：简单、灵活、广泛受支持、并且能满足大多数web应用的需要。</p>
-<h2 id="6-Http1-1有无队头阻塞，并发模式？keepalive？"><a href="#6-Http1-1有无队头阻塞，并发模式？keepalive？" class="headerlink" title="6. Http1.1有无队头阻塞，并发模式？keepalive？"></a>6. Http1.1有无队头阻塞，并发模式？keepalive？</h2><p>这里主要补充下http发展历史：</p>
-<ul>
-<li><p>http1.1相对http1.0的改进：</p>
-<ul>
-<li>使用长连接改善短连接造成的性能开销（keep-alive）</li>
-<li>使用管道网络传输，只要一个请求发送出去，不必等其回来，就可以发送第二个请求出去，减少整体的响应时间，即解决发送方的队头阻塞问题（这个大部分场景下不支持）</li>
-</ul>
-</li>
-<li><p>http1.1的问题：</p>
-<ul>
-<li>请求&#x2F;响应头部未压缩，首部信息越多延迟越大</li>
-<li>发送冗余的首部，每次互相发送相同的首部造成浪费较多</li>
-<li>服务器处理按请求顺序响应，如果服务器响应慢，客户端一直请求不到数据，会队头阻塞</li>
-<li>没有请求优先级控制</li>
-<li>请求只能从客户端开始，服务器只能被动响应</li>
-</ul>
-</li>
-<li><p>http2相对http1.1的改进</p>
-<ul>
-<li>头部压缩：若同时发出多个请求，头一样或相似，会消除重复部分，使用hpack算法，维护头信息表，将字段入表，之后相同，则发送索引号。</li>
-<li>二进制格式：头信息和数据体都使用二进制，计算机无需在明文和二进制之间转换</li>
-<li>并发传输：解决队头阻塞问题，多个stream复用一个tcp连接，可乱序发送，服务器通过stream id区分，并组装成有序的http消息</li>
-<li>服务器主动推送资源：双方都可以建立stream，客户端用奇数，服务器用偶数。主要用于服务器提前发送客户端可能需要的资源，减少时延和开销。</li>
-</ul>
-</li>
-<li><p>http2的缺点：</p>
-<ul>
-<li>队头阻塞：stream看似解决http1的队头阻塞，但是无法解决发生在tcp层面的阻塞，tcp需要包有序，如果无序，则会将后续包放入缓冲区，一旦发生丢包，会出发重传，一个tcp连接中所有http请求都必须等待这个丢了的包被重传回来。（实际上是响应端的队头阻塞）</li>
-</ul>
-</li>
-<li><p>http3相对http2的改进：</p>
-<ul>
-<li>将会发生阻塞的tcp换成了udp，并通过quic协议来实现类似tcp的可靠传输<ul>
-<li>无队头阻塞：某个stream丢包，只阻塞这个stream，不影响其他stream</li>
-<li>更快的连接建立：过去tcp和tls是分层的，需要分批次握手，而quic内部包含了tls，可以在一个rtt内（三次握手）完成连接简历和密钥写上</li>
-<li>连接迁移：tcp使用四元组来确定一条tcp连接，若切换网络环境，IP地址变了，必须断开连接，重新建立（tcp和tsl分别握手+tcp慢启动，时延很高，迁移成本高），而quic使用连接id来分别标记双方，ip地址变化后，也可以无缝复用原连接，无需重连，没有卡顿。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>http3的缺点：</p>
-<ul>
-<li>很多网络设备不知道quic，只知道udp，有的网络设备会丢弃udp。</li>
-<li>普及缓慢</li>
-</ul>
-</li>
-</ul>
-<p>Keep-Alive是http1.1头部，与持久连接有关，持久连接希望在http请求在传输完数据后保持连接打开，以便之后的请求可以重用该连接，减少频繁建立和关闭连接带来的开销。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http1.1的头部信息，http2中默认支持多路复用，以下头部字段不需要</span><br><span class="line"></span><br><span class="line"># 代表打开持久连接</span><br><span class="line">connection:keep-alive </span><br><span class="line"></span><br><span class="line"># 保持打开状态5s，并且可以被重用1000次</span><br><span class="line">Keep-Alive: timeout, max=1000</span><br></pre></td></tr></table></figure>
-
-<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-介绍下哈希查找的过程？"><a href="#1-介绍下哈希查找的过程？" class="headerlink" title="1. 介绍下哈希查找的过程？"></a>1. 介绍下哈希查找的过程？</h2><h2 id="2-BIO和NIO"><a href="#2-BIO和NIO" class="headerlink" title="2. BIO和NIO"></a>2. BIO和NIO</h2><p>还需要更新<br>java中两种主要的IO处理方式，主要区别在于是否允许线程在等待数据时被阻塞。</p>
-<ol>
-<li>BIO（Blocking IO）<ul>
-<li>阻塞模式：当线程调用read或write方法 ，该线程被阻塞，直到数据被读取或写入，或者发生某个异常，这意味着其他IO操作必须等待当前操作完成。</li>
-<li>模型简单：模型简单，流程清晰</li>
-<li>效率问题：每次IO都会导致线程被阻塞，如果请求并发量大，需要创建大量线程来处理IO，导致资源浪费和系统压力增加。</li>
-</ul>
-</li>
-<li>NIO（Non-blocking IO）<ul>
-<li>非阻塞模式：线程调用read，如果没有数据可读，线程可以继续执行其他任务，write同理。线程通常将非阻塞IO的空闲时间用于在其他IO通道上执行IO操作，所以单个线程可以管理多个数据输出。</li>
-<li>缓冲区：NIO引入了缓冲区的概念，数据的读写都是基于缓冲区进行的，缓冲区实质上是一个数组</li>
-<li>选择器：NIO引入了selector的概念，选择器可以监视多个IO通道，检查那个通道已经准备好了读写，使得一个线程可以管理多个通道。</li>
-<li>灵活性增加，但是编程复杂度也增加。</li>
-</ul>
-</li>
-</ol>
-<h1 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h1><h2 id="1-IPv4转int，int转IPv4（手写）"><a href="#1-IPv4转int，int转IPv4（手写）" class="headerlink" title="1. IPv4转int，int转IPv4（手写）"></a>1. IPv4转int，int转IPv4（手写）</h2><h2 id="2-汉诺塔（手写）"><a href="#2-汉诺塔（手写）" class="headerlink" title="2. 汉诺塔（手写）"></a>2. 汉诺塔（手写）</h2><h2 id="3-排序算法？介绍下快排？"><a href="#3-排序算法？介绍下快排？" class="headerlink" title="3. 排序算法？介绍下快排？"></a>3. 排序算法？介绍下快排？</h2><h2 id="4-介绍下查找算法？"><a href="#4-介绍下查找算法？" class="headerlink" title="4. 介绍下查找算法？"></a>4. 介绍下查找算法？</h2><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>线性查找</td>
-<td>逐项查找，时间复杂度O(n)</td>
-</tr>
-<tr>
-<td>二分查找</td>
-<td>列表需要有序，时间复杂度O(logn)</td>
-</tr>
-<tr>
-<td>哈希表查找</td>
-<td>将键转换为数组的索引，平均时间复杂度O(1),出现哈希冲突，最差时间复杂度为O(n)</td>
-</tr>
-<tr>
-<td>插值查找</td>
-<td>对二分查找的改进，适用于均匀分布的已排序数据集，根据查找的键值与查找范围的首尾键值的关系来估算要查找的键值在查询范围内的位置。（所以要数据分布均匀）</td>
-</tr>
-<tr>
-<td>二叉搜索树查找</td>
-<td>相对二分查找，更适合动态数据，插入删除相对数组容易，但可能存在不平衡问题</td>
-</tr>
-</tbody></table>
-<p>还有二叉搜索树查找，平衡树查找，b树b+树查找，索引查找,跳表查询</p>
-<h2 id="5-链表和数组？"><a href="#5-链表和数组？" class="headerlink" title="5. 链表和数组？"></a>5. 链表和数组？</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/" data-id="clmltjsqe00009sum4wh63jth" data-title="携程-秋招-一二面" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-携程面经-搬运" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/" class="article-date">
-  <time class="dt-published" datetime="2023-09-15T11:25:50.000Z" itemprop="datePublished">2023-09-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/">携程面经-搬运</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-jvm内存"><a href="#1-jvm内存" class="headerlink" title="1. jvm内存"></a>1. jvm内存</h2><p>不细写了。</p>
-<ul>
-<li>线程共享：<ul>
-<li>堆：存放对象实例，gc的主要区域，当内存泄露、分配大量大对象时会OOM</li>
-<li>方法区：存放类的信息，元空间是其底层物理实现，当类加载过多，会产生OOM</li>
-</ul>
-</li>
-<li>线程私有：<ul>
-<li>java栈：存放基础数据类型和对象引用</li>
-<li>本地方法栈：服务于其他语言的本地方法，和java栈一样，也有小概率发生OOM，场景是创建了太多的线程，每个线程都会都会分配一定的必要的内存空间，线程过多，则OOM。</li>
-<li>程序计数器：字节码执行的行号指示器</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-强引用，软引用，弱引用，虚引用"><a href="#2-强引用，软引用，弱引用，虚引用" class="headerlink" title="2. 强引用，软引用，弱引用，虚引用"></a>2. 强引用，软引用，弱引用，虚引用</h2><p>与垃圾回收机制有关，可以帮助程序员更加灵活的控制对象的生命周期。</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>强引用</td>
-<td>只要对象有强引用与之关联，GC绝不对其回收；比方说Object obj &#x3D; new Object();</td>
-</tr>
-<tr>
-<td>软引用</td>
-<td>在内存紧张时会被回收</td>
-</tr>
-<tr>
-<td>弱引用</td>
-<td>比软引用生命周期更短，一旦jvm进行垃圾回收，与弱引用关联的对象都会被回收，不考虑其他引用情况，是一种积极的的回收策略；适用于不希望对象长时间活在内存的场景，例如WeekHashMap</td>
-</tr>
-<tr>
-<td>虚引用</td>
-<td>主要是用来跟踪对象被垃圾回收的状态，与其关联的对象总是被可垃圾回收，有虚引用关联，不影响其生命周期</td>
-</tr>
-</tbody></table>
-<h2 id="3-线程池核心参数有哪些，keppalive参数有什么用？线程池的阻塞队列有哪些？"><a href="#3-线程池核心参数有哪些，keppalive参数有什么用？线程池的阻塞队列有哪些？" class="headerlink" title="3. 线程池核心参数有哪些，keppalive参数有什么用？线程池的阻塞队列有哪些？"></a>3. 线程池核心参数有哪些，keppalive参数有什么用？线程池的阻塞队列有哪些？</h2><p>线程池的核心参数：</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>核心线程数</td>
-<td></td>
-</tr>
-<tr>
-<td>最大线程数</td>
-<td></td>
-</tr>
-<tr>
-<td>阻塞队列</td>
-<td></td>
-</tr>
-<tr>
-<td>KeepAliveTime</td>
-<td>线程池中超过核心线程数的空闲线程的最大空闲时间，实际上getTask中poll方法的参数</td>
-</tr>
-<tr>
-<td>unit</td>
-<td>keepAliveTime的时间单位</td>
-</tr>
-<tr>
-<td>ThreadFactory</td>
-<td>创建现成的工厂</td>
-</tr>
-<tr>
-<td>handler</td>
-<td>线程池的拒绝策略</td>
-</tr>
-</tbody></table>
-<p>阻塞队列有哪些？</p>
-<table>
-<thead>
-<tr>
-<th>队列</th>
-<th>描述</th>
-<th>使用场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ArrayBlockingQueue</td>
-<td>数组支持的有界阻塞队列</td>
-<td></td>
-</tr>
-<tr>
-<td>LinkedBlockingQueue</td>
-<td>链表支持的阻塞队列，可指定大小，不指定默认容量为Integer.MAX_VALUE</td>
-<td></td>
-</tr>
-<tr>
-<td>PriorityBlockingQueue</td>
-<td>支持优先级的无界队列，需要定义比较器</td>
-<td></td>
-</tr>
-<tr>
-<td>SynchronousQueue</td>
-<td>不存储元素，用于线程间数据交换</td>
-<td></td>
-</tr>
-<tr>
-<td>DelayedQueue</td>
-<td>元素到期才能被取出，用于创建时间延迟的缓存场景</td>
-<td>定时任务，周期性任务</td>
-</tr>
-<tr>
-<td>LinkedBlockingQueue</td>
-<td>双端版本的LinkedBlockingQueue</td>
-<td></td>
-</tr>
-<tr>
-<td>LinkedTransferQueue</td>
-<td>链表支持的，生产者线程会等待消费者接收数据</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>拒绝策略有哪些（简写）？</p>
-<ol>
-<li>抛出异常（默认）</li>
-<li>静默处理</li>
-<li>移除阻塞队列中队头的任务，插入新任务</li>
-<li>调用者线程执行任务，算是个负反馈，来降低任务分发的频率</li>
-</ol>
-<h2 id="4-threadlocal是什么？有内存溢出风险吗？"><a href="#4-threadlocal是什么？有内存溢出风险吗？" class="headerlink" title="4. threadlocal是什么？有内存溢出风险吗？"></a>4. threadlocal是什么？有内存溢出风险吗？</h2><p>ThreadLocal是java提供的一个线程局部变量的工具，每个线程都有一个局部变量，可以通过ThreadLocal存取，不同线程之间相互独立。<br>内存泄露？<br>ThreadLocal的生命周期和线程绑定，所以在线程池这种，线程复用的场景，如果使用完不清理ThreadLocal的值，可能会导致内存泄露。</p>
-<h1 id="5-什么是线程死锁？怎么解决或防止死锁？"><a href="#5-什么是线程死锁？怎么解决或防止死锁？" class="headerlink" title="5. 什么是线程死锁？怎么解决或防止死锁？"></a>5. 什么是线程死锁？怎么解决或防止死锁？</h1><p>线程死锁是指两个及两个以上的线程在执行过程中，由于竞争资源而导致的互相等待的现象，若无外力作用，他们都无法进行下去。<br>一种简单的情况是，两个线程分别占有一部分资源并等待对方释放自己所需要的资源。</p>
-<p>死锁产生的四个条件<br>    * 互斥<br>    * 请求并保持<br>    * 不剥夺<br>    * 循环等待</p>
-<p>解决或防止死锁的方法<br>    * 资源有序分配<br>    * 线程开始前分配所有必要资源<br>    * 一个线程请求资源得不到满足，则必须释放其占有的所有资源<br>    * 死锁的检测和解除<br>    * 超时与重试</p>
-<h1 id="6-spring面向切片编程的实现原理，spring动态代理"><a href="#6-spring面向切片编程的实现原理，spring动态代理" class="headerlink" title="6. spring面向切片编程的实现原理，spring动态代理"></a>6. spring面向切片编程的实现原理，spring动态代理</h1><p>面向切片编程AOP是提取在应用程序中多个地方都有影响，且与主业务逻辑无关的功能，比如日志、事务管理等。<br>实现原理：spring容器实例化bean时，会查找定义的切面，并根据切面和通知创建响应的代理对象，这些代理对象将原始的bean包装在内，并在调用目标方法时执行相应的通知。<br>动态代理：代理对象包装目标对象，当代理对象的一个方法被调用时，他会执行相应的通知，然后再调用原始对象上的相应方法。</p>
-<h2 id="7-哪些框架用了反射？反射会有什么问题？"><a href="#7-哪些框架用了反射？反射会有什么问题？" class="headerlink" title="7. 哪些框架用了反射？反射会有什么问题？"></a>7. 哪些框架用了反射？反射会有什么问题？</h2><p>使用反射的java框架：</p>
-<ul>
-<li>spring</li>
-<li>hibernate</li>
-<li>junit</li>
-<li>javaBean</li>
-<li>structs</li>
-</ul>
-<p>问题：</p>
-<ul>
-<li>性能：反射方法通常比非反射方法调用慢</li>
-<li>安全：可能会破坏封装</li>
-<li>类型的安全问题：反射不会进行类型检查，类型问题可能在运行时出现，会导致运行时异常</li>
-</ul>
-<p>使用反射创建实例的例子</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类名</span></span><br><span class="line"><span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> <span class="string">&quot;java.lang.String&quot;</span>;</span><br><span class="line"><span class="comment">// 通过反射获取类</span></span><br><span class="line">Class&lt;?&gt; clazz = Class.forName(className);</span><br><span class="line"><span class="comment">// 创建实例</span></span><br><span class="line"><span class="type">Object</span> <span class="variable">instance</span> <span class="operator">=</span> clazz.getDeclaredConstructor().newInstance();</span><br><span class="line"><span class="comment">// 打印实例</span></span><br><span class="line">System.out.println(instance);</span><br></pre></td></tr></table></figure>
-
-<h2 id="8-逃逸分析"><a href="#8-逃逸分析" class="headerlink" title="8. 逃逸分析"></a>8. 逃逸分析</h2><p>一种编译器器优化技术，主要目的是分析对象的动态作用于，确定对象是否可能逃逸出方法或者线程的作用域，进而决定如何更有效的分配和管理对象。</p>
-<p>应用：</p>
-<ol>
-<li>栈上分配：java中对象通常在堆上分配，需要进行垃圾回收，如果逃逸分析发生一个对象只在一个方法作用域内有效，不会被其他才能线程引用，那么可以分配在栈上，从而避免在堆上分配和后续的垃圾回收。</li>
-<li>锁消除：若对象不会被多线程共享，则可以消除不必要的锁操作。</li>
-<li>锁粗化：如果连续多次对同一个对象进行同步，则可以将多次锁操作合并为一次，减少锁竞争。</li>
-</ol>
-<p>Java HotSpot VM，可以通过JVM参数来启用逃逸分析，虽然可以提高程序的性能，减少不必要的内存和锁开销，但是会导致编译时间增加。</p>
-<h1 id="MySql"><a href="#MySql" class="headerlink" title="MySql"></a>MySql</h1><h2 id="1-mysql什么情况下会加行锁，什么情况加表锁"><a href="#1-mysql什么情况下会加行锁，什么情况加表锁" class="headerlink" title="1. mysql什么情况下会加行锁，什么情况加表锁"></a>1. mysql什么情况下会加行锁，什么情况加表锁</h2><p>如果使用的引擎是innodb的话，默认使用的是行锁。</p>
-<ul>
-<li>加表锁的情况<ul>
-<li>执行DDL操作</li>
-<li>sql语句导致无法预测要锁定哪些行，可能会使用表锁，比如说外键约束的场景</li>
-<li>显式的使用lock table语句</li>
-</ul>
-</li>
-<li>加行锁的情况<ul>
-<li>where子句匹配到了主键或唯一索引</li>
-<li>执行了范围查询、全表扫描、或不使用索引的查询，不过有可能会锁定大量行，接近全表的数据。</li>
-<li>insert，update，delete语句中受影响的行</li>
-<li>select … for update(排他锁)，select … lock in share mode(共享锁),会对所选行加行锁</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-mysql索引结构，b-树相对于b树的改进，带来了哪些好处？"><a href="#2-mysql索引结构，b-树相对于b树的改进，带来了哪些好处？" class="headerlink" title="2. mysql索引结构，b+树相对于b树的改进，带来了哪些好处？"></a>2. mysql索引结构，b+树相对于b树的改进，带来了哪些好处？</h2><ol>
-<li>b+树将数据全存储在叶子结点中，使得每个非叶子结点中可以存储更多的索引，树的整体高度降低，而树的高度和磁盘的IO次数相关，有效的降低了IO的开销，同时使得查询更加稳定。</li>
-<li>b+树使用双向链表将叶子结点进行串联，提高了排序、范围查询等操作的效率。</li>
-<li>b+树插入删除效率上更高，因为数据只存在于叶子节点，不必在整棵树上移动。</li>
-</ol>
-<h2 id="3-要对一个列做模糊查询，希望走索引，应该怎么做？"><a href="#3-要对一个列做模糊查询，希望走索引，应该怎么做？" class="headerlink" title="3. 要对一个列做模糊查询，希望走索引，应该怎么做？"></a>3. 要对一个列做模糊查询，希望走索引，应该怎么做？</h2><p>需要看查询的需求</p>
-<ol>
-<li>如果是模糊查询是以固定前缀开头，那直接对该列加索引或者前缀索引就可。</li>
-<li>如果不以固定前缀开头<ul>
-<li>使用全文索引  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> FULLTEXT INDEX idx_name <span class="keyword">ON</span> table_name(column_name);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> <span class="keyword">MATCH</span>(column_name) AGAINST(<span class="string">&#x27;abc&#x27;</span>);</span><br></pre></td></tr></table></figure></li>
-<li>使用搜索引擎，利用倒排索引的方式来。<ul>
-<li>主要思想是：关键词-&gt;文档id的映射，对关键词索引和文档id分别做了优化，如关键词有序，且使用前缀树降低内存开销。文档id通过增量id，integer数组和bitmap的混合使用来降低硬盘开销。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="4-SQL表有4个列，每个列加单独索引，然后查询语句里where条件4个列都有-的条件，问是否用到索引？用到的话是用了什么索引？"><a href="#4-SQL表有4个列，每个列加单独索引，然后查询语句里where条件4个列都有-的条件，问是否用到索引？用到的话是用了什么索引？" class="headerlink" title="4. SQL表有4个列，每个列加单独索引，然后查询语句里where条件4个列都有&#x3D;的条件，问是否用到索引？用到的话是用了什么索引？"></a>4. SQL表有4个列，每个列加单独索引，然后查询语句里where条件4个列都有&#x3D;的条件，问是否用到索引？用到的话是用了什么索引？</h2><p>会用到索引，优化器会使用其中他认为最优的索引来执行。</p>
-<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><ol>
-<li>缓存穿透的解决策略<br>首先要区分三个概念</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>现象</th>
-<th>原因</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>缓存雪崩</td>
-<td>大量的key在同一时间失效，导致请求大量打到数据库上，导致数据库宕机</td>
-<td>过期时间可以加上随机数；可以在过期前主动更新缓存；</td>
-</tr>
-<tr>
-<td>缓存击穿</td>
-<td>热点数据的key失效，导致访问该热点数据的请求，打到数据库上</td>
-<td>热点数据永不过期，利用后台线程进行数据更新；设置二级缓存，当一级缓存失效后，可以访问二级缓存；设置互斥锁，保证只有一个请求去访问数据库更新缓存，其他线程等待。</td>
-</tr>
-<tr>
-<td>缓存穿透</td>
-<td>访问一个数据库中不存在的key，会导致redis无法拦截请求，请求每次都打到数据库上</td>
-<td>reids中可以存储一个null值，设置较短的过期时间；可以通过bitmap或者布隆过滤器来拦截请求</td>
-</tr>
-</tbody></table>
-<h2 id="1-redis为什么快"><a href="#1-redis为什么快" class="headerlink" title="1. redis为什么快?"></a>1. redis为什么快?</h2><p>不细讲，不过要看看标准答案是什么</p>
-<ol>
-<li>内存操作vs磁盘操作</li>
-<li>数据结构简单，且底层实现高效</li>
-<li>处理用户请求时是单线程，避免了线程上下文切换的开销，也避免了处理数据竞争和死锁的开销。</li>
-</ol>
-<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="1-介绍快速排序、归并排序"><a href="#1-介绍快速排序、归并排序" class="headerlink" title="1. 介绍快速排序、归并排序"></a>1. 介绍快速排序、归并排序</h2><p>快排和归并都是分治的思想。<br>快排：选择基准-&gt;划分-&gt;递归处理子序列<br>归并排序（merged sort）：</p>
-<ul>
-<li>分解：将列表中每个元素放入单独的列表</li>
-<li>递归排序：递归合并这些子列表以产生新的排序子列表</li>
-<li>合并：反复合并这些子列表，直到只剩下一个已排序的列表。</li>
-</ul>
-<h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><h2 id="1-服务器内存溢出，cpu占用100-，这些怎么排查"><a href="#1-服务器内存溢出，cpu占用100-，这些怎么排查" class="headerlink" title="1. 服务器内存溢出，cpu占用100%，这些怎么排查"></a>1. 服务器内存溢出，cpu占用100%，这些怎么排查</h2><ol>
-<li>查看系统日志，找相关的错误和警告</li>
-<li>使用top和htop查看哪些进程&#x2F;线程在消耗大量cpu</li>
-<li>使用perf，linux性能分析工具，可以查找到哪些函数或系统调用导致了高CPU使用</li>
-<li>java应用的话，可以使用jstack来查看哪些线程或代码段导致了高的CPU使用</li>
-<li>检查硬件故障</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/" data-id="clmkt26wm0000f8um543rhb8d" data-title="携程面经-搬运" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" rel="tag">代码练习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">手写代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JAVA/" style="font-size: 16.67px;">JAVA</a> <a href="/tags/MYSQL/" style="font-size: 10px;">MYSQL</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" style="font-size: 13.33px;">代码练习</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">并发</a> <a href="/tags/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">手写代码</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2023/09/21/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">b站-实习-微服务开发-二面</a>
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
           </li>
+          
         
-          <li>
-            <a href="/2023/09/20/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">b站-实习-微服务开发-一面</a>
-          </li>
         
-          <li>
-            <a href="/2023/09/20/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/">网络相关面试题</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/19/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E4%BB%A3%E7%A0%81%E9%A2%98/">Java并发编程-常见面试代码题</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/19/%E7%99%BE%E5%BA%A6-%E5%AE%9E%E4%B9%A0-java%E5%BC%80%E5%8F%91-%E7%BA%AF%E5%87%89%E9%9D%A2/">百度-实习-java开发-一面（纯凉面）</a>
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
     </div>
   </div>
+</nav>
 
   
-</aside>
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="xiangyao的博客小站"></span>
+          
+        </div>
+
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+
       
-      &copy; 2023 xiangyao<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
     </div>
   </div>
-</footer>
+</div>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/21/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" target="_self">
+          b站-实习-微服务开发-二面
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/21/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" target="_self">
+        <div>
+          网络1. http1-3分别解决了什么问题？如果在http3的场景下，从5G切换为无线网，会需要重新建立连接吗？http1.1,http2,http3的演变  htt1.1相对http1： 使用长连接改善了短连接的性能开销 支持管道通信，来解决队头阻塞   http2相对http1.1： 头部压缩 二进制格式，增加解析效率 并发传输：使用多个stream复用一条tcp连接的方式解决队头阻塞，一个t
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-21 14:55" pubdate>
+              2023-09-21
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/20/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" target="_self">
+          b站-实习-微服务开发-一面
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/20/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" target="_self">
+        <div>
+          项目1. celery的使用场景？daphne的使用场景？celery是分布式任务队列系统，允许执行并发的任务，执行后台任务或处理大量的任务 主要组件：  client：向消息队列发送任务 broker：消息队列，如rabbitmq，redis worker：负责执行任务的进程 result backend：用于存储任务的结果，可以是数据库、缓存系统或其他存储  使用场景：  后台任务 定时任务
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-20 14:57" pubdate>
+              2023-09-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/20/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/" target="_self">
+          网络相关面试题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/20/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/" target="_self">
+        <div>
+          1. Http协议的请求和响应格式请求格式12345678910111213141516171819202122232425262728293031/** * 请求首行 * 请求方法 + 请求目标 + HTTP版本 * 常见的请求方法：get，post，put, patch, delete, head, options * /POST / HTTP/1.1/** * 请求体 * key-value
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-20 10:11" pubdate>
+              2023-09-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/19/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E4%BB%A3%E7%A0%81%E9%A2%98/" target="_self">
+          Java并发编程-常见面试代码题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/19/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E4%BB%A3%E7%A0%81%E9%A2%98/" target="_self">
+        <div>
+          题目1 题目描述1两个线程循环打印1-100。 Code12345678910111213141516171819202122232425262728293031323334353637383940414243public class Exam1 &#123;    //保证线程共享且可见    static volatile int num = 1;    //锁，任意一个对象即可    sta
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-19 20:10" pubdate>
+              2023-09-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+              <a href="/tags/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/">#手写代码</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/19/%E7%99%BE%E5%BA%A6-%E5%AE%9E%E4%B9%A0-java%E5%BC%80%E5%8F%91-%E7%BA%AF%E5%87%89%E9%9D%A2/" target="_self">
+          百度-实习-java开发-一面（纯凉面）
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/19/%E7%99%BE%E5%BA%A6-%E5%AE%9E%E4%B9%A0-java%E5%BC%80%E5%8F%91-%E7%BA%AF%E5%87%89%E9%9D%A2/" target="_self">
+        <div>
+          题目没做出来，最近懈怠了，docker、k8s了解过少。[TOC] 算法1. 字符串运算题目描述： 12345678一个由数字和运算符组成的字符串的表达式，按不同优先级组合数字和运算符，计算并返回所有可能组合的结果。可以按任意顺序返回答案。输入：2-1-1输出：[0, 2]解释：((2-1)-1) = 0      (2-(1-1)) = 2注： 运算符仅包含+, -, *, 输入整数范围[0,9
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-19 16:06" pubdate>
+              2023-09-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/19/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85/" target="_self">
+          生产者&amp;&amp;消费者
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/19/%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85/" target="_self">
+        <div>
+          用LinkedList实现。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263public class SharedQueue &#123;    private int capacity = 10; //队列最大
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-19 11:13" pubdate>
+              2023-09-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JAVA/">#JAVA</a>
+            
+              <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/">#代码练习</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/18/%E4%B8%BB%E6%B5%81%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/" target="_self">
+          网络编程基础
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/18/%E4%B8%BB%E6%B5%81%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/" target="_self">
+        <div>
+          [TOC] 网络的演变过程 BIO NIO IO多路复用I(select&#x2F;poll) IO多路复用II(epoll) 信号驱动IO AIO(异步IO)  参考资料 https://papergames.jobs.feishu.cn/referral/campus/m/position?token=MzsxNjk0MTQwNzQ2OTI3OzcyMzU5Mzk2MDMyOTQ4MTQyMT
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-18 22:51" pubdate>
+              2023-09-18
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/18/BIO-NIO/" target="_self">
+          BIO&amp;NIO
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/18/BIO-NIO/" target="_self">
+        <div>
+          [TOC] BIOBIOServeraccept时会阻塞，等待客户端连接，但是后续处理使用了新的线程，故不会阻塞。但是会对于数千数万个请求分别创建线程开销过大。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950import java.io.BufferedReade
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-18 17:34" pubdate>
+              2023-09-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JAVA/">#JAVA</a>
+            
+              <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/">#代码练习</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/" target="_self">
+          携程-秋招-一二面
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/16/%E6%90%BA%E7%A8%8B-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E4%BA%8C%E9%9D%A2/" target="_self">
+        <div>
+          [TOC] 综合类1. mysql如何提高并发量？连接池的常用大小？思考的点包括哪些？  硬件方面： 使用SSD提高IO速度； 增加内存来提供更大的缓冲区，减少IO操作 多核处理器：提供更多的并行能力   MYSQL配置优化 调整innodb_buffer_pool_size（存储引擎的内存缓冲池大小），应调整为系统总内存的60%-80% 调整innodb_log_file_size，适当增大日志
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-16 16:06" pubdate>
+              2023-09-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/" target="_self">
+          携程面经-搬运
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/15/%E6%90%BA%E7%A8%8B%E9%9D%A2%E7%BB%8F-%E6%90%AC%E8%BF%90/" target="_self">
+        <div>
+          [TOC] Java1. jvm内存不细写了。  线程共享： 堆：存放对象实例，gc的主要区域，当内存泄露、分配大量大对象时会OOM 方法区：存放类的信息，元空间是其底层物理实现，当类加载过多，会产生OOM   线程私有： java栈：存放基础数据类型和对象引用 本地方法栈：服务于其他语言的本地方法，和java栈一样，也有小概率发生OOM，场景是创建了太多的线程，每个线程都会都会分配一定的必要的内
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-15 19:25" pubdate>
+              2023-09-15
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
 
-<script src="/js/script.js"></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-  </div>
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
 </body>
 </html>

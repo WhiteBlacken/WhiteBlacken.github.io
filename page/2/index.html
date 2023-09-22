@@ -1,1149 +1,718 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xiangyao">
+  <meta name="keywords" content="">
   
-  <title>xiangyao的个人博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="xiangyao的个人博客">
 <meta property="og:url" content="http://example.com/page/2/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="xiangyao">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="xiangyao的个人博客" type="application/atom+xml">
+<meta name="twitter:card" content="summary_large_image">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
   
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+  <title>xiangyao的个人博客</title>
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
   
 <meta name="generator" content="Hexo 6.3.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">xiangyao的个人博客</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">记录下这一刻，让我们变得更强</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
         
-      </nav>
-      <nav id="sub-nav">
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-常见选型问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/" class="article-date">
-  <time class="dt-published" datetime="2023-09-15T10:57:13.000Z" itemprop="datePublished">2023-09-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/">常见选型问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="1-为什么选择Meilisearch？"><a href="#1-为什么选择Meilisearch？" class="headerlink" title="1. 为什么选择Meilisearch？"></a>1. 为什么选择Meilisearch？</h1><p>这和我们项目的性质有关，我们是希望做出一个有少量用户的原型，以向投资者展示潜力。<br>在这个背景下，我们主要对比了Meilisearch和ES，<br>学习难度上：MeiliSearch的配置更简单，维护更简单，api也比较直观和简单<br>资源消耗上：meilisearch更轻量，消耗的内存和cpu资源更少<br>功能上：meilisearch仅是一个比较纯粹的搜索引擎，不具备es中机器学习插件、日志处理等功能，但对于我们来说够用。<br>与django的适配上：django集成Meilisearch的第三方库更完备<br>不过随着未来的项目增长，确实需要考虑迁移到es上。</p>
-<h1 id="2-为什么选择websocket而不是http来实现聊天？"><a href="#2-为什么选择websocket而不是http来实现聊天？" class="headerlink" title="2. 为什么选择websocket而不是http来实现聊天？"></a>2. 为什么选择websocket而不是http来实现聊天？</h1><ol>
-<li>tcp本身是全双工，但是常用的Http1.1,虽然基于tcp协议，但是本身是半双工的，对于聊天这种需要服务器主动推送数据到客户端的场景，不友好，所以需要使用支持全双工的websocket协议。</li>
-<li>http1.1里，是请求-响应模型，虽然可以使用定时轮询，长轮询等方式实现服务推送，但是如果需要频繁交互的话，websocket消耗资源更少。</li>
-<li>相对http，websocket头部信息更少，相同数量的消息在websocket上会产生更少的网络流量。</li>
-<li>适合广播，能够很好的扩展到聊天室或群聊场景。</li>
-</ol>
-<p>扩展：http2.0引入了服务器的推送的特性，为什么不选择http2.0？</p>
-<ol>
-<li>推送的不同：http2.0的目的是解决服务器知道客户端需要的资源，进行提前发送，来减少往返时间和延迟的场景。例如，客户端请求一个html页面，服务端可能知道客户端会需要与之相关的css和js文件，可提前推送。相对比，websocket是真正的双向和实时通信，允许客户端和服务器之间任意时刻发送数据，不需要预测或以前知道对方需要什么。</li>
-<li>兼容性：http2.0有些浏览器和服务器并不支持，特别是服务器推送功能，websocket的兼容性更好。</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/" data-id="clmkigetf0000osumg0dg006n" data-title="常见选型问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-索引创建实际遇到的问题-搬运" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/15/%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%99%85%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%90%AC%E8%BF%90/" class="article-date">
-  <time class="dt-published" datetime="2023-09-15T02:47:55.000Z" itemprop="datePublished">2023-09-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/15/%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%99%85%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%90%AC%E8%BF%90/">索引创建实际遇到的问题-搬运</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>一张邀请绑定表，一个用户绑定了几十万个记录。<br>索引列为uid-用户的id，create_time-关系的创建时间。<br>查询需求比较简单：<br>根据创建时间倒序，取一页的记录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from bind where uid = xxx order by create_time desc limit 10;</span><br></pre></td></tr></table></figure>
-
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ol>
-<li><p>第一次查询比较慢，后续查询会变快，原因可能是第一次需要将几十万的数据页加载到Buffer pool，后续可以直接从内存中读取。</p>
-</li>
-<li><p>通过explain发现索引命中了创建时间，而非预期的uid，如果该用户上次绑定是在上个月，那他需要扫描这个所有的新增绑定，才能找到他的那10条数据。这样非常不稳定。</p>
-</li>
-<li><p>如果设置强制走uid索引（force index（id_uid）），explain中extra会显示出现了using file sort，这里是优化器不选择走uid索引的原因。因为即使只查询10条数据，但是需要把几十万条数据查出来以后进行排序。<br>如何影响优化优化器选择哪条索引呢？<br>主要有三种方式：</p>
-<ul>
-<li>force index(index_name)，强制优化器只使用指定的索引，如果该索引无法用于检索数据，MySQL将返回错误。 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> table_name force index(index_name) <span class="keyword">where</span> <span class="keyword">condition</span>;</span><br></pre></td></tr></table></figure></li>
-<li>use index(index_name)，告诉查询优化器仅使用列出的索引来查找数据，如果没有列出索引，查询优化器将根据表中的数据选择一个。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table_name using index(index_name) where condition;</span><br></pre></td></tr></table></figure></li>
-<li>ignore index(index_name),告诉优化器忽略列出的索引。查询优化器会考虑表中的其他索引，但不会考虑被忽略的那些。 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> table_name ignore index(index_name) <span class="keyword">where</span> <span class="keyword">condition</span>;</span><br></pre></td></tr></table></figure>
-其中force index和using index有什么区别吗？<br>force index列出的索引无法用来查询数据，则报错。<br>using index列出的索引无法用来查询数据时，则忽略这个提示。</li>
-</ul>
-</li>
-<li><p>可以通过将create_time和uid建立联合索引的方式来做，但是生产环境数据比较大，增加这样的索引会增加不少的负担，并且如果想要最新的数据，除了时间，使用id倒序也可以，最后uid，id天然的形成了倒序的效果。</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/15/%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%99%85%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%90%AC%E8%BF%90/" data-id="clmk20u1700008kumgsle4k4d" data-title="索引创建实际遇到的问题-搬运" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-唯品会-实习-Java大数据组件开发-二面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" class="article-date">
-  <time class="dt-published" datetime="2023-09-14T06:57:38.000Z" itemprop="datePublished">2023-09-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">唯品会-实习-Java大数据组件开发-二面</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="代码题"><a href="#代码题" class="headerlink" title="代码题"></a>代码题</h1><h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">手写一个阻塞队列。</span><br><span class="line">满足以下要求：</span><br><span class="line">1. 有界</span><br><span class="line">2. 实现读写函数</span><br><span class="line">3. 使用模板</span><br><span class="line">4. 考虑多线程并发读取</span><br></pre></td></tr></table></figure>
-
-<h2 id="代码书写"><a href="#代码书写" class="headerlink" title="代码书写"></a>代码书写</h2><p>先了解一下java中的阻塞队列。<br>java的阻塞队列提供了线程安全的队列实现，其中的阻塞操作主要是为了确保在并发环境中数据安全添加和移除。’java.util.concurrent’包提供了多种阻塞队列的实现，这些阻塞队列在多线程编程，特别是生产者-消费者模型中非常有用。<br>多线程环境中，阻塞队列是一个非常有用的工具，因为他自动处理了大部分线程间同步的问题。<br>以下是主要的阻塞队列：</p>
-<table>
-<thead>
-<tr>
-<th>队列</th>
-<th>介绍</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ArrayBlockingQueue</td>
-<td>基于数据结构的有界阻塞队列</td>
-</tr>
-<tr>
-<td>LinkedBlockingQueue</td>
-<td>基于链表的可选容量（默认为Integer.MAX_VALUE)的阻塞队列。</td>
-</tr>
-<tr>
-<td>PriorityBlockingQueue</td>
-<td>支持优先级的无界阻塞队列，队列中的元素必须实现Comparable接口</td>
-</tr>
-<tr>
-<td>SynchronousQueue</td>
-<td>不存储元素的阻塞队列，每一个put操作必须等待一个take操作</td>
-</tr>
-<tr>
-<td>DelayQueue</td>
-<td>使用优先队列实现的无界阻塞函数，只有在延迟到期才能从中提取元素</td>
-</tr>
-<tr>
-<td>LinkedTransferQueue</td>
-<td>链表组成的队列，是TransferQueue接口的一个实现，并支持所有操作</td>
-</tr>
-<tr>
-<td>LinkedBlockingDeque</td>
-<td>双向阻塞队列，可以从两端插入或移除元素</td>
-</tr>
-</tbody></table>
-<p>提供的操作</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>put(e)</td>
-<td>将元素添加到队列末尾，队满则等待</td>
-</tr>
-<tr>
-<td>take()</td>
-<td>从队列前端移除并返回元素，队空则等待</td>
-</tr>
-<tr>
-<td>offer(e,timeout,timeunit)</td>
-<td>尝试将元素添加到队列中，队满则等待指定时间</td>
-</tr>
-<tr>
-<td>poll(timeout,timeunit)</td>
-<td>从队头移并返回头部的元素，如果队列为空则等待指定时间</td>
-</tr>
-</tbody></table>
-<p>代码实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyBlockingQueue</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">CAPACITY</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    LinkedList&lt;E&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="type">ReentrantLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>(<span class="literal">true</span>); <span class="comment">//创建公平锁，来保证等待时间最长的线程获得锁</span></span><br><span class="line">    <span class="type">Condition</span> <span class="variable">full</span> <span class="operator">=</span> lock.newCondition();</span><br><span class="line">    <span class="type">Condition</span> <span class="variable">empty</span> <span class="operator">=</span> lock.newCondition();</span><br><span class="line"></span><br><span class="line">    MyBlockingQueue(<span class="type">int</span> capacity) &#123;</span><br><span class="line">        <span class="built_in">this</span>.CAPACITY = capacity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(E e)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (queue.size() == CAPACITY) &#123;</span><br><span class="line">                full.await();</span><br><span class="line">            &#125;</span><br><span class="line">            queue.add(e);</span><br><span class="line">            <span class="keyword">if</span> (queue.size() == <span class="number">1</span>) &#123; <span class="comment">//说明之前是0</span></span><br><span class="line">                empty.signal();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> E <span class="title function_">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (queue.size() == <span class="number">0</span>) &#123;</span><br><span class="line">                empty.await();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">E</span> <span class="variable">e</span> <span class="operator">=</span> queue.poll();</span><br><span class="line">            System.out.println(<span class="string">&quot;get date:&quot;</span> + e + <span class="string">&quot; and queue-size:&quot;</span> + queue.size());</span><br><span class="line">            <span class="keyword">if</span> (queue.size() == CAPACITY - <span class="number">1</span>) &#123;</span><br><span class="line">                full.signal();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> e;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        MyBlockingQueue&lt;Integer&gt; blockingQueue = <span class="keyword">new</span> <span class="title class_">MyBlockingQueue</span>&lt;&gt;(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建5个生产者线程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="type">int</span> <span class="variable">producerNum</span> <span class="operator">=</span> i;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                        <span class="type">int</span> <span class="variable">item</span> <span class="operator">=</span> (<span class="type">int</span>) (Math.random() * <span class="number">100</span>);</span><br><span class="line">                        blockingQueue.put(item);</span><br><span class="line">                        System.out.println(<span class="string">&quot;Producer &quot;</span> + producerNum + <span class="string">&quot; put: &quot;</span> + item);</span><br><span class="line">                        Thread.sleep(<span class="number">500</span>);  <span class="comment">// 模拟生产需要的时间</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建5个消费者线程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                        <span class="type">int</span> <span class="variable">item</span> <span class="operator">=</span> blockingQueue.take();</span><br><span class="line">                        System.out.println(<span class="string">&quot;Consumed: &quot;</span> + item);</span><br><span class="line">                        Thread.sleep(<span class="number">1000</span>);  <span class="comment">// 模拟消费需要的时间</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果使用synchronized的关键字，有一个坑是，只有一个线程可以执行任何synchronized代码块。因此，如果一个线程正在执行put方法（它是一个synchronized方法），其他线程不能同时执行put或take方法，它们必须等待直到第一个线程退出synchronized块。即synchronized是对象级别的。当然，可以使用synchronized(someObject)来进行更细粒度的控制。</p>
-<p>前面给出的代码中，因为使用的是同一个lock，实际上也是put和take也是互斥的。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" data-id="clmj6u9xn0000qcum2nc70qk1" data-title="唯品会-实习-Java大数据组件开发-二面" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-美团-秋招-后端开发-一面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" class="article-date">
-  <time class="dt-published" datetime="2023-09-13T07:34:43.000Z" itemprop="datePublished">2023-09-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">美团-秋招-后端开发-一面</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><ol>
-<li>什么是幻读？写一个insert语句来说明间隙锁加在什么位置？<br>幻读：事务中多次查询，行集不同。<br>如何解决幻读？mvcc+间隙锁<ul>
-<li>当前读：使用select … for update来对所选的行上排他锁。<ul>
-<li>在事务开始使用它，当开始一个事务并打算查询某些可能更新某些行时，首先查询锁定这些行<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">START</span> TRANSACTION;</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">where</span> id <span class="keyword">BETWEEN</span> <span class="number">1</span> <span class="keyword">AND</span> <span class="number">4</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br><span class="line">  ```  </span><br><span class="line"><span class="operator">*</span> 后续查询，同一个事务中再次执行相同的<span class="keyword">select</span>查询，由于已经锁定了相关行，会看到相同的行集，不会出现幻读。</span><br><span class="line"><span class="operator">*</span> 执行更新，该事务的可以安全进行更新，记录锁会锁定<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>，间隙锁会锁定<span class="number">2</span>，故其他事务执行插入<span class="number">2</span>会失败。</span><br><span class="line">  ```<span class="keyword">sql</span></span><br><span class="line">  <span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name (id) <span class="keyword">VALUES</span>(<span class="number">2</span>);</span><br></pre></td></tr></table></figure></li>
-<li>需要注意：<ul>
-<li>确保事务不会长时间持有锁，以避免可能的死锁或长时间阻止其他事务访问被锁定的数据。</li>
-<li>不能防止其他事务插入数据到查询范围之外。</li>
-</ul>
-</li>
-<li>以上是在有索引的情况，如果没加索引，如何添加间隙锁？<ul>
-<li>通常会做全表扫描，并对整张表做意向锁。<ul>
-<li>意向锁：通知其他事务，有事务打算获取更精细级别的锁，这意味着其他事务如果想在这个表上获得排它锁，会被阻塞。</li>
-<li>记录锁：只有满足条件的行，才会被加上记录锁。</li>
-<li>间隙锁：由于count没有索引，所以无法加上明确的间隙锁。但是由于可能的全表扫描，实际上整个表都可能受到影响，导致新行插入也可能受到限制。如果查询的是具体的记录，不会锁定任何间隙。如果使用范围查询，则可能使用间隙锁。<strong>如果想想用范围查询并执行SELECT…FOR UPDATE操作，最好在涉及的列上加上索引。</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>快照读：通过MVCC解决幻读，在可重复读隔离级别下，事务在执行过程中看到的数据实际上是不变的。<ul>
-<li>mvcc在事务开始后，执行第一个查询语句，会创建read view，后续的查询语句利用这个read view+undo log版本链找到事务开始时的数据，以保证在事务中每次查询的数据都一样。</li>
-<li>MVCC已经这么好了，为什么还需要间隙锁？<ul>
-<li>虽然事务B插入行，事务A不会出现幻读，但是事务A如果要在这个范围内插入数据，会和事务B的插入发生冲突。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>MVCC+间隙锁就可以解决幻读了吗？<br>结论：很大程度上可以，但是没有完全解决。<br>场景一：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- T1时刻：仅有id 1-4的记录，事务A查询id=5，查询不到</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t_stu <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">5</span>；</span><br><span class="line"><span class="comment">-- T2时刻：事务B插入id=5的记录</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t_stu <span class="keyword">values</span>(<span class="number">5</span>,<span class="string">&#x27;qxy&#x27;</span>)；</span><br><span class="line"><span class="comment">-- T3时刻：事务A更新了id=5的记录，很违和</span></span><br><span class="line"><span class="keyword">update</span> t_stu <span class="keyword">set</span> name <span class="operator">=</span> <span class="string">&#x27;qxy1&#x27;</span> <span class="keyword">where</span> id<span class="operator">=</span> <span class="number">5</span>;</span><br><span class="line"><span class="comment">-- T4时刻：事务A查询id=5，可以查询到</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t_stu <span class="keyword">where</span> id<span class="operator">=</span> <span class="number">5</span>；</span><br></pre></td></tr></table></figure>
-
-<p>场景二：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- T1时刻：事务A执行快照读，读出3条记录</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t_test <span class="keyword">where</span> id <span class="operator">&gt;</span> <span class="number">100</span>;</span><br><span class="line"><span class="comment">-- T2时刻：事务B插入id=200的记录</span></span><br><span class="line"><span class="comment">-- T3时刻：事务A再执行当前读，会得到4条记录</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t_test <span class="keyword">where</span> id <span class="operator">&gt;</span> <span class="number">100</span> <span class="keyword">for</span> <span class="keyword">update</span>;</span><br></pre></td></tr></table></figure>
-<p>想要避免这类特殊场景下发生幻读，就要尽量在开启事务之后，尽快执行select…for update语句，目的就是为了避免T2时刻数据的插入。<br>2. 高并发写数据库的情况？</p>
-<p>抛出去的剑又回来了，是不是间隙锁会导致高并发读写的出现性能问题？<br>参考腾讯一面-有遇到过因为隔离级别导致的问题啊？</p>
-<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><ol>
-<li><p>jvm内存结构</p>
-</li>
-<li><p>OOM出现的情况<br>分不同的区域来讨论：</p>
-<table>
-<thead>
-<tr>
-<th>分类</th>
-<th>描述</th>
-<th>常见原因</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>堆</td>
-<td>应用程序创建太多对象，其长时间不被GC回收。</td>
-<td>内存泄露、创建了大量的大对象、长久时间持有大量对象的引用</td>
-</tr>
-<tr>
-<td>永久代-&gt;元空间（java 8）</td>
-<td>为方法区提供物理内存，主要存放类的数据。直接在主机内存分配，不在java堆，但是受到本机可用内存的限制</td>
-<td>大量类加载；元空间大小设置过小，通过指定-XX：MaxMetaspaceSize来调整；类加载泄露：频繁重新加载类或大量的动态代理生成；优化应用程序和库，减少应用程序加载的类和资源数量；升级或更改JVM</td>
-</tr>
-<tr>
-<td>本地方法栈，java线程栈</td>
-<td>过多的方法调用，超出栈的大小限制，可能会stackoverflow，也可能会oom。</td>
-<td>创建太多线程，jvm无法为新的线程分配必要的内存</td>
-</tr>
-<tr>
-<td>直接内存溢出</td>
-<td>ByteBuffer.allocateDirect()分配内存是在java堆外，但是JVM进程的最大内存限制的约束</td>
-<td></td>
-</tr>
-<tr>
-<td>GC Overhead Limit Exceeded</td>
-<td>特定的OOM错误，表示GC频繁运行但回收内存很少</td>
-<td>长时间大量的小对象对创建和丢弃，导致GC频繁</td>
-</tr>
-</tbody></table>
-</li>
-</ol>
-<p>java中什么情况下会使用直接内存？<br>使用ByteBuffer.allocateDirect()方法分配的内存，位于java堆之外，直接内存常用于IO操作，特别是NIO中，因为他可以减少java堆和本地IO操作之间复制数据的开销。<br>虽然直接内存位于Java对之外，但仍受到进程最大内存限制的约束，如果尝试分配超过限制的直接内存，则会报OOM。可以通过调整JVM的-XX：MaxDirectMemorySize来设置直接内存的最大值。</p>
-<p>JVM参数中可以指定哪些区域的大小？<br>java堆、元空间、直接内存。但是仍然受到操作系统对进程总体内存的限制。<br>所以进程不论超出jvm限制，或者是超出操作系统的限制，都会造成OOM。</p>
-<h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><ol>
-<li>项目中redis部署的方式</li>
-<li>redis为什么快</li>
-<li>redis有哪些数据结构？讲下zset的底层结构？</li>
-<li>redis和数据库不一致的情况？</li>
-</ol>
-<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><ol>
-<li>服务响应很慢，如何排查？如何定位到代码？<br>这个问题属实高频题，主要要理清思路。可以和排查数据库查询慢对比。<br>可以导致响应慢的原因：</li>
-</ol>
-<ul>
-<li>数据库或外部依赖（远程服务，api调用，缓存服务器）</li>
-<li>网络问题</li>
-<li>系统资源</li>
-<li>并发和线程管理</li>
-<li>第三方框架导致的问题</li>
-</ul>
-<p>主要的排除步骤 –如果是django程序怎么检查，为什么我们的django程序没有遇到GC问题</p>
-<ul>
-<li>事件定性：确认报告的慢响应问题。验证是否所有用户和请求都受到了影响，还是只是某些特定场景。对比历史数据，确定是持续存在的问题还是突发事件。</li>
-<li>监控和日志审查：看监控面板或使用top命令，查看是否有高的CPU使用、内存耗尽或异常垃圾收集行为。查阅应用日志，找出异常、错误或者其他可以信息。如果有，查看垃圾收集日志，检查频繁或长时间的GC事件。</li>
-<li>检查网络和外部服务：ping、traceroute看网络延迟；检查与外部服务和数据库的交互，确保响应正常</li>
-<li>应用性能分析：使用jvisualVM，jConsole去看jvm的性能指标，分析线程转储，看是否有阻塞、死锁或其他线程相关问题。</li>
-<li>数据库查询：如果应用依赖于数据库，看数据库的慢查询日志。</li>
-<li>代码：回顾最近的代码更改 以及 查看配置文件或环境设置，有无不合理的限制或配置。</li>
-<li>重现问题：在测试环境中尝试重现。</li>
-<li>使用APM工具找出瓶颈和性能下降的具体位置</li>
-<li>检查硬件和资源：看是否有硬盘故障或RAM故障，查看其他与应用相关的系统资源，如磁盘IO、网络带宽。</li>
-<li>系统级检查：查看操作系统日志</li>
-</ul>
-<h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><ol>
-<li>项目难点？</li>
-</ol>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
-<li>为什么选择这家公司？</li>
-<li>为什么不找暑期实习？</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" data-id="clmhp3z31000018um1wh1327w" data-title="美团-秋招-后端开发-一面" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-阿里国际-0911-笔试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/12/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-0911-%E7%AC%94%E8%AF%95/" class="article-date">
-  <time class="dt-published" datetime="2023-09-12T05:01:11.000Z" itemprop="datePublished">2023-09-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/12/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-0911-%E7%AC%94%E8%AF%95/">阿里国际-0911-笔试</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="题目要求："><a href="#题目要求：" class="headerlink" title="题目要求："></a>题目要求：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">小红喜欢看电影，对不同的电影有不同的期待值。</span><br><span class="line">每天上映一部电影，随着上映时间的增加，小红的期待会减少。</span><br><span class="line">小红只在奇数天看电影，且不会重复看同一个电影，求n天内看电影能获得的最大期待。</span><br></pre></td></tr></table></figure>
-
-<h2 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6 1</span><br><span class="line">1 2 4 9 4 5</span><br></pre></td></tr></table></figure>
-
-<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13   </span><br></pre></td></tr></table></figure>
-
-<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">总共6天，期待值每过1天降低1.</span><br><span class="line">小红可以在1 3 5天看电影。</span><br><span class="line">第一天：期待值最大的电影值为1.</span><br><span class="line">第三天：电影的期待分别为1,4,期待值最大为4</span><br><span class="line">第五天：电影的期待分别为-1,8,4,期待值最大为8</span><br><span class="line">故结果为 1+4+8=13</span><br></pre></td></tr></table></figure>
-
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>堆问题</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line">n, d = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">arr = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split()))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用堆：满足每次需要取出最值，并剔除</span></span><br><span class="line"><span class="comment"># 需要的是最大堆，python仅最小堆，故对元素取反</span></span><br><span class="line">res = <span class="number">0</span></span><br><span class="line">heap = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>:  <span class="comment"># 说是奇数天，其实是偶数</span></span><br><span class="line">        <span class="comment"># 只是保持相对关系，实际的期望之后再求</span></span><br><span class="line">        expect, idx = heapq.heappushpop(heap, (-arr[i] - d * i, i))  <span class="comment"># 不想回头，所以每过一天分量+d，一定是递增，不然那每一天都加个d还有啥用</span></span><br><span class="line">        res += -expect - i * d  <span class="comment"># res += - (expect + (d * idx)) - (i - idx) * d  先把多删的不上，再把期望按经过的时间衰退</span></span><br><span class="line">    <span class="keyword">else</span>:  <span class="comment"># 偶数天也要放进来，只是不输出就行</span></span><br><span class="line">        heapq.heappush(heap, (-arr[i] - d * i, i))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(res)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/12/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-0911-%E7%AC%94%E8%AF%95/" data-id="clmfuls4o0000s4um5sipc1ci" data-title="阿里国际-0911-笔试" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-拼多多-0910-笔试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/" class="article-date">
-  <time class="dt-published" datetime="2023-09-10T12:11:33.000Z" itemprop="datePublished">2023-09-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/">拼多多-0910-笔试</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="题目要求："><a href="#题目要求：" class="headerlink" title="题目要求："></a>题目要求：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">小明需要在m分钟内修或更换n个零件，会给出每个零件修的耗时ai、修的价格bi、更换的耗时ci、更换的价格di。</span><br><span class="line">请计算在m分钟能否修复（修或更换均可）n个零件，如何可以，输出最小的成本</span><br></pre></td></tr></table></figure>
-
-<h2 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3 18        # n个零件， 时间上限为m</span><br><span class="line">9 1 2 11    # 第一个零件的 修耗时，修成本，更换耗时，更换成本</span><br><span class="line">8 4 3 10    # 第二个零件 ...</span><br><span class="line">10 6 5 12   # 第三个零件 ...</span><br></pre></td></tr></table></figure>
-
-<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">23          # 价格</span><br></pre></td></tr></table></figure>
-
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>背包问题</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 处理输入</span></span><br><span class="line">n, m = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">parts = []</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    a, b, c, d = <span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">input</span>().split())</span><br><span class="line">    parts.append((a, b, c, d))</span><br><span class="line"></span><br><span class="line">min_time = <span class="built_in">sum</span>(x[<span class="number">2</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts)</span><br><span class="line"><span class="keyword">if</span> min_time &gt; m:  <span class="comment"># 如果全换不修是否能满足要求</span></span><br><span class="line">    <span class="built_in">print</span>(-<span class="number">1</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># 转换成0-1背包问题,挑选从换-&gt;修的零件,尽可能多的选取价格降低最多的方式</span></span><br><span class="line">    bag_weight = m - min_time  <span class="comment"># 最多可以更换weight的重量</span></span><br><span class="line">    weights = [x[<span class="number">0</span>] - x[<span class="number">2</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts]</span><br><span class="line">    values = [x[<span class="number">3</span>] - x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts]</span><br><span class="line">    <span class="comment"># dp[i][j] 在可选范围为前i个,背包容量为j</span></span><br><span class="line">    dp = [[<span class="number">0</span>] * (bag_weight + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>)]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(bag_weight + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> i * j == <span class="number">0</span>:</span><br><span class="line">                dp[i][j] = <span class="number">0</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> j - weights[i - <span class="number">1</span>] &lt; <span class="number">0</span>:  <span class="comment"># 没法选</span></span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dp[i][j] = <span class="built_in">max</span>(</span><br><span class="line">                    dp[i - <span class="number">1</span>][j],  <span class="comment"># 不选</span></span><br><span class="line">                    dp[i - <span class="number">1</span>][j - weights[i - <span class="number">1</span>]] + values[i - <span class="number">1</span>]  <span class="comment"># 选</span></span><br><span class="line">                )</span><br><span class="line">    res = <span class="built_in">sum</span>(x[<span class="number">3</span>] <span class="keyword">for</span> x <span class="keyword">in</span> parts) - dp[n][bag_weight]</span><br><span class="line">    <span class="built_in">print</span>(res)</span><br></pre></td></tr></table></figure>
-
-<p>申请了一个二维的dp数组，空间复杂度为O(m*n),无法通过测试用例。其实不是m，不过也是一个时间，比m小，对应代码中的m-min_time。<br>dp[i][j]只依赖于dp[i-1][*],所以可以使用滚动数据，将空间复杂度降为O(2*m)。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仅展示修改部分</span></span><br><span class="line">dp = [[<span class="number">0</span>] * (bag_weight + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>)] </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(bag_weight + <span class="number">1</span>):</span><br><span class="line">        now, pre = i % <span class="number">2</span>, (i - <span class="number">1</span>) % <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> i * j == <span class="number">0</span>:</span><br><span class="line">            dp[now][j] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> j - weights[i - <span class="number">1</span>] &lt; <span class="number">0</span>:  <span class="comment"># 没法选</span></span><br><span class="line">            dp[now][j] = dp[pre][j]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dp[now][j] = <span class="built_in">max</span>(</span><br><span class="line">                dp[pre][j],  <span class="comment"># 不选</span></span><br><span class="line">                dp[pre][j - weights[i - <span class="number">1</span>]] + values[i - <span class="number">1</span>]  <span class="comment"># 选</span></span><br><span class="line">            )</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/" data-id="clmdhsy3900002gum8mwg93v5" data-title="拼多多-0910-笔试" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Java基础知识" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="article-date">
-  <time class="dt-published" datetime="2023-09-09T16:43:36.000Z" itemprop="datePublished">2023-09-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">J.U.C</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>先依葫芦画瓢，再深入理解<br>[TOC]</p>
-</blockquote>
-<h1 id="1-什么是协程？"><a href="#1-什么是协程？" class="headerlink" title="1. 什么是协程？"></a>1. 什么是协程？</h1><h1 id="2-什么是超线程？"><a href="#2-什么是超线程？" class="headerlink" title="2. 什么是超线程？"></a>2. 什么是超线程？</h1><h1 id="3-如何设置合理的线程数？"><a href="#3-如何设置合理的线程数？" class="headerlink" title="3. 如何设置合理的线程数？"></a>3. 如何设置合理的线程数？</h1><p>目标是：最大化利用CPU的情况下，减少线程切换的开销</p>
-<ul>
-<li>高并发，低耗时，建议少线程</li>
-<li>低并发，高耗时，建议多线程</li>
-<li>高并发，高耗时，分析任务类型，增加排队，加大线程数</li>
-</ul>
-<h1 id="4-什么是匿名类？什么是函数式接口？"><a href="#4-什么是匿名类？什么是函数式接口？" class="headerlink" title="4. 什么是匿名类？什么是函数式接口？"></a>4. 什么是匿名类？什么是函数式接口？</h1><h1 id="5-run-和start"><a href="#5-run-和start" class="headerlink" title="5. run()和start()"></a>5. run()和start()</h1><p>run方法是同步方法，由主线程执行，并未开启新线程。<br>run可以无限执行，start只能执行一次（illegalThreadStateException）。</p>
-<p>还有getName，setName，sleep，interrupt，yield，getPriority（1-10，默认是5），setPriority等方法。<br>sleep(0)先进入阻塞态（不过因为是0ms，所以直接进就绪态），yield进入就绪态。<br>yield之后，优先级更高的线程更有可能获得cpu时间片。yield根据jvm和操作系统不同，行为可能不同。<br>interrupt方法只是通知线程需要中断，做了个标记，并不会立刻中断。<br>public static boolean interrupted() 判断是否中断，并清除标记。<br>public boolean isInterrupted() 判断是否被中断，不清楚标记。<br>sleep过程如果使用interrupt，会抛出InterruptedException异常，捕获该异常会清除标记，需要在catch中再次使用interrupt来标记。<br>join：主线程等待子线程完成<br>setDaemon：设置守护进程，只要所有用户线程退出后，守护进程<strong>立马</strong>结束，不论执行到哪。<br>应用：垃圾回收器；tomcat用来接收外部请求的线程。<br>isDaemon<br>getState：new，runnable，waiting（sleep，join，wait），timed_waiting（带计时的sleep，join，wait），blocked（锁相关），terminated</p>
-<h1 id="6-线程的创建方式"><a href="#6-线程的创建方式" class="headerlink" title="6. 线程的创建方式"></a>6. 线程的创建方式</h1><ol>
-<li>实现Runnable接口的run方法<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyRunnable</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Runnable方式运行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">MyRunnable</span> <span class="variable">myRunnable</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyRunnable</span>();</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(myRunnable);</span><br><span class="line">        thread1.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>继承Thread类并重新run方法<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//受限于java的单继承，如果继承了Thread类，无法继承其他类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyThread</span> <span class="keyword">extends</span> <span class="title class_">Thread</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Thread方式运行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">MyThread</span>().start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>使用FutureTask方法（实现Callable接口）<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyCallable</span> <span class="keyword">implements</span> <span class="title class_">Callable</span>&lt;String&gt; &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Callable接口方式运行&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        FutureTask&lt;String&gt; futureTask = <span class="keyword">new</span> <span class="title class_">FutureTask</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">MyCallable</span>());</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(futureTask);</span><br><span class="line">        thread.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> futureTask.get();</span><br><span class="line">            System.out.println(result);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="7-线程池的作用"><a href="#7-线程池的作用" class="headerlink" title="7. 线程池的作用"></a>7. 线程池的作用</h1><p>容纳多个线程的容器，其中的线程可以反复使用，省去了频繁创建线程对象的操作，无需反复创建线程而消耗过多的资源。<br>主要优势：</p>
-<ul>
-<li>降低资源消耗：防止了反复创建销毁</li>
-<li>提高响应速度：任务不需要等待线程创建</li>
-<li>提高线程的可管理性：防止无限制创建</li>
-</ul>
-<h2 id="为什么要在finally里关闭线程池？"><a href="#为什么要在finally里关闭线程池？" class="headerlink" title="为什么要在finally里关闭线程池？"></a>为什么要在finally里关闭线程池？</h2><p>占用系统资源，内存泄露，主线程不会退出。</p>
-<p>threadPool.shutdown();等待正在执行的，以及阻塞队列中任务执行完。<br>threadPool.shutdownNow();等正在执行的任务后即关闭线程。<br>这两种方式使用interrupt，给是给个中断标志，并不会决定线程关闭，由线程内部自己处理。<br>两者的区别只是看是否依据阻塞队列是否为空。</p>
-<p>threadPool.isTerminated();可以用于判断线程池是否真正停止了。</p>
-<h2 id="execute-方法和submit-有什么区别？"><a href="#execute-方法和submit-有什么区别？" class="headerlink" title="execute()方法和submit()有什么区别？"></a>execute()方法和submit()有什么区别？</h2><ol>
-<li>参数<br>execute只接收runnable，submit指出runnable,callable，可以直接返回FutureTask对象。</li>
-<li>异常<br>execute会在子线程中抛出异常，主线程捕捉不到。submit不会立刻抛出异常，而是将异常暂时存起来，等调用Future.get()方法才会抛出，并且可以在主线程中捕捉到。</li>
-</ol>
-<h2 id="线程池的创建顺序"><a href="#线程池的创建顺序" class="headerlink" title="线程池的创建顺序"></a>线程池的创建顺序</h2><p>实际的执行顺序，并不一致，比如阻塞队列中的任务和最大线程数量创建线程所执行的任务。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A[判断核心线程数量是否已满]</span><br><span class="line">A --&gt;|是| B[判断阻塞队列是否已满]</span><br><span class="line">A --&gt;|否| C[创建线程执行任务]</span><br><span class="line">B --&gt;|否| D[加入阻塞队列]</span><br><span class="line">B --&gt;|是| E[判断最大线程数量是否已满]</span><br><span class="line">E --&gt;|是| F[执行拒绝策略]</span><br><span class="line">E --&gt;|否| G[创建线程]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>线程依赖阻塞队列来保活。</p>
-<p>？什么是阻塞队列，什么是非阻塞队列？</p>
-<p>拒绝策略</p>
-<ol>
-<li>抛异常-默认</li>
-<li>调用者线程自己去执行，相当于反馈机制，减缓新任务的提交速度</li>
-<li>抛弃最老的任务-阻塞队列中</li>
-<li>直接静默抛弃</li>
-</ol>
-<p>可以实现RejectedExecutionHandler接口，自定义拒绝策略。</p>
-<p>线程淘汰策略</p>
-<ol>
-<li>正常退出<br>假设m个线程，核心线程数为n，其中m&gt;n,阻塞队列无任务，需要淘汰m-n个线程。<br>淘汰通过getTask方法，当getTask为null时对应的线程消失，当上述场景不满足时，阻塞队列实际上一直调用的是take方法，进行无限阻塞，而满足时会进行poll超时阻塞。<br>m个线程需要通过CAS去竞争，竞争成功的m-n个线程会执行poll()方法，超时后，getTask返回null，剩余的n个线程则在没有新任务时无限阻塞。<br>核心线程和临时线程本质上没区别，看最后保留了哪些，哪些就是核心线程。<br>所以线程池参数的超时时间，就是用来设置poll方法超时阻塞的时间。</li>
-<li>异常退出<br>线程抛异常退出后，线程池会addWork()创建一个新的线程。<br>为什么不捕获异常，直接让线程执行下一个任务呢？<br>为了统一的异常处理器setUncaughtExceptionHandler，所以需要抛出异常，异常抛出后，线程异常退出。</li>
-</ol>
-<h2 id="tomcat中的线程池"><a href="#tomcat中的线程池" class="headerlink" title="tomcat中的线程池"></a>tomcat中的线程池</h2><p>JUC的线程池构造方法本身并不创建线程，只是创建一个线程工厂。而tomcat中线程池的构造方法有一个preStartAllCoreThread()方法，用于提前创建所有的核心线程。</p>
-<h1 id="8-线程安全问题"><a href="#8-线程安全问题" class="headerlink" title="8. 线程安全问题"></a>8. 线程安全问题</h1><p>线程并发对共享数据进行读写，造成数据混乱。<br>线程安全的三特性：</p>
-<ul>
-<li>原子性<ul>
-<li>synchronized</li>
-<li>atomic</li>
-</ul>
-</li>
-<li>可见性<ul>
-<li>synchronized</li>
-<li>voliate</li>
-</ul>
-</li>
-<li>有序性</li>
-</ul>
-<h2 id="9-JMM"><a href="#9-JMM" class="headerlink" title="9. JMM"></a>9. JMM</h2><p>JAVA多线程内存模型。<br>多线程对共享变量操作实际上是操作每个线程工作内存中的副本。</p>
-<p>缓存一致性协议（MESI）<br>多个CPU从主内存读取同一个数据到各自的高速缓存，当其中某个cpu修改了缓存里的数据，该数据会马上同步回主内存，其他cpu通过总线嗅探机制可以感知到数据的变化从而将自己的缓存里的数据失效。</p>
-<p>volatile是如何使缓存一致的？<br>volatile底层主要是通过汇编lock前缀指令，他会锁定这块内存区域的缓存（缓存行锁定），并写回到主内存。<br>而intel 64架构中lock指令会执行以下操作：<br>    1. 立即将当前缓存行中的数据写回系统内存<br>    2. 写回操作会引起其他CPU里缓存该内存地址的数据无效（MESI协议）<br>    3. 提供内存屏障，使得lock前后指令不能重排序。</p>
-<p>指令重排序：在不影响单线程程序执行结果的前提下，计算机为了最大限度发挥机器性能，会对机器指令重排序优化。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[源代码]</span><br><span class="line">B[编译器优化重排序]</span><br><span class="line">C[指令级优化重排序]</span><br><span class="line">D[内存系统重排序]</span><br><span class="line">E[最终执行指令序列]</span><br><span class="line">A --&gt;B</span><br><span class="line">B --&gt;C</span><br><span class="line">C --&gt;D</span><br><span class="line">D --&gt;E</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>bilibili在使用vpn时，视频会播放不了</p>
-<p>对象的创建流程</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[开始]</span><br><span class="line">B[类加载检查]</span><br><span class="line">C[已经加载]</span><br><span class="line">D[分配内存]</span><br><span class="line">E[未加载]</span><br><span class="line">F[加载类]</span><br><span class="line">G[初始化零值]</span><br><span class="line">H[设置对象头]</span><br><span class="line">I[执行init方法]</span><br><span class="line">J[结束]</span><br><span class="line"></span><br><span class="line">A --&gt; B</span><br><span class="line">B --&gt; |已经加载| C</span><br><span class="line">B --&gt; |未加载| E</span><br><span class="line">C --&gt; D</span><br><span class="line">E --&gt; F --&gt; D</span><br><span class="line">D --&gt; G</span><br><span class="line">G --&gt; H</span><br><span class="line">H --&gt; I</span><br><span class="line">I --&gt; J</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>内存屏障<br>如果在两行代码中加上内存屏障，则底层不会对其进行重排序。</p>
-<h2 id="10-锁"><a href="#10-锁" class="headerlink" title="10. 锁"></a>10. 锁</h2><h3 id="1-乐观锁-悲观锁"><a href="#1-乐观锁-悲观锁" class="headerlink" title="1. 乐观锁&amp;&amp;悲观锁"></a>1. 乐观锁&amp;&amp;悲观锁</h3><p>锁的类型，并非具体的实现。</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>描述</th>
-<th>缺点</th>
-<th>实现</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>悲观锁</td>
-<td>一种同步机制，假设多个事务在并发执行会发生冲突，因此事务开始时就预先获取所需的锁，确保在事务执行期间，其他事务不能访问被锁定的数据，适合于并发量大，写操作多的情况</td>
-<td>降低并发度</td>
-<td>synchronized，lock</td>
-</tr>
-<tr>
-<td>乐观锁</td>
-<td>认为在使用数据时不会有别的线程修改数据，所以不加锁，只是在更新数据的时候去判断之前是否有线程更新了数据。</td>
-<td>循环时间长时开销很大；ABA问题(加标记，加版本号)</td>
-<td>CAS</td>
-</tr>
-</tbody></table>
-<p>自旋锁&amp;&amp;互斥锁</p>
-<ul>
-<li>自旋锁：<ul>
-<li>借鉴CAS思想，指当一个线程在获取锁时，如果锁已经被其他线程获取，那么线程将循环等待，不断判断锁是否能被成功获取，直到获取锁才会退出循环。</li>
-<li>与互斥锁相似，都是为了解决对某项资源的互斥使用。</li>
-<li>但是互斥锁会让没得到锁资源的线程进入blocked状态，而后在争夺到锁资源后恢复runnable状态，这期中涉及到用户态和内核态的转换，代价较高。</li>
-<li>自旋锁不会引起调用者阻塞，如果自旋锁已经被别的执行单元保持，调用者就一直循环在那里看该自旋锁的保持者是否已经释放了锁。</li>
-<li>不适合锁占用时间比较久的情况。</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-synchronized锁升级"><a href="#2-synchronized锁升级" class="headerlink" title="2. synchronized锁升级"></a>2. synchronized锁升级</h2><p>JDK 1.6之前，java内置锁是重量级锁,效率低下，需要由jvm用户态切换到操作系统管程来实现互斥。<br>自旋锁一直在用户态，无需切换。</p>
-<p><strong>管程（Monitor）</strong><br>监视器，用于管理共享变量以及对共享变量操作的过程，让他们支持并发，操作系统中称为管程，java中称为对象锁。</p>
-<p><strong>锁升级的目的</strong><br>为了提高锁的获取与释放效率，对synchronized实现进行了优化，锁的级别随着<br>竞争情况逐渐升级，而且不可降级。</p>
-<p><strong>级别（从低到高）</strong><br>无锁-&gt;偏向锁（线程本身再次请求锁）-&gt;轻量级锁（不同线程交替请求锁，自旋）-&gt;重量级锁。</p>
-<h2 id="3-synchronized-ReentrantLock"><a href="#3-synchronized-ReentrantLock" class="headerlink" title="3. synchronized&amp;&amp;ReentrantLock"></a>3. synchronized&amp;&amp;ReentrantLock</h2><ul>
-<li>ReentrantLock需手工加锁和解锁，但是粒度和使用更灵活。</li>
-<li>synchronized是java内置关键字，由c++实现，lock是java类。</li>
-<li>ReentrantLock可以判断是否获取到了锁。 </li>
-<li>ReentrantLock提供锁申请等待限时。<ul>
-<li>lock1.tryLock();</li>
-<li>lock1.tryLock(2, TimeUnit.SECONDS);</li>
-</ul>
-</li>
-<li>ReetrantLock获取锁的过程是可以被打断的。</li>
-</ul>
-<p>总结：<br>synchronized：可重入、不可中断、非公平<br>lock：可重入、可中断、可公平</p>
-<h2 id="4-公平锁和非公平锁"><a href="#4-公平锁和非公平锁" class="headerlink" title="4. 公平锁和非公平锁"></a>4. 公平锁和非公平锁</h2><p>大部分情况下，锁的申请都是非公平的。<br>synchronized是非公平锁，ReentrantLock有公平和非公平模式。<br>非公平锁更能充分的利用CPU时间片，减少CPU空闲状态时间；减少线程切换的开销（刚释放锁的线程再次获取同步状态的概率非常大）。但可能导致锁饥饿。<br>非公平锁能够带来更高额吞吐量。</p>
-<h2 id="5-共享锁和排它锁"><a href="#5-共享锁和排它锁" class="headerlink" title="5. 共享锁和排它锁"></a>5. 共享锁和排它锁</h2><p>多个读进程并没有线程并没有线程安全问题。<br>所以引入了共享锁（读锁）和排它锁（写锁）。<br>读锁：多个读线程共享，阻塞写线程。<br>写锁：写线程独享。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-id="clmdhsy3e00012gum436n6vwg" data-title="J.U.C" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag">并发</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-阿里国际-秋招-java开发-一面-简历面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/" class="article-date">
-  <time class="dt-published" datetime="2023-09-09T03:06:54.000Z" itemprop="datePublished">2023-09-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/">阿里国际-秋招-java开发-一面/简历面</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>总评：java基础知识回答不好；介绍平时在读的书，最喜欢的课程这类题目，可以提前准备下。</p>
-</blockquote>
-<h2 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h2><h3 id="1-介绍下切面编程？"><a href="#1-介绍下切面编程？" class="headerlink" title="1. 介绍下切面编程？"></a>1. 介绍下切面编程？</h3><ul>
-<li>将程序中的横切关注点（比如日志、事务管理、安全）与主业务分离开，开发者可以独立开发主业务逻辑，而不必关系与主业务逻辑不直接相关的代码。</li>
-<li>代码重用</li>
-<li>提高可维护性</li>
-<li>灵活性：轻松的添加或删除切面，不影响主业务逻辑</li>
-</ul>
-<p>总结：更关注主业务逻辑，将业务不相关代码模块化，并与主业务分离，提高了代码的可重用性和可维护性。<br>场景:日志、事务、权限检查、性能监控、异常处理</p>
-<h3 id="2-介绍下JAVA的内存管理？"><a href="#2-介绍下JAVA的内存管理？" class="headerlink" title="2. 介绍下JAVA的内存管理？"></a>2. 介绍下JAVA的内存管理？</h3><ol>
-<li>内存分区</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>作用</th>
-<th>特性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>堆</td>
-<td>存放对象实例</td>
-<td>线程共享；需要GC</td>
-</tr>
-<tr>
-<td>方法区</td>
-<td>存放类信息，静态代码段，静态变量，jit即时编译产生的代码段</td>
-<td>线程共享</td>
-</tr>
-<tr>
-<td>线程栈</td>
-<td>存放局部变量和引用变量</td>
-<td>线程私有</td>
-</tr>
-<tr>
-<td>本地方法栈</td>
-<td>服务于本地方法调用</td>
-<td>线程私有</td>
-</tr>
-<tr>
-<td>程序计数器</td>
-<td>记录字节码运行的位置</td>
-<td>线程私有</td>
-</tr>
-</tbody></table>
-<ol start="2">
-<li>垃圾回收<br>依赖GC来回收不再引用的对象。<br>如何区分对象是否被应用：引用计数和可达性分析<br>常见垃圾回收算法<ul>
-<li>标记-清除：会导致碎片化</li>
-<li>复制：空间折半</li>
-<li>标记-整理：移动开销大<br>常见的垃圾回收器</li>
-<li>serial collector:特点是Stop the word，且单线程</li>
-<li>parallel Collector：stop the world，但是多线程</li>
-<li>CMS：为解决stw问题，但是未完全解决</li>
-<li>G1：改进CMS</li>
-</ul>
-</li>
-<li>对象分配<br>对象首先在新生代，特别是eden，eden满了进行young gc。<br>存活时间长的对象，进入老年代，老年代满了进行full gc。<br>防止了频繁移动长生命周期的对象带来的开销。</li>
-<li>内存泄露<br>现象：不再使用的对象却不被回收。<br>原因：长生命周期对象持有短生命周期对象的引用。<br>例子：<ul>
-<li>static修饰的集合类</li>
-<li>未显式close的数据库连接、网络和io操作</li>
-<li>集合中的对象属性修改后无法被remove</li>
-<li>释放对象时未删除监听器</li>
-<li>内部类</li>
-<li>单例对象持有外部引用（单例对象以静态变量形式存在）</li>
-</ul>
-</li>
-</ol>
-<h3 id="3-JAVA类加载的过程？双亲委派机制？"><a href="#3-JAVA类加载的过程？双亲委派机制？" class="headerlink" title="3. JAVA类加载的过程？双亲委派机制？"></a>3. JAVA类加载的过程？双亲委派机制？</h3><p>当一个类加载器收到类加载请求，不会自己去加载，而是委派给父类加载器。<br>如果父类加载器无法完成加载（所请求的类不在其搜索路径下），子加载器尝试自己去加载。<br>是一个递归的过程。</p>
-<p>加载器自顶向下分别为：</p>
-<ol>
-<li>Bootstrap classloader：加载jre核心库，如java.lang</li>
-<li>Extention ClassLoader：加载jre&#x2F;lib&#x2F;ext或系统变量java.ext.dirs执行位置的类库</li>
-<li>Application ClassLoader：加载用户路径（classpath）上指定的类库。</li>
-<li>自定义类加载器：开发者通过集成java.lang.ClassLoader来创建自己的类加载器</li>
-</ol>
-<p><strong>扩展1：需要打破双亲委派机制的场景?</strong><br><strong>扩展2：如何打破双亲委派机制？</strong></p>
-<h3 id="4-介绍下红黑树"><a href="#4-介绍下红黑树" class="headerlink" title="4. 介绍下红黑树"></a>4. 介绍下红黑树</h3><h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><h3 id="1-键入url到页面渲染的过程？-高频题"><a href="#1-键入url到页面渲染的过程？-高频题" class="headerlink" title="1. 键入url到页面渲染的过程？(高频题)"></a>1. 键入url到页面渲染的过程？(高频题)</h3><ol>
-<li>从url中提取域名和静态资源</li>
-<li>通过DNS服务器，将域名转换为IP地址，过程是：浏览器缓存-&gt;查hosts-&gt;本地DNS服务器缓存-&gt;询问根域名服务器，获得顶级域名服务器-&gt;询问顶级域名服务器，获得权威域名服务器-&gt;询问权威域名服务器，获得IP.</li>
-<li>得到IP以后，调用socket方法，通过tcp或udp进行传递，tcp使用IP协议栈进行传递，其中IP负责在不同网络中路由，ARP将IP翻译为MAC地址，在目标局域网中找到目标主机。</li>
-<li>找到目标主机原路返还。</li>
-</ol>
-<h3 id="2-介绍下TCP滑动窗口"><a href="#2-介绍下TCP滑动窗口" class="headerlink" title="2. 介绍下TCP滑动窗口"></a>2. 介绍下TCP滑动窗口</h3><p>流量控制的核心机制。<br>发送方的窗口由接收方窗口和网络拥塞情况动态调整。<br>发送方发送一些数据并得到确认，会向前滑动，从而可以发送更多的数据。相应的，接收方接收了数据并发送相应的确认后，接收窗口也向前滑动。<br>如果接收方缓冲区被填满，会设置窗口发小为0来告知发送方停止发数据。<br>当网络拥塞时，发送方也会减少其窗口，来减少发送数据量，在网络条件改善后，在逐步增加。如快恢复和快重传。</p>
-<p>重传机制：超时重传-&gt;快重传-&gt;SACK<br><strong>扩展1：假设接收方窗口为10，接收到的序列是1,3,4,5,2,6，会怎么样？</strong><br>接收到seq&#x3D;1，会发送ack&#x3D;2<br>接收到3,4,5，会继续发送ack&#x3D;2，且将3,4,5放入缓冲区<br>接收到2，从缓存区中取出3,4,5，并按照正确的顺序传递给上层应用，发送ack&#x3D;6，<br>接收6，发送ack&#x3D;7<br>保证了即使在数据包乱序的情况，也能确保数据按正确的顺序被上层应用接收。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="1-介绍下最近在读的书，以及给你的启发？"><a href="#1-介绍下最近在读的书，以及给你的启发？" class="headerlink" title="1. 介绍下最近在读的书，以及给你的启发？"></a>1. 介绍下最近在读的书，以及给你的启发？</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/" data-id="clmbgdpzj000134um22r2hdlc" data-title="阿里国际-秋招-java开发-一面/简历面" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-得物-秋招-java开发-一面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/09/%E5%BE%97%E7%89%A9-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" class="article-date">
-  <time class="dt-published" datetime="2023-09-09T03:06:09.000Z" itemprop="datePublished">2023-09-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/09/%E5%BE%97%E7%89%A9-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">得物-秋招-java开发-一面</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>题目很简单，但是关于java的知识太薄弱了</p>
-</blockquote>
-<h2 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h2><h3 id="1-面向对象的特性？多态的实现方式？"><a href="#1-面向对象的特性？多态的实现方式？" class="headerlink" title="1. 面向对象的特性？多态的实现方式？"></a>1. 面向对象的特性？多态的实现方式？</h3><ol>
-<li>继承</li>
-<li>封装</li>
-<li>多态<ul>
-<li>方法重载（同名不同参）：编译时多态</li>
-<li>方法重写（继承后override）：运行时多态</li>
-</ul>
-</li>
-</ol>
-<h3 id="2-接口和抽象类的区别？"><a href="#2-接口和抽象类的区别？" class="headerlink" title="2. 接口和抽象类的区别？"></a>2. 接口和抽象类的区别？</h3><table>
-<thead>
-<tr>
-<th>特性</th>
-<th>接口</th>
-<th>抽象</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>数量</td>
-<td>可实现多个</td>
-<td>只能继承一个</td>
-</tr>
-<tr>
-<td>含非抽象方法</td>
-<td></td>
-<td>√</td>
-</tr>
-<tr>
-<td>可以被实例化</td>
-<td></td>
-<td>√</td>
-</tr>
-<tr>
-<td>可以有构造函数</td>
-<td></td>
-<td>√</td>
-</tr>
-<tr>
-<td>可以有成员变量</td>
-<td></td>
-<td>√</td>
-</tr>
-<tr>
-<td>访问修饰符</td>
-<td>仅为public</td>
-<td>抽象方法可为public和protected</td>
-</tr>
-<tr>
-<td>使用场景</td>
-<td>仅提供公共方法协议，不考虑实现</td>
-<td>为一系列类提供公共的状态来实现</td>
-</tr>
-</tbody></table>
-<h3 id="3-String类是否可以继承？如果创建了路径完全一样的String，会有什么区别？"><a href="#3-String类是否可以继承？如果创建了路径完全一样的String，会有什么区别？" class="headerlink" title="3. String类是否可以继承？如果创建了路径完全一样的String，会有什么区别？"></a>3. String类是否可以继承？如果创建了路径完全一样的String，会有什么区别？</h3><p>String类不可以被继承，其被final修饰。<br>final修饰的特点：（以下情况编译不通过）</p>
-<ol>
-<li>final修饰的类不能被继承</li>
-<li>final修饰的方法不能被重写</li>
-<li>final修饰的变量赋值后不可修改</li>
-</ol>
-<p>创建了路径完全一样的String类会怎么样？</p>
-<ol>
-<li>编译不通过</li>
-<li>即使编译通过，类加载器也会默认加载java类库的java.lang.String。（除非自定义类加载器）</li>
-<li>即使创建了同一个包中的类，也不能访问String类的包级私有成员（不加修饰符的默认访问级别）<br>目的是为了确保核心类库不会被恶意代码覆盖和修改。</li>
-</ol>
-<h3 id="4-JAVA创建对象有几种方法？"><a href="#4-JAVA创建对象有几种方法？" class="headerlink" title="4. JAVA创建对象有几种方法？"></a>4. JAVA创建对象有几种方法？</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1. new</span><br><span class="line">ClassName obj = new ClassName();</span><br><span class="line">2. newInstance + 反射</span><br><span class="line">//只能调用无参构造函数</span><br><span class="line">ClassName obj = (ClassName)Class.forName(&quot;ClassName&quot;).newInstance();</span><br><span class="line">3. Constructor的newInstance方法</span><br><span class="line">//也是反射，可带参数</span><br><span class="line">Constructor&lt;ClassName&gt; constructor = ClassName.class.getConstructor(String.class,int.class);</span><br><span class="line">ClassName obj = constructor.newInstance(&quot;John&quot;,25);</span><br><span class="line">4. clone方法，需要类实现Cloneable方法</span><br><span class="line">ClassName obj1 = new ClassName();</span><br><span class="line">ClassName obj2 = (ClassName)obj1.clone();</span><br><span class="line">5. 反序列化</span><br><span class="line">//从流中读取对象，使用反序列化构建</span><br><span class="line">ObjectInputStream inStream = new ObjectInputStream(anInputStream);</span><br><span class="line">ClassName obj = (ClassName)inStream.readObject();</span><br><span class="line">6. 工厂模式</span><br><span class="line">//提供一个接口或方法来创建对象，不需要客户端知道具体要创建哪个类的实例。</span><br><span class="line">//一个常见的使用场景：数据库连接的创建</span><br></pre></td></tr></table></figure>
-<h3 id="5-HashMap-get一个值的过程？为什么冲突用链表，而不用数组？"><a href="#5-HashMap-get一个值的过程？为什么冲突用链表，而不用数组？" class="headerlink" title="5. HashMap get一个值的过程？为什么冲突用链表，而不用数组？"></a>5. HashMap get一个值的过程？为什么冲突用链表，而不用数组？</h3><p>get值，hashCode-&gt;equals<br>为什么用链表存储冲突结点？</p>
-<ol>
-<li>数组需提前分配空间，可能会面临扩容问题</li>
-<li>链表转红黑树更简单</li>
-</ol>
-<p><strong>扩展1：HashMap的key值可以是可变对象吗？</strong><br>可以，HashMap的key值可以是任何对象。但是可能会产生数据丢失和不一致。<br>并且自己需要定义hashCode和equals方法，一旦修改了equals，需要相应修改hashCode方法。</p>
-<p><strong>扩展2：如果我不重写hashCode和equals方法，直接将对象放入HashSet，依据什么去重？</strong><br>是否指向内存中同一个对象。</p>
-<p><strong>扩展3：python中的dict的key值可以是可变对象吗？</strong><br>不可以，需要满足可哈希，可变对象hash值会变化。（而java中的hashmap可以使用任何类型做key值）<br>其他和java中hashmap类似，自定义对象去重，使用__hash__(),<strong>eq</strong>()来判断。</p>
-<h3 id="6-介绍下threadlocal"><a href="#6-介绍下threadlocal" class="headerlink" title="6. 介绍下threadlocal"></a>6. 介绍下threadlocal</h3><p>线程局部变量的类，每个线程自己的独立的变量副本。<br>用于保存线程的相关状态。<br>有内存泄露的风险，如果线程是线程池中的持久线程，用完ThreadLocal未使用remove方法，会导致内存泄露。</p>
-<h3 id="7-介绍下synchronized和atomic"><a href="#7-介绍下synchronized和atomic" class="headerlink" title="7. 介绍下synchronized和atomic"></a>7. 介绍下synchronized和atomic</h3><p>主要围绕着上锁不上锁，阐述以下几点：</p>
-<ol>
-<li>不同并发程度下的开销</li>
-<li>适用范围</li>
-</ol>
-<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="1-深分页问题如何解决？"><a href="#1-深分页问题如何解决？" class="headerlink" title="1. 深分页问题如何解决？"></a>1. 深分页问题如何解决？</h3><h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><h3 id="1-文本如何转成结构化信息的？"><a href="#1-文本如何转成结构化信息的？" class="headerlink" title="1. 文本如何转成结构化信息的？"></a>1. 文本如何转成结构化信息的？</h3><p>正则表达式，可以用于提取邮箱，手机号。<br>newspaper，识别大段文本。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/09/%E5%BE%97%E7%89%A9-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" data-id="clmbgdpzf000034um1ifo0lzg" data-title="得物-秋招-java开发-一面" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-腾讯-秋招-后台开发-一面" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/09/%E8%85%BE%E8%AE%AF-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" class="article-date">
-  <time class="dt-published" datetime="2023-09-08T16:45:35.000Z" itemprop="datePublished">2023-09-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/09/%E8%85%BE%E8%AE%AF-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">腾讯-秋招-后台开发-一面</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="1-如果数据查询突然很慢，如何排查？"><a href="#1-如果数据查询突然很慢，如何排查？" class="headerlink" title="1. 如果数据查询突然很慢，如何排查？"></a>1. 如果数据查询突然很慢，如何排查？</h3><p>可能引起的原因：</p>
-<ol>
-<li>数据量增大，本身sql书写不合理，或者没加索引，或者索引失效（分布发生了变化，导致执行计划认为全表扫描更快），或者索引碎片化，或者页分裂</li>
-<li>大量的并发请求，服务器资源占用升高</li>
-<li>受到类似DDos攻击</li>
-<li>锁和阻塞，某些查询或任务锁定了资源</li>
-<li>数据库在进行维护任务</li>
-<li>网络问题</li>
-<li>硬件设施出问题，或磁盘空间不足</li>
-</ol>
-<h3 id="2-mysql的锁有哪些？什么情况下会加表锁？什么情况下加间隙锁？"><a href="#2-mysql的锁有哪些？什么情况下会加表锁？什么情况下加间隙锁？" class="headerlink" title="2. mysql的锁有哪些？什么情况下会加表锁？什么情况下加间隙锁？"></a>2. mysql的锁有哪些？什么情况下会加表锁？什么情况下加间隙锁？</h3><p>innodb加表锁的几种情况：</p>
-<ol>
-<li>全表扫描，或count(*)</li>
-<li>可能违反外键约束的情况。比如删除数据，但是因为外键，要全表扫描另外一张表中是否有违反约束的记录。–不靠谱，外键会加索引</li>
-<li>DDL操作，mysql5.6开始，引入了在线DDL，可以在不锁定全表的情况下哎，进行更新。以下操作可以在线ddl：添加索引、删除索引、更改列的默认值，列的重命名，添加删除外键约束。其他在限定条件下可以在线的操作：添加列（5.7不允许not null，8.0有摩尔恩之也行），删除（如果不是主键的一部分的话），更改列的类型（varchar(10)-&gt;varchar(20)可以，int-&gt;char不行）</li>
-<li>锁升级，行锁累积，升级为表锁来减少锁的管理开销</li>
-<li>明确的锁表请求，lock tables（默认加写锁）</li>
-</ol>
-<p>间隙锁用于锁定两个记录之间的间隙，确保在锁定期间，其他事务不能在这个间隙插入新的记录，来防止幻读。<br>innodb加间隙锁的情况：</p>
-<ol>
-<li>范围查询</li>
-<li>唯一索引检查，插入记录冲突时</li>
-<li>外键约束检查</li>
-<li>插入操作</li>
-</ol>
-<h3 id="3-隔离级别有哪些？因为隔离级别导致问题的情况遇到过吗？"><a href="#3-隔离级别有哪些？因为隔离级别导致问题的情况遇到过吗？" class="headerlink" title="3. 隔离级别有哪些？因为隔离级别导致问题的情况遇到过吗？"></a>3. 隔离级别有哪些？因为隔离级别导致问题的情况遇到过吗？</h3><h3 id="4-怎么知道是否使用了索引？"><a href="#4-怎么知道是否使用了索引？" class="headerlink" title="4. 怎么知道是否使用了索引？"></a>4. 怎么知道是否使用了索引？</h3><p>explain</p>
-<h3 id="5-聚簇索引和非聚簇索引的区别？"><a href="#5-聚簇索引和非聚簇索引的区别？" class="headerlink" title="5. 聚簇索引和非聚簇索引的区别？"></a>5. 聚簇索引和非聚簇索引的区别？</h3><h3 id="6-为什么用B-树？"><a href="#6-为什么用B-树？" class="headerlink" title="6. 为什么用B+树？"></a>6. 为什么用B+树？</h3><h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><h3 id="1-三次握手，客户端的ack丢失会怎么用？"><a href="#1-三次握手，客户端的ack丢失会怎么用？" class="headerlink" title="1. 三次握手，客户端的ack丢失会怎么用？"></a>1. 三次握手，客户端的ack丢失会怎么用？</h3><p>server重发syn+ack报文，3次失败后断开半连接状态。</p>
-<h3 id="2-实际使用过socket吗"><a href="#2-实际使用过socket吗" class="headerlink" title="2. 实际使用过socket吗"></a>2. 实际使用过socket吗</h3><h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><h3 id="1-介绍下垃圾回收算法？"><a href="#1-介绍下垃圾回收算法？" class="headerlink" title="1. 介绍下垃圾回收算法？"></a>1. 介绍下垃圾回收算法？</h3><h3 id="2-jvm调优的经验？"><a href="#2-jvm调优的经验？" class="headerlink" title="2. jvm调优的经验？"></a>2. jvm调优的经验？</h3><h3 id="3-类加载器？双亲委派机制？什么时候要打破双亲委派机制？"><a href="#3-类加载器？双亲委派机制？什么时候要打破双亲委派机制？" class="headerlink" title="3. 类加载器？双亲委派机制？什么时候要打破双亲委派机制？"></a>3. 类加载器？双亲委派机制？什么时候要打破双亲委派机制？</h3><h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><h3 id="1-基本数据结构？讲讲跳表？"><a href="#1-基本数据结构？讲讲跳表？" class="headerlink" title="1. 基本数据结构？讲讲跳表？"></a>1. 基本数据结构？讲讲跳表？</h3><h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><h3 id="1-如何排查占用资源的内存？"><a href="#1-如何排查占用资源的内存？" class="headerlink" title="1. 如何排查占用资源的内存？"></a>1. 如何排查占用资源的内存？</h3><h3 id="2-如果jvm的xml设为4GB，通过top发现其占用不止4GB，是因为什么？"><a href="#2-如果jvm的xml设为4GB，通过top发现其占用不止4GB，是因为什么？" class="headerlink" title="2. 如果jvm的xml设为4GB，通过top发现其占用不止4GB，是因为什么？"></a>2. 如果jvm的xml设为4GB，通过top发现其占用不止4GB，是因为什么？</h3><p>xml限制了堆内存的大小，但是其他内存区也有开销。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/09/%E8%85%BE%E8%AE%AF-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" data-id="clmavving0000soum6uo252g7" data-title="腾讯-秋招-后台开发-一面" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" rel="tag">代码练习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">手写代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JAVA/" style="font-size: 16.67px;">JAVA</a> <a href="/tags/MYSQL/" style="font-size: 10px;">MYSQL</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" style="font-size: 13.33px;">代码练习</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">并发</a> <a href="/tags/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">手写代码</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 20px;">面经</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2023/09/21/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/">b站-实习-微服务开发-二面</a>
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
           </li>
+          
         
-          <li>
-            <a href="/2023/09/20/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/">b站-实习-微服务开发-一面</a>
-          </li>
         
-          <li>
-            <a href="/2023/09/20/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/">网络相关面试题</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/19/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E4%BB%A3%E7%A0%81%E9%A2%98/">Java并发编程-常见面试代码题</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/19/%E7%99%BE%E5%BA%A6-%E5%AE%9E%E4%B9%A0-java%E5%BC%80%E5%8F%91-%E7%BA%AF%E5%87%89%E9%9D%A2/">百度-实习-java开发-一面（纯凉面）</a>
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
     </div>
   </div>
+</nav>
 
   
-</aside>
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="xiangyao的博客小站"></span>
+          
+        </div>
+
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+
       
-      &copy; 2023 xiangyao<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
     </div>
   </div>
-</footer>
+</div>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/" target="_self">
+          常见选型问题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/15/%E5%B8%B8%E8%A7%81%E9%80%89%E5%9E%8B%E9%97%AE%E9%A2%98/" target="_self">
+        <div>
+          1. 为什么选择Meilisearch？这和我们项目的性质有关，我们是希望做出一个有少量用户的原型，以向投资者展示潜力。在这个背景下，我们主要对比了Meilisearch和ES，学习难度上：MeiliSearch的配置更简单，维护更简单，api也比较直观和简单资源消耗上：meilisearch更轻量，消耗的内存和cpu资源更少功能上：meilisearch仅是一个比较纯粹的搜索引擎，不具备es中机
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-15 18:57" pubdate>
+              2023-09-15
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/15/%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%99%85%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%90%AC%E8%BF%90/" target="_self">
+          索引创建实际遇到的问题-搬运
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/15/%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%AE%9E%E9%99%85%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%90%AC%E8%BF%90/" target="_self">
+        <div>
+          场景一张邀请绑定表，一个用户绑定了几十万个记录。索引列为uid-用户的id，create_time-关系的创建时间。查询需求比较简单：根据创建时间倒序，取一页的记录 1select * from bind where uid = xxx order by create_time desc limit 10;  分析 第一次查询比较慢，后续查询会变快，原因可能是第一次需要将几十万的数据页加载到Buf
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-15 10:47" pubdate>
+              2023-09-15
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/MYSQL/">#MYSQL</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" target="_self">
+          唯品会-实习-Java大数据组件开发-二面
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" target="_self">
+        <div>
+          代码题题目要求123456手写一个阻塞队列。满足以下要求：1. 有界2. 实现读写函数3. 使用模板4. 考虑多线程并发读取  代码书写先了解一下java中的阻塞队列。java的阻塞队列提供了线程安全的队列实现，其中的阻塞操作主要是为了确保在并发环境中数据安全添加和移除。’java.util.concurrent’包提供了多种阻塞队列的实现，这些阻塞队列在多线程编程，特别是生产者-消费者模型中非常
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-14 14:57" pubdate>
+              2023-09-14
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" target="_self">
+          美团-秋招-后端开发-一面
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/13/%E7%BE%8E%E5%9B%A2-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" target="_self">
+        <div>
+          mysql 什么是幻读？写一个insert语句来说明间隙锁加在什么位置？幻读：事务中多次查询，行集不同。如何解决幻读？mvcc+间隙锁 当前读：使用select … for update来对所选的行上排他锁。 在事务开始使用它，当开始一个事务并打算查询某些可能更新某些行时，首先查询锁定这些行1234567  START TRANSACTION;  SELECT * FROM table_name
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-13 15:34" pubdate>
+              2023-09-13
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/12/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-0911-%E7%AC%94%E8%AF%95/" target="_self">
+          阿里国际-0911-笔试
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/12/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-0911-%E7%AC%94%E8%AF%95/" target="_self">
+        <div>
+          题目要求：123小红喜欢看电影，对不同的电影有不同的期待值。每天上映一部电影，随着上映时间的增加，小红的期待会减少。小红只在奇数天看电影，且不会重复看同一个电影，求n天内看电影能获得的最大期待。  输入格式：126 11 2 4 9 4 5  输出格式：113     解释123456总共6天，期待值每过1天降低1.小红可以在1 3 5天看电影。第一天：期待值最大的电影值为1.第三天：电影的期待分
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-12 13:01" pubdate>
+              2023-09-12
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AC%94%E8%AF%95/">#笔试</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/" target="_self">
+          拼多多-0910-笔试
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/10/%E6%8B%BC%E5%A4%9A%E5%A4%9A-0910-%E7%AC%94%E8%AF%95/" target="_self">
+        <div>
+          题目要求：12小明需要在m分钟内修或更换n个零件，会给出每个零件修的耗时ai、修的价格bi、更换的耗时ci、更换的价格di。请计算在m分钟能否修复（修或更换均可）n个零件，如何可以，输出最小的成本  输入格式：12343 18        # n个零件， 时间上限为m9 1 2 11    # 第一个零件的 修耗时，修成本，更换耗时，更换成本8 4 3 10    # 第二个零件 ...10 6
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-10 20:11" pubdate>
+              2023-09-10
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AC%94%E8%AF%95/">#笔试</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" target="_self">
+          J.U.C
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/10/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" target="_self">
+        <div>
+          先依葫芦画瓢，再深入理解[TOC]  1. 什么是协程？2. 什么是超线程？3. 如何设置合理的线程数？目标是：最大化利用CPU的情况下，减少线程切换的开销  高并发，低耗时，建议少线程 低并发，高耗时，建议多线程 高并发，高耗时，分析任务类型，增加排队，加大线程数  4. 什么是匿名类？什么是函数式接口？5. run()和start()run方法是同步方法，由主线程执行，并未开启新线程。run
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-10 00:43" pubdate>
+              2023-09-10
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JAVA/">#JAVA</a>
+            
+              <a href="/tags/%E5%B9%B6%E5%8F%91/">#并发</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/" target="_self">
+          阿里国际-秋招-java开发-一面/简历面
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/09/%E9%98%BF%E9%87%8C%E5%9B%BD%E9%99%85-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2-%E7%AE%80%E5%8E%86%E9%9D%A2/" target="_self">
+        <div>
+          总评：java基础知识回答不好；介绍平时在读的书，最喜欢的课程这类题目，可以提前准备下。  JAVA1. 介绍下切面编程？ 将程序中的横切关注点（比如日志、事务管理、安全）与主业务分离开，开发者可以独立开发主业务逻辑，而不必关系与主业务逻辑不直接相关的代码。 代码重用 提高可维护性 灵活性：轻松的添加或删除切面，不影响主业务逻辑  总结：更关注主业务逻辑，将业务不相关代码模块化，并与主业务分离，
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-09 11:06" pubdate>
+              2023-09-09
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/09/%E5%BE%97%E7%89%A9-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" target="_self">
+          得物-秋招-java开发-一面
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/09/%E5%BE%97%E7%89%A9-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" target="_self">
+        <div>
+          题目很简单，但是关于java的知识太薄弱了  JAVA1. 面向对象的特性？多态的实现方式？ 继承 封装 多态 方法重载（同名不同参）：编译时多态 方法重写（继承后override）：运行时多态    2. 接口和抽象类的区别？   特性 接口 抽象    数量 可实现多个 只能继承一个   含非抽象方法  √   可以被实例化  √   可以有构造函数  √   可以有成员变量  √   访问
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-09 11:06" pubdate>
+              2023-09-09
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/09/%E8%85%BE%E8%AE%AF-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" target="_self">
+          腾讯-秋招-后台开发-一面
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/09/%E8%85%BE%E8%AE%AF-%E7%A7%8B%E6%8B%9B-%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" target="_self">
+        <div>
+          数据库1. 如果数据查询突然很慢，如何排查？可能引起的原因：  数据量增大，本身sql书写不合理，或者没加索引，或者索引失效（分布发生了变化，导致执行计划认为全表扫描更快），或者索引碎片化，或者页分裂 大量的并发请求，服务器资源占用升高 受到类似DDos攻击 锁和阻塞，某些查询或任务锁定了资源 数据库在进行维护任务 网络问题 硬件设施出问题，或磁盘空间不足  2. mysql的锁有哪些？什么情况下
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-09 00:45" pubdate>
+              2023-09-09
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
 
-<script src="/js/script.js"></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-  </div>
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
 </body>
 </html>
