@@ -16,15 +16,15 @@
   <meta name="author" content="xiangyao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="常见的异常 除数不能为0（ArithmeticException） 空指针异常（NullPointException） 数组下标越界（ArrayIndexOutOfBoundsException） 类型转换异常（ClassCastException）  异常的分类均继承自Throwable。    类型 描述 常见类    编译时异常 超出程序员控制的情况，例如试图打开不存在的文件，网络连接或数据">
+    <meta name="description" content="异常的分类均继承自Throwable。    类型 描述 常见类    编译时异常 超出程序员控制的情况，例如试图打开不存在的文件，网络连接或数据库连接问题，通过强制程序员处理或声明这些异常，来确保这些问题被正确处理。编译器要求调用可以抛出编译时异常的方法和代码必须放在try-catch或在方法声明中使用后throws，否则无法编译通过 IOException,SQLException,FileN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java异常处理">
 <meta property="og:url" content="http://example.com/2023/09/25/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
-<meta property="og:description" content="常见的异常 除数不能为0（ArithmeticException） 空指针异常（NullPointException） 数组下标越界（ArrayIndexOutOfBoundsException） 类型转换异常（ClassCastException）  异常的分类均继承自Throwable。    类型 描述 常见类    编译时异常 超出程序员控制的情况，例如试图打开不存在的文件，网络连接或数据">
+<meta property="og:description" content="异常的分类均继承自Throwable。    类型 描述 常见类    编译时异常 超出程序员控制的情况，例如试图打开不存在的文件，网络连接或数据库连接问题，通过强制程序员处理或声明这些异常，来确保这些问题被正确处理。编译器要求调用可以抛出编译时异常的方法和代码必须放在try-catch或在方法声明中使用后throws，否则无法编译通过 IOException,SQLException,FileN">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-25T14:59:37.000Z">
-<meta property="article:modified_time" content="2023-09-25T16:32:19.157Z">
+<meta property="article:modified_time" content="2023-09-26T04:29:45.983Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="JAVA">
 <meta name="twitter:card" content="summary_large_image">
@@ -196,7 +196,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k words
+          3k words
         
       </span>
     
@@ -207,7 +207,7 @@
         
         
         
-          14 mins
+          25 mins
         
       </span>
     
@@ -249,13 +249,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="常见的异常"><a href="#常见的异常" class="headerlink" title="常见的异常"></a>常见的异常</h1><ol>
-<li>除数不能为0（ArithmeticException）</li>
-<li>空指针异常（NullPointException）</li>
-<li>数组下标越界（ArrayIndexOutOfBoundsException）</li>
-<li>类型转换异常（ClassCastException）</li>
-</ol>
-<h1 id="异常的分类"><a href="#异常的分类" class="headerlink" title="异常的分类"></a>异常的分类</h1><p>均继承自Throwable。</p>
+                <h1 id="异常的分类"><a href="#异常的分类" class="headerlink" title="异常的分类"></a>异常的分类</h1><p>均继承自Throwable。</p>
 <table>
 <thead>
 <tr>
@@ -276,8 +270,8 @@
 </tr>
 <tr>
 <td>错误</td>
-<td>由Java虚拟机生成并抛出的异常，程序不对其做处理</td>
-<td></td>
+<td>由Java虚拟机生成并抛出的异常，表示严重的问题，不是由应用程序正常操作引起的，通常指示有关java运行时环境的问题，比如说系统资源不足，类定义不兼容，程序不对其做处理</td>
+<td>OutOfMemoryError，StackOverflowError，NoClassDefFoundError</td>
 </tr>
 </tbody></table>
 <h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><h2 id="1-自己处理异常"><a href="#1-自己处理异常" class="headerlink" title="1. 自己处理异常"></a>1. 自己处理异常</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ExceptionDemo</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;code 1&quot;</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br>        <span class="hljs-type">int</span>[] arr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">3</span>];<br>        <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            System.out.println(i / <span class="hljs-number">0</span>);<br>            System.out.println(arr[<span class="hljs-number">10</span>]);<br>            System.out.println(str.length());<br>        &#125; <span class="hljs-keyword">catch</span> (ArithmeticException e) &#123;<br>            System.out.println(<span class="hljs-string">&quot;除数为0&quot;</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (ArrayIndexOutOfBoundsException e) &#123;<br>            System.out.println(<span class="hljs-string">&quot;数组下标越界&quot;</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (NullPointerException e)&#123;<br>            System.out.println(<span class="hljs-string">&quot;空指针异常&quot;</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e)&#123; <span class="hljs-comment">// 捕捉前面忽略的异常类型</span><br>            e.printStackTrace();<br>        &#125;<br>        System.out.println(<span class="hljs-string">&quot;code 2&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -307,7 +301,30 @@
 <td>用作异常和错误类的基类，在java中，只有Throwbale及其子类的实例可以被throw关键字抛出，被catch关键字捕获</td>
 </tr>
 </tbody></table>
-
+<h1 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ExceptionDemo4</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        System.out.println(test()); <span class="hljs-comment">// 2</span><br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            x++;<br>            <span class="hljs-comment">// System.exit(0);</span><br>            <span class="hljs-keyword">return</span> x; <span class="hljs-comment">// return 2</span><br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            ++x;<br>            <span class="hljs-comment">// 不会改变try中返回的结果</span><br>            <span class="hljs-comment">// 一旦try中的代码块被执行，finally就会执行，除非出现了System.exit()</span><br>            System.out.println(x); <span class="hljs-comment">// 3</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>try中return和finally的执行顺序？</strong><br>return代码执行时会将局部变量保存在栈帧的顶部，然后finally修改的还是原来的栈帧位置的局部变量，最终返回的信息还是栈帧顶部的变量。所以finally在return关键字之后执行，但是不改变栈帧顶部信息。<br><strong>如何try和finally中都有return呢？</strong><br>finally中的return返回的是finally中的局部变量的信息，即finally中的return会覆盖掉try中的return。</p>
+<table>
+<thead>
+<tr>
+<th>相似概念</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>final</td>
+<td>关键字，修饰的类不能被继承，修饰的方法不能被重写，修饰的变量变常量</td>
+</tr>
+<tr>
+<td>finally</td>
+<td>异常处理结构的一部分，与try-catch一起使用，表示最终执行的代码，常用来做资源的释放</td>
+</tr>
+<tr>
+<td>finalize</td>
+<td>Object类中的方法，用于垃圾回收。当GC决定回收摸一个对象时，该对象的finalize方法会被调用，给予对象在销毁前执行某些操作的机会。不被推荐使用</td>
+</tr>
+</tbody></table>
+<h1 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h1><p>Java中的异常都是Throwable，Exception，RuntimeException的子类，创建自定义异常，就是创建对应的子类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ExceptionDemo4</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            getScore();<br>        &#125; <span class="hljs-keyword">catch</span> (ScoreException e) &#123;<br>            System.out.println(e.getMessage());<br>        &#125;<br><br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">double</span> <span class="hljs-title function_">getScore</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> ScoreException &#123;<br>        <span class="hljs-type">double</span> <span class="hljs-variable">score</span> <span class="hljs-operator">=</span> <span class="hljs-number">999</span>;<br>        <span class="hljs-keyword">if</span>(score&lt;<span class="hljs-number">0</span>||score&gt;<span class="hljs-number">100</span>)&#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ScoreException</span>(<span class="hljs-string">&quot;分数越界&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> score;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ScoreException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Exception</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">ScoreException</span><span class="hljs-params">()</span>&#123;<br><br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">ScoreException</span><span class="hljs-params">(String message)</span>&#123;<br>        <span class="hljs-built_in">super</span>(message);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -375,6 +392,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/09/26/%E7%94%B5%E4%BF%A1-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E9%9D%A2/" title="电信-秋招-一面">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">电信-秋招-一面</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
