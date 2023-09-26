@@ -16,15 +16,15 @@
   <meta name="author" content="xiangyao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="代码题题目要求123456手写一个阻塞队列。满足以下要求：1. 有界2. 实现读写函数3. 使用模板4. 考虑多线程并发读取  代码书写先了解一下java中的阻塞队列。java的阻塞队列提供了线程安全的队列实现，其中的阻塞操作主要是为了确保在并发环境中数据安全添加和移除。’java.util.concurrent’包提供了多种阻塞队列的实现，这些阻塞队列在多线程编程，特别是生产者-消费者模型中非常">
+    <meta name="description" content="总结时间比较长，闲聊居多，会引导并且说错的会纠正，手写阻塞队列确实学到了一些东西 难度：⭐⭐⭐☆☆学到的知识：⭐⭐⭐⭐⭐ 代码题题目要求123456手写一个阻塞队列。满足以下要求：1. 有界2. 实现读写函数3. 使用模板4. 考虑多线程并发读取  代码书写先了解一下java中的阻塞队列。java的阻塞队列提供了线程安全的队列实现，其中的阻塞操作主要是为了确保在并发环境中数据安全添加和移除。’ja">
 <meta property="og:type" content="article">
 <meta property="og:title" content="唯品会-实习-Java大数据组件开发-二面">
 <meta property="og:url" content="http://example.com/2023/09/14/%E5%94%AF%E5%93%81%E4%BC%9A-%E5%AE%9E%E4%B9%A0-Java%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
-<meta property="og:description" content="代码题题目要求123456手写一个阻塞队列。满足以下要求：1. 有界2. 实现读写函数3. 使用模板4. 考虑多线程并发读取  代码书写先了解一下java中的阻塞队列。java的阻塞队列提供了线程安全的队列实现，其中的阻塞操作主要是为了确保在并发环境中数据安全添加和移除。’java.util.concurrent’包提供了多种阻塞队列的实现，这些阻塞队列在多线程编程，特别是生产者-消费者模型中非常">
+<meta property="og:description" content="总结时间比较长，闲聊居多，会引导并且说错的会纠正，手写阻塞队列确实学到了一些东西 难度：⭐⭐⭐☆☆学到的知识：⭐⭐⭐⭐⭐ 代码题题目要求123456手写一个阻塞队列。满足以下要求：1. 有界2. 实现读写函数3. 使用模板4. 考虑多线程并发读取  代码书写先了解一下java中的阻塞队列。java的阻塞队列提供了线程安全的队列实现，其中的阻塞操作主要是为了确保在并发环境中数据安全添加和移除。’ja">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-14T06:57:38.000Z">
-<meta property="article:modified_time" content="2023-09-15T14:57:37.673Z">
+<meta property="article:modified_time" content="2023-09-26T09:10:05.481Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -249,7 +249,9 @@
             
               <div class="markdown-body">
                 
-                <h1 id="代码题"><a href="#代码题" class="headerlink" title="代码题"></a>代码题</h1><h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown">手写一个阻塞队列。<br>满足以下要求：<br><span class="hljs-bullet">1.</span> 有界<br><span class="hljs-bullet">2.</span> 实现读写函数<br><span class="hljs-bullet">3.</span> 使用模板<br><span class="hljs-bullet">4.</span> 考虑多线程并发读取<br></code></pre></td></tr></table></figure>
+                <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>时间比较长，闲聊居多，会引导并且说错的会纠正，手写阻塞队列确实学到了一些东西</p>
+<p><strong>难度</strong>：⭐⭐⭐☆☆<br><strong>学到的知识</strong>：⭐⭐⭐⭐⭐</p>
+<h1 id="代码题"><a href="#代码题" class="headerlink" title="代码题"></a>代码题</h1><h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown">手写一个阻塞队列。<br>满足以下要求：<br><span class="hljs-bullet">1.</span> 有界<br><span class="hljs-bullet">2.</span> 实现读写函数<br><span class="hljs-bullet">3.</span> 使用模板<br><span class="hljs-bullet">4.</span> 考虑多线程并发读取<br></code></pre></td></tr></table></figure>
 
 <h2 id="代码书写"><a href="#代码书写" class="headerlink" title="代码书写"></a>代码书写</h2><p>先了解一下java中的阻塞队列。<br>java的阻塞队列提供了线程安全的队列实现，其中的阻塞操作主要是为了确保在并发环境中数据安全添加和移除。’java.util.concurrent’包提供了多种阻塞队列的实现，这些阻塞队列在多线程编程，特别是生产者-消费者模型中非常有用。<br>多线程环境中，阻塞队列是一个非常有用的工具，因为他自动处理了大部分线程间同步的问题。<br>以下是主要的阻塞队列：</p>
 <table>
