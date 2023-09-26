@@ -16,15 +16,15 @@
   <meta name="author" content="xiangyao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="算法题目描述12String转Long，需要考虑各种异常情况。设计测试用例。 一些要点Java中，int占4个字节，long占8个字节。以long为例，其取值范围为$$-2^{63}到2^{63}-1$$，不要轻易对下界取反，因为会溢出。Java中提供了Long.MAX_VAlUE和Long.MIN_VALUE来获取long的上下界。其他类型，byte(非bit)占1字节，short占2字节，fl">
+    <meta name="description" content="总结难度较大，问的问题比较基础，但是很偏，各个专业课都覆盖到了，但是基础不牢，给面试官留的印象比较差。难度：⭐⭐⭐⭐⭐学到的知识：⭐⭐⭐⭐☆ 算法题目描述12String转Long，需要考虑各种异常情况。设计测试用例。 一些要点Java中，int占4个字节，long占8个字节。以long为例，其取值范围为$$-2^{63}到2^{63}-1$$，不要轻易对下界取反，因为会溢出。Java中提供了Lo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="b站-实习-微服务开发-三面">
 <meta property="og:url" content="http://example.com/2023/09/22/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%B8%89%E9%9D%A2/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
-<meta property="og:description" content="算法题目描述12String转Long，需要考虑各种异常情况。设计测试用例。 一些要点Java中，int占4个字节，long占8个字节。以long为例，其取值范围为$$-2^{63}到2^{63}-1$$，不要轻易对下界取反，因为会溢出。Java中提供了Long.MAX_VAlUE和Long.MIN_VALUE来获取long的上下界。其他类型，byte(非bit)占1字节，short占2字节，fl">
+<meta property="og:description" content="总结难度较大，问的问题比较基础，但是很偏，各个专业课都覆盖到了，但是基础不牢，给面试官留的印象比较差。难度：⭐⭐⭐⭐⭐学到的知识：⭐⭐⭐⭐☆ 算法题目描述12String转Long，需要考虑各种异常情况。设计测试用例。 一些要点Java中，int占4个字节，long占8个字节。以long为例，其取值范围为$$-2^{63}到2^{63}-1$$，不要轻易对下界取反，因为会溢出。Java中提供了Lo">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-22T14:24:35.000Z">
-<meta property="article:modified_time" content="2023-09-23T14:34:59.685Z">
+<meta property="article:modified_time" content="2023-09-26T09:05:30.435Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -196,7 +196,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k words
+          4.1k words
         
       </span>
     
@@ -207,7 +207,7 @@
         
         
         
-          34 mins
+          35 mins
         
       </span>
     
@@ -249,7 +249,8 @@
             
               <div class="markdown-body">
                 
-                <h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-type">String</span>转<span class="hljs-type">Long</span>，需要考虑各种异常情况。<br>设计测试用例。<br></code></pre></td></tr></table></figure>
+                <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>难度较大，问的问题比较基础，但是很偏，各个专业课都覆盖到了，但是基础不牢，给面试官留的印象比较差。<br><strong>难度</strong>：⭐⭐⭐⭐⭐<br><strong>学到的知识</strong>：⭐⭐⭐⭐☆</p>
+<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-type">String</span>转<span class="hljs-type">Long</span>，需要考虑各种异常情况。<br>设计测试用例。<br></code></pre></td></tr></table></figure>
 <h2 id="一些要点"><a href="#一些要点" class="headerlink" title="一些要点"></a>一些要点</h2><p>Java中，int占4个字节，long占8个字节。以long为例，其取值范围为$$-2^{63}到2^{63}-1$$，不要轻易对下界取反，因为会溢出。<br>Java中提供了Long.MAX_VAlUE和Long.MIN_VALUE来获取long的上下界。<br>其他类型，byte(非bit)占1字节，short占2字节，float 4字节，double 8字节，char 2字节。<br><strong>对象占几个字节？</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">Class MaNong &#123; <br>    <span class="hljs-type">int</span> count;<br>    <span class="hljs-type">boolean</span> flag;<br>    Object obj; <br>&#125;<br></code></pre></td></tr></table></figure>
 <p>对象头（8字节&#x2F;16字节）+ int（4字节）+ boolean（1字节）+ 空引用（4字节&#x2F;8字节）&#x3D; 17字节。<br>Java对象内存分配时以8的整数分配（对齐填充，以提高访问速度），故会分配24字节。<br>其中空引用类型，32位jvm是4字节，64位jvm是8字节，如果启动了压缩oops（限制堆大小，最大让其寻址32G内存），仍可能是4字节。<br><strong>包装类占几个字节？</strong><br>和对象一样，对象头 + 基本数据类型 + 对齐填充。</p>

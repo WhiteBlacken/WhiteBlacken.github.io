@@ -16,22 +16,22 @@
   <meta name="author" content="xiangyao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="总结总体难度比较简单，时间很短，20分钟不到,要补充docker和消息中间件的相关知识。 难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ 项目1. 介绍项目难点？2. 为什么使用RocketMQ？与其他消息中间件的对比？学生完成在线考试并提交答案时，考试数据会被发送到RocketMQ中，后台评分系统作为消费者，从RocketMQ中拉去数据并进行评分，分析学生答题情况，并生成报告。因为分析学生答题情况比较慢">
+    <meta name="description" content="总结问的问题都很基础，没有深挖，没有问项目，但是答的也很差。难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ Java1. java的基本数据类型？分别占几个字节？   基本数据类型 字节    byte 1   short 2   int 4   long 8   float 4   double 8   char 2   boolean 1，不一定   网络1. 介绍下tcp三次握手？2. tcp粘包问">
 <meta property="og:type" content="article">
-<meta property="og:title" content="电信-秋招-一面">
-<meta property="og:url" content="http://example.com/2023/09/26/%E7%94%B5%E4%BF%A1-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E9%9D%A2/index.html">
+<meta property="og:title" content="万得-秋招-java开发一面">
+<meta property="og:url" content="http://example.com/2023/09/26/%E4%B8%87%E5%BE%97-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91%E4%B8%80%E9%9D%A2/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
-<meta property="og:description" content="总结总体难度比较简单，时间很短，20分钟不到,要补充docker和消息中间件的相关知识。 难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ 项目1. 介绍项目难点？2. 为什么使用RocketMQ？与其他消息中间件的对比？学生完成在线考试并提交答案时，考试数据会被发送到RocketMQ中，后台评分系统作为消费者，从RocketMQ中拉去数据并进行评分，分析学生答题情况，并生成报告。因为分析学生答题情况比较慢">
+<meta property="og:description" content="总结问的问题都很基础，没有深挖，没有问项目，但是答的也很差。难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ Java1. java的基本数据类型？分别占几个字节？   基本数据类型 字节    byte 1   short 2   int 4   long 8   float 4   double 8   char 2   boolean 1，不一定   网络1. 介绍下tcp三次握手？2. tcp粘包问">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-09-26T05:08:25.000Z">
-<meta property="article:modified_time" content="2023-09-26T09:08:09.560Z">
+<meta property="article:published_time" content="2023-09-26T08:25:03.000Z">
+<meta property="article:modified_time" content="2023-09-26T09:02:43.364Z">
 <meta property="article:author" content="xiangyao">
-<meta property="article:tag" content="面经">
+<meta property="article:tag" content="一面">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>电信-秋招-一面 - xiangyao的个人博客</title>
+  <title>万得-秋招-java开发一面 - xiangyao的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -173,7 +173,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="电信-秋招-一面"></span>
+            <span id="subtitle" data-typed-text="万得-秋招-java开发一面"></span>
           
         </div>
 
@@ -184,7 +184,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-26 13:08" pubdate>
+        <time datetime="2023-09-26 16:25" pubdate>
           September 26, 2023 pm
         </time>
       </span>
@@ -196,7 +196,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k words
+          914 words
         
       </span>
     
@@ -207,7 +207,7 @@
         
         
         
-          10 mins
+          8 mins
         
       </span>
     
@@ -244,32 +244,72 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">电信-秋招-一面</h1>
+            <h1 id="seo-header">万得-秋招-java开发一面</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总体难度比较简单，时间很短，20分钟不到,要补充docker和消息中间件的相关知识。</p>
-<p><strong>难度</strong>：⭐☆☆☆☆<br><strong>学到的知识</strong>：⭐☆☆☆☆</p>
-<h1 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h1><h2 id="1-介绍项目难点？"><a href="#1-介绍项目难点？" class="headerlink" title="1. 介绍项目难点？"></a>1. 介绍项目难点？</h2><h2 id="2-为什么使用RocketMQ？与其他消息中间件的对比？"><a href="#2-为什么使用RocketMQ？与其他消息中间件的对比？" class="headerlink" title="2. 为什么使用RocketMQ？与其他消息中间件的对比？"></a>2. 为什么使用RocketMQ？与其他消息中间件的对比？</h2><p>学生完成在线考试并提交答案时，考试数据会被发送到RocketMQ中，后台评分系统作为消费者，从RocketMQ中拉去数据并进行评分，分析学生答题情况，并生成报告。因为分析学生答题情况比较慢，并且可能出现大量学生同时提交的情况，所以使用RocketMQ来消峰，并用于异步处理。</p>
-<h2 id="3-docker的使用场景？如何暴露端口？"><a href="#3-docker的使用场景？如何暴露端口？" class="headerlink" title="3. docker的使用场景？如何暴露端口？"></a>3. docker的使用场景？如何暴露端口？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 运行web服务器，并将容器的80端口映射到主机的8080端口</span><br>docker run -p <span class="hljs-number">8080</span>:<span class="hljs-number">80</span> nginx<br><span class="hljs-comment">//映射多个端口，可多次使用-p</span><br>docker run -p <span class="hljs-number">8080</span>:<span class="hljs-number">80</span> -p <span class="hljs-number">8443</span>:<span class="hljs-number">443</span> nginx<br><span class="hljs-comment">//动态端口映射，不关心主机映射的具体端口，希望Docker为主机选择一个端口</span><br>docker run -p <span class="hljs-number">80</span> nginx<br><span class="hljs-comment">//使用docker port命令来查看docker为你选择的端口</span><br>docker port nginx <span class="hljs-number">80</span><br><br><span class="hljs-comment">//创建并启动容器</span><br>docker run [options] images [command] [arg...]<br><span class="hljs-comment">//启动/停止/重启一个或多个已经停止的容器</span><br>docker start/stop/restart [container_id]<br><span class="hljs-comment">//列出容器</span><br>docker ps  <span class="hljs-comment">//只显示运行的的</span><br>docker ps -a <span class="hljs-comment">//显示所有，包括已停止的</span><br><span class="hljs-comment">//删除容器</span><br>docker rm [container_id]<br><span class="hljs-comment">//查看日志</span><br>docker logs [container_id]<br><span class="hljs-comment">//在正在运行的容器中执行命令</span><br>docker exec -it [container_id] /bin/bash<br><br><span class="hljs-comment">//删除镜像</span><br>docker rmi [image_id]<br><span class="hljs-comment">//拉取镜像</span><br>docker pull [image_id]<br><span class="hljs-comment">//本地镜像推送到注册中心</span><br>docker push [image_name]<br><span class="hljs-comment">//从dockerfile创建镜像</span><br>docker build -t [image_name:tag] [path_to_dockerfile]<br><br><span class="hljs-comment">//网络，volume，docker-compose相关的暂不列出</span><br></code></pre></td></tr></table></figure>
-
-<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-创建线程的方式？优缺点？"><a href="#1-创建线程的方式？优缺点？" class="headerlink" title="1. 创建线程的方式？优缺点？"></a>1. 创建线程的方式？优缺点？</h2><p>简写</p>
+                <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>问的问题都很基础，没有深挖，没有问项目，但是答的也很差。<br><strong>难度</strong>：⭐☆☆☆☆<br><strong>学到的知识</strong>：⭐☆☆☆☆</p>
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-java的基本数据类型？分别占几个字节？"><a href="#1-java的基本数据类型？分别占几个字节？" class="headerlink" title="1. java的基本数据类型？分别占几个字节？"></a>1. java的基本数据类型？分别占几个字节？</h2><table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>字节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte</td>
+<td>1</td>
+</tr>
+<tr>
+<td>short</td>
+<td>2</td>
+</tr>
+<tr>
+<td>int</td>
+<td>4</td>
+</tr>
+<tr>
+<td>long</td>
+<td>8</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+</tr>
+<tr>
+<td>double</td>
+<td>8</td>
+</tr>
+<tr>
+<td>char</td>
+<td>2</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>1，不一定</td>
+</tr>
+</tbody></table>
+<h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="1-介绍下tcp三次握手？"><a href="#1-介绍下tcp三次握手？" class="headerlink" title="1. 介绍下tcp三次握手？"></a>1. 介绍下tcp三次握手？</h2><h2 id="2-tcp粘包问题？"><a href="#2-tcp粘包问题？" class="headerlink" title="2. tcp粘包问题？"></a>2. tcp粘包问题？</h2><p>从应用程序角度：TCP是基于流的协议，所以数据是作为无边界的连续流发送的，并非独立的包。<br>从网络传输角度：数据是被分段放入tcp包进行传输的，Nagle是一个性能优化算法，用于减少小的tcp段的数量，他的工作原理是等待足够的数据可供发送，从而组成一个更大的段，除非之前发送的段已经被确认。他在尝试减少网络上小tcp端的数量，因为大量的小段会导致网络拥塞和效率低下。但这种算法也同时造成了粘包问题，多个消息粘在一起。<br>同时接收端缓冲也会导致粘包，接收端对额缓冲区不是立即被读取，或者被部分读取时，多个包会累积在一起。<br><strong>如何解决粘包问题？</strong></p>
 <ol>
-<li>继承Thread：会占用继承的名额，Java是单继承的</li>
-<li>实现Runnable</li>
-<li>使用FutureTask和Callable：可以获取结果</li>
+<li>使用固定长度的包头，比如消息前4个字节用于表示消息长度。接收方先读取4字节，然后读取实际的数据。</li>
+<li>在消息尾部加上特定换行符。</li>
+<li>在应用层增加长度字段或其他类型的消息边界。</li>
+<li>使用更高级协议，比如websocket或者http2</li>
+<li>关闭Nagle算法，不推荐。</li>
 </ol>
-<h2 id="2-线程池的参数？"><a href="#2-线程池的参数？" class="headerlink" title="2. 线程池的参数？"></a>2. 线程池的参数？</h2><p>简写</p>
-<ol>
-<li>核心线程数</li>
-<li>最大线程数</li>
-<li>阻塞队列</li>
-<li>keepAliveTime和unit</li>
-<li>线程工厂</li>
-<li>拒绝策略</li>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="1-平时创建的索引类型有哪些？"><a href="#1-平时创建的索引类型有哪些？" class="headerlink" title="1. 平时创建的索引类型有哪些？"></a>1. 平时创建的索引类型有哪些？</h2><p>主键索引<br>唯一索引<br>复合索引<br>全文索引<br>外键索引<br>前缀索引</p>
+<h2 id="2-sql书写优化的手段？"><a href="#2-sql书写优化的手段？" class="headerlink" title="2. sql书写优化的手段？"></a>2. sql书写优化的手段？</h2><ol>
+<li>选择性使用字段，避免select *</li>
+<li>使用索引+避免各种索引失效的情况</li>
+<li>使用limit减少返回的数据。</li>
+<li>其他关于join，or，子查询的问题并非绝对，可以单独整理一篇在不同场景下的sql书写。</li>
 </ol>
-
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="1-python和java的区别？"><a href="#1-python和java的区别？" class="headerlink" title="1. python和java的区别？"></a>1. python和java的区别？</h2><ol>
+<li>语法和可读性上<br>python的语法简介明了，可读性更好。java的语法更详细和严格，并且python因为是动态语言，很多类型错误只在运行时被检测到，java可以在编译时就捕获，所以python写起来快，debug比java麻烦。</li>
+</ol>
+<h2 id="2-面向对象和面向过程的区别？"><a href="#2-面向对象和面向过程的区别？" class="headerlink" title="2. 面向对象和面向过程的区别？"></a>2. 面向对象和面向过程的区别？</h2><p>面向对象提高了模块化、封装、重用性和维护性，且更直观，更容易模拟现实世界的系统和流程，在大型、需要团队写作和长期维护的项目中尤其受欢迎。</p>
+<h2 id="3-个人优缺点？"><a href="#3-个人优缺点？" class="headerlink" title="3. 个人优缺点？"></a>3. 个人优缺点？</h2>
                 
               </div>
             
@@ -281,7 +321,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E9%9D%A2%E7%BB%8F/" class="print-no-link">#面经</a>
+        <a href="/tags/%E4%B8%80%E9%9D%A2/" class="print-no-link">#一面</a>
       
     </div>
   
@@ -293,8 +333,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>电信-秋招-一面</div>
-      <div>http://example.com/2023/09/26/电信-秋招-一面/</div>
+      <div>万得-秋招-java开发一面</div>
+      <div>http://example.com/2023/09/26/万得-秋招-java开发一面/</div>
     </div>
     <div class="license-meta">
       
@@ -338,18 +378,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/26/%E4%B8%87%E5%BE%97-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91%E4%B8%80%E9%9D%A2/" title="万得-秋招-java开发一面">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">万得-秋招-java开发一面</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/09/25/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" title="Java异常处理">
-                        <span class="hidden-mobile">Java异常处理</span>
+                      <a href="/2023/09/26/%E7%94%B5%E4%BF%A1-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E9%9D%A2/" title="电信-秋招-一面">
+                        <span class="hidden-mobile">电信-秋招-一面</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
