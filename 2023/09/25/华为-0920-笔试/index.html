@@ -24,7 +24,7 @@
 <meta property="og:description" content="题目要求：123456班级组织传球活动，男女同学随机排成m行n列队伍，第一列中的任意一个男同学都可以作为传球的起点，要求最终将球传到最后一列的任意一个男同学手里，求所有能够完成任务的传球路线中的最优路线(传球次数最少的路线)的传球次数。传球规则：1.男同学只能将球传给男同学，不能传给女同学。2.球只能传给身边前后左右相邻的同学。3.如果游戏不能完成，返回-1。求最短的传球路线  输入格式：1234">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-25T03:54:35.000Z">
-<meta property="article:modified_time" content="2023-09-25T04:31:04.133Z">
+<meta property="article:modified_time" content="2023-09-26T15:20:32.538Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="笔试">
 <meta name="twitter:card" content="summary_large_image">
@@ -196,7 +196,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          337 words
+          1.1k words
         
       </span>
     
@@ -207,7 +207,7 @@
         
         
         
-          3 mins
+          9 mins
         
       </span>
     
@@ -256,7 +256,7 @@
 <h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">5<br></code></pre></td></tr></table></figure>
 
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>最短路问题，上BFS。</p>
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">getMinLength</span>(<span class="hljs-params">matrix, m, n</span>):<br>    step = <span class="hljs-number">0</span><br>    queue = [(row, <span class="hljs-number">0</span>) <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m) <span class="hljs-keyword">if</span> matrix[row][<span class="hljs-number">0</span>] == <span class="hljs-number">1</span>]<br>    visited = &#123;(row, <span class="hljs-number">0</span>) <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m) <span class="hljs-keyword">if</span> matrix[row][<span class="hljs-number">0</span>] == <span class="hljs-number">1</span>&#125;<br>    dirs = [[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>], [-<span class="hljs-number">1</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>]]<br>    <span class="hljs-keyword">while</span> queue:<br>        size = <span class="hljs-built_in">len</span>(queue)<br>        <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(size):<br>            i, j = queue.pop(<span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">if</span> j == n - <span class="hljs-number">1</span>:<br>                <span class="hljs-keyword">return</span> step<br>            <span class="hljs-keyword">for</span> <span class="hljs-built_in">dir</span> <span class="hljs-keyword">in</span> dirs:<br>                neigh_i, neigh_j = i + <span class="hljs-built_in">dir</span>[<span class="hljs-number">0</span>], j + <span class="hljs-built_in">dir</span>[<span class="hljs-number">1</span>]<br>                <span class="hljs-keyword">if</span> (neigh_i, neigh_j) <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> visited <span class="hljs-keyword">and</span> isValid(matrix, neigh_i, neigh_j):<br>                    queue.append((neigh_i, neigh_j))<br>                    visited.add((neigh_i, neigh_j))<br>        step += <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">isValid</span>(<span class="hljs-params">matrix, i, j</span>):<br>    m, n = <span class="hljs-built_in">len</span>(matrix), <span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>])<br>    <span class="hljs-keyword">if</span> i &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> i &gt;= m <span class="hljs-keyword">or</span> j &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> j &gt;= n:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">return</span> matrix[i][j] == <span class="hljs-number">1</span><br><br><br>m, n = <span class="hljs-built_in">map</span>(<span class="hljs-built_in">int</span>, <span class="hljs-built_in">input</span>().split())<br>matrix = [<span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(<span class="hljs-built_in">int</span>, <span class="hljs-built_in">input</span>().split())) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m)]<br><span class="hljs-built_in">print</span>(getMinLength(matrix, m, n))<br></code></pre></td></tr></table></figure>
                 
               </div>
             
