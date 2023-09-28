@@ -16,22 +16,22 @@
   <meta name="author" content="xiangyao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="总结问的问题都很基础，没有深挖，没有问项目，但是答的也很差。难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ Java1. java的基本数据类型？分别占几个字节？   基本数据类型 字节    byte 1   short 2   int 4   long 8   float 4   double 8   char 2   boolean 1，不一定   网络1. 介绍下tcp三次握手？2. tcp粘包问">
+    <meta name="description" content="网卡和IP地址网卡，又称网络适配器&#x2F;网络接口卡，作用是使计算机能够连接到网络。可以是物理设备（插在服务器上的扩展卡）或虚拟设备（在虚拟机中使用的虚拟网络适配器）。IP地址是分配给网卡的，一个计算机可以有多个网卡，每个网卡有自己的IP。例如，一个计算机可以有一个以太网适配器和一个WiFi适配器，每个适配器会有自己的IP地址。IP可以是静态分配（手动分配），也可以是动态分配（通过DHCP自动">
 <meta property="og:type" content="article">
-<meta property="og:title" content="万得-秋招-java开发一面">
-<meta property="og:url" content="http://example.com/2023/09/26/%E4%B8%87%E5%BE%97-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91%E4%B8%80%E9%9D%A2/index.html">
+<meta property="og:title" content="什么是网卡？">
+<meta property="og:url" content="http://example.com/2023/09/28/%E4%BB%80%E4%B9%88%E6%98%AF%E7%BD%91%E5%8D%A1/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
-<meta property="og:description" content="总结问的问题都很基础，没有深挖，没有问项目，但是答的也很差。难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ Java1. java的基本数据类型？分别占几个字节？   基本数据类型 字节    byte 1   short 2   int 4   long 8   float 4   double 8   char 2   boolean 1，不一定   网络1. 介绍下tcp三次握手？2. tcp粘包问">
+<meta property="og:description" content="网卡和IP地址网卡，又称网络适配器&#x2F;网络接口卡，作用是使计算机能够连接到网络。可以是物理设备（插在服务器上的扩展卡）或虚拟设备（在虚拟机中使用的虚拟网络适配器）。IP地址是分配给网卡的，一个计算机可以有多个网卡，每个网卡有自己的IP。例如，一个计算机可以有一个以太网适配器和一个WiFi适配器，每个适配器会有自己的IP地址。IP可以是静态分配（手动分配），也可以是动态分配（通过DHCP自动">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-09-26T08:25:03.000Z">
-<meta property="article:modified_time" content="2023-09-27T12:25:50.462Z">
+<meta property="article:published_time" content="2023-09-28T05:08:00.000Z">
+<meta property="article:modified_time" content="2023-09-28T05:35:41.595Z">
 <meta property="article:author" content="xiangyao">
-<meta property="article:tag" content="一面">
+<meta property="article:tag" content="计算机扫盲篇">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>万得-秋招-java开发一面 - xiangyao的个人博客</title>
+  <title>什么是网卡？ - xiangyao的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -173,7 +173,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="万得-秋招-java开发一面"></span>
+            <span id="subtitle" data-typed-text="什么是网卡？"></span>
           
         </div>
 
@@ -184,8 +184,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-26 16:25" pubdate>
-          September 26, 2023 pm
+        <time datetime="2023-09-28 13:08" pubdate>
+          September 28, 2023 pm
         </time>
       </span>
     
@@ -196,7 +196,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          930 words
+          981 words
         
       </span>
     
@@ -207,7 +207,7 @@
         
         
         
-          8 mins
+          9 mins
         
       </span>
     
@@ -244,72 +244,28 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">万得-秋招-java开发一面</h1>
+            <h1 id="seo-header">什么是网卡？</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>问的问题都很基础，没有深挖，没有问项目，但是答的也很差。<br><strong>难度</strong>：⭐☆☆☆☆<br><strong>学到的知识</strong>：⭐☆☆☆☆</p>
-<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-java的基本数据类型？分别占几个字节？"><a href="#1-java的基本数据类型？分别占几个字节？" class="headerlink" title="1. java的基本数据类型？分别占几个字节？"></a>1. java的基本数据类型？分别占几个字节？</h2><table>
-<thead>
-<tr>
-<th>基本数据类型</th>
-<th>字节</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>byte</td>
-<td>1</td>
-</tr>
-<tr>
-<td>short</td>
-<td>2</td>
-</tr>
-<tr>
-<td>int</td>
-<td>4</td>
-</tr>
-<tr>
-<td>long</td>
-<td>8</td>
-</tr>
-<tr>
-<td>float</td>
-<td>4</td>
-</tr>
-<tr>
-<td>double</td>
-<td>8</td>
-</tr>
-<tr>
-<td>char</td>
-<td>2</td>
-</tr>
-<tr>
-<td>boolean</td>
-<td>1，不一定</td>
-</tr>
-</tbody></table>
-<h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="1-介绍下tcp三次握手？"><a href="#1-介绍下tcp三次握手？" class="headerlink" title="1. 介绍下tcp三次握手？"></a>1. 介绍下tcp三次握手？</h2><h2 id="2-tcp粘包问题？"><a href="#2-tcp粘包问题？" class="headerlink" title="2. tcp粘包问题？"></a>2. tcp粘包问题？</h2><p>从应用程序角度：TCP是基于流的协议，所以数据是作为无边界的连续流发送的，并非独立的包。<br>从网络传输角度：数据是被分段放入tcp包进行传输的，Nagle是一个性能优化算法，用于减少小的tcp段的数量，他的工作原理是等待足够的数据可供发送，从而组成一个更大的段，除非之前发送的段已经被确认。他在尝试减少网络上小tcp端的数量，因为大量的小段会导致网络拥塞和效率低下。但这种算法也同时造成了粘包问题，多个消息粘在一起。<br>同时接收端缓冲也会导致粘包，接收端对额缓冲区不是立即被读取，或者被部分读取时，多个包会累积在一起。<br><strong>如何解决粘包问题？</strong></p>
+                <h1 id="网卡和IP地址"><a href="#网卡和IP地址" class="headerlink" title="网卡和IP地址"></a>网卡和IP地址</h1><p>网卡，又称网络适配器&#x2F;网络接口卡，作用是使计算机能够连接到网络。可以是物理设备（插在服务器上的扩展卡）或虚拟设备（在虚拟机中使用的虚拟网络适配器）。<br>IP地址是分配给网卡的，一个计算机可以有多个网卡，每个网卡有自己的IP。例如，一个计算机可以有一个以太网适配器和一个WiFi适配器，每个适配器会有自己的IP地址。<br>IP可以是静态分配（手动分配），也可以是动态分配（通过DHCP自动分配）。例如，家庭网络中的设备通常通过DHCP从路由器获得IP地址，而服务器通常使用静态IP地址来确保其地址不变。<br>总结：网络提供了计算机与网络之间的接口，而IP地址为网卡在网络上提供唯一的标识符，使其他设备可以与之通信。</p>
+<h1 id="什么是DHCP？"><a href="#什么是DHCP？" class="headerlink" title="什么是DHCP？"></a>什么是DHCP？</h1><p>DHCP：允许服务器动态分配IP地址给客户端的网络协议。使用DHCP，设备可以在加入网络时自动获得一个IP地址，无需手动配置。</p>
+<h1 id="家庭无线网络中谁来分配IP地址？"><a href="#家庭无线网络中谁来分配IP地址？" class="headerlink" title="家庭无线网络中谁来分配IP地址？"></a>家庭无线网络中谁来分配IP地址？</h1><p>家庭网络中通常有路由器充当DHCP服务器的角色。通常路由器使用192.168.1.1作为其IP地址，然后将192.168.1.2到192.168.1.254作为DHCP地址池，意味着路由器可以分配253个不同的IP地址。<br>简单过程：</p>
+<ul>
+<li>启动时请求：当一个设备连接到家庭网络时，会发送一个DHCP请求，询问一个IP地址。</li>
+<li>分配IP地址：路由器收到请求后，会从其IP地址池中选择一个IP地址，并分配给这个设备。</li>
+<li>租约时间：IP地址的分配不是永久的，而是有一个租期，当租期到期后，设备需要重新请求IP地址，或者请求续约当前的IP地址。</li>
+</ul>
+<h1 id="有多个网卡的服务器，在监听某一端口，他在监听哪个网卡上的端口呢？"><a href="#有多个网卡的服务器，在监听某一端口，他在监听哪个网卡上的端口呢？" class="headerlink" title="有多个网卡的服务器，在监听某一端口，他在监听哪个网卡上的端口呢？"></a>有多个网卡的服务器，在监听某一端口，他在监听哪个网卡上的端口呢？</h1><p>监听所有网卡或特定网卡都可以。</p>
 <ol>
-<li>使用固定长度的包头，比如消息前4个字节用于表示消息长度。接收方先读取4字节，然后读取实际的数据。</li>
-<li>在消息尾部加上特定换行符。</li>
-<li>在应用层增加长度字段或其他类型的消息边界。</li>
-<li>使用更高级协议，比如websocket或者http2</li>
-<li>关闭Nagle算法，不推荐。</li>
+<li>监听所有网卡：服务器绑定到特殊地址<code>0.0.0.0</code>(IPv4)或<code>::</code>(IPv6),会监听计算机上所有网卡的指定端口。</li>
+<li>监听特定网卡：服务器也可绑定到一个特定的ip地址，意味着只接收发往这个IP地址的连接。例如，只希望服务在内部网络上可用，并不对外部网络开放。<ul>
+<li>比如说有两个网卡，一个连接到公共互联网<code>103.0.113.10</code>,一个连接到私有内部网络<code>10.0.0.10</code>,如果希望某个服务，比如数据库，只能从内部网络访问，可以让该服务绑定到IP<code>10.0.0.10</code>上，这样外部攻击者即使知道数据库正在运行，也无法通过公共互联网接口访问，因为服务器并没有在这个接口上监听。</li>
+</ul>
+</li>
 </ol>
-<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="1-平时创建的索引类型有哪些？"><a href="#1-平时创建的索引类型有哪些？" class="headerlink" title="1. 平时创建的索引类型有哪些？"></a>1. 平时创建的索引类型有哪些？</h2><p>主键索引<br>唯一索引<br>复合索引<br>全文索引<br>外键索引<br>前缀索引</p>
-<h2 id="2-sql书写优化的手段？"><a href="#2-sql书写优化的手段？" class="headerlink" title="2. sql书写优化的手段？"></a>2. sql书写优化的手段？</h2><ol>
-<li>选择性使用字段，避免select *</li>
-<li>使用索引+避免各种索引失效的情况</li>
-<li>使用limit减少返回的数据。</li>
-<li>其他关于join，or，子查询的问题并非绝对，可以单独整理一篇在不同场景下的sql书写。</li>
-</ol>
-<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="1-描述下什么是时间复杂度？"><a href="#1-描述下什么是时间复杂度？" class="headerlink" title="1. 描述下什么是时间复杂度？"></a>1. 描述下什么是时间复杂度？</h2><h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="1-python和java的区别？"><a href="#1-python和java的区别？" class="headerlink" title="1. python和java的区别？"></a>1. python和java的区别？</h2><ol>
-<li>语法和可读性上<br>python的语法简介明了，可读性更好。java的语法更详细和严格，并且python因为是动态语言，很多类型错误只在运行时被检测到，java可以在编译时就捕获，所以python写起来快，debug比java麻烦。</li>
-</ol>
-<h2 id="2-面向对象和面向过程的区别？"><a href="#2-面向对象和面向过程的区别？" class="headerlink" title="2. 面向对象和面向过程的区别？"></a>2. 面向对象和面向过程的区别？</h2><p>面向对象提高了模块化、封装、重用性和维护性，且更直观，更容易模拟现实世界的系统和流程，在大型、需要团队写作和长期维护的项目中尤其受欢迎。</p>
-<h2 id="3-个人优缺点？"><a href="#3-个人优缺点？" class="headerlink" title="3. 个人优缺点？"></a>3. 个人优缺点？</h2>
+
                 
               </div>
             
@@ -321,7 +277,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E4%B8%80%E9%9D%A2/" class="print-no-link">#一面</a>
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%89%AB%E7%9B%B2%E7%AF%87/" class="print-no-link">#计算机扫盲篇</a>
       
     </div>
   
@@ -333,8 +289,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>万得-秋招-java开发一面</div>
-      <div>http://example.com/2023/09/26/万得-秋招-java开发一面/</div>
+      <div>什么是网卡？</div>
+      <div>http://example.com/2023/09/28/什么是网卡/</div>
     </div>
     <div class="license-meta">
       
@@ -346,7 +302,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>September 26, 2023</div>
+          <div>September 28, 2023</div>
         </div>
       
       
@@ -378,18 +334,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/28/Kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" title="Kafka基础知识总结">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Kafka基础知识总结</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/09/26/%E7%94%B5%E4%BF%A1-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E9%9D%A2/" title="电信-秋招-一面">
-                        <span class="hidden-mobile">电信-秋招-一面</span>
+                      <a href="/2023/09/28/Kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" title="Kafka基础知识总结">
+                        <span class="hidden-mobile">Kafka基础知识总结</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

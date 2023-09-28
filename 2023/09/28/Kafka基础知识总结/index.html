@@ -16,21 +16,31 @@
   <meta name="author" content="xiangyao">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Archives">
-<meta property="og:url" content="http://example.com/archives/2023/index.html">
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Kafka基础知识总结">
+<meta property="og:url" content="http://example.com/2023/09/28/Kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-27T16:48:57.000Z">
+<meta property="article:modified_time" content="2023-09-27T16:49:15.814Z">
 <meta property="article:author" content="xiangyao">
+<meta property="article:tag" content="Kafka">
+<meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Archives - xiangyao的个人博客</title>
+  <title>Kafka基础知识总结 - xiangyao的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -80,7 +90,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -162,9 +172,49 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Archives"></span>
+            <span id="subtitle" data-typed-text="Kafka基础知识总结"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-28 00:48" pubdate>
+          September 28, 2023 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          0 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          1 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -180,100 +230,170 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">29 posts in total</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2023</p>
-    
-    <a href="/2023/09/28/%E4%BB%80%E4%B9%88%E6%98%AF%E7%BD%91%E5%8D%A1/" class="list-group-item list-group-item-action">
-      <time>09-28</time>
-      <div class="list-group-item-title">什么是网卡？</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Kafka基础知识总结</h1>
+            
+            
+              <div class="markdown-body">
+                
+                
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
   
-    
-    <a href="/2023/09/28/Kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" class="list-group-item list-group-item-action">
-      <time>09-28</time>
-      <div class="list-group-item-title">Kafka基础知识总结</div>
-    </a>
   
-    
-    <a href="/2023/09/26/%E4%B8%87%E5%BE%97-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91%E4%B8%80%E9%9D%A2/" class="list-group-item list-group-item-action">
-      <time>09-26</time>
-      <div class="list-group-item-title">万得-秋招-java开发一面</div>
-    </a>
-  
-    
-    <a href="/2023/09/26/%E7%94%B5%E4%BF%A1-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E9%9D%A2/" class="list-group-item list-group-item-action">
-      <time>09-26</time>
-      <div class="list-group-item-title">电信-秋招-一面</div>
-    </a>
-  
-    
-    <a href="/2023/09/25/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="list-group-item list-group-item-action">
-      <time>09-25</time>
-      <div class="list-group-item-title">Java异常处理</div>
-    </a>
-  
-    
-    <a href="/2023/09/25/%E7%89%9B%E5%AE%A2%E7%9B%B8%E5%85%B3%E9%9D%A2%E7%BB%8F%E6%95%B4%E7%90%86-0925/" class="list-group-item list-group-item-action">
-      <time>09-25</time>
-      <div class="list-group-item-title">牛客相关面经整理-0925</div>
-    </a>
-  
-    
-    <a href="/2023/09/25/%E5%8D%8E%E4%B8%BA-0920-%E7%AC%94%E8%AF%95/" class="list-group-item list-group-item-action">
-      <time>09-25</time>
-      <div class="list-group-item-title">华为-0920-笔试</div>
-    </a>
-  
-    
-    <a href="/2023/09/22/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%B8%89%E9%9D%A2/" class="list-group-item list-group-item-action">
-      <time>09-22</time>
-      <div class="list-group-item-title">b站-实习-微服务开发-三面</div>
-    </a>
-  
-    
-    <a href="/2023/09/21/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/" class="list-group-item list-group-item-action">
-      <time>09-21</time>
-      <div class="list-group-item-title">b站-实习-微服务开发-二面</div>
-    </a>
-  
-    
-    <a href="/2023/09/20/b%E7%AB%99-%E5%AE%9E%E4%B9%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91-%E4%B8%80%E9%9D%A2/" class="list-group-item list-group-item-action">
-      <time>09-20</time>
-      <div class="list-group-item-title">b站-实习-微服务开发-一面</div>
-    </a>
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Kafka/" class="print-no-link">#Kafka</a>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="print-no-link">#学习笔记</a>
+      
+    </div>
   
 </div>
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2023/page/2/#board">2</a><a class="page-number" href="/archives/2023/page/3/#board">3</a><a class="extend next" rel="next" href="/archives/2023/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
+              
+  
 
-
-
-
-              </div>
-            </div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Kafka基础知识总结</div>
+      <div>http://example.com/2023/09/28/Kafka基础知识总结/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>xiangyao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 28, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
           </div>
         </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/28/%E4%BB%80%E4%B9%88%E6%98%AF%E7%BD%91%E5%8D%A1/" title="什么是网卡？">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">什么是网卡？</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/26/%E4%B8%87%E5%BE%97-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91%E4%B8%80%E9%9D%A2/" title="万得-秋招-java开发一面">
+                        <span class="hidden-mobile">万得-秋招-java开发一面</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -367,6 +487,99 @@
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 
