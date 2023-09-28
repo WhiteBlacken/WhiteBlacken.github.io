@@ -16,21 +16,25 @@
   <meta name="author" content="xiangyao">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="Kafka基础知识总结">
+    <meta name="description" content="基本概念topic 主题消息存在topic中，类似于数据库中表，通常将相同的类型的消息存储到同一个主题中。半结构化的数据，某些情况下会将不同类型的消息放在同一个topic中，来满足特定的需求（如需要保证不同操作的顺序）。 patition 分区主题可以包含多个分区，使用分区实现的kafka的分布式需求，不同分区可放在不同的服务器上，可以通过调整节点的数量，来对kafka进行线性扩展。分区是一个线性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka入门">
 <meta property="og:url" content="http://example.com/2023/09/28/Kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
+<meta property="og:description" content="基本概念topic 主题消息存在topic中，类似于数据库中表，通常将相同的类型的消息存储到同一个主题中。半结构化的数据，某些情况下会将不同类型的消息放在同一个topic中，来满足特定的需求（如需要保证不同操作的顺序）。 patition 分区主题可以包含多个分区，使用分区实现的kafka的分布式需求，不同分区可放在不同的服务器上，可以通过调整节点的数量，来对kafka进行线性扩展。分区是一个线性">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://z1.ax1x.com/2023/09/28/pPbBmgP.png">
 <meta property="article:published_time" content="2023-09-27T16:48:57.000Z">
-<meta property="article:modified_time" content="2023-09-27T16:49:15.814Z">
+<meta property="article:modified_time" content="2023-09-28T09:32:29.154Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="Kafka">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://z1.ax1x.com/2023/09/28/pPbBmgP.png">
   
   
   
-  <title>Kafka基础知识总结 - xiangyao的个人博客</title>
+  <title>Kafka入门 - xiangyao的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -172,7 +176,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Kafka基础知识总结"></span>
+            <span id="subtitle" data-typed-text="Kafka入门"></span>
           
         </div>
 
@@ -195,7 +199,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          1.9k words
         
       </span>
     
@@ -206,7 +210,7 @@
         
         
         
-          1 mins
+          16 mins
         
       </span>
     
@@ -243,12 +247,21 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Kafka基础知识总结</h1>
+            <h1 id="seo-header">Kafka入门</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="topic-主题"><a href="#topic-主题" class="headerlink" title="topic 主题"></a>topic 主题</h2><p>消息存在topic中，类似于数据库中表，通常将相同的类型的消息存储到同一个主题中。<br>半结构化的数据，某些情况下会将不同类型的消息放在同一个topic中，来满足特定的需求（如需要保证不同操作的顺序）。</p>
+<h2 id="patition-分区"><a href="#patition-分区" class="headerlink" title="patition 分区"></a>patition 分区</h2><p>主题可以包含多个分区，使用分区实现的kafka的分布式需求，不同分区可放在不同的服务器上，可以通过调整节点的数量，来对kafka进行线性扩展。<br>分区是一个线性增长的不可变的线性日志，消息存储到分区中后不可变更，每个消息有一个offset，kafka可以通过offset来对消息进行提取，但是没法对消息的内容进行检索和查询，offset在一个分区内是递增的，且不可重复，不同分区的偏移量可以重复。</p>
+<h1 id="record-消息"><a href="#record-消息" class="headerlink" title="record 消息"></a>record 消息</h1><p>kafka中的消息是以键值对的形式存在，键值可用于指定消息存放的分区。<br>当不指定key，key为空，kafka会以轮询的方式放到不同分区</p>
+<h1 id="replication-副本"><a href="#replication-副本" class="headerlink" title="replication 副本"></a>replication 副本</h1><p>分区保证了kafka的可扩展性，但是分区损坏可能导致数据丢失，kafka通过副本机制保证其可靠性。<br>比如设置replication-factor&#x3D;3,则会存在3个副本，其中一个分区为主分支leader，负责数据的读写，另外两个副本follower，其仅用于数据同步。通过ISR（IN-Sync Replica list）来维护在同步的副本，若某个副本不能正常同步数据或落后较多，会从ISR中剔除，直到其赶上同步进度，再将其加入。</p>
+<h1 id="broker-消息代理"><a href="#broker-消息代理" class="headerlink" title="broker 消息代理"></a>broker 消息代理</h1><p>负责消息的读写请求，并将数据写入到磁盘，一般一台服务器为一个broker。</p>
+<p>下面这张图展示了Kafka cluster的相关概念。<br>该图是replication-factor&#x3D;3的情况，总共分为8个分区，每个分区有3个副本，每个broker上有一个leader结点，以及不同分区的follower结点。以brokder-0为例，他会处理p1分区的读写请求，处理p0和p2的数据同步。<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pPbBmgP"><img src="https://z1.ax1x.com/2023/09/28/pPbBmgP.png" srcset="/img/loading.gif" lazyload alt="pPbBmgP.png"></a></p>
+<h1 id="使用docker部署kafka"><a href="#使用docker部署kafka" class="headerlink" title="使用docker部署kafka"></a>使用docker部署kafka</h1><h2 id="1-安装docker-docker-compose"><a href="#1-安装docker-docker-compose" class="headerlink" title="1. 安装docker+docker-compose"></a>1. 安装docker+docker-compose</h2><h2 id="2-获取已经写好的docker-compose文件"><a href="#2-获取已经写好的docker-compose文件" class="headerlink" title="2. 获取已经写好的docker-compose文件"></a>2. 获取已经写好的docker-compose文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">直接下载指定文件也行</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">克隆docker制作脚本</span><br>git clone https://github.com/wurstmeister/kafka-docker.git<br><span class="hljs-meta prompt_"># </span><span class="language-bash">进入目录查看目录文件</span><br>cd kafka-docker<br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看所有标签，找到最新版本</span><br>git tag<br><span class="hljs-meta prompt_"># </span><span class="language-bash">切换到最新版本</span><br>git checkout &lt;last_tag_name&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="3-修改docker-compose-yml的配置"><a href="#3-修改docker-compose-yml的配置" class="headerlink" title="3. 修改docker-compose.yml的配置"></a>3. 修改docker-compose.yml的配置</h2><p>修改后的版本</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">version:</span> <span class="hljs-string">&#x27;2&#x27;</span><br><span class="hljs-symbol">services:</span><br><span class="hljs-symbol">  zookeeper:</span><br><span class="hljs-symbol">    image:</span> wurstmeister/zookeeper<br><span class="hljs-symbol">    ports:</span><br>      - <span class="hljs-string">&quot;2181:2181&quot;</span><br><span class="hljs-symbol">  kafka1:</span><br><span class="hljs-symbol">    image:</span> wurstmeister/kafka:latest<br><span class="hljs-symbol">    ports:</span><br>      - <span class="hljs-string">&quot;9092:9092&quot;</span><br><span class="hljs-symbol">    environment:</span><br><span class="hljs-symbol">      KAFKA_ADVERTISED_HOST_NAME:</span> <span class="hljs-meta"># 使用自己的ip地址</span><br><span class="hljs-symbol">      KAFKA_ZOOKEEPER_CONNECT:</span> zookeeper:<span class="hljs-number">2181</span><br><span class="hljs-symbol">      KAFKA_BROKER_ID:</span> <span class="hljs-number">1</span><br><span class="hljs-symbol">    volumes:</span><br>      - <span class="hljs-keyword">/var/</span>run/docker.sock:<span class="hljs-keyword">/var/</span>run/docker.sock<br></code></pre></td></tr></table></figure>
+<h2 id="4-运行并测试"><a href="#4-运行并测试" class="headerlink" title="4. 运行并测试"></a>4. 运行并测试</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">启动zookeeper和kafka</span><br>docker-compose up -d<br><span class="hljs-meta prompt_"># </span><span class="language-bash">获取kafka容器的<span class="hljs-built_in">id</span></span><br>docker ps<br><span class="hljs-meta prompt_"># </span><span class="language-bash">进入kafka容器，为了方便测试可以打开两个窗口，都进入容器</span><br>docker exec -it kafka-docker-kafka1-1 /bin/bash # 其中kafka-docker-kafka1-1为容器名称<br><span class="hljs-meta prompt_"># </span><span class="language-bash">创建topic</span><br>kafka-topics.sh --create --topic test-topic --bootstrap-server localhost:9092 # 分区和副本使用了默认<br><span class="hljs-meta prompt_"># </span><span class="language-bash">生产者</span><br>kafka-console-producer.sh --topic test-topic --bootstrap-server localhost:9092 # 进入了交互页面<br><span class="hljs-meta prompt_"># </span><span class="language-bash">消费者</span><br>kafka-console-consumer.sh --topic test-topic --from-beginning --bootstrap-server localhost:9092<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">下面就可以从生产者发送消息，来让消费者消费。</span><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -274,7 +287,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Kafka基础知识总结</div>
+      <div>Kafka入门</div>
       <div>http://example.com/2023/09/28/Kafka基础知识总结/</div>
     </div>
     <div class="license-meta">
