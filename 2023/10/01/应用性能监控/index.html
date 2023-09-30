@@ -24,7 +24,7 @@
 <meta property="og:description" content="背景最近想学习下Prometheus的相关知识，正好上线的django项目没有监控，故拿该项目试试。 django下配置Prometheusdjango应用程序端目标是提供可以Prometheus格式的数据的接口。  安装库1pip install django-prometheus 修改django的settings的文件修改installed_apps1234INSTALLED_APPS &#x3D;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-30T16:11:09.000Z">
-<meta property="article:modified_time" content="2023-09-30T16:57:14.395Z">
+<meta property="article:modified_time" content="2023-09-30T16:58:59.927Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="运维">
 <meta name="twitter:card" content="summary_large_image">
@@ -196,7 +196,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          1.5k words
         
       </span>
     
@@ -207,7 +207,7 @@
         
         
         
-          12 mins
+          13 mins
         
       </span>
     
@@ -264,7 +264,7 @@
 <li>修改prometheus.yml配置文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">简单的一些配置</span><br>global:<br>  scrape_interval: 15s <br>  evaluation_interval: 15s <br><br>scrape_configs:<br>  - job_name: &quot;django&quot;<br><br>    # scheme defaults to &#x27;http&#x27;.<br><br>    static_configs:<br>      - targets: [&quot;127.0.0.1:8000&quot;] # 监听的服务<br><br>    # 实际上不配置，默认也是这个<br>    metrics_path: &#x27;/metrics&#x27;<br>      <br><br></code></pre></td></tr></table></figure></li>
 <li>运行Prometheus，会提供一个Web UI<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">windows</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">默认监听9090端口</span><br>.\prometheus.exe --config.file=prometheus.yml<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">如果想修改端口</span><br>.\prometheus.exe --config.file=prometheus.yml --web.listen-address=:8080<br></code></pre></td></tr></table></figure></li>
 </ol>
-<p>配置很方便，但是通过实际上很多指标看不懂其意思，暂时不能帮助理解系统的运行状态。</p>
+<p>配置很方便，但是通过实际上很多指标看不懂其意思，暂时不能帮助理解系统的运行状态。<br>另外一方面，Prometheus的数据解读和可视化并不够好，可以配合Grafana来使用。</p>
 
                 
               </div>
