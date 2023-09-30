@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>应用性能监控</title>
+    <link href="/2023/10/01/%E5%BA%94%E7%94%A8%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7/"/>
+    <url>/2023/10/01/%E5%BA%94%E7%94%A8%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7/</url>
+    
+    <content type="html"><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>最近想学习下Prometheus的相关知识，正好上线的django项目没有监控，故拿该项目试试。</p><h1 id="django下配置Prometheus"><a href="#django下配置Prometheus" class="headerlink" title="django下配置Prometheus"></a>django下配置Prometheus</h1><h2 id="django应用程序端"><a href="#django应用程序端" class="headerlink" title="django应用程序端"></a>django应用程序端</h2><p>目标是提供可以Prometheus格式的数据的接口。</p><ol><li>安装库<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pip install django-prometheus<br></code></pre></td></tr></table></figure></li><li>修改django的settings的文件<br>修改installed_apps<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">INSTALLED_APPS = [<br>    <span class="hljs-comment"># ...其他的apps</span><br>    <span class="hljs-string">&#x27;django_prometheus&#x27;</span>,<br>]<br></code></pre></td></tr></table></figure>更改数据库配置<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">DATABASES = &#123;<br>    <span class="hljs-string">&quot;default&quot;</span>: &#123;<br>        <span class="hljs-comment"># &quot;ENGINE&quot;: &quot;django.db.backends.mysql&quot;, 以前的配置</span><br>        <span class="hljs-string">&quot;ENGINE&quot;</span>: <span class="hljs-string">&quot;django_prometheus.db.backends.mysql&quot;</span>, <span class="hljs-comment"># 新的配置</span><br>        <span class="hljs-comment"># ...你的其他设置，如NAME, USER等...</span><br>    &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>添加中间件<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">Before中间件要放在其他中间件之前</span><br><span class="hljs-string">After中间件放在其他中间件之后</span><br><span class="hljs-string">这样可以准确地测量从请求开始到结束的整个过程，包括其他中间件和视图处理的时间。</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br>MIDDLEWARE = [<br>    <span class="hljs-string">&#x27;django_prometheus.middleware.PrometheusBeforeMiddleware&#x27;</span>, <br>    <span class="hljs-comment"># ...其他中间件...</span><br>    <span class="hljs-string">&#x27;django_prometheus.middleware.PrometheusAfterMiddleware&#x27;</span>,<br>]<br></code></pre></td></tr></table></figure></li><li>使用url暴露指标<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 实际的路径是 http://127.0.0.1:8000/metrics</span><br><span class="hljs-comment"># 该url会输出Prometheus格式的指标</span><br>path(<span class="hljs-string">&quot;&quot;</span>, include(<span class="hljs-string">&#x27;django_prometheus.urls&#x27;</span>)),<br></code></pre></td></tr></table></figure></li></ol><h2 id="Prometheus端"><a href="#Prometheus端" class="headerlink" title="Prometheus端"></a>Prometheus端</h2><p>目标是定期拉取数据，并提供可视化。</p><ol><li>下载对应的版本的Prometheus</li><li>修改prometheus.yml配置文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">简单的一些配置</span><br>global:<br>  scrape_interval: 15s <br>  evaluation_interval: 15s <br><br>scrape_configs:<br>  - job_name: &quot;django&quot;<br><br>    # scheme defaults to &#x27;http&#x27;.<br><br>    static_configs:<br>      - targets: [&quot;127.0.0.1:8000&quot;] # 监听的服务<br><br>    # 实际上不配置，默认也是这个<br>    metrics_path: &#x27;/metrics&#x27;<br>      <br><br></code></pre></td></tr></table></figure></li><li>运行Prometheus，会提供一个Web UI<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">windows</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">默认监听9090端口</span><br>.\prometheus.exe --config.file=prometheus.yml<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">如果想修改端口</span><br>.\prometheus.exe --config.file=prometheus.yml --web.listen-address=:8080<br></code></pre></td></tr></table></figure></li></ol><p>配置很方便，但是通过实际上很多指标看不懂其意思，暂时不能帮助理解系统的运行状态。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>运维</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>JVM基础知识</title>
+    <link href="/2023/09/30/JVM%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <url>/2023/09/30/JVM%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Java内存区域"><a href="#Java内存区域" class="headerlink" title="Java内存区域"></a>Java内存区域</h1><h2 id="介绍下Jvm运行时数据区？"><a href="#介绍下Jvm运行时数据区？" class="headerlink" title="介绍下Jvm运行时数据区？"></a>介绍下Jvm运行时数据区？</h2><p>主要由5块组成。<br>线程共有的有：<br>堆：主要用于存储对象实例。<br>方法区：用于存储类信息。<br>线程私有的有：<br>java虚拟机栈：用于存储基本数据类型和引用类型<br>本地方法栈：服务于本地方法<br>程序计数器：用于指向字节码的行号，控制执行流程</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>JAVA</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Java集合</title>
     <link href="/2023/09/29/Java%E9%9B%86%E5%90%88/"/>
     <url>/2023/09/29/Java%E9%9B%86%E5%90%88/</url>
