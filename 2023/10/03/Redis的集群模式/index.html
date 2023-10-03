@@ -16,24 +16,23 @@
   <meta name="author" content="xiangyao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="背景网站使用MeiliSearch(可以理解为ES)作为搜索引擎，数据来源是MySQL中的一张大表，目前需要MeiliSearch同步MySQL的增量数据。准备选取Cannal监听binlog的方案来完成 Cannal介绍基于MySQL的数据库增量日志解析，提供增量数据订阅和消费。早期诞生于阿里巴巴国内国外跨机房同步的业务需求。使用场景  数据实时备份 异构数据源（ES，Hbase）与数据库数据增">
+    <meta name="description" content="引子提起Redis的高可用，一般包含两层含义：  数据不能丢失，或者尽量减少丢失 Redis服务不可中断  前者可以通过AOF和RDB持久化保证，后者则要求Redis服务不能单点部署，这也是本文要介绍的集群模式。 相关概念主从模式 部署多台Redis服务器，分为主库和从库，他们之间通过主从复制，保证数据副本的一致。 读写分离：主数据库负责读写，从数据库仅负责读。 主库挂了，需要选举出从库成为主库。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cannal同步MySQL增量数据至ES&#x2F;MeiliSearch">
-<meta property="og:url" content="http://example.com/2023/10/03/Cannal%E5%90%8C%E6%AD%A5MySQL%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%87%B3ES-MeiliSearch/index.html">
+<meta property="og:title" content="Redis的集群模式">
+<meta property="og:url" content="http://example.com/2023/10/03/Redis%E7%9A%84%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
-<meta property="og:description" content="背景网站使用MeiliSearch(可以理解为ES)作为搜索引擎，数据来源是MySQL中的一张大表，目前需要MeiliSearch同步MySQL的增量数据。准备选取Cannal监听binlog的方案来完成 Cannal介绍基于MySQL的数据库增量日志解析，提供增量数据订阅和消费。早期诞生于阿里巴巴国内国外跨机房同步的业务需求。使用场景  数据实时备份 异构数据源（ES，Hbase）与数据库数据增">
+<meta property="og:description" content="引子提起Redis的高可用，一般包含两层含义：  数据不能丢失，或者尽量减少丢失 Redis服务不可中断  前者可以通过AOF和RDB持久化保证，后者则要求Redis服务不能单点部署，这也是本文要介绍的集群模式。 相关概念主从模式 部署多台Redis服务器，分为主库和从库，他们之间通过主从复制，保证数据副本的一致。 读写分离：主数据库负责读写，从数据库仅负责读。 主库挂了，需要选举出从库成为主库。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-10-03T07:34:53.000Z">
-<meta property="article:modified_time" content="2023-10-03T15:17:34.524Z">
+<meta property="article:published_time" content="2023-10-03T15:18:22.000Z">
+<meta property="article:modified_time" content="2023-10-03T16:00:06.465Z">
 <meta property="article:author" content="xiangyao">
-<meta property="article:tag" content="开发">
-<meta property="article:tag" content="Cannal">
-<meta property="article:tag" content="MQ">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Cannal同步MySQL增量数据至ES/MeiliSearch - xiangyao的个人博客</title>
+  <title>Redis的集群模式 - xiangyao的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -175,7 +174,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Cannal同步MySQL增量数据至ES/MeiliSearch"></span>
+            <span id="subtitle" data-typed-text="Redis的集群模式"></span>
           
         </div>
 
@@ -186,7 +185,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-03 15:34" pubdate>
+        <time datetime="2023-10-03 23:18" pubdate>
           October 3, 2023 pm
         </time>
       </span>
@@ -198,7 +197,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          627 words
+          1.1k words
         
       </span>
     
@@ -209,7 +208,7 @@
         
         
         
-          6 mins
+          10 mins
         
       </span>
     
@@ -246,42 +245,46 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Cannal同步MySQL增量数据至ES/MeiliSearch</h1>
+            <h1 id="seo-header">Redis的集群模式</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>网站使用MeiliSearch(可以理解为ES)作为搜索引擎，数据来源是MySQL中的一张大表，目前需要MeiliSearch同步MySQL的增量数据。准备选取Cannal监听binlog的方案来完成</p>
-<h1 id="Cannal"><a href="#Cannal" class="headerlink" title="Cannal"></a>Cannal</h1><p><strong>介绍</strong><br>基于MySQL的数据库增量日志解析，提供增量数据订阅和消费。早期诞生于阿里巴巴国内国外跨机房同步的业务需求。<br><strong>使用场景</strong></p>
-<ul>
-<li>数据实时备份</li>
-<li>异构数据源（ES，Hbase）与数据库数据增量同步</li>
-<li>业务Cache刷新（Redis），保证缓存一致性</li>
-<li>带业务逻辑的增量数据处理，如监听某个数据的变化做一定的逻辑处理。</li>
-</ul>
-<p><strong>原理</strong><br>借助于MySQL主从复制原理。</p>
-<p>主从复制分三步：</p>
+                <h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>提起Redis的高可用，一般包含两层含义：</p>
 <ol>
-<li>master将改变记录写入binlog。</li>
-<li>slave将master的binary log events拷贝到其中继日志（relay log）</li>
-<li>slave重做中继日志中的事件</li>
+<li>数据不能丢失，或者尽量减少丢失</li>
+<li>Redis服务不可中断</li>
 </ol>
-<p>Cannal则是把自己伪装成slave结点，想master发送dump协议，等待master推送binlog。</p>
-<p><strong>优势</strong><br>对业务逻辑无入侵，可以解决在呢过量同步问题。<br><strong>缺点</strong></p>
-<ul>
-<li>只能监听MySQL。</li>
-<li>准实时同步</li>
-<li>顺序问题</li>
+<p>前者可以通过AOF和RDB持久化保证，后者则要求Redis服务不能单点部署，这也是本文要介绍的集群模式。</p>
+<h1 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h1><h2 id="主从模式"><a href="#主从模式" class="headerlink" title="主从模式"></a>主从模式</h2><ul>
+<li>部署多台Redis服务器，分为主库和从库，他们之间通过主从复制，保证数据副本的一致。</li>
+<li>读写分离：主数据库负责读写，从数据库仅负责读。</li>
+<li>主库挂了，需要选举出从库成为主库。</li>
 </ul>
-<h1 id="使用Cannal同步数据至MeiliSearch"><a href="#使用Cannal同步数据至MeiliSearch" class="headerlink" title="使用Cannal同步数据至MeiliSearch"></a>使用Cannal同步数据至MeiliSearch</h1><p>要注意的几点？</p>
-<ul>
-<li>错误处理？</li>
-<li>消费的效率？</li>
-<li>消费的顺序？</li>
+<h2 id="主从同步的过程"><a href="#主从同步的过程" class="headerlink" title="主从同步的过程"></a>主从同步的过程</h2><ul>
+<li>第一阶段：建立连接，协商同步<ul>
+<li>从库向主库发送psync命令，要求进行数据同步</li>
+<li>主库收到命令，响应fullresync命令，表示进行全量复制</li>
 </ul>
+</li>
+<li>第二阶段：主库同步数据给从库<ul>
+<li>主库执行bgsave，生成RDB文件，发给从库。</li>
+<li>从库接收到RDB后，清空当前数据库，加载RDB文件</li>
+</ul>
+</li>
+<li>第三阶段：主库发送新写的命令给从库<ul>
+<li>主库发送完RDB，会把replication buffer中的修改操作发给从库，从库重新执行这些操作，实现同步。</li>
+</ul>
+</li>
+</ul>
+<h2 id="可能产生的问题"><a href="#可能产生的问题" class="headerlink" title="可能产生的问题"></a>可能产生的问题</h2><h3 id="数据不一致"><a href="#数据不一致" class="headerlink" title="数据不一致"></a>数据不一致</h3><p>主从复制是异步进行，从库如果滞后执行（网络延迟、正在执行阻塞性命令，如hgetall），则会导致主从数据不一致。</p>
+<h3 id="读取过期数据"><a href="#读取过期数据" class="headerlink" title="读取过期数据"></a>读取过期数据</h3><p>Redis版本低于3.2时，读从库并不判断数据是否过期，导致返回过期数据。3.2滞后，若从库读到数据已经过期，从库不删除（从数据库不进行写操作），但是返回空值。</p>
+<h3 id="多从库全量复制下主库的开销"><a href="#多从库全量复制下主库的开销" class="headerlink" title="多从库全量复制下主库的开销"></a>多从库全量复制下主库的开销</h3><p>在一主多从的模式下，很多从库要和主库进行全量复制。产生两个大的开销：1. fork进程生成RDB，会阻塞主线程的正常请求 2. 传输大的RDB文件会占用主库带宽。<br>解决：可以采用主-从-从模式</p>
+<h3 id="主从网络中断的全量复制问题"><a href="#主从网络中断的全量复制问题" class="headerlink" title="主从网络中断的全量复制问题"></a>主从网络中断的全量复制问题</h3><p>全量复制后，会维护网络长连接，用于主库后续写命令的传输，避免频繁建立连接的开销。<br><strong>网络断开重连后，是否会再次全量复制？</strong><br>2.8版本前需要，2.8之后，重连后采用增量复制，将断连期间的写命令同步给从库。使用repl_backlog_buffer缓冲区实现。主库会记录自己写的位置，从库会记录自己读的位置。</p>
+<h3 id="主节点故障"><a href="#主节点故障" class="headerlink" title="主节点故障"></a>主节点故障</h3><p>如果主节点故障，使用人工来将从节点晋升为主节点，并且通知应用方更新主节点地址，这个是不能被接受的。Redis2.8开始提供了哨兵机制来解决这个问题。</p>
+<h4 id="哨兵作用"><a href="#哨兵作用" class="headerlink" title="哨兵作用"></a>哨兵作用</h4><p>特殊模式下的Redis进程，三个作用：监控、选主、通知。<br>监控：哨兵运行期间，监视所有主从结点，周期性的发送ping命令，检测主从库是否挂了，若是主从没有在规定时间内响应ping命令，则哨兵认为其下线。<br>选主：当主库下线时，需要按照一定规则选出主库。<br>通知：选出主库后，将新主库的连接信息发送给其他从库 + 客户端。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/442830673/answer/3189925821">https://www.zhihu.com/question/442830673/answer/3189925821</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/442830673/answer/3202016337">https://www.zhihu.com/question/442830673/answer/3202016337</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/647505284">https://zhuanlan.zhihu.com/p/647505284</a></li>
 </ol>
 
                 
@@ -295,11 +298,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%BC%80%E5%8F%91/" class="print-no-link">#开发</a>
+        <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="print-no-link">#学习笔记</a>
       
-        <a href="/tags/Cannal/" class="print-no-link">#Cannal</a>
-      
-        <a href="/tags/MQ/" class="print-no-link">#MQ</a>
+        <a href="/tags/Redis/" class="print-no-link">#Redis</a>
       
     </div>
   
@@ -311,8 +312,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Cannal同步MySQL增量数据至ES/MeiliSearch</div>
-      <div>http://example.com/2023/10/03/Cannal同步MySQL增量数据至ES-MeiliSearch/</div>
+      <div>Redis的集群模式</div>
+      <div>http://example.com/2023/10/03/Redis的集群模式/</div>
     </div>
     <div class="license-meta">
       
@@ -356,18 +357,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/03/MQ%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%A1%BA%E5%BA%8F%E6%80%A7%EF%BC%9F/" title="MQ如何保证顺序性？">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MQ如何保证顺序性？</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/10/01/%E5%BA%94%E7%94%A8%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7/" title="应用性能监控">
-                        <span class="hidden-mobile">应用性能监控</span>
+                      <a href="/2023/10/03/MQ%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%A1%BA%E5%BA%8F%E6%80%A7%EF%BC%9F/" title="MQ如何保证顺序性？">
+                        <span class="hidden-mobile">MQ如何保证顺序性？</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
