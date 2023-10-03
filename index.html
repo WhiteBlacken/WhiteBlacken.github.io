@@ -208,7 +208,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/10/03/MQ%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%A1%BA%E5%BA%8F%E6%80%A7%EF%BC%9F/" target="_self">
         <div>
-          为什么需要保证MQ的顺序？一般MQ被用于三种场景：  削峰填谷。防止服务器被高流量打挂。 流程的异步或解耦。 Mysql通过Cannal订阅binlog，发送给MQ，进行后续的数据同步。  三个场景中，只有第三个场景需要严格保证消息顺序。考虑如果两个更新请求，更换了顺序，可能结果就与预期不一致了。 解决思路单线程消费一个topic，一个partition，一个consumer，一个线程例如kafk
+          为什么需要保证MQ的顺序？一般MQ被用于三种场景：  削峰填谷。防止服务器被高流量打挂。 流程的异步或解耦。 Mysql通过Cannal订阅binlog，发送给MQ，进行后续的数据同步。  三个场景中，只有第三个场景需要严格保证消息顺序。考虑如果两个更新请求，更换了顺序，可能结果就与预期不一致了。 解决方案单线程消费一个topic，一个partition，一个consumer，一个线程例如kafk
         </div>
       </a>
 
