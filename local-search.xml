@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>不同数据库比较</title>
+    <link href="/2023/10/04/%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AF%94%E8%BE%83/"/>
+    <url>/2023/10/04/%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AF%94%E8%BE%83/</url>
+    
+    <content type="html"><![CDATA[<h1 id="MySQL为代表的关系型数据库"><a href="#MySQL为代表的关系型数据库" class="headerlink" title="MySQL为代表的关系型数据库"></a>MySQL为代表的关系型数据库</h1><p>先看MySQL本身，支持事务，是单机的，不考虑分库分表的情况下，能存储的数据量取决于服务器的硬盘大小。<br>如果是日增1T这种需求的数据，不适合存数据。</p><h1 id="Redis为代表的内存数据库"><a href="#Redis为代表的内存数据库" class="headerlink" title="Redis为代表的内存数据库"></a>Redis为代表的内存数据库</h1><p>读写都在内存，快，可以通过AOF和RDB进行持久化，但是最终数据都要加载到内存中，内容容量有限，不适合存储大量数据。</p><h1 id="ES为代表的分布式搜索引擎"><a href="#ES为代表的分布式搜索引擎" class="headerlink" title="ES为代表的分布式搜索引擎"></a>ES为代表的分布式搜索引擎</h1><p>主要是用于检索，但是因为其分布式，也能存储海量数据，且检索性能也好。<br>但是如果不是经常进行检索，ES会比较贵，因为数据写入ES，会进行分词。</p><h1 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h1><p>可以存储海量数据，但是不支持随机修改，查询效率差。mark</p><h1 id="HBase"><a href="#HBase" class="headerlink" title="HBase"></a>HBase</h1><p>NoSQL数据库，可以存储海量数据，查询和插入效率都还行，可修改。</p><h1 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h1>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>数据库</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Redis的集群模式</title>
     <link href="/2023/10/03/Redis%E7%9A%84%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/"/>
     <url>/2023/10/03/Redis%E7%9A%84%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/</url>
