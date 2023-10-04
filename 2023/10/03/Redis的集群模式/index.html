@@ -24,7 +24,7 @@
 <meta property="og:description" content="引子提起Redis的高可用，一般包含两层含义：  数据不能丢失，或者尽量减少丢失 Redis服务不可中断  前者可以通过AOF和RDB持久化保证，后者则要求Redis服务不能单点部署，这也是本文要介绍的集群模式。 相关概念主从模式 部署多台Redis服务器，分为主库和从库，他们之间通过主从复制，保证数据副本的一致。 读写分离：主数据库负责读写，从数据库仅负责读。 主库挂了，需要选举出从库成为主库。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-03T15:18:22.000Z">
-<meta property="article:modified_time" content="2023-10-03T16:00:06.465Z">
+<meta property="article:modified_time" content="2023-10-04T02:08:32.010Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="Redis">
@@ -197,7 +197,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k words
+          2k words
         
       </span>
     
@@ -208,7 +208,7 @@
         
         
         
-          10 mins
+          17 mins
         
       </span>
     
@@ -283,8 +283,23 @@
 <h3 id="主从网络中断的全量复制问题"><a href="#主从网络中断的全量复制问题" class="headerlink" title="主从网络中断的全量复制问题"></a>主从网络中断的全量复制问题</h3><p>全量复制后，会维护网络长连接，用于主库后续写命令的传输，避免频繁建立连接的开销。<br><strong>网络断开重连后，是否会再次全量复制？</strong><br>2.8版本前需要，2.8之后，重连后采用增量复制，将断连期间的写命令同步给从库。使用repl_backlog_buffer缓冲区实现。主库会记录自己写的位置，从库会记录自己读的位置。</p>
 <h3 id="主节点故障"><a href="#主节点故障" class="headerlink" title="主节点故障"></a>主节点故障</h3><p>如果主节点故障，使用人工来将从节点晋升为主节点，并且通知应用方更新主节点地址，这个是不能被接受的。Redis2.8开始提供了哨兵机制来解决这个问题。</p>
 <h4 id="哨兵作用"><a href="#哨兵作用" class="headerlink" title="哨兵作用"></a>哨兵作用</h4><p>特殊模式下的Redis进程，三个作用：监控、选主、通知。<br>监控：哨兵运行期间，监视所有主从结点，周期性的发送ping命令，检测主从库是否挂了，若是主从没有在规定时间内响应ping命令，则哨兵认为其下线。<br>选主：当主库下线时，需要按照一定规则选出主库。<br>通知：选出主库后，将新主库的连接信息发送给其他从库 + 客户端。</p>
+<p><strong>哨兵本身是一个redis进程，若是哨兵挂了怎么办？</strong><br>一个哨兵对Redis节点进行监控，会出现单点问题，所以一般使用多个哨兵来监控Redis节点，哨兵之间也会互相监控。<br>哨兵之间通过发布订阅模式组成集群？（怎么理解）</p>
+<p><strong>哨兵如何判定主库下线？</strong><br>主观下线：当一个哨兵无法在规定时间内获得目标实例的响应，该哨兵会认为该实例主观下线。<br>客观下线：当足够数量的哨兵（看配置）同意一个节点是主观下线状态，这个节点会被标记为客观下线。</p>
+<p>若没有足够数量的哨兵同意主库已经进入主观下线，则主库主观下线状态移除。</p>
+<p><strong>哨兵如何选主？</strong><br>主库客观下线后，会进入选主模式。<br>包含过滤和打分两个过程。<br>过滤：下线、网络不好<br>打分：从库优先级（通过slave-Priority配置）、复制进度、ID号</p>
+<p><strong>由哪个哨兵执行主从切换呢？</strong><br>一个哨兵标记主库为主观下线，会向其他哨兵发送is-master-down-by-addr，其他哨兵会根据自己和主库的连接情况恢复Y或N，住过该哨兵获得足够多赞成票，则主库被标记为客观下线。<br>其紧接着再次发起投票，希望它可以来执行主从切换，称为leader选取。<br>哨兵称为leader需要满足两个条件</p>
+<ul>
+<li>拿到 n&#x2F;2 + 1的赞成票</li>
+<li>票数需要大于等于配置文件中的quorum值</li>
+</ul>
+<p>如果因为网络故障等原因，没有哨兵获得足够的票数，那哨兵集群会等待一段时间（一般是哨兵故障转移超时时间的2倍），再重新进行选举。</p>
+<p><strong>如何进行主从切换（故障转移）？</strong><br>通知选主后的节点升级为新主库，通知到其他节点（包括原主库）成为新主库的从节点。<br>通知客户端新主节点的地址。</p>
+<h2 id="Redis-Cluster集群"><a href="#Redis-Cluster集群" class="headerlink" title="Redis Cluster集群"></a>Redis Cluster集群</h2><p>前面的哨兵模式，实现了读写分离、故障转移，保证了可用性。但是每个节点的数据是一样，浪费内存，并且不容易在线扩容。于是Redis 3.0引入了Redis Cluster集群（切片集群），对数据进行分片，每个redis上存储不同的内容，来解决在线扩容。</p>
+<p><strong>客户端如何确定访问的数据在哪个实例上？</strong><br>mark 几种策略</p>
+<p>主从保证的是读写分离、数据备份，哨兵保证的是可用，redis cluster为了解决的是单一主节点带来的性能瓶颈。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/647505284">https://zhuanlan.zhihu.com/p/647505284</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/351437609">https://zhuanlan.zhihu.com/p/351437609</a>  –思路清晰</li>
 </ol>
 
                 
