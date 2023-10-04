@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>MySQL中的各种锁</title>
+    <link href="/2023/10/04/MySQL%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E9%94%81/"/>
+    <url>/2023/10/04/MySQL%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E9%94%81/</url>
+    
+    <content type="html"><![CDATA[<h1 id="锁的目的"><a href="#锁的目的" class="headerlink" title="锁的目的"></a>锁的目的</h1><p>处理并发问题，保证数据安全。</p><h1 id="划分维度"><a href="#划分维度" class="headerlink" title="划分维度"></a>划分维度</h1><p><strong>按照使用方式</strong><br>共享锁、排它锁<br><strong>按照加锁范围</strong><br>全局锁、表级锁、行锁<br><strong>思想上</strong><br>乐观锁、悲观锁</p><h1 id="共享锁-排它锁"><a href="#共享锁-排它锁" class="headerlink" title="共享锁&amp;排它锁"></a>共享锁&amp;排它锁</h1><h2 id="共享锁"><a href="#共享锁" class="headerlink" title="共享锁"></a>共享锁</h2><p>Share lock，也叫读锁。当对象被锁定时，允许其他事务读取该对象，也允许其他事务从该对象上获取共享锁，但是不能写入。<br>加锁方式：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 方式1</span><br><span class="hljs-keyword">select</span> ... lock <span class="hljs-keyword">in</span> share mode;<br><span class="hljs-comment">-- 方式2</span><br><span class="hljs-keyword">select</span> ... <span class="hljs-keyword">for</span> share;<br></code></pre></td></tr></table></figure><h2 id="排它锁"><a href="#排它锁" class="headerlink" title="排它锁"></a>排它锁</h2><p>Extention Lock，写锁、独占锁。阻塞其他事务对当前对象的读写操作。<br>加锁方式：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ... <span class="hljs-keyword">for</span> <span class="hljs-keyword">update</span>;<br></code></pre></td></tr></table></figure><h1 id="全局锁-表级锁-行锁"><a href="#全局锁-表级锁-行锁" class="headerlink" title="全局锁&amp;表级锁&amp;行锁"></a>全局锁&amp;表级锁&amp;行锁</h1><h2 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h2><p>对整个数据库实例加锁，最大粒度的锁。<br>加锁方式：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql">flush tables <span class="hljs-keyword">with</span> read lock;<br><span class="hljs-comment">-- 执行完毕后，整个数据库就处于只读状态了。</span><br></code></pre></td></tr></table></figure><p>释放锁：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql">unlock tables;<br><span class="hljs-comment">-- 或者加锁的会话断开，全局锁自动释放。</span><br></code></pre></td></tr></table></figure><h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h2><p>包含两种：表锁和元数据锁。</p><h3 id="表锁"><a href="#表锁" class="headerlink" title="表锁"></a>表锁</h3><p>对整张表上锁，包括读锁和写锁，显示显示加锁和释放。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 加写锁</span><br>lock tables tablename write;<br>lock tables tablenmae; <span class="hljs-comment">--默认加写锁</span><br><span class="hljs-comment">-- 加读锁</span><br>lock tables tablename read;<br><span class="hljs-comment">-- 释放锁</span><br>unlock tables;<br></code></pre></td></tr></table></figure><h3 id="元数据锁"><a href="#元数据锁" class="headerlink" title="元数据锁"></a>元数据锁</h3><p>对更改表结构时隐式上锁， mark</p><h3 id="意向锁"><a href="#意向锁" class="headerlink" title="意向锁"></a>意向锁</h3><h3 id="AUTO-INC锁"><a href="#AUTO-INC锁" class="headerlink" title="AUTO-INC锁"></a>AUTO-INC锁</h3><h2 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h2><p>MySQL行锁在引擎层实现，不是所有引擎都支持行锁，Innodb指出，MyISAM不支持。<br>行锁主要有四类：</p><ul><li>Record lock</li><li>Gap lock</li><li>Next-key lock</li><li>插入意向锁</li></ul><h3 id="Record-lock"><a href="#Record-lock" class="headerlink" title="Record lock"></a>Record lock</h3><h1 id="乐观锁-悲观锁"><a href="#乐观锁-悲观锁" class="headerlink" title="乐观锁&amp;悲观锁"></a>乐观锁&amp;悲观锁</h1><h1 id="死锁的发生和处理"><a href="#死锁的发生和处理" class="headerlink" title="死锁的发生和处理"></a>死锁的发生和处理</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol><li><a href="https://zhuanlan.zhihu.com/p/570570330">https://zhuanlan.zhihu.com/p/570570330</a></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>数据库</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>不同数据库比较</title>
     <link href="/2023/10/04/%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AF%94%E8%BE%83/"/>
     <url>/2023/10/04/%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AF%94%E8%BE%83/</url>
