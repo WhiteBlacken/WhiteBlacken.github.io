@@ -16,22 +16,25 @@
   <meta name="author" content="xiangyao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="背景两个Django应用与Nginx服务放在了同一台服务器上，希望迁移其中一个应用来到其他服务器上来降低资源的竞争。 迁移准备过去的部署策略：Nginx + uWSGi + 两个应用服务 + 裸机理想状态：nginx集群 + 两个服务不同的集群此次的目标：仅仅希望将后台应用拆出来，不做其他处理，Nginx与应用1仍共享一台服务器。需要做的事情有：  在新的服务器上，准备新的环境，使用docker来">
+    <meta name="description" content="背景公司有一个单独的翻译程序，会针对指定的数据库中的字段进行批量翻译，生成json文件，后续去修改数据库中的不同语言的字段。一次生成的数据量在50w-200w不等，因为需要人工抽查，所以没有在翻译完成后直接导入，同时也避免导入数据时造成的数据库负担。（可以在流量低谷进行导入）。数据库中数据量在2kw左右。 前期准备导入的所需json文件在本地机器上。预期使用pymysql导入，比较简单，代码量小。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次应用迁移">
-<meta property="og:url" content="http://example.com/2023/10/05/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%BA%94%E7%94%A8%E8%BF%81%E7%A7%BB/index.html">
+<meta property="og:title" content="记一次修改数据库中百万条数据的经历？">
+<meta property="og:url" content="http://example.com/2023/10/06/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%99%BE%E4%B8%87%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%9F/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
-<meta property="og:description" content="背景两个Django应用与Nginx服务放在了同一台服务器上，希望迁移其中一个应用来到其他服务器上来降低资源的竞争。 迁移准备过去的部署策略：Nginx + uWSGi + 两个应用服务 + 裸机理想状态：nginx集群 + 两个服务不同的集群此次的目标：仅仅希望将后台应用拆出来，不做其他处理，Nginx与应用1仍共享一台服务器。需要做的事情有：  在新的服务器上，准备新的环境，使用docker来">
+<meta property="og:description" content="背景公司有一个单独的翻译程序，会针对指定的数据库中的字段进行批量翻译，生成json文件，后续去修改数据库中的不同语言的字段。一次生成的数据量在50w-200w不等，因为需要人工抽查，所以没有在翻译完成后直接导入，同时也避免导入数据时造成的数据库负担。（可以在流量低谷进行导入）。数据库中数据量在2kw左右。 前期准备导入的所需json文件在本地机器上。预期使用pymysql导入，比较简单，代码量小。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-10-05T15:42:21.000Z">
-<meta property="article:modified_time" content="2023-10-06T05:26:32.261Z">
+<meta property="og:image" content="https://vip.helloimg.com/images/2023/10/06/oHrtZ9.png">
+<meta property="article:published_time" content="2023-10-06T09:32:51.000Z">
+<meta property="article:modified_time" content="2023-10-06T16:36:27.921Z">
 <meta property="article:author" content="xiangyao">
-<meta property="article:tag" content="运维">
+<meta property="article:tag" content="开发">
+<meta property="article:tag" content="未完结">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://vip.helloimg.com/images/2023/10/06/oHrtZ9.png">
   
   
   
-  <title>记一次应用迁移 - xiangyao的个人博客</title>
+  <title>记一次修改数据库中百万条数据的经历？ - xiangyao的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -173,7 +176,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="记一次应用迁移"></span>
+            <span id="subtitle" data-typed-text="记一次修改数据库中百万条数据的经历？"></span>
           
         </div>
 
@@ -184,8 +187,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-05 23:42" pubdate>
-          October 5, 2023 pm
+        <time datetime="2023-10-06 17:32" pubdate>
+          October 6, 2023 pm
         </time>
       </span>
     
@@ -196,7 +199,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k words
+          1.3k words
         
       </span>
     
@@ -207,7 +210,7 @@
         
         
         
-          13 mins
+          12 mins
         
       </span>
     
@@ -244,49 +247,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">记一次应用迁移</h1>
+            <h1 id="seo-header">记一次修改数据库中百万条数据的经历？</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>两个Django应用与Nginx服务放在了同一台服务器上，希望迁移其中一个应用来到其他服务器上来降低资源的竞争。</p>
-<h1 id="迁移准备"><a href="#迁移准备" class="headerlink" title="迁移准备"></a>迁移准备</h1><p><strong>过去的部署策略</strong>：Nginx + uWSGi + 两个应用服务 + 裸机<br><strong>理想状态</strong>：nginx集群 + 两个服务不同的集群<br><strong>此次的目标</strong>：仅仅希望将后台应用拆出来，不做其他处理，Nginx与应用1仍共享一台服务器。<br><strong>需要做的事情有</strong>：</p>
+                <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>公司有一个单独的翻译程序，会针对指定的数据库中的字段进行批量翻译，生成json文件，后续去修改数据库中的不同语言的字段。<br>一次生成的数据量在50w-200w不等，因为需要人工抽查，所以没有在翻译完成后直接导入，同时也避免导入数据时造成的数据库负担。（可以在流量低谷进行导入）。<br>数据库中数据量在2kw左右。</p>
+<h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><p>导入的所需json文件在本地机器上。预期使用pymysql导入，比较简单，代码量小。<br>需要满足的要点：</p>
 <ol>
-<li>在新的服务器上，准备新的环境，使用docker来运行后台应用，以未来可能的迁移或集群操作。</li>
-<li>修改nginx配置，使得其可以在<a href="http://www.xxx.com时路由到应用1，www.xxx.com:port时路由到应用2。">www.xxx.com时路由到应用1，www.xxx.com:port时路由到应用2。</a></li>
+<li>记录哪些数据行被修改了。</li>
+<li>程序异常中止时，需要保存上一次处理到的位置，可以从该位置重启。</li>
+<li>记录插入失败的数据行，以及对应的原因。</li>
 </ol>
-<h1 id="操作流程"><a href="#操作流程" class="headerlink" title="操作流程"></a>操作流程</h1><h2 id="1-使用git克隆代码"><a href="#1-使用git克隆代码" class="headerlink" title="1. 使用git克隆代码"></a>1. 使用git克隆代码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git clone xxx<br></code></pre></td></tr></table></figure>
-<h2 id="2-更新requirements"><a href="#2-更新requirements" class="headerlink" title="2. 更新requirements"></a>2. 更新requirements</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">进入项目目录</span><br>cd /home/qxy/code/<br><span class="hljs-meta prompt_"># </span><span class="language-bash">覆盖更新requirements.txt</span><br>pipreqs . --force<br></code></pre></td></tr></table></figure>
-<h2 id="3-准备Dockerfile"><a href="#3-准备Dockerfile" class="headerlink" title="3. 准备Dockerfile"></a>3. 准备Dockerfile</h2><p>dockerfile里需要做几件事。</p>
+<h1 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h1><p>希望引入最小的外部依赖，故未使用数据库或redis来进行记录。<br>成功和失败的数据行分别使用txt文件来写入。<br>每1w条读入内存，大约100MB，会执行多次数据库批量更新操作。此时会更新程序执行的位置，也是记录在txt文件中。<br>考虑到输入的文件夹在执行过程中并不会删除或新增文件，直接使用文件的位置（处理过的文件数量）作为再次重试时的开始位置。</p>
+<p>存在问题：</p>
 <ol>
-<li>准备环境，python环境 + requirements.txt中所需要的依赖</li>
-<li>将项目代码copy到镜像中</li>
-<li>将uwsgi配置copy到镜像中</li>
-<li>启动uWSGI</li>
+<li>插入速度较慢，每1w条大约在3分钟左右。监控数据库发现，cpu利用率在1%以下，内存利用率在80%以上，使用多线程并行插入可能会造成数据库崩溃。这也反应了这种更新方式存在的问题，对数据库压力很大，压力来源于哪里，目前还不明白。</li>
+<li>失败后没有自主重试的策略。</li>
+<li>批量插入失败后，会将整个批次都插入失败的txt。</li>
 </ol>
-<p>Dockerfile如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs shell">FROM python:3.9<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">设置工作目录</span><br>WORKDIR /home/qxy/code/back-stage-management<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">复制并安装依赖项，然后清理不需要的文件</span><br>COPY requirements.txt ./<br>RUN pip install --no-cache-dir -r requirements.txt &amp;&amp; \<br>    apt-get autoremove -y &amp;&amp; \<br>    apt-get clean &amp;&amp; \<br>    rm -rf /var/lib/apt/lists/*<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">复制代码</span><br>COPY . .<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">配置uWSGI</span><br>COPY uwsgi.ini ./<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">定义存储uWSGI日志的卷</span><br>VOLUME /var/log/uwsgi<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">启动uWSGI服务器</span><br>CMD [&quot;uwsgi&quot;, &quot;--ini&quot;, &quot;uwsgi.ini&quot;]<br></code></pre></td></tr></table></figure>
-
-<p>uWSGI如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">[uwsgi]<br>http-timeout = 300<br>http = :8000<br>chdir = /home/qxy/code/back-stage-management<br>wsgi-file = soAdmin/wsgi.py<br>processes = 4<br>threads = 2<br>logto = /var/log/uwsgi/uwsgi.log<br></code></pre></td></tr></table></figure>
-
-<h2 id="4-构造镜像"><a href="#4-构造镜像" class="headerlink" title="4. 构造镜像"></a>4. 构造镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker build -t your_image_name .<br></code></pre></td></tr></table></figure>
-<h2 id="5-启动容器"><a href="#5-启动容器" class="headerlink" title="5. 启动容器"></a>5. 启动容器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">指定暴露的端口,uwsgi日志挂载的位置,生产or开发环境</span><br>docker run -p 8000:8000 -v /home/qxy/logs/uwsgi-log:/var/log/uwsgi -e ENV=develop -e DEBUG=True your_image_name<br></code></pre></td></tr></table></figure>
-
-<p>到这里为止，配置中存在三个问题：</p>
-<ol>
-<li>每次更新代码都要重新build镜像。<br>有两种做法，<ul>
-<li>一种是将宿主机上的代码映射到容器内部，代码更新后重启容器即可。这在开发环境中推荐，但在生产环境中不推荐，生产环境通常将代码设置为只读，来提高安全性和降低未知因素的干扰。</li>
-<li>通过构建pipeline，将git pull -&gt; build -&gt; run -&gt; 错误回滚（回滚至之前的镜像）流水线化。</li>
-</ul>
-</li>
-<li>没有托管静态文件。-&gt; 后续通过Nginx配置来托管</li>
-</ol>
-<h2 id="6-配置Nginx"><a href="#6-配置Nginx" class="headerlink" title="6. 配置Nginx"></a>6. 配置Nginx</h2><p>主要要做两件事：–这里可能是伪需求，多给个域名就不需要通过网络来配置静态文件了。</p>
-<ol>
-<li>配置不同服务器上的Nginx和uWSGI的连接</li>
-<li>处理Nginx托管静态文件的问题。</li>
-</ol>
+<h1 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h1><h2 id="针对内存占用高的问题"><a href="#针对内存占用高的问题" class="headerlink" title="针对内存占用高的问题"></a>针对内存占用高的问题</h2><p>实际上该数据库内存占用一直很高，只在10月4日，骤降了一天。<br>情况如下：<br><img src="https://vip.helloimg.com/images/2023/10/06/oHrtZ9.png" srcset="/img/loading.gif" lazyload alt="oHrtZ9.png"><br>内存占用高的原因是因为，设置较高的<code>innodb_buffer_pool_size</code>,为6442450944B，6G，而总内存为8G。所以内存占用并不因为这次插入程序引起。<br><strong>至于为什么“骤降一天”？</strong><br>数据库重启过，而在MySQL启动时，Innodb会先分配一部分Buffer pool的大小，随着数据的访问和使用，Buffer Pool的实际占用内存会逐渐增加，直到到达配置上限。</p>
+<h2 id="数据库写入速度慢"><a href="#数据库写入速度慢" class="headerlink" title="数据库写入速度慢"></a>数据库写入速度慢</h2><p>针对该更新语句（实际是批量执行）：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">UPDATE</span> teng_supplier <span class="hljs-keyword">SET</span> description_cn <span class="hljs-operator">=</span> &quot;xxxx&quot; <span class="hljs-keyword">WHERE</span> s_id <span class="hljs-operator">=</span> <span class="hljs-number">4582303985804775425</span>;<br></code></pre></td></tr></table></figure>
+<p>其中s_id是一个唯一性索引。<br>预期命中的索引是<code>eq_ref</code>:MySQL能够在表中通过唯一性索引或主键索引找到一行。<br>通过explain查看执行计划，其type是<code>range</code>：只检索给定的范围，使用一个索引来选择行。实际进行了范围查询。<br>如果使用以下语句，则type为const，因为无论是B+树或者哈希索引都能在常数时间内找到该条记录。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">explain  <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> teng_supplier  <span class="hljs-keyword">WHERE</span> s_id<span class="hljs-operator">=</span><span class="hljs-number">4548511110629691393</span>;<br></code></pre></td></tr></table></figure>
+<p>但是对于update语句来说，为了保证数据修改操作的安全性和一致性，数据库需要锁定一定范围内的行来保证，所以最后的type是一个范围查询。（猜测）<br>而且针对单条update语句，测得执行时间约为0.016s,执行1w条插入约为2.6分钟，似乎也没什么问题，并非由索引失效导致。</p>
+<p>加上实际上对数据库的负载高只是个乌龙，所以可以使用多线程大胆的插入来解决该问题。</p>
 
                 
               </div>
@@ -299,7 +285,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E8%BF%90%E7%BB%B4/" class="print-no-link">#运维</a>
+        <a href="/tags/%E5%BC%80%E5%8F%91/" class="print-no-link">#开发</a>
+      
+        <a href="/tags/%E6%9C%AA%E5%AE%8C%E7%BB%93/" class="print-no-link">#未完结</a>
       
     </div>
   
@@ -311,8 +299,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>记一次应用迁移</div>
-      <div>http://example.com/2023/10/05/记一次应用迁移/</div>
+      <div>记一次修改数据库中百万条数据的经历？</div>
+      <div>http://example.com/2023/10/06/如何优雅修改数据库中百万条数据？/</div>
     </div>
     <div class="license-meta">
       
@@ -324,7 +312,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 5, 2023</div>
+          <div>October 6, 2023</div>
         </div>
       
       
@@ -356,9 +344,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/06/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%99%BE%E4%B8%87%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%9F/" title="记一次修改数据库中百万条数据的经历？">
+                      <a href="/2023/10/06/BIO-NIO/" title="IO多路复用">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">记一次修改数据库中百万条数据的经历？</span>
+                        <span class="hidden-mobile">IO多路复用</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -366,8 +354,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/10/05/nginx%E5%85%A5%E9%97%A8/" title="nginx入门">
-                        <span class="hidden-mobile">nginx入门</span>
+                      <a href="/2023/10/05/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%BA%94%E7%94%A8%E8%BF%81%E7%A7%BB/" title="记一次应用迁移">
+                        <span class="hidden-mobile">记一次应用迁移</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

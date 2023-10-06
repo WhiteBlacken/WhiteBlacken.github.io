@@ -29,6 +29,27 @@
   
   
   <entry>
+    <title>记一次修改数据库中百万条数据的经历？</title>
+    <link href="/2023/10/06/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%99%BE%E4%B8%87%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%9F/"/>
+    <url>/2023/10/06/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%99%BE%E4%B8%87%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%9F/</url>
+    
+    <content type="html"><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>公司有一个单独的翻译程序，会针对指定的数据库中的字段进行批量翻译，生成json文件，后续去修改数据库中的不同语言的字段。<br>一次生成的数据量在50w-200w不等，因为需要人工抽查，所以没有在翻译完成后直接导入，同时也避免导入数据时造成的数据库负担。（可以在流量低谷进行导入）。<br>数据库中数据量在2kw左右。</p><h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><p>导入的所需json文件在本地机器上。预期使用pymysql导入，比较简单，代码量小。<br>需要满足的要点：</p><ol><li>记录哪些数据行被修改了。</li><li>程序异常中止时，需要保存上一次处理到的位置，可以从该位置重启。</li><li>记录插入失败的数据行，以及对应的原因。</li></ol><h1 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h1><p>希望引入最小的外部依赖，故未使用数据库或redis来进行记录。<br>成功和失败的数据行分别使用txt文件来写入。<br>每1w条读入内存，大约100MB，会执行多次数据库批量更新操作。此时会更新程序执行的位置，也是记录在txt文件中。<br>考虑到输入的文件夹在执行过程中并不会删除或新增文件，直接使用文件的位置（处理过的文件数量）作为再次重试时的开始位置。</p><p>存在问题：</p><ol><li>插入速度较慢，每1w条大约在3分钟左右。监控数据库发现，cpu利用率在1%以下，内存利用率在80%以上，使用多线程并行插入可能会造成数据库崩溃。这也反应了这种更新方式存在的问题，对数据库压力很大，压力来源于哪里，目前还不明白。</li><li>失败后没有自主重试的策略。</li><li>批量插入失败后，会将整个批次都插入失败的txt。</li></ol><h1 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h1><h2 id="针对内存占用高的问题"><a href="#针对内存占用高的问题" class="headerlink" title="针对内存占用高的问题"></a>针对内存占用高的问题</h2><p>实际上该数据库内存占用一直很高，只在10月4日，骤降了一天。<br>情况如下：<br><img src="https://vip.helloimg.com/images/2023/10/06/oHrtZ9.png" alt="oHrtZ9.png"><br>内存占用高的原因是因为，设置较高的<code>innodb_buffer_pool_size</code>,为6442450944B，6G，而总内存为8G。所以内存占用并不因为这次插入程序引起。<br><strong>至于为什么“骤降一天”？</strong><br>数据库重启过，而在MySQL启动时，Innodb会先分配一部分Buffer pool的大小，随着数据的访问和使用，Buffer Pool的实际占用内存会逐渐增加，直到到达配置上限。</p><h2 id="数据库写入速度慢"><a href="#数据库写入速度慢" class="headerlink" title="数据库写入速度慢"></a>数据库写入速度慢</h2><p>针对该更新语句（实际是批量执行）：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">UPDATE</span> teng_supplier <span class="hljs-keyword">SET</span> description_cn <span class="hljs-operator">=</span> &quot;xxxx&quot; <span class="hljs-keyword">WHERE</span> s_id <span class="hljs-operator">=</span> <span class="hljs-number">4582303985804775425</span>;<br></code></pre></td></tr></table></figure><p>其中s_id是一个唯一性索引。<br>预期命中的索引是<code>eq_ref</code>:MySQL能够在表中通过唯一性索引或主键索引找到一行。<br>通过explain查看执行计划，其type是<code>range</code>：只检索给定的范围，使用一个索引来选择行。实际进行了范围查询。<br>如果使用以下语句，则type为const，因为无论是B+树或者哈希索引都能在常数时间内找到该条记录。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">explain  <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> teng_supplier  <span class="hljs-keyword">WHERE</span> s_id<span class="hljs-operator">=</span><span class="hljs-number">4548511110629691393</span>;<br></code></pre></td></tr></table></figure><p>但是对于update语句来说，为了保证数据修改操作的安全性和一致性，数据库需要锁定一定范围内的行来保证，所以最后的type是一个范围查询。（猜测）<br>而且针对单条update语句，测得执行时间约为0.016s,执行1w条插入约为2.6分钟，似乎也没什么问题，并非由索引失效导致。</p><p>加上实际上对数据库的负载高只是个乌龙，所以可以使用多线程大胆的插入来解决该问题。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>开发</tag>
+      
+      <tag>未完结</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>记一次应用迁移</title>
     <link href="/2023/10/05/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%BA%94%E7%94%A8%E8%BF%81%E7%A7%BB/"/>
     <url>/2023/10/05/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%BA%94%E7%94%A8%E8%BF%81%E7%A7%BB/</url>
