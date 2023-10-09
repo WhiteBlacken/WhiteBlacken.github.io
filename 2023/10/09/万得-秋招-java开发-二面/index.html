@@ -16,23 +16,21 @@
   <meta name="author" content="xiangyao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="为什么需要保证MQ的顺序？一般MQ被用于三种场景：  削峰填谷。防止服务器被高流量打挂。 流程的异步或解耦。 Mysql通过Cannal订阅binlog，发送给MQ，进行后续的数据同步。  三个场景中，只有第三个场景需要严格保证消息顺序。考虑如果两个更新请求，更换了顺序，可能结果就与预期不一致了。 解决方案单线程消费一个topic，一个partition，一个consumer，一个线程例如kafk">
+    <meta name="description" content="总结问的问题比较简单，答的还行。 难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ Java1. 重写和重载的区别？重写：子类重写父类方法，运行时多态重载：同名方法，不同参数列表，编译时多态 数据库1. 不可重复度和幻读的区别？不可重复读：事务A在执行过程中读取到了事务B已提交的修改。幻读：事务A在执行过程中，因事务B的修改，前后读到的行数不一致。 2. 写sql语句。题目如下12345-- 有两张表--">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MQ如何保证顺序性？">
-<meta property="og:url" content="http://example.com/2023/10/03/MQ%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%A1%BA%E5%BA%8F%E6%80%A7%EF%BC%9F/index.html">
+<meta property="og:title" content="万得-秋招-java开发-二面">
+<meta property="og:url" content="http://example.com/2023/10/09/%E4%B8%87%E5%BE%97-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
-<meta property="og:description" content="为什么需要保证MQ的顺序？一般MQ被用于三种场景：  削峰填谷。防止服务器被高流量打挂。 流程的异步或解耦。 Mysql通过Cannal订阅binlog，发送给MQ，进行后续的数据同步。  三个场景中，只有第三个场景需要严格保证消息顺序。考虑如果两个更新请求，更换了顺序，可能结果就与预期不一致了。 解决方案单线程消费一个topic，一个partition，一个consumer，一个线程例如kafk">
+<meta property="og:description" content="总结问的问题比较简单，答的还行。 难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ Java1. 重写和重载的区别？重写：子类重写父类方法，运行时多态重载：同名方法，不同参数列表，编译时多态 数据库1. 不可重复度和幻读的区别？不可重复读：事务A在执行过程中读取到了事务B已提交的修改。幻读：事务A在执行过程中，因事务B的修改，前后读到的行数不一致。 2. 写sql语句。题目如下12345-- 有两张表--">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-10-03T13:12:43.000Z">
-<meta property="article:modified_time" content="2023-10-03T15:17:44.672Z">
+<meta property="article:published_time" content="2023-10-09T04:12:41.000Z">
+<meta property="article:modified_time" content="2023-10-09T04:29:34.716Z">
 <meta property="article:author" content="xiangyao">
-<meta property="article:tag" content="学习笔记">
-<meta property="article:tag" content="MQ">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>MQ如何保证顺序性？ - xiangyao的个人博客</title>
+  <title>万得-秋招-java开发-二面 - xiangyao的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -174,7 +172,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="MQ如何保证顺序性？"></span>
+            <span id="subtitle" data-typed-text="万得-秋招-java开发-二面"></span>
           
         </div>
 
@@ -185,8 +183,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-03 21:12" pubdate>
-          October 3, 2023 pm
+        <time datetime="2023-10-09 12:12" pubdate>
+          October 9, 2023 pm
         </time>
       </span>
     
@@ -197,7 +195,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k words
+          300 words
         
       </span>
     
@@ -208,7 +206,7 @@
         
         
         
-          14 mins
+          3 mins
         
       </span>
     
@@ -245,35 +243,18 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">MQ如何保证顺序性？</h1>
+            <h1 id="seo-header">万得-秋招-java开发-二面</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="为什么需要保证MQ的顺序？"><a href="#为什么需要保证MQ的顺序？" class="headerlink" title="为什么需要保证MQ的顺序？"></a>为什么需要保证MQ的顺序？</h1><p>一般MQ被用于三种场景：</p>
-<ul>
-<li>削峰填谷。防止服务器被高流量打挂。</li>
-<li>流程的异步或解耦。</li>
-<li>Mysql通过Cannal订阅binlog，发送给MQ，进行后续的数据同步。</li>
-</ul>
-<p>三个场景中，只有第三个场景需要严格保证消息顺序。考虑如果两个更新请求，更换了顺序，可能结果就与预期不一致了。</p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="单线程消费"><a href="#单线程消费" class="headerlink" title="单线程消费"></a>单线程消费</h2><p>一个topic，一个partition，一个consumer，一个线程<br>例如kafka中，同一分区内保证的有序，消费者同一组内只有有一个消费者消费，并且该消费者使用单线程，则可以保证顺序。<br>存在两个问题：</p>
-<ol>
-<li>一旦一条消息出现问题，整个broker都被卡住。</li>
-<li>并发度低。</li>
-</ol>
-<h2 id="多线程多内存（阻塞）队列"><a href="#多线程多内存（阻塞）队列" class="headerlink" title="多线程多内存（阻塞）队列"></a>多线程多内存（阻塞）队列</h2><p>主要解决并发度低的问题。<br>kafka端不做修改，将消费者改为多线程执行，创建多个内存队列。根据数据的key值将其分配到不同的队列，每个线程专门负责一个队列的数据处理，这样在保证相同key处理顺序性的同时提高了消息处理的并发度。</p>
-<p><strong>如何是将MySQL的增量变更同步到ES中，如何设置key呢？</strong><br>使用主键ID作为KEY。<br>Cannal解析数据时，即使给出的语句没有直接操作主键，仍可以从变更的数据中提取出主键ID。</p>
-<p>样例：<br>执行的sql语句：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">UPDATE</span> users <span class="hljs-keyword">SET</span> email <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;alice_new@example.com&#x27;</span> <span class="hljs-keyword">WHERE</span> username <span class="hljs-operator">=</span> &quot;qxy&quot;;<br></code></pre></td></tr></table></figure>
-<p>Cannal解析的json：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>    <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;before&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alice_old@example.com&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;qxy&quot;</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;after&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alice_new@example.com&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;qxy&quot;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;database&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;your_database_name&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;table&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;users&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;UPDATE&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;ts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1629876543210</span><span class="hljs-punctuation">,</span> <br>  <span class="hljs-attr">&quot;sql&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span> <br>  <span class="hljs-attr">&quot;sqlType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;INTEGER&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;VARCHAR&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;VARCHAR&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;mysqlType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;int(11)&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;varchar(255)&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;varchar(255)&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;primaryKeys&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;id&quot;</span><span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></td></tr></table></figure>
+                <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>问的问题比较简单，答的还行。</p>
+<p><strong>难度</strong>：⭐☆☆☆☆<br><strong>学到的知识</strong>：⭐☆☆☆☆</p>
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-重写和重载的区别？"><a href="#1-重写和重载的区别？" class="headerlink" title="1. 重写和重载的区别？"></a>1. 重写和重载的区别？</h2><p>重写：子类重写父类方法，运行时多态<br>重载：同名方法，不同参数列表，编译时多态</p>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="1-不可重复度和幻读的区别？"><a href="#1-不可重复度和幻读的区别？" class="headerlink" title="1. 不可重复度和幻读的区别？"></a>1. 不可重复度和幻读的区别？</h2><p>不可重复读：事务A在执行过程中读取到了事务B已提交的修改。<br>幻读：事务A在执行过程中，因事务B的修改，前后读到的行数不一致。</p>
+<h2 id="2-写sql语句。题目如下"><a href="#2-写sql语句。题目如下" class="headerlink" title="2. 写sql语句。题目如下"></a>2. 写sql语句。题目如下</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 有两张表</span><br><span class="hljs-comment">-- 学生表 tb_stu：主键 id, 学生名 username</span><br><span class="hljs-comment">-- 课程成绩表 tb_score: 主键 id, 学生 stu_id, 课程 c_id, 分数 score</span><br><br><span class="hljs-comment">-- 题目要求：查询平均分在80以上的学生姓名。</span><br></code></pre></td></tr></table></figure>
 
-<p>不过实际情况下，对于一张需要增量同步的大表来说，几乎不存在不携带主键或唯一索引情况下增删改操作。对于我们场景下的商家表来说，增删改操作几乎都是带着id（主键）或者sid（唯一索引）。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/436381554/answer/1653179400">https://www.zhihu.com/question/436381554/answer/1653179400</a></li>
-</ol>
-
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="1-对万得了解多少？"><a href="#1-对万得了解多少？" class="headerlink" title="1. 对万得了解多少？"></a>1. 对万得了解多少？</h2><h1 id="笔试题目"><a href="#笔试题目" class="headerlink" title="笔试题目"></a>笔试题目</h1>
                 
               </div>
             
@@ -281,15 +262,6 @@
             <div>
               <div class="post-metas my-3">
   
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="print-no-link">#学习笔记</a>
-      
-        <a href="/tags/MQ/" class="print-no-link">#MQ</a>
-      
-    </div>
   
 </div>
 
@@ -299,8 +271,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>MQ如何保证顺序性？</div>
-      <div>http://example.com/2023/10/03/MQ如何保证顺序性？/</div>
+      <div>万得-秋招-java开发-二面</div>
+      <div>http://example.com/2023/10/09/万得-秋招-java开发-二面/</div>
     </div>
     <div class="license-meta">
       
@@ -312,7 +284,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 3, 2023</div>
+          <div>October 9, 2023</div>
         </div>
       
       
@@ -344,18 +316,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/03/Redis%E7%9A%84%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/" title="Redis的集群模式">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Redis的集群模式</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/10/03/Cannal%E5%90%8C%E6%AD%A5MySQL%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%87%B3ES-MeiliSearch/" title="Cannal同步MySQL增量数据至ES/MeiliSearch/Milvus">
-                        <span class="hidden-mobile">Cannal同步MySQL增量数据至ES/MeiliSearch/Milvus</span>
+                      <a href="/2023/10/07/%E4%B8%AD%E6%9C%9F%E7%AD%94%E8%BE%A9%E8%BF%9B%E5%B1%95/" title="中期答辩进展">
+                        <span class="hidden-mobile">中期答辩进展</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
