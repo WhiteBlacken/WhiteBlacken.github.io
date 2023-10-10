@@ -24,7 +24,7 @@
 <meta property="og:description" content="题目没做出来，最近懈怠了，docker、k8s了解过少。[TOC] 算法1. 字符串运算题目描述： 12345678一个由数字和运算符组成的字符串的表达式，按不同优先级组合数字和运算符，计算并返回所有可能组合的结果。可以按任意顺序返回答案。输入：2-1-1输出：[0, 2]解释：((2-1)-1) &#x3D; 0      (2-(1-1)) &#x3D; 2注： 运算符仅包含+, -, *, 输入整数范围[0,9">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-19T08:06:14.000Z">
-<meta property="article:modified_time" content="2023-09-23T14:39:11.194Z">
+<meta property="article:modified_time" content="2023-10-10T02:46:04.886Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -196,7 +196,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k words
+          3.6k words
         
       </span>
     
@@ -207,7 +207,7 @@
         
         
         
-          29 mins
+          30 mins
         
       </span>
     
@@ -269,9 +269,7 @@
 <p>StringBuffer和StringBuilder并非基于String，而是基于Char[],他们是可变的，所以存在线程安全问题，但是StringBuffer使用synchronized关键字来保证其线程安全，StringBuilder是线程不安全的。</p>
 <p>实际上String也是基于Char[]，只不过其Char[]使用了final修饰。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">String</span><br>    <span class="hljs-keyword">implements</span> <span class="hljs-title class_">java</span>.io.Serializable, Comparable&lt;String&gt;, CharSequence &#123;<br>    <span class="hljs-comment">/** The value is used for character storage. */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">char</span> value[];<br>    <span class="hljs-comment">//....</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
+<p><strong>有了String，为什么还需要StringBuilder&#x2F;StringBuffer?</strong><br>String是不可变的，任何修改字符串的操作都会创建新的String对象，并且会涉及复制字符到新的对象，这些可能会带对象创建以及拷贝的开销，消耗更多的内存。<br>而StringBuilder和StringBuffer是可变的，在修改时频繁修改时可以降低以上开销，并且操作的可读性更好。</p>
 <h1 id="部署相关"><a href="#部署相关" class="headerlink" title="部署相关"></a>部署相关</h1><h2 id="1-项目的部署策略？"><a href="#1-项目的部署策略？" class="headerlink" title="1. 项目的部署策略？"></a>1. 项目的部署策略？</h2><h2 id="2-搜索具体做了什么？只是调api吗？"><a href="#2-搜索具体做了什么？只是调api吗？" class="headerlink" title="2. 搜索具体做了什么？只是调api吗？"></a>2. 搜索具体做了什么？只是调api吗？</h2><h2 id="3-AI搜索的机器哪里来的？规模怎么样？"><a href="#3-AI搜索的机器哪里来的？规模怎么样？" class="headerlink" title="3. AI搜索的机器哪里来的？规模怎么样？"></a>3. AI搜索的机器哪里来的？规模怎么样？</h2><h2 id="4-论文做了什么？"><a href="#4-论文做了什么？" class="headerlink" title="4. 论文做了什么？"></a>4. 论文做了什么？</h2>
                 
               </div>
