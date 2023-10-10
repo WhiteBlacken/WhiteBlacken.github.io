@@ -18,14 +18,14 @@
   
     <meta name="description" content="背景网站使用MeiliSearch(可以理解为ES)作为搜索引擎，数据来源是MySQL中的一张大表，目前需要MeiliSearch同步MySQL的增量数据。准备选取Cannal监听binlog的方案来完成。 Canal介绍基于MySQL的数据库增量日志解析，提供增量数据订阅和消费。早期诞生于阿里巴巴国内国外跨机房同步的业务需求。使用场景  数据实时备份 异构数据源（ES，Hbase）与数据库数据增">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cannal同步MySQL增量数据至ES&#x2F;MeiliSearch&#x2F;Milvus">
+<meta property="og:title" content="Canal同步MySQL增量数据至ES&#x2F;MeiliSearch&#x2F;Milvus">
 <meta property="og:url" content="http://example.com/2023/10/03/Cannal%E5%90%8C%E6%AD%A5MySQL%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%87%B3ES-MeiliSearch/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
 <meta property="og:description" content="背景网站使用MeiliSearch(可以理解为ES)作为搜索引擎，数据来源是MySQL中的一张大表，目前需要MeiliSearch同步MySQL的增量数据。准备选取Cannal监听binlog的方案来完成。 Canal介绍基于MySQL的数据库增量日志解析，提供增量数据订阅和消费。早期诞生于阿里巴巴国内国外跨机房同步的业务需求。使用场景  数据实时备份 异构数据源（ES，Hbase）与数据库数据增">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://z1.ax1x.com/2023/10/10/pPxLurj.png">
 <meta property="article:published_time" content="2023-10-03T07:34:53.000Z">
-<meta property="article:modified_time" content="2023-10-10T07:40:54.061Z">
+<meta property="article:modified_time" content="2023-10-10T08:41:39.584Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="开发">
 <meta property="article:tag" content="Cannal">
@@ -36,7 +36,7 @@
   
   
   
-  <title>Cannal同步MySQL增量数据至ES/MeiliSearch/Milvus - xiangyao的个人博客</title>
+  <title>Canal同步MySQL增量数据至ES/MeiliSearch/Milvus - xiangyao的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -178,7 +178,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Cannal同步MySQL增量数据至ES/MeiliSearch/Milvus"></span>
+            <span id="subtitle" data-typed-text="Canal同步MySQL增量数据至ES/MeiliSearch/Milvus"></span>
           
         </div>
 
@@ -249,7 +249,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Cannal同步MySQL增量数据至ES/MeiliSearch/Milvus</h1>
+            <h1 id="seo-header">Canal同步MySQL增量数据至ES/MeiliSearch/Milvus</h1>
             
             
               <div class="markdown-body">
@@ -316,7 +316,7 @@
 <h3 id="安装-配置ES"><a href="#安装-配置ES" class="headerlink" title="安装&#x2F;配置ES"></a>安装&#x2F;配置ES</h3><p>这里也可以配置MeiliSearch</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">拉取镜像</span><br>docker pull elasticsearch:7.16.2<br><span class="hljs-meta prompt_"># </span><span class="language-bash">运行es</span><br>sudo docker run -p 9200:9200 -p 9300:9300  -e discovery.type=single-node --name es-7 -d elasticsearch:7.16.2<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">进入容器修改配置</span><br>sudo docker exec -it es-7 /bin/bash<br>vim config/elasticsearch.yml<br><span class="hljs-meta prompt_"># </span><span class="language-bash">配置修改如下：</span><br>···<br>cluster.name: es-cluster<br>network.host: 0.0.0.0<br><br>node.name: node-1<br>http.port: 9200<br>http.cors.enabled: true<br>http.cors.allow-origin: &quot;*&quot;<br>node.master: true<br>node.data: true<br>···<br><span class="hljs-meta prompt_"># </span><span class="language-bash">测试</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">访问：http://127.0.0.1:9200/_mapping?pretty=<span class="hljs-literal">true</span></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">在线安装分词器</span><br>docker exec -it es-7<br>./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.16.2/elasticsearch-analysis-ik-7.16.2.zip<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">网速慢，可以离线安装</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">宿主机上线下载好zip文件</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">拷贝到容器中</span><br>docker cp elasticsearch-analysis-ik-7.16.2.zip  es-7:/usr/share/elasticsearch/plugins<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">进入容器，解压</span><br>docker exec -it es-7 /bin/bash<br>cd /usr/share/elasticsearch/plugins/<br>unzip elasticsearch-analysis-ik-7.16.2.zip -d ik<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">重启容器</span><br>docker restart es-7<br></code></pre></td></tr></table></figure>
 
-<h3 id="配置canal-server"><a href="#配置canal-server" class="headerlink" title="配置canal-server"></a>配置canal-server</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull canal/canal-server:v1.1.5<br>docker run --name canal-1.5 -p 11111:11111 --link mysql-8:mysql-8 -id canal/canal-server:v1.1.5<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">修改配置文件</span><br>docker exec -it canal-1.5 /bin/bash<br>vi canal-server/conf/example/instance.properties<br><span class="hljs-meta prompt_"># </span><span class="language-bash">配置文件修改部分如下：</span><br>···<br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># mysql serverId , v1.0.26+ will autoGen</span></span><br>canal.instance.mysql.slaveId=10<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">position info</span><br>canal.instance.master.address=mysql-8:3306<br>canal.instance.dbUsername=yourUsername<br>canal.instance.dbPassword=yourPSW<br>···<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">重启容器</span><br>docker restart canal-1.1.7<br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看日志</span><br>docker exec -it canal-1.1.7 /bin/bash<br>tail -100f canal-server/logs/example/example.log <br></code></pre></td></tr></table></figure>
+<h3 id="配置canal-server"><a href="#配置canal-server" class="headerlink" title="配置canal-server"></a>配置canal-server</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull canal/canal-server:v1.1.7<br>docker run --name canal-1.1.7 -p 11111:11111 --link mysql-8:mysql-8 -id canal/canal-server:v1.1.7<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">修改配置文件</span><br>docker exec -it canal-1.5 /bin/bash<br>vi canal-server/conf/example/instance.properties<br><span class="hljs-meta prompt_"># </span><span class="language-bash">配置文件修改部分如下：</span><br>···<br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># mysql serverId , v1.0.26+ will autoGen</span></span><br>canal.instance.mysql.slaveId=10<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">position info</span><br>canal.instance.master.address=mysql-8:3306<br>canal.instance.dbUsername=yourUsername<br>canal.instance.dbPassword=yourPSW<br>···<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">重启容器</span><br>docker restart canal-1.1.7<br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看日志</span><br>docker exec -it canal-1.1.7 /bin/bash<br>tail -100f canal-server/logs/example/example.log <br></code></pre></td></tr></table></figure>
 
 
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
@@ -355,7 +355,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Cannal同步MySQL增量数据至ES/MeiliSearch/Milvus</div>
+      <div>Canal同步MySQL增量数据至ES/MeiliSearch/Milvus</div>
       <div>http://example.com/2023/10/03/Cannal同步MySQL增量数据至ES-MeiliSearch/</div>
     </div>
     <div class="license-meta">
