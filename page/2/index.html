@@ -200,6 +200,46 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2023/10/04/%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AF%94%E8%BE%83/" target="_self">
+          不同数据库比较
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/04/%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AF%94%E8%BE%83/" target="_self">
+        <div>
+          MySQL为代表的关系型数据库先看MySQL本身，支持事务，是单机的，不考虑分库分表的情况下，能存储的数据量取决于服务器的硬盘大小。如果是日增1T这种需求的数据，不适合存数据。 Redis为代表的内存数据库读写都在内存，快，可以通过AOF和RDB进行持久化，但是最终数据都要加载到内存中，内容容量有限，不适合存储大量数据。 ES为代表的分布式搜索引擎主要是用于检索，但是因为其分布式，也能存储海量数据
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-04 10:11" pubdate>
+              2023-10-04
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">#数据库</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2023/10/03/Redis%E7%9A%84%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/" target="_self">
           Redis的集群模式
         </a>
@@ -554,50 +594,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%89%AB%E7%9B%B2%E7%AF%87/">#计算机扫盲篇</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/09/28/Kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" target="_self">
-          Kafka入门
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/28/Kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" target="_self">
-        <div>
-          基本概念topic 主题消息存在topic中，类似于数据库中表，通常将相同的类型的消息存储到同一个主题中。半结构化的数据，某些情况下会将不同类型的消息放在同一个topic中，来满足特定的需求（如需要保证不同操作的顺序）。 patition 分区主题可以包含多个分区，使用分区实现的kafka的分布式需求，不同分区可放在不同的服务器上，可以通过调整节点的数量，来对kafka进行线性扩展。分区是一个线性
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-28 00:48" pubdate>
-              2023-09-28
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Kafka/">#Kafka</a>
-            
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">#学习笔记</a>
-            
-              <a href="/tags/MQ/">#MQ</a>
             
           </div>
         
