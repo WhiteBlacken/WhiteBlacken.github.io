@@ -24,7 +24,7 @@
 <meta property="og:description" content="项目背景公司针对商家会有大批量的营销拓客或通知消息的推送，需要销售部门的同学去进行短信或邮件推送，同时技术同学有也需要有一些发送推送的代码逻辑，所以我们公司将推送平台独立出来，实际上其定位是一个营销效率提升的一个工具。 规则引擎是用来做什么的？因为项目中会接入多个短信渠道，不同渠道会有不同的价格，有时候会想选取价格更低的渠道进行发送，并且也会出现渠道挂掉的情况的。所以就希望在不同发布重启的情况下，">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-10T15:11:55.000Z">
-<meta property="article:modified_time" content="2023-10-11T16:33:35.422Z">
+<meta property="article:modified_time" content="2023-10-11T17:05:19.648Z">
 <meta property="article:author" content="xiangyao">
 <meta property="article:tag" content="面经">
 <meta property="article:tag" content="未完结">
@@ -197,7 +197,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.8k words
+          4.2k words
         
       </span>
     
@@ -208,7 +208,7 @@
         
         
         
-          32 mins
+          35 mins
         
       </span>
     
@@ -299,6 +299,9 @@
 <li>数据非真实时</li>
 <li>仅支持分区内消息有序，无法实现消息全局有序。</li>
 </ol>
+<h1 id="kafka和flink构建的消息追踪系统是用来做什么"><a href="#kafka和flink构建的消息追踪系统是用来做什么" class="headerlink" title="kafka和flink构建的消息追踪系统是用来做什么"></a>kafka和flink构建的消息追踪系统是用来做什么</h1><p>消息推送平台跟普通消息下发最大的不同是我们是实现对消息全链路追踪的，业务方可以通过推送后台实时查看消息下发的情况，针对消息模板和用户都是OK的（比如这个用户是否接收到消息，如果没接收到，那可能是因为什么被过滤了）<br>所以消息推送平台会有个实时流的模块，用Flink实现的。我在消息处理的过程中对多个关键的位置进行埋点，在Flink对这些信息做清洗处理，实时的会写进Redis、离线的会落到Hive中</p>
+<p>因为使用方想要获取消息下发是否成功，以及成功的比例，或者的失败的原因，以此来进行策略上的调整。我们这里用flink来对几个关键位置上的埋点信息进行数据清洗，然后将其写入redis。（离线的是放入hive中）<br>可以通过用户维度，或者模板维度去查看。<br>这里的关键位置包括：消费mq、去重、下发的回执。</p>
+<hr>
 <h1 id="这里面涉及到生产者和消费者，如何保证生产者不重复发送消息，消费者不重复消费消息"><a href="#这里面涉及到生产者和消费者，如何保证生产者不重复发送消息，消费者不重复消费消息" class="headerlink" title="这里面涉及到生产者和消费者，如何保证生产者不重复发送消息，消费者不重复消费消息"></a>这里面涉及到生产者和消费者，如何保证生产者不重复发送消息，消费者不重复消费消息</h1><p>虽然kafka的提供了事务的支持，能够一定程序上避免重复发送消息，但是可能会带来性能的损耗。<br>我实际上没有实现生产者不重复发送消息，而是在消费端，用redis去做了去重处理。</p>
 <p><strong>幂等是怎么设计的？</strong><br>如果是订单类的话，可以用redis+mysql唯一索引去做，key是订单id号+订单状态，redis来做前置判断，由mysql来确保最后的幂等。<br>在该平台中，主要是用redis来进行处理，根据常见的业务需求，分为了两种key的构建方式。</p>
 <ol>
