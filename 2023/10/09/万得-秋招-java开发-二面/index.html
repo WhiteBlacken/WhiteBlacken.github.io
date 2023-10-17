@@ -16,15 +16,15 @@
   <meta name="author" content="xiangyao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="总结问的问题比较简单，答的还行。 难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ Java1. 重写和重载的区别？重写：子类重写父类方法，运行时多态重载：同名方法，不同参数列表，编译时多态 数据库1. 不可重复度和幻读的区别？不可重复读：事务A在执行过程中读取到了事务B已提交的修改。幻读：事务A在执行过程中，因事务B的修改，前后读到的行数不一致。 2. 写sql语句。题目如下12345-- 有两张表--">
+    <meta name="description" content="总结问的问题比较简单，答的还行。 难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ Java1. 重写和重载的区别？重写override：子类重写父类方法，运行时多态,仅方法体不同，方法名、参数列表和返回类型都要相同重载overload：同名方法，不同参数列表，也可以有不同的返回类型，编译时多态 数据库1. 不可重复度和幻读的区别？不可重复读：事务A在执行过程中读取到了事务B已提交的修改。幻读：事务A在执行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="万得-秋招-java开发-二面">
 <meta property="og:url" content="http://example.com/2023/10/09/%E4%B8%87%E5%BE%97-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91-%E4%BA%8C%E9%9D%A2/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
-<meta property="og:description" content="总结问的问题比较简单，答的还行。 难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ Java1. 重写和重载的区别？重写：子类重写父类方法，运行时多态重载：同名方法，不同参数列表，编译时多态 数据库1. 不可重复度和幻读的区别？不可重复读：事务A在执行过程中读取到了事务B已提交的修改。幻读：事务A在执行过程中，因事务B的修改，前后读到的行数不一致。 2. 写sql语句。题目如下12345-- 有两张表--">
+<meta property="og:description" content="总结问的问题比较简单，答的还行。 难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ Java1. 重写和重载的区别？重写override：子类重写父类方法，运行时多态,仅方法体不同，方法名、参数列表和返回类型都要相同重载overload：同名方法，不同参数列表，也可以有不同的返回类型，编译时多态 数据库1. 不可重复度和幻读的区别？不可重复读：事务A在执行过程中读取到了事务B已提交的修改。幻读：事务A在执行">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-09T04:12:41.000Z">
-<meta property="article:modified_time" content="2023-10-09T04:29:34.716Z">
+<meta property="article:modified_time" content="2023-10-13T05:57:52.536Z">
 <meta property="article:author" content="xiangyao">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -195,7 +195,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          300 words
+          477 words
         
       </span>
     
@@ -206,7 +206,7 @@
         
         
         
-          3 mins
+          4 mins
         
       </span>
     
@@ -250,9 +250,10 @@
                 
                 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>问的问题比较简单，答的还行。</p>
 <p><strong>难度</strong>：⭐☆☆☆☆<br><strong>学到的知识</strong>：⭐☆☆☆☆</p>
-<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-重写和重载的区别？"><a href="#1-重写和重载的区别？" class="headerlink" title="1. 重写和重载的区别？"></a>1. 重写和重载的区别？</h2><p>重写：子类重写父类方法，运行时多态<br>重载：同名方法，不同参数列表，编译时多态</p>
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="1-重写和重载的区别？"><a href="#1-重写和重载的区别？" class="headerlink" title="1. 重写和重载的区别？"></a>1. 重写和重载的区别？</h2><p>重写override：子类重写父类方法，运行时多态,仅方法体不同，方法名、参数列表和返回类型都要相同<br>重载overload：同名方法，不同参数列表，也可以有不同的返回类型，编译时多态</p>
 <h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="1-不可重复度和幻读的区别？"><a href="#1-不可重复度和幻读的区别？" class="headerlink" title="1. 不可重复度和幻读的区别？"></a>1. 不可重复度和幻读的区别？</h2><p>不可重复读：事务A在执行过程中读取到了事务B已提交的修改。<br>幻读：事务A在执行过程中，因事务B的修改，前后读到的行数不一致。</p>
-<h2 id="2-写sql语句。题目如下"><a href="#2-写sql语句。题目如下" class="headerlink" title="2. 写sql语句。题目如下"></a>2. 写sql语句。题目如下</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 有两张表</span><br><span class="hljs-comment">-- 学生表 tb_stu：主键 id, 学生名 username</span><br><span class="hljs-comment">-- 课程成绩表 tb_score: 主键 id, 学生 stu_id, 课程 c_id, 分数 score</span><br><br><span class="hljs-comment">-- 题目要求：查询平均分在80以上的学生姓名。</span><br></code></pre></td></tr></table></figure>
+<h2 id="2-写sql语句。题目如下"><a href="#2-写sql语句。题目如下" class="headerlink" title="2. 写sql语句。题目如下"></a>2. 写sql语句。题目如下</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 有两张表</span><br><span class="hljs-comment">-- 学生表 tb_stu：主键 id, 学生名 username</span><br><span class="hljs-comment">-- 课程成绩表 tb_score: 主键 id, 学生 stu_id, 课程 c_id, 分数 score</span><br><br><span class="hljs-comment">-- 题目要求：查询平均分在80以上的学生姓名。</span><br><br><span class="hljs-keyword">select</span> username, <span class="hljs-built_in">avg</span>(score)<br><span class="hljs-keyword">from</span> tb_stu<br><span class="hljs-keyword">join</span> tb_score <br><span class="hljs-keyword">on</span> tb_stu.id <span class="hljs-operator">=</span> tb_score.stu_id<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> tb_stu.id<br><span class="hljs-keyword">having</span> <span class="hljs-built_in">avg</span>(score) <span class="hljs-operator">&gt;=</span> <span class="hljs-number">80</span>;<br></code></pre></td></tr></table></figure>
+
 
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="1-对万得了解多少？"><a href="#1-对万得了解多少？" class="headerlink" title="1. 对万得了解多少？"></a>1. 对万得了解多少？</h2><h1 id="笔试题目"><a href="#笔试题目" class="headerlink" title="笔试题目"></a>笔试题目</h1>
                 

@@ -1,0 +1,660 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xiangyao">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="做查漏补缺和复习用，不会写的特别详细，重要内容会单开一章。  java1. jwt怎么实现单点登录？2. ArrayList和LinkedList的区别？3. java的并发机制，响应式编程？4. GC中cms和g1的比较5. CountDownLatch、CyclicBarrieer、Semaphore分别如何使用？6.-Xss的含义？线上项目是否有频繁full gc？一个Springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="牛客相关面经整理">
+<meta property="og:url" content="http://example.com/2023/10/16/%E7%89%9B%E5%AE%A2%E7%9B%B8%E5%85%B3%E9%9D%A2%E7%BB%8F%E6%95%B4%E7%90%86-0925/index.html">
+<meta property="og:site_name" content="xiangyao的个人博客">
+<meta property="og:description" content="做查漏补缺和复习用，不会写的特别详细，重要内容会单开一章。  java1. jwt怎么实现单点登录？2. ArrayList和LinkedList的区别？3. java的并发机制，响应式编程？4. GC中cms和g1的比较5. CountDownLatch、CyclicBarrieer、Semaphore分别如何使用？6.-Xss的含义？线上项目是否有频繁full gc？一个Springboot">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-16T07:00:12.000Z">
+<meta property="article:modified_time" content="2023-10-16T07:58:03.855Z">
+<meta property="article:author" content="xiangyao">
+<meta property="article:tag" content="面经">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>牛客相关面经整理 - xiangyao的个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xiangyao的小站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="牛客相关面经整理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-16 15:00" pubdate>
+          October 16, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">牛客相关面经整理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>做查漏补缺和复习用，不会写的特别详细，重要内容会单开一章。</p>
+</blockquote>
+<h1 id="java"><a href="#java" class="headerlink" title="java"></a>java</h1><h2 id="1-jwt怎么实现单点登录？"><a href="#1-jwt怎么实现单点登录？" class="headerlink" title="1. jwt怎么实现单点登录？"></a>1. jwt怎么实现单点登录？</h2><h2 id="2-ArrayList和LinkedList的区别？"><a href="#2-ArrayList和LinkedList的区别？" class="headerlink" title="2. ArrayList和LinkedList的区别？"></a>2. ArrayList和LinkedList的区别？</h2><h2 id="3-java的并发机制，响应式编程？"><a href="#3-java的并发机制，响应式编程？" class="headerlink" title="3. java的并发机制，响应式编程？"></a>3. java的并发机制，响应式编程？</h2><h2 id="4-GC中cms和g1的比较"><a href="#4-GC中cms和g1的比较" class="headerlink" title="4. GC中cms和g1的比较"></a>4. GC中cms和g1的比较</h2><h2 id="5-CountDownLatch、CyclicBarrieer、Semaphore分别如何使用？"><a href="#5-CountDownLatch、CyclicBarrieer、Semaphore分别如何使用？" class="headerlink" title="5. CountDownLatch、CyclicBarrieer、Semaphore分别如何使用？"></a>5. CountDownLatch、CyclicBarrieer、Semaphore分别如何使用？</h2><h2 id="6-Xss的含义？线上项目是否有频繁full-gc？一个Springboot至少有几个线程？"><a href="#6-Xss的含义？线上项目是否有频繁full-gc？一个Springboot至少有几个线程？" class="headerlink" title="6.-Xss的含义？线上项目是否有频繁full gc？一个Springboot至少有几个线程？"></a>6.-Xss的含义？线上项目是否有频繁full gc？一个Springboot至少有几个线程？</h2><h2 id="7-元空间的收缩程度？"><a href="#7-元空间的收缩程度？" class="headerlink" title="7. 元空间的收缩程度？"></a>7. 元空间的收缩程度？</h2><h2 id="8-Spring注入-代理模式-事务注解-A调用被事务修饰的B过程？"><a href="#8-Spring注入-代理模式-事务注解-A调用被事务修饰的B过程？" class="headerlink" title="8. Spring注入-&gt;代理模式-&gt;事务注解-&gt;A调用被事务修饰的B过程？"></a>8. Spring注入-&gt;代理模式-&gt;事务注解-&gt;A调用被事务修饰的B过程？</h2><h2 id="9-Exception和Error的区别？可以抛出自制的Error吗，会被捕获吗？"><a href="#9-Exception和Error的区别？可以抛出自制的Error吗，会被捕获吗？" class="headerlink" title="9. Exception和Error的区别？可以抛出自制的Error吗，会被捕获吗？"></a>9. Exception和Error的区别？可以抛出自制的Error吗，会被捕获吗？</h2><p>Error通常由运行时环境导致，应用程序不需要捕获，也无法处理，常见的Error有StackOverflowError&#x2F;OutOfMemoryError&#x2F;NoClassFoundError。<br>异常通常需要由应用程序捕获并处理，分为编译时异常和运行时异常，其中编译时异常需要try-catch或throw显示抛出异常，一般超出程序员的控制范围，比如说网络连接、IO连接、文件不存在等；运行时异常不强制要求捕获，通常由编程错误导致，比如说空指针或者说除0错误。</p>
+<h2 id="10-HashMap可以保存null-key或value吗？CocurrentHashMap可以存null值吗？"><a href="#10-HashMap可以保存null-key或value吗？CocurrentHashMap可以存null值吗？" class="headerlink" title="10. HashMap可以保存null key或value吗？CocurrentHashMap可以存null值吗？"></a>10. HashMap可以保存null key或value吗？CocurrentHashMap可以存null值吗？</h2><h2 id="11-Spring中事务的隔离传播方式默认为？"><a href="#11-Spring中事务的隔离传播方式默认为？" class="headerlink" title="11. Spring中事务的隔离传播方式默认为？"></a>11. Spring中事务的隔离传播方式默认为？</h2><h2 id="12-两个事务，事务A调用事务B，若事务B回滚了，事务A会回滚吗？"><a href="#12-两个事务，事务A调用事务B，若事务B回滚了，事务A会回滚吗？" class="headerlink" title="12. 两个事务，事务A调用事务B，若事务B回滚了，事务A会回滚吗？"></a>12. 两个事务，事务A调用事务B，若事务B回滚了，事务A会回滚吗？</h2><h2 id="13-hashmap和hashtabled的区别？"><a href="#13-hashmap和hashtabled的区别？" class="headerlink" title="13. hashmap和hashtabled的区别？"></a>13. hashmap和hashtabled的区别？</h2><p>hashtable是线程安全的，方法使用的synchronized修饰，而hashmap是线程不安全的。<br>但是hashtable对整个数组上锁，效率比较低，也不推荐使用。</p>
+<h2 id="14-concurrentHashMap原理"><a href="#14-concurrentHashMap原理" class="headerlink" title="14. concurrentHashMap原理"></a>14. concurrentHashMap原理</h2><p>线程的安全的map，在jDK1.7及之前，是通过分段锁来保证并发安全。<br>在JDK1.8以后，通过node锁来进一步提高并发度。可以手动实现下。</p>
+<h2 id="15-线程创建方式"><a href="#15-线程创建方式" class="headerlink" title="15 线程创建方式"></a>15 线程创建方式</h2><ol>
+<li>继承thread，因为java是单继承所以不推荐</li>
+<li>实现runnable</li>
+<li>实现callable接口，可以通过futuretask获取结果</li>
+<li>使用线程池:更合理的利用资源，避免线程反复创建和销毁的开销，也防止创建过多线程对系统资源的消耗。</li>
+</ol>
+<h2 id="16-什么时候触发垃圾回收？"><a href="#16-什么时候触发垃圾回收？" class="headerlink" title="16. 什么时候触发垃圾回收？"></a>16. 什么时候触发垃圾回收？</h2><p>年轻代满了，young gc；<br>老年代满了，full gc；</p>
+<h2 id="17-多线程会引发什么问题？"><a href="#17-多线程会引发什么问题？" class="headerlink" title="17. 多线程会引发什么问题？"></a>17. 多线程会引发什么问题？</h2><p>线程安全？数据竞争。</p>
+<h2 id="18-数据库的索引有哪些？"><a href="#18-数据库的索引有哪些？" class="headerlink" title="18. 数据库的索引有哪些？"></a>18. 数据库的索引有哪些？</h2><p>需要分不同维度：</p>
+<ul>
+<li>聚簇&#x2F;分聚簇</li>
+<li>B+树&#x2F;hash</li>
+<li>唯一索引，主键索引，联合索引，前缀索引，全文索引</li>
+</ul>
+<p><strong>聚簇索引和非聚簇索引的区别？</strong><br>物理顺序是否与索引顺序一致。<br>一般会将主键作为聚簇索引，如果没有主键，则选取非null的唯一性索引，如果也没有，会生成一个聚簇索引。</p>
+<h2 id="19-mysql事务的隔离级别"><a href="#19-mysql事务的隔离级别" class="headerlink" title="19. mysql事务的隔离级别"></a>19. mysql事务的隔离级别</h2><ul>
+<li>读未提交：会存在脏数据的问题，当然还有其他问题</li>
+<li>读已提交：会存在不可重复读的问题，当然还有其他问题</li>
+<li>可重复读：会存在幻读的问题</li>
+<li>串行化：没问题，但是效率很低，无并发</li>
+</ul>
+<h2 id="20-B-树和B树的区别"><a href="#20-B-树和B树的区别" class="headerlink" title="20. B+树和B树的区别"></a>20. B+树和B树的区别</h2><p>B+树的数据仅存放于叶子结点，使得其每个非叶子结点可以存放更多的索引，使得整体树的高度更小，磁盘的IO次数也更少。同时因为父节点和数据，即叶子结点的长度相同，使得查询的时间开销比较稳定。<br>其次B+树在叶子结点之间使用双向链表进行连接，使得范围查询、排序等操作更高效。</p>
+<p><strong>为什么不使用平衡二叉树？</strong><br>高度更高，磁盘IO更大。<br>因为磁盘IO来读入的结点数有关，每个结点存储的索引越少，需要进行的磁盘IO次数就越多。</p>
+<h2 id="21-redis的数据结构-持久化"><a href="#21-redis的数据结构-持久化" class="headerlink" title="21. redis的数据结构,持久化"></a>21. redis的数据结构,持久化</h2><p>数据结构：list，hash，string，bitmap，set，zset<br>持久化：AOF，RDB。</p>
+<h2 id="22-TCP三次握手，四次挥手？"><a href="#22-TCP三次握手，四次挥手？" class="headerlink" title="22. TCP三次握手，四次挥手？"></a>22. TCP三次握手，四次挥手？</h2><p>用seq来保证顺序。<br>如果客户端采用洪泛攻击，服务器的处理方式是在三次重试后断开。</p>
+<p>四次挥手？<br>等待time_wait状态？是为了防止服务器没有收到ack，而保持半连接。有点忘了，复习下。</p>
+<h2 id="23-从输入url到界面展示？"><a href="#23-从输入url到界面展示？" class="headerlink" title="23. 从输入url到界面展示？"></a>23. 从输入url到界面展示？</h2><p>拿到的url，解析域名，通过dns解析ip地址。<br>通过IP地址在网络上寻找目标主机，判断是否在改网络内，在该网络内利用ARP解析目标物理地址，否则通过路由器继续路由。这个过程是由ip协议族保证的。<br>到了目标主机，在层层向上封装，并来到监听特定端口的应用服务，通过相同的方式进行返回。有点忘了，复习下。</p>
+<h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="1-tcp三次握手可以减少为两次吗？"><a href="#1-tcp三次握手可以减少为两次吗？" class="headerlink" title="1. tcp三次握手可以减少为两次吗？"></a>1. tcp三次握手可以减少为两次吗？</h2><h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="1-一致性哈希？"><a href="#1-一致性哈希？" class="headerlink" title="1. 一致性哈希？"></a>1. 一致性哈希？</h2><h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="1-MySql的隔离级别？如何实现？-mark，要仔细看，讲的不太对"><a href="#1-MySql的隔离级别？如何实现？-mark，要仔细看，讲的不太对" class="headerlink" title="1. MySql的隔离级别？如何实现？-mark，要仔细看，讲的不太对"></a>1. MySql的隔离级别？如何实现？-mark，要仔细看，讲的不太对</h2><p>默认隔离级别是可重复读。共有4个隔离级别：</p>
+<ol>
+<li>读未提交：不用处理</li>
+<li>读已提交：短暂共享锁进行读操作，但是在读操作后立刻释放。</li>
+<li>可重复读：<strong>事务</strong>过程中使用共享锁，事务结束后才释放。</li>
+<li>串行化：使用范围锁锁定虽有被访问的行，直到事务结束。</li>
+</ol>
+<h2 id="2-Mysql单条insert语句是不是事务？"><a href="#2-Mysql单条insert语句是不是事务？" class="headerlink" title="2. Mysql单条insert语句是不是事务？"></a>2. Mysql单条insert语句是不是事务？</h2><p>是事务，在autocommit开启的情况下（默认开启），insert，update，delete都是隐式事务。<br>通过start transaction声明的是显式事务。</p>
+<h2 id="3-where中有or，且包含索引，查询过程是怎样的？"><a href="#3-where中有or，且包含索引，查询过程是怎样的？" class="headerlink" title="3. where中有or，且包含索引，查询过程是怎样的？"></a>3. where中有or，且包含索引，查询过程是怎样的？</h2><p>需要分情况讨论，对于下面这个例子</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> students <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">5</span> <span class="hljs-keyword">or</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Alice&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<ol>
+<li>如果id和name包含在联合索引中，查询优化器可能会使用这个联合索引来加速索引。</li>
+<li>如果id和name有各自的索引，可能会使用index merge策略，会分别查询符合id和name查询条件的记录，然后合并结果集。</li>
+<li>如果只有一个有索引，那么会进行全表扫描。</li>
+</ol>
+<p>对于各种情况下，查询优化器都可能基于多种因素，比如表的统计数据、查询选择性、涉及的数据量来决定不使用索引。</p>
+<h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><h2 id="1-僵尸进程是什么？如何排查？"><a href="#1-僵尸进程是什么？如何排查？" class="headerlink" title="1. 僵尸进程是什么？如何排查？"></a>1. 僵尸进程是什么？如何排查？</h2><p>僵尸进程是指进程已经结束，但其进程描述符仍保留在系统中，因为父进程尚未询问其终止状态，所以他仍然保留在进程表中。<br><strong>特点:</strong></p>
+<ol>
+<li>不占用物理资源，仅占用一个进程表项</li>
+<li>不进行任何活动，只等待被其父进程收割</li>
+<li>若父进程结束，则init进程（pid为1）成为其新的父进程，并很快收割他。</li>
+</ol>
+<p><strong>产生的原因：</strong><br>进程完成执行并终止后，会通过exit系统调用将其退出状态返回给其父进程，父进程通过wait系统的系统调用来获取这个状态。如果父进程不立即调用wait，那么终止的进程就会变成僵尸进程。<br><strong>如何排查僵尸进程？</strong></p>
+<ol>
+<li>ps aux | grep ‘Z’ &#x2F;&#x2F; 僵尸进程在状态列会被标记为’Z’</li>
+</ol>
+<p>僵尸进程不是大问题，因为他们几乎不消耗资源，但如果有大量的僵尸进程，可能会占用所有的进程标识符，以至于系统无法启动新的进程。</p>
+<h1 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h1><h2 id="1-redis使用zset，遇到大key怎么处理？"><a href="#1-redis使用zset，遇到大key怎么处理？" class="headerlink" title="1. redis使用zset，遇到大key怎么处理？"></a>1. redis使用zset，遇到大key怎么处理？</h2><h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><h2 id="1-讲讲开闭原则？"><a href="#1-讲讲开闭原则？" class="headerlink" title="1. 讲讲开闭原则？"></a>1. 讲讲开闭原则？</h2><h1 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h1><h2 id="1-分布式Session？"><a href="#1-分布式Session？" class="headerlink" title="1. 分布式Session？"></a>1. 分布式Session？</h2><h1 id="场景题"><a href="#场景题" class="headerlink" title="场景题"></a>场景题</h1><h2 id="1-怎么实现用户断点上传视频？"><a href="#1-怎么实现用户断点上传视频？" class="headerlink" title="1. 怎么实现用户断点上传视频？"></a>1. 怎么实现用户断点上传视频？</h2><h2 id="2-1kw的数据，如何保证每次都快速找到想要的数据？"><a href="#2-1kw的数据，如何保证每次都快速找到想要的数据？" class="headerlink" title="2. 1kw的数据，如何保证每次都快速找到想要的数据？"></a>2. 1kw的数据，如何保证每次都快速找到想要的数据？</h2><h2 id="3-实现一个功能：用户搜索关键字，快速从全网找出他要搜索的这个关键字并整理返回给他？"><a href="#3-实现一个功能：用户搜索关键字，快速从全网找出他要搜索的这个关键字并整理返回给他？" class="headerlink" title="3. 实现一个功能：用户搜索关键字，快速从全网找出他要搜索的这个关键字并整理返回给他？"></a>3. 实现一个功能：用户搜索关键字，快速从全网找出他要搜索的这个关键字并整理返回给他？</h2><h2 id="4-如何用链表实现三个表连接？"><a href="#4-如何用链表实现三个表连接？" class="headerlink" title="4. 如何用链表实现三个表连接？"></a>4. 如何用链表实现三个表连接？</h2><h2 id="5-8G的文件，每行都是数字（可能为long），用2G内存统计所有重复出现过的数字，以及出现过的次数？"><a href="#5-8G的文件，每行都是数字（可能为long），用2G内存统计所有重复出现过的数字，以及出现过的次数？" class="headerlink" title="5. 8G的文件，每行都是数字（可能为long），用2G内存统计所有重复出现过的数字，以及出现过的次数？"></a>5. 8G的文件，每行都是数字（可能为long），用2G内存统计所有重复出现过的数字，以及出现过的次数？</h2><h1 id="代码题"><a href="#代码题" class="headerlink" title="代码题"></a>代码题</h1><h2 id="1-API限流器"><a href="#1-API限流器" class="headerlink" title="1. API限流器"></a>1. API限流器</h2><h2 id="2-多叉树遍历"><a href="#2-多叉树遍历" class="headerlink" title="2. 多叉树遍历"></a>2. 多叉树遍历</h2><h2 id="3-字典树"><a href="#3-字典树" class="headerlink" title="3. 字典树"></a>3. 字典树</h2><h2 id="4-LRU"><a href="#4-LRU" class="headerlink" title="4. LRU"></a>4. LRU</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%9D%A2%E7%BB%8F/" class="print-no-link">#面经</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>牛客相关面经整理</div>
+      <div>http://example.com/2023/10/16/牛客相关面经整理-0925/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>xiangyao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 16, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/16/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E7%BA%A2%E9%BB%91%E6%A0%91/" title="一文搞懂红黑树">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">一文搞懂红黑树</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/13/%E9%98%BF%E9%87%8C%E6%99%BA%E8%83%BD%E4%BA%92%E8%81%94-%E7%A7%8B%E6%8B%9B-Java%E5%BC%80%E5%8F%91/" title="阿里智能互联--秋招-Java开发">
+                        <span class="hidden-mobile">阿里智能互联--秋招-Java开发</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
