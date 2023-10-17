@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>常用的消息中间件</title>
+    <link href="/2023/10/17/%E5%B8%B8%E7%94%A8%E7%9A%84%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    <url>/2023/10/17/%E5%B8%B8%E7%94%A8%E7%9A%84%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/</url>
+    
+    <content type="html"><![CDATA[<h1 id="消息中间件-MQ-的特点"><a href="#消息中间件-MQ-的特点" class="headerlink" title="消息中间件(MQ)的特点"></a>消息中间件(MQ)的特点</h1><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>异步、解耦、削峰。（被说烂了，这里就不解释了）</p><h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul><li>系统的可用性降低。</li><li>系统的复杂度提高。</li><li>一致性问题<ul><li>之前可以用事务来在推送失败时进行数据回滚，而引入MQ，则需要考虑消息失败的问题。</li><li>如果多个系统进行消费，如何保证他们的事务一致性。</li></ul></li></ul><h1 id="常见MQ"><a href="#常见MQ" class="headerlink" title="常见MQ"></a>常见MQ</h1><h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><table><thead><tr><th>特性</th><th>ActiveMQ</th><th>RabbitMQ</th><th>RocketMQ</th><th>Kafka</th></tr></thead><tbody><tr><td>单机吞吐量</td><td>万级</td><td>万级</td><td><strong>10万级</strong></td><td><strong>10万级</strong></td></tr><tr><td>topic数量对吞吐量的影响</td><td></td><td></td><td><strong>topic可以达到几百几千，吞吐量小幅下降</strong></td><td>topic从几十到几百时，吞吐量大幅下降，如果想要大规模topic，需要增加更多的机器资源</td></tr><tr><td>时效性</td><td>毫秒</td><td><strong>微秒，时延最低</strong></td><td>毫秒</td><td>毫秒以内</td></tr><tr><td>可用性</td><td>高，主从架构</td><td>高</td><td>非常高，分布式</td><td><strong>非常高，分布式，多副本</strong></td></tr><tr><td>消息可靠性</td><td>较低概率丢失</td><td><strong>基本不丢</strong></td><td>参数优化后，可以0丢失</td><td>较低概率丢失</td></tr><tr><td>社区</td><td>无大吞吐量场景验证，社区不活跃</td><td>开源，稳定，社区活跃</td><td>阿里出品，apache接管，社区不活跃</td><td>Apache，开源，高吞吐，社区活跃度高</td></tr><tr><td>延迟队列的支持</td><td>支持</td><td>需要插件</td><td>支持，可以设置或新增delay level</td><td>不支持</td></tr></tbody></table><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol><li><a href="https://zhuanlan.zhihu.com/p/553890417">https://zhuanlan.zhihu.com/p/553890417</a></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>消息中间件</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>延迟队列的使用场景及相关消息队列</title>
     <link href="/2023/10/17/%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"/>
     <url>/2023/10/17/%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</url>

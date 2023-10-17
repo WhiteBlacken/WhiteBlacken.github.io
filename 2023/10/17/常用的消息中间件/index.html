@@ -16,22 +16,22 @@
   <meta name="author" content="xiangyao">
   <meta name="keywords" content="">
   
-    <meta name="description" content="场景以电商中的常见场景来举例：  订单未支付，关闭订单，并退还库存 定期检查处于退款状态的订单是否已经退款成功 新创建的店铺，N天没有上传商品，发送短信提醒  以上场景都可以通过定时扫表去做，问题就是不同的业务要去维护一个自己的扫表逻辑，但是这些扫表逻辑比较类似，可以考虑从具体业务中抽离。此时可以考虑引入延迟队列。 相关的消息中间件一些消息中间件的Broker端内置了延迟消息支持的能力，比如NSQ">
+    <meta name="description" content="消息中间件(MQ)的特点使用场景异步、解耦、削峰。（被说烂了，这里就不解释了） 缺点 系统的可用性降低。 系统的复杂度提高。 一致性问题 之前可以用事务来在推送失败时进行数据回滚，而引入MQ，则需要考虑消息失败的问题。 如果多个系统进行消费，如何保证他们的事务一致性。    常见MQ对比   特性 ActiveMQ RabbitMQ RocketMQ Kafka    单机吞吐量 万级 万级 10">
 <meta property="og:type" content="article">
-<meta property="og:title" content="延迟队列的使用场景及相关消息队列">
-<meta property="og:url" content="http://example.com/2023/10/17/%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/index.html">
+<meta property="og:title" content="常用的消息中间件">
+<meta property="og:url" content="http://example.com/2023/10/17/%E5%B8%B8%E7%94%A8%E7%9A%84%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/index.html">
 <meta property="og:site_name" content="xiangyao的个人博客">
-<meta property="og:description" content="场景以电商中的常见场景来举例：  订单未支付，关闭订单，并退还库存 定期检查处于退款状态的订单是否已经退款成功 新创建的店铺，N天没有上传商品，发送短信提醒  以上场景都可以通过定时扫表去做，问题就是不同的业务要去维护一个自己的扫表逻辑，但是这些扫表逻辑比较类似，可以考虑从具体业务中抽离。此时可以考虑引入延迟队列。 相关的消息中间件一些消息中间件的Broker端内置了延迟消息支持的能力，比如NSQ">
+<meta property="og:description" content="消息中间件(MQ)的特点使用场景异步、解耦、削峰。（被说烂了，这里就不解释了） 缺点 系统的可用性降低。 系统的复杂度提高。 一致性问题 之前可以用事务来在推送失败时进行数据回滚，而引入MQ，则需要考虑消息失败的问题。 如果多个系统进行消费，如何保证他们的事务一致性。    常见MQ对比   特性 ActiveMQ RabbitMQ RocketMQ Kafka    单机吞吐量 万级 万级 10">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-10-17T08:18:19.000Z">
-<meta property="article:modified_time" content="2023-10-17T14:03:25.090Z">
+<meta property="article:published_time" content="2023-10-17T14:05:37.000Z">
+<meta property="article:modified_time" content="2023-10-17T14:36:57.994Z">
 <meta property="article:author" content="xiangyao">
-<meta property="article:tag" content="消息队列">
+<meta property="article:tag" content="消息中间件">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>延迟队列的使用场景及相关消息队列 - xiangyao的个人博客</title>
+  <title>常用的消息中间件 - xiangyao的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -173,7 +173,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="延迟队列的使用场景及相关消息队列"></span>
+            <span id="subtitle" data-typed-text="常用的消息中间件"></span>
           
         </div>
 
@@ -184,7 +184,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-17 16:18" pubdate>
+        <time datetime="2023-10-17 22:05" pubdate>
           October 17, 2023 pm
         </time>
       </span>
@@ -196,7 +196,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k words
+          482 words
         
       </span>
     
@@ -207,7 +207,7 @@
         
         
         
-          21 mins
+          5 mins
         
       </span>
     
@@ -244,80 +244,83 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">延迟队列的使用场景及相关消息队列</h1>
+            <h1 id="seo-header">常用的消息中间件</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>以电商中的常见场景来举例：</p>
-<ol>
-<li>订单未支付，关闭订单，并退还库存</li>
-<li>定期检查处于退款状态的订单是否已经退款成功</li>
-<li>新创建的店铺，N天没有上传商品，发送短信提醒</li>
-</ol>
-<p>以上场景都可以通过定时扫表去做，问题就是不同的业务要去维护一个自己的扫表逻辑，但是这些扫表逻辑比较类似，可以考虑从具体业务中抽离。此时可以考虑引入延迟队列。</p>
-<h1 id="相关的消息中间件"><a href="#相关的消息中间件" class="headerlink" title="相关的消息中间件"></a>相关的消息中间件</h1><p>一些消息中间件的Broker端内置了延迟消息支持的能力，比如NSQ(go实现，最多2h延迟)，QMQ，RabbitMQ(需要插件)，RocketMQ（可以设置和新增不同level的延迟）。</p>
-<p>Broker端内置延迟消息处理能力，核心实现思路都一样：将延迟消息通过一个临时存储进行暂存，到期后才投递到目标Topic。</p>
-<p>步骤如下：</p>
-<ol>
-<li>producer将延迟消息发送到某个topic</li>
-<li>Broker判断是一个延迟消息，将其通过临时存储暂存。</li>
-<li>Broker内部的延迟服务检查消息是否到期，将到期的消息投递到delay service。</li>
-<li>消费者消费</li>
-</ol>
-<p>从上可以看出，主要是两个模块比较重要</p>
-<ol>
-<li><strong>临时存储</strong>。有以下要求：<ul>
-<li>为了满足削峰填谷，写入性能要高</li>
-<li>要满足高可靠性，可持久化和备份</li>
-<li>需要按照时间排序，支持排序</li>
-<li>支持长时间保存，这个和业务场景相关，但是不推荐延迟太长，存储成本大，且业务逻辑可能已改变。</li>
+                <h1 id="消息中间件-MQ-的特点"><a href="#消息中间件-MQ-的特点" class="headerlink" title="消息中间件(MQ)的特点"></a>消息中间件(MQ)的特点</h1><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>异步、解耦、削峰。（被说烂了，这里就不解释了）</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>系统的可用性降低。</li>
+<li>系统的复杂度提高。</li>
+<li>一致性问题<ul>
+<li>之前可以用事务来在推送失败时进行数据回滚，而引入MQ，则需要考虑消息失败的问题。</li>
+<li>如果多个系统进行消费，如何保证他们的事务一致性。</li>
 </ul>
 </li>
-<li><strong>延迟消息服务</strong></li>
-</ol>
-<p>如果消息中间件提供延迟消息支持，则这两个服务都在Broker内部实现，对业务透明。</p>
-<p>像类似kafka原生并不支持延迟消息，需要对其改造，使用代理层+第三方临时存储，滴滴的DDMQ基于该思想，有赞的redis方案也比较类似（不过没有引入额外的消息中间件）。</p>
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><h2 id="基于RocketMQ的延迟队列方案"><a href="#基于RocketMQ的延迟队列方案" class="headerlink" title="基于RocketMQ的延迟队列方案"></a>基于RocketMQ的延迟队列方案</h2><p>开源的RocketMQ支持延迟消息，但是不支持秒级精度。默认支持18个level的延迟消息，从1s到2h。<br>Broker启动时，每个节点会有18个队列，分别对应18个level。可以新增或修改，比方说修改某个level为2d，或增加一个2d。<br><strong>生产者发送延迟消息</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 使用的是延迟级别，而不是具体的延迟时间</span><br>msg.setDelayTimeLevel(<span class="hljs-number">5</span>);<br></code></pre></td></tr></table></figure>
-<p><strong>Broker端处理延迟消息</strong></p>
-<ol>
-<li>先将消息写入CommitLog，修改topic为<code>SCHEDUKLE_TOPIC_XXX</code>，根据delayLevel确定内部的队列，并计算其投递时间</li>
-<li>转发消息至延迟主题的ConsumeQueue中</li>
-<li>通过ScheduleMessageService充当延迟服务，消费指定topic中的信息，该服务启动时，会创建一个定时器，会根据延迟级别的个数启动对应数量的TimerTask来负责一个延迟级别的消费和投递。</li>
-<li>将到期消息重新存储到CommitLog中，重新设置其topic和队列信息，重新计算tag的哈希值（之前存储的是消息的投递时间）</li>
-<li>将消息投递到目标topic的ConsumeQueue</li>
-</ol>
-<p><strong>消费重试</strong><br>消息消费失败后，将其作为新的延迟消息投递回Broker。默认会重试16次，实际上将delay level的前两次去掉了。<br>所以其实如果消费失败了，延迟还是比较大的。</p>
-<h2 id="基于Redis的延迟队列方案"><a href="#基于Redis的延迟队列方案" class="headerlink" title="基于Redis的延迟队列方案"></a>基于Redis的延迟队列方案</h2><p>内容几乎都来源于有赞的消息队列实践，<a target="_blank" rel="noopener" href="https://tech.youzan.com/queuing_delay/">https://tech.youzan.com/queuing_delay/</a></p>
-<h3 id="设计的目标"><a href="#设计的目标" class="headerlink" title="设计的目标"></a>设计的目标</h3><ul>
-<li>消息可靠性：消息进入延迟队列中，至少被消费一次</li>
-<li>高可用性：多实例部署</li>
-<li>实时性：允许一定的时间误差</li>
-<li>支持消息删除：随时删除指定消息 –这一点真的有必要吗？</li>
 </ul>
-<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h4 id="Job-Pool"><a href="#Job-Pool" class="headerlink" title="Job Pool"></a>Job Pool</h4><p>用于存放所有的Job的元信息。包括</p>
-<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cos">topic: 类型/业务名称<br>id：<span class="hljs-keyword">job</span>的唯一标识，用于检索和删除<span class="hljs-keyword">job</span><br>delay：<span class="hljs-keyword">job</span>需要延迟的时间，单位是<span class="hljs-keyword">s</span><br>ttr：<span class="hljs-keyword">job</span>执行超时时间，单位是<span class="hljs-keyword">s</span><br>body：<span class="hljs-keyword">job</span>的内容，供消费者做具体的业务处理，以json格式存储<br></code></pre></td></tr></table></figure>
-<p>只需要K&#x2F;V结构，key为job id，value为job struct。使用Redis的String类型即可。<br>其中job id由业务方决定，需要保证全局一致性，建议使用topic+业务唯一id。</p>
-<h4 id="Delay-Bucket"><a href="#Delay-Bucket" class="headerlink" title="Delay Bucket"></a>Delay Bucket</h4><p>一组以时间为维度的有序队列，用来存放所有需要延迟或者被reserve的job id。使用Redis的zset实现。</p>
-<h4 id="Timer"><a href="#Timer" class="headerlink" title="Timer"></a>Timer</h4><p>负责扫描Bucket，并将delay时间大于等于当前时间的job放到对应的ready queue。</p>
-<h4 id="Ready-Queue"><a href="#Ready-Queue" class="headerlink" title="Ready Queue"></a>Ready Queue</h4><p>存放处于ready状态的job id，供消费者程序消费。使用普通list就可以，redis的list。</p>
-<h3 id="消息流程"><a href="#消息流程" class="headerlink" title="消息流程"></a>消息流程</h3><ol>
-<li>用户对商品下单，创建订单成功，将job结构体以job id为key存入job pool。</li>
-<li>根据delay计算绝对时间，以轮询方式放入某个延时队列bucket。</li>
-<li>timer不停轮询不同的bucket,到达延迟时间后，取出job id，从job pool中获取结构体，如果job处于delete状态，则pass，继续轮询；如果job非delete状态，确认delay时间是否大于等于当前时间，满足则将将job id放入ready queue，然后从bucket移除；如果不满足则要重新计算delay，再次放入bucket，并将之前的job id从bucket中移除。</li>
-<li>消费端轮询对应topic的ready queue，获取job或做自己的业务逻辑处理。服务端可以按照ttr，重新计算执行时间，将其放入bucket。</li>
-<li>消费端处理完业务向服务端响应finish，服务端根据job id删除对应job结构体。</li>
-</ol>
-<h3 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h3><ol>
-<li>需要一个线程无限循环来作为timer，在没有ready job的情况下占用了cpu资源。 -&gt; wait&#x2F;notify方式</li>
-<li>消费端一次只能取一个job，网络IO消耗大。-&gt; 长连接</li>
-<li>持久化受限于redis本身的持久化能力。</li>
-</ol>
+<h1 id="常见MQ"><a href="#常见MQ" class="headerlink" title="常见MQ"></a>常见MQ</h1><h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>ActiveMQ</th>
+<th>RabbitMQ</th>
+<th>RocketMQ</th>
+<th>Kafka</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单机吞吐量</td>
+<td>万级</td>
+<td>万级</td>
+<td><strong>10万级</strong></td>
+<td><strong>10万级</strong></td>
+</tr>
+<tr>
+<td>topic数量对吞吐量的影响</td>
+<td></td>
+<td></td>
+<td><strong>topic可以达到几百几千，吞吐量小幅下降</strong></td>
+<td>topic从几十到几百时，吞吐量大幅下降，如果想要大规模topic，需要增加更多的机器资源</td>
+</tr>
+<tr>
+<td>时效性</td>
+<td>毫秒</td>
+<td><strong>微秒，时延最低</strong></td>
+<td>毫秒</td>
+<td>毫秒以内</td>
+</tr>
+<tr>
+<td>可用性</td>
+<td>高，主从架构</td>
+<td>高</td>
+<td>非常高，分布式</td>
+<td><strong>非常高，分布式，多副本</strong></td>
+</tr>
+<tr>
+<td>消息可靠性</td>
+<td>较低概率丢失</td>
+<td><strong>基本不丢</strong></td>
+<td>参数优化后，可以0丢失</td>
+<td>较低概率丢失</td>
+</tr>
+<tr>
+<td>社区</td>
+<td>无大吞吐量场景验证，社区不活跃</td>
+<td>开源，稳定，社区活跃</td>
+<td>阿里出品，apache接管，社区不活跃</td>
+<td>Apache，开源，高吞吐，社区活跃度高</td>
+</tr>
+<tr>
+<td>延迟队列的支持</td>
+<td>支持</td>
+<td>需要插件</td>
+<td>支持，可以设置或新增delay level</td>
+<td>不支持</td>
+</tr>
+</tbody></table>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a target="_blank" rel="noopener" href="https://tech.youzan.com/queuing_delay/">https://tech.youzan.com/queuing_delay/</a></li>
-<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1581368">https://cloud.tencent.com/developer/article/1581368</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/641585587">https://zhuanlan.zhihu.com/p/641585587</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/553890417">https://zhuanlan.zhihu.com/p/553890417</a></li>
 </ol>
 
                 
@@ -331,7 +334,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" class="print-no-link">#消息队列</a>
+        <a href="/tags/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="print-no-link">#消息中间件</a>
       
     </div>
   
@@ -343,8 +346,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>延迟队列的使用场景及相关消息队列</div>
-      <div>http://example.com/2023/10/17/延迟队列的使用场景及相关消息队列/</div>
+      <div>常用的消息中间件</div>
+      <div>http://example.com/2023/10/17/常用的消息中间件/</div>
     </div>
     <div class="license-meta">
       
@@ -388,18 +391,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/17/%E5%B8%B8%E7%94%A8%E7%9A%84%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" title="常用的消息中间件">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">常用的消息中间件</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/10/16/%E4%BB%80%E4%B9%88%E6%98%AFAOP%EF%BC%9F/" title="什么是AOP？">
-                        <span class="hidden-mobile">什么是AOP？</span>
+                      <a href="/2023/10/17/%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" title="延迟队列的使用场景及相关消息队列">
+                        <span class="hidden-mobile">延迟队列的使用场景及相关消息队列</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
