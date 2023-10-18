@@ -200,178 +200,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/03/Redis%E7%9A%84%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/" target="_self">
-          Redis的集群模式
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/03/Redis%E7%9A%84%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/" target="_self">
-        <div>
-          参考：https://www.zhihu.com/question/590914180/answer/2976459561  引子提起Redis的高可用，一般包含两层含义：  数据不能丢失，或者尽量减少丢失 Redis服务不可中断  前者可以通过AOF和RDB持久化保证，后者则要求Redis服务不能单点部署，这也是本文要介绍的集群模式。 相关概念主从模式 部署多台Redis服务器，分为主库和从库，
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-03 23:18" pubdate>
-              2023-10-03
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">#学习笔记</a>
-            
-              <a href="/tags/Redis/">#Redis</a>
-            
-              <a href="/tags/%E6%9C%AA%E5%AE%8C%E7%BB%93/">#未完结</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/03/MQ%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%A1%BA%E5%BA%8F%E6%80%A7%EF%BC%9F/" target="_self">
-          MQ如何保证顺序性？
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/03/MQ%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%A1%BA%E5%BA%8F%E6%80%A7%EF%BC%9F/" target="_self">
-        <div>
-          为什么需要保证MQ的顺序？一般MQ被用于三种场景：  削峰填谷。防止服务器被高流量打挂。 流程的异步或解耦。 Mysql通过Cannal订阅binlog，发送给MQ，进行后续的数据同步。  三个场景中，只有第三个场景需要严格保证消息顺序。考虑如果两个更新请求，更换了顺序，可能结果就与预期不一致了。 解决方案单线程消费一个topic，一个partition，一个consumer，一个线程例如kafk
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-03 21:12" pubdate>
-              2023-10-03
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">#学习笔记</a>
-            
-              <a href="/tags/MQ/">#MQ</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/03/Cannal%E5%90%8C%E6%AD%A5MySQL%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%87%B3ES-MeiliSearch/" target="_self">
-          Canal同步MySQL增量数据至ES/MeiliSearch/Milvus
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/03/Cannal%E5%90%8C%E6%AD%A5MySQL%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%87%B3ES-MeiliSearch/" target="_self">
-        <div>
-          背景网站使用MeiliSearch(可以理解为ES)作为搜索引擎，数据来源是MySQL中的一张大表，目前需要MeiliSearch同步MySQL的增量数据。准备选取Cannal监听binlog的方案来完成。 Canal介绍基于MySQL的数据库增量日志解析，提供增量数据订阅和消费。早期诞生于阿里巴巴国内国外跨机房同步的业务需求。使用场景  数据实时备份 异构数据源（ES，Hbase）与数据库数据增
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-03 15:34" pubdate>
-              2023-10-03
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%BC%80%E5%8F%91/">#开发</a>
-            
-              <a href="/tags/Cannal/">#Cannal</a>
-            
-              <a href="/tags/MQ/">#MQ</a>
-            
-              <a href="/tags/%E6%9C%AA%E5%AE%8C%E7%BB%93/">#未完结</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/01/%E5%BA%94%E7%94%A8%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7/" target="_self">
-          应用性能监控
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/01/%E5%BA%94%E7%94%A8%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7/" target="_self">
-        <div>
-          背景最近想学习下Prometheus的相关知识，正好上线的django项目没有监控，故拿该项目试试。 django下配置Prometheusdjango应用程序端目标是提供可以Prometheus格式的数据的接口。  安装库1pip install django-prometheus 修改django的settings的文件修改installed_apps1234INSTALLED_APPS =
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-01 00:11" pubdate>
-              2023-10-01
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E8%BF%90%E7%BB%B4/">#运维</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
         <a href="/2023/09/30/JVM%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" target="_self">
           JVM基础知识
         </a>
@@ -598,6 +426,166 @@
               <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">#学习笔记</a>
             
               <a href="/tags/MQ/">#MQ</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/26/%E4%B8%87%E5%BE%97-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91%E4%B8%80%E9%9D%A2/" target="_self">
+          万得-秋招-java开发一面
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/26/%E4%B8%87%E5%BE%97-%E7%A7%8B%E6%8B%9B-java%E5%BC%80%E5%8F%91%E4%B8%80%E9%9D%A2/" target="_self">
+        <div>
+          总结问的问题都很基础，没有深挖，没有问项目，但是答的也很差。难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ Java1. java的基本数据类型？分别占几个字节？   基本数据类型 字节    byte 1   short 2   int 4   long 8   float 4   double 8   char 2   boolean 1，不一定   网络1. 介绍下tcp三次握手？2. tcp粘包问
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-26 16:25" pubdate>
+              2023-09-26
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%B8%80%E9%9D%A2/">#一面</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/26/%E7%94%B5%E4%BF%A1-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E9%9D%A2/" target="_self">
+          电信-秋招-一面
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/26/%E7%94%B5%E4%BF%A1-%E7%A7%8B%E6%8B%9B-%E4%B8%80%E9%9D%A2/" target="_self">
+        <div>
+          总结总体难度比较简单，时间很短，20分钟不到,要补充docker和消息中间件的相关知识。 难度：⭐☆☆☆☆学到的知识：⭐☆☆☆☆ 项目1. 介绍项目难点？2. 为什么使用RocketMQ？与其他消息中间件的对比？学生完成在线考试并提交答案时，考试数据会被发送到RocketMQ中，后台评分系统作为消费者，从RocketMQ中拉去数据并进行评分，分析学生答题情况，并生成报告。因为分析学生答题情况比较慢
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-26 13:08" pubdate>
+              2023-09-26
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/25/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" target="_self">
+          Java异常处理
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/25/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" target="_self">
+        <div>
+          异常的分类均继承自Throwable。    类型 描述 常见类    编译时异常 超出程序员控制的情况，例如试图打开不存在的文件，网络连接或数据库连接问题，通过强制程序员处理或声明这些异常，来确保这些问题被正确处理。编译器要求调用可以抛出编译时异常的方法和代码必须放在try-catch或在方法声明中使用后throws，否则无法编译通过 IOException,SQLException,FileN
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-25 22:59" pubdate>
+              2023-09-25
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JAVA/">#JAVA</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/09/25/%E5%8D%8E%E4%B8%BA-0920-%E7%AC%94%E8%AF%95/" target="_self">
+          华为-0920-笔试
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/25/%E5%8D%8E%E4%B8%BA-0920-%E7%AC%94%E8%AF%95/" target="_self">
+        <div>
+          题目要求：123456班级组织传球活动，男女同学随机排成m行n列队伍，第一列中的任意一个男同学都可以作为传球的起点，要求最终将球传到最后一列的任意一个男同学手里，求所有能够完成任务的传球路线中的最优路线(传球次数最少的路线)的传球次数。传球规则：1.男同学只能将球传给男同学，不能传给女同学。2.球只能传给身边前后左右相邻的同学。3.如果游戏不能完成，返回-1。求最短的传球路线  输入格式：1234
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-25 11:54" pubdate>
+              2023-09-25
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AC%94%E8%AF%95/">#笔试</a>
             
           </div>
         
